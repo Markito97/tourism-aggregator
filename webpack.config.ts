@@ -32,6 +32,11 @@ const config: webpack.Configuration = {
         ],
       },
       {
+        test: /\.(png|jpg|gif)$/,
+        issuer: /\.tsx?$/,
+        type: 'asset/resource',
+      },
+      {
         test: /\.tsx?$/,
         loader: 'esbuild-loader',
         options: {

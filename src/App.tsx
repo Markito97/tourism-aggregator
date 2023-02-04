@@ -1,11 +1,7 @@
 import React, { type FunctionComponent } from 'react'
-import './index.css'
 import { Header } from './components/Header/Header'
+import './App.css'
 
 export const App: FunctionComponent = () => {
-  return (
-    <div className="container">
-      <Header />
-    </div>
-  )
+  return <Header />
 }
