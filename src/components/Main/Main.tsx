@@ -1,14 +1,14 @@
+import { Activities } from './Activities/Activities'
+import styles from './Main.module.css'
+import { Hotels } from './Hotels/Hotels'
 import React from 'react'
-// eslint-disable-next-line import/no-absolute-path
-import Carousel from '/src/assets/resource/Carousel1.jpg'
 
 export const Main = (): JSX.Element => {
   return (
-    <main>
+    <main className={styles.main}>
       <div className="container">
-        <div className="carousel">
-          <img src={Carousel} alt="" />
-        </div>
+        <Activities />
+        <Hotels />
       </div>
     </main>
   )

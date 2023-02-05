@@ -23,7 +23,6 @@ const config: webpack.Configuration = {
     rules: [
       {
         test: /\.css/i,
-        // issuer: /app\.tsx$/,
         use: [
           {
             loader: 'style-loader',
@@ -52,6 +51,10 @@ const config: webpack.Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+    }),
+    new webpack.ProvidePlugin({
+      React: 'react',
+      ReactDOM: 'react-dom',
     }),
   ],
   resolve: {
