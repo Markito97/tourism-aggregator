@@ -13,10 +13,15 @@ const slides = [
   { image: Carousel2 },
   { image: Carousel3 },
 ]
-export const Slider = (): JSX.Element => {
+interface SliderProps {
+  sliderRef?: React.RefObject<HTMLDivElement>
+}
+
+export const Slider = ({ sliderRef }: SliderProps): JSX.Element => {
   const [swipe, setSwipe] = useState<any>()
+
   return (
-    <div className={styles.carousel}>
+    <div ref={sliderRef} className={styles.carousel}>
       <SliderButton onClick={() => swipe?.slidePrev()}>BACK</SliderButton>
       <Swiper
         onBeforeInit={(swipper) => {

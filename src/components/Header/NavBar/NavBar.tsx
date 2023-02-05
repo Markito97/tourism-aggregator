@@ -1,13 +1,17 @@
 import React, { FunctionComponent } from 'react'
 import { NavBarLinks } from './NavBarLinks/NavBarLinks'
 import styles from './NavBar.module.css'
-import { SignIn } from '../SignIn/SignIn'
 import { Logo } from '../../Logo/Logo'
+import { SignIn } from './SignIn/SignIn'
 
-export const NavBar: FunctionComponent = () => {
+interface NavBarProps {
+  handle: () => void
+}
+
+export const NavBar = ({ handle }: NavBarProps): JSX.Element => {
   return (
     <nav className={styles.navBar}>
-      <Logo />
+      <Logo handle={handle} />
       <NavBarLinks />
       <SignIn />
     </nav>

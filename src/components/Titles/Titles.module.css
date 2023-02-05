@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 300px;
+  padding-top: 250px;
 }
 
 .subTitleImg {
@@ -26,7 +26,7 @@
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
-  font-size: 250px;
+  font-size: 220px;
   line-height: 305px;
   background: linear-gradient(
       47.06deg,
