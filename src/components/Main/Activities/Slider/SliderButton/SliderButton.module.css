@@ -1,0 +1,41 @@
+.arrowPrev {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  left: -80px;
+}
+
+.arrowNext {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  left: 1220px;
+}
+
+.textBack {
+  padding-top: 30px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.15em;
+  color: rgba(45, 45, 45, 1);
+  user-select: none;
+}
+
+.textNext {
+  padding-top: 30px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.15em;
+  color: rgba(45, 45, 45, 1);
+  user-select: none;
+}

@@ -27,11 +27,31 @@ li {
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
-  min-width: 1200px;
+  max-width: 1200px;
 }
 
-@media screen and (max-width: 1200px) {
-  .container {
-    min-width: 1000px;
-  }
+.swiper {
+  width: 100%;
+  height: 100%;
 }
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* 
+.swiper-button-prev {
+  background-image: url('/src/assets/icons/ArrowPrev.svg');
+} */

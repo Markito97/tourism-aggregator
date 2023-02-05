@@ -15,6 +15,7 @@
     "@babel/runtime": "^7.20.13",
     "@typescript-eslint/parser": "^5.50.0",
     "eslint-plugin-html": "^7.1.0",
+    "swiper": "^9.0.2",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
