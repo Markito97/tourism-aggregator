@@ -1,11 +1,11 @@
 import React from 'react'
-import { ActivitiesHeader } from './ActivitiesHeader/ActivitiesHeader'
-import { Slider } from './Slider/Slider'
+import { Slider } from '../../Slider/Slider'
+import { Titles } from '../../Titles/Titles'
 
 export const Activities = (): JSX.Element => {
   return (
     <>
-      <ActivitiesHeader />
+      {/* <Titles /> */}
       <Slider />
     </>
   )

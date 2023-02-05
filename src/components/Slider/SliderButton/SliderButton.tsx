@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import { ArrowBack } from '../../../../../assets/icons/ArrowBack'
-import { ArrowNext } from '../../../../../assets/icons/ArrowNext'
+import { ArrowBack } from '../../../assets/icons/ArrowBack'
+import { ArrowNext } from '../../../assets/icons/ArrowNext'
 import styles from './SliderButton.module.css'
 
 interface SliderButtonProps {

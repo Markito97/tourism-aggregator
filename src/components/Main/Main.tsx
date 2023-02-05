@@ -1,8 +1,7 @@
-import React from 'react'
-
-import styles from './Main.module.css'
 import { Activities } from './Activities/Activities'
+import styles from './Main.module.css'
 import { Hotels } from './Hotels/Hotels'
+import React from 'react'
 
 export const Main = (): JSX.Element => {
   return (

@@ -54,6 +54,7 @@ const config: webpack.Configuration = {
     }),
     new webpack.ProvidePlugin({
       React: 'react',
+      ReactDOM: 'react-dom',
     }),
   ],
   resolve: {

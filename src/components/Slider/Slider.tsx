@@ -1,3 +1,4 @@
+/* eslint-disable import/no-absolute-path */
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -20,12 +21,14 @@ export const Slider = (): JSX.Element => {
       <div className={styles.carousel}>
         <SliderButton onClick={() => swipe?.slidePrev()}>BACK</SliderButton>
         <Swiper
-          onBeforeInit={(swipper) => setSwipe(swipper)}
+          onBeforeInit={(swipper) => {
+            setSwipe(swipper)
+          }}
           slidesPerView={3}
           spaceBetween={30}
         >
           {slides.map((slide) => (
-            <SwiperSlide>
+            <SwiperSlide key={slide.image}>
               <img src={slide.image} alt="" />
             </SwiperSlide>
           ))}
