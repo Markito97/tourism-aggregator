@@ -33,7 +33,7 @@ const config: webpack.Configuration = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        type: 'assets/resource',
+        type: 'asset/resource',
       },
       {
         test: /\.tsx?$/,

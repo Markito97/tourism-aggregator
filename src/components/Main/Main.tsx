@@ -1,26 +1,13 @@
 import React from 'react'
+// eslint-disable-next-line import/no-absolute-path
+import Carousel from '/src/assets/resource/Carousel1.jpg'
 
 export const Main = (): JSX.Element => {
   return (
     <main>
       <div className="container">
-        <div className="mainTitle">
-          <h6>HUNDREDS OF</h6>
-          <h1>Activities for Everyoune</h1>
-        </div>
         <div className="carousel">
-          <div className="carousel__item">
-            <img src="./assets/resource/Carousel1.jpg" alt="" />
-          </div>
-          <div className="carousel__item">
-            <img src="" alt="" />
-          </div>
-          <div className="carousel__item">
-            <img src="" alt="" />
-          </div>
-          <div className="carousel__item">
-            <img src="" alt="" />
-          </div>
+          <img src={Carousel} alt="" />
         </div>
       </div>
     </main>
