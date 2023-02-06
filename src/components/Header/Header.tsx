@@ -1,6 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { NavBar } from './NavBar/NavBar'
-import { MapMenu } from './MapMenu/MapMenu'
 import { Titles } from '../Titles/Titles'
 
 const headerTitles = {
@@ -18,7 +17,6 @@ export const Header = ({ handleScroll }: HeaderProps): JSX.Element => {
     <>
       <NavBar handle={handleScroll} />
       <Titles titles={headerTitles} />
-      <MapMenu />
     </>
   )
 }

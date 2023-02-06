@@ -25,6 +25,7 @@ ul,
 li {
   padding: 0;
   list-style: none;
+  text-decoration: none;
 }
 
 .wrapper {
@@ -62,6 +63,7 @@ li {
 }
 
 header {
+  height: 100vh;
   display: block;
   background: linear-gradient(
       181.06deg,
@@ -70,4 +72,23 @@ header {
       rgba(255, 255, 255, 0) 116.72%
     ),
     url('/src/assets/resource/Rectangle.jpg') no-repeat center top / cover;
+}
+
+main {
+  padding-top: 135px;
+}
+
+footer {
+  margin-top: 200px;
+  background: rgba(244, 244, 244, 1);
+}
+
+.activeLink {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.inactiveLink {
+  color: #fff;
+  text-decoration: none;
 }

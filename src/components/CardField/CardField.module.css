@@ -1,0 +1,24 @@
+.content {
+  padding-top: 120px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 370px 370px 370px;
+  column-gap: 45px;
+}
+
+.contentView {
+  margin-top: 25px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  padding-left: 79px;
+  padding-right: 79px;
+  color: #fff;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 5px;
+  background: rgba(61, 61, 61, 1);
+  text-transform: uppercase;
+}

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
-import classes from './NavBarLink.module.css'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import styles from './NavBarLink.module.css'
+import { setIsActive } from '../../../../utility/utility'
 
 interface INavBarLink {
   link: string
@@ -9,8 +10,11 @@ interface INavBarLink {
 export const NavBarLink: FunctionComponent<INavBarLink> = ({ link }) => {
   const linkLower = link.toLowerCase()
   return (
-    <Link to={`${linkLower}`} className={classes.navLink}>
+    <NavLink
+      to={`${linkLower}`}
+      className={(status) => setIsActive(status, styles)}
+    >
       {link}
-    </Link>
+    </NavLink>
   )
 }

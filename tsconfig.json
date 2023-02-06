@@ -8,7 +8,11 @@
     },
     "include": ["./**/*"],
     "compilerOptions": {
+      "lib": ["es6", "dom"],
       /* Visit https://aka.ms/tsconfig to read more about this file */
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "strictNullChecks": true,
       "plugins": [{"name": "typescript-plugin-css-modules"}],
       /* Projects */
       // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */

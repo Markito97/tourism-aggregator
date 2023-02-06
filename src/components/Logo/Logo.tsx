@@ -1,15 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import styles from './Logo.module.css'
+import { setIsActive } from '../../utility/utility'
+
 interface LogoProps {
-  handle: () => void
+  handle?: () => void
 }
 
 export const Logo = ({ handle }: LogoProps): JSX.Element => {
   return (
-    <div>
-      <Link onClick={handle} to={'/'}>
-        Logo
-      </Link>
-    </div>
+    <NavLink
+      className={(status) => setIsActive(status, styles)}
+      onClick={handle}
+      to={'/'}
+    >
+      Logo
+    </NavLink>
   )
 }

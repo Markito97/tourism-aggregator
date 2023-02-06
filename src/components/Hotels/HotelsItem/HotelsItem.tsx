@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './HotelsItem.module.css'
-import { RaitingStart } from '../../../../assets/icons/RaitingStart'
+import { RaitingStart } from '../../../assets/icons/RaitingStart'
 
 interface IContent {
   image: string
