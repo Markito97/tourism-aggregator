@@ -1,7 +1,14 @@
 import React from 'react'
-import { Hotels } from '../components/Hotels/Hotels'
 import { Slider } from '../components/Slider/Slider'
 import { Titles } from '../components/Titles/Titles'
+import { AboutUs } from '../components/AboutUs/AboutUs'
+import { HotelsContent } from '../components/Hotels/HotelsContent'
+
+const activitiesTitles = {
+  title: 'Activities for Everyoune',
+  subTitle: 'HUNDREDS OF',
+  className: 'Content',
+}
 
 const hotelsTitles = {
   title: 'Hotels and Appartments',
@@ -9,12 +16,21 @@ const hotelsTitles = {
   className: 'Content',
 }
 
+const aboutUsTitles = {
+  title: 'Our Philosophy',
+  subTitle: 'About Us',
+  className: 'Content',
+}
+
 export const Home = (): JSX.Element => {
   return (
     <>
-      <Titles titles={hotelsTitles} />
+      <Titles titles={activitiesTitles} />
       <Slider />
-      <Hotels />
+      <Titles titles={hotelsTitles} />
+      <HotelsContent />
+      <Titles titles={aboutUsTitles} />
+      <AboutUs />
     </>
   )
 }

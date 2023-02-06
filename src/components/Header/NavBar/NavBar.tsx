@@ -10,7 +10,6 @@ interface NavBarProps {
 export const NavBar = ({ handle }: NavBarProps): JSX.Element => {
   return (
     <nav className={styles.navBar}>
-      <Logo handle={handle} />
       <NavBarLinks />
     </nav>
   )

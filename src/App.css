@@ -49,7 +49,6 @@ li {
   text-align: center;
   font-size: 18px;
   background: #fff;
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,10 +71,6 @@ header {
       rgba(255, 255, 255, 0) 116.72%
     ),
     url('/src/assets/resource/Rectangle.jpg') no-repeat center top / cover;
-}
-
-main {
-  padding-top: 135px;
 }
 
 footer {

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-absolute-path */
 import React from 'react'
-import { HotelsItem } from '../HotelsItem/HotelsItem'
+import { HotelsItem } from './HotelsItem/HotelsItem'
 import Hotels1 from '/src/assets/resource/Hotel1.jpg'
 import Hotels2 from '/src/assets/resource/Hotel2.jpg'
 import Hotels3 from '/src/assets/resource/Hotel3.jpg'
