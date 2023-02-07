@@ -1,12 +1,10 @@
 import React from 'react'
 import styles from './CardProduct.module.css'
-
-interface ICard {
-  image: string
-}
+import { Link } from 'react-router-dom'
+import { IProduct } from './CardField'
 
 interface CardProductProps {
-  card: ICard
+  card: IProduct
 }
 
 export const CardProduct = ({ card }: CardProductProps): JSX.Element => {
@@ -16,7 +14,9 @@ export const CardProduct = ({ card }: CardProductProps): JSX.Element => {
       <div className={styles.content}>
         <div className={styles.priceText}>Price</div>
         <div>
-          <button className={styles.cardBtn}>Paid</button>
+          <button className={styles.cardBtn}>
+            <Link to={'/product'}>Paid</Link>
+          </button>
         </div>
       </div>
       <div className={styles.shortDesc}>Short Description</div>

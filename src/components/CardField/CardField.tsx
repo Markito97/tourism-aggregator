@@ -1,33 +1,25 @@
 import React from 'react'
 import { CardProduct } from './CardProduct'
-import Card1 from '../../assets/resource/Card1.jpg'
-import Card2 from '../../assets/resource/Card2.jpg'
-import Card3 from '../../assets/resource/Card3.jpg'
-import Card4 from '../../assets/resource/Card4.jpg'
 import styles from './CardField.module.css'
 
-const cards = [
-  { image: Card1 },
-  { image: Card2 },
-  { image: Card3 },
-  { image: Card4 },
-]
+export interface IProduct {
+  id: number
+  image: string
+  title: string
+  description: string
+  price: number
+}
 
-export const CardField = (): JSX.Element => {
+interface CardFieldProps {
+  products: IProduct[]
+}
+
+export const CardField = ({ products }: CardFieldProps): JSX.Element => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <div className={styles.content}>
-        {cards.map((card) => (
-          <CardProduct key={card.image} card={card} />
-        ))}
-      </div>
+    <div className={styles.content}>
+      {products.map((card) => (
+        <CardProduct key={card.image} card={card} />
+      ))}
     </div>
   )
 }

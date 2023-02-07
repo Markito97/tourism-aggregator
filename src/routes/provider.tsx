@@ -13,6 +13,7 @@ export const Provider = (): JSX.Element => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<Hotels />} />
+        <Route path="/hotels/:lake" element={<Hotels />} />
         <Route path="/aboutus" element={<About />} />
         <Route path="/activities" element={<Activities />} />
         <Route path="/contacts" element={<Contacts />} />

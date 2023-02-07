@@ -1,3 +1,9 @@
+/* .wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+} */
+
 .content {
   padding-top: 120px;
   width: 100%;
