@@ -1,13 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Logo } from '../Logo/Logo'
-import { setIsActive } from '../../utility/utility'
+import { setIsActive } from '@utils/utility'
 import styles from './Navbar.module.css'
 
 export const Navbar = (): JSX.Element => {
   return (
     <ul className={styles.content}>
-      <Logo />
+      <NavLink className={(status) => setIsActive(status, styles)} to={'/'}>
+        Home
+      </NavLink>
       <NavLink
         className={(status) => setIsActive(status, styles)}
         to={'/hotels'}

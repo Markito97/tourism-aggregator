@@ -1,5 +1,4 @@
 import React from 'react'
-import { Logo } from '../Logo/Logo'
 import styles from './Footer.module.css'
 
 const footerLinks = [
@@ -13,7 +12,6 @@ const footerLinks = [
 export const Footer = (): JSX.Element => {
   return (
     <div className={styles.footer}>
-      <Logo />
       <div>Company name</div>
       <div className={styles.footerNavigation}>
         {footerLinks.map((link, index) => (

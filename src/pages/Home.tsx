@@ -1,6 +1,5 @@
 import React, { RefObject } from 'react'
 import { Titles } from '../components/Titles/Titles'
-import { AboutUs } from '../components/AboutUs/AboutUs'
 import { HotelsContent } from '../components/Hotels/HotelsContent'
 import { Carousel } from '../components/Carousel/Carousel'
 
@@ -13,12 +12,6 @@ const activitiesTitles = {
 const hotelsTitles = {
   title: 'Hotels and Appartments',
   subTitle: 'Beauties',
-  className: 'Content',
-}
-
-const aboutUsTitles = {
-  title: 'Our Philosophy',
-  subTitle: 'About Us',
   className: 'Content',
 }
 
