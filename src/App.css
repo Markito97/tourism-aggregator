@@ -73,6 +73,9 @@ header {
     url('/src/assets/resource/Rectangle.jpg') no-repeat center top / cover;
 }
 
+main {
+}
+
 footer {
   margin-top: 200px;
   background: rgba(244, 244, 244, 1);

@@ -1,17 +1,17 @@
 import React, { ReactNode } from 'react'
-import { ArrowBack } from '../../../assets/icons/ArrowBack'
-import { ArrowNext } from '../../../assets/icons/ArrowNext'
-import styles from './SliderButton.module.css'
+import { ArrowBack } from '../../assets/icons/ArrowBack'
+import { ArrowNext } from '../../assets/icons/ArrowNext'
+import styles from './CarouselBtn.module.css'
 
-interface SliderButtonProps {
+interface CarouselBtnProps {
   children: ReactNode
   onClick: () => void
 }
 
-export const SliderButton = ({
+export const CarouselBtn = ({
   children,
   onClick,
-}: SliderButtonProps): JSX.Element => {
+}: CarouselBtnProps): JSX.Element => {
   return (
     <div
       className={children === 'BACK' ? styles.arrowPrev : styles.arrowNext}

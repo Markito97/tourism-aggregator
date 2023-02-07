@@ -28,8 +28,6 @@ export const CardField = (): JSX.Element => {
           <CardProduct key={card.image} card={card} />
         ))}
       </div>
-
-      <button className={styles.contentView}>View More</button>
     </div>
   )
 }

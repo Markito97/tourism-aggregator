@@ -14,7 +14,7 @@ export const Logo = ({ handle }: LogoProps): JSX.Element => {
       onClick={handle}
       to={'/'}
     >
-      Logo
+      Home
     </NavLink>
   )
 }

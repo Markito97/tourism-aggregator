@@ -1,26 +1,42 @@
-import React, { createRef } from 'react'
-import { Header } from '../Header/Header'
-import { Outlet } from 'react-router-dom'
+import React, { ReactNode, createRef, useEffect, useState } from 'react'
 import { Footer } from '../Footer/Footer'
+import { Titles } from '../Titles/Titles'
+import { NavBarLinks } from '../NavBar/NavBarLinks'
+const headerTitles = {
+  title: 'Norway',
+  subTitle: 'Explore',
+  className: 'imageContent',
+}
 
-export const Layout = (): JSX.Element => {
-  const ref1 = createRef<HTMLElement>()
+interface ITest {
+  current: HTMLDivElement | null
+}
 
-  const hanldeScroll = (): void => {
-    ref1.current?.scrollIntoView()
+interface LayoutProps {
+  children: ReactNode
+}
+
+export const Layout = ({ children }: LayoutProps): JSX.Element => {
+  const mainContentRef = createRef<HTMLElement>()
+
+  const hanldeScroll = (path: string): void => {
+    mainContentRef.current?.scrollIntoView()
   }
+
+  console.log('rerender')
 
   return (
     <div className="wrapper">
       <header>
         <div className="container">
-          <Header handleScroll={hanldeScroll} />
+          <nav>
+            <NavBarLinks handle={hanldeScroll} />
+            <Titles titles={headerTitles} />
+          </nav>
         </div>
       </header>
-      <main ref={ref1}>
-        <div className="container">
-          <Outlet />
-        </div>
+      <main ref={mainContentRef}>
+        <div className="container">{children}</div>
       </main>
       <footer>
         <div className="container">

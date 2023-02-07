@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 import AboutUsImg from '../../assets/resource/AboutUs.jpg'
 import styles from './AboutUs.module.css'
 
-export const AboutUs = (): JSX.Element => {
+interface AboutUsProps {
+  aboutUsRef?: RefObject<HTMLDivElement>
+}
+
+export const AboutUs = ({ aboutUsRef }: AboutUsProps): JSX.Element => {
   return (
-    <div className={styles.content}>
+    <div ref={aboutUsRef} className={styles.content}>
       <img className={styles.contentImg} src={AboutUsImg} alt="" />
       <div className={styles.textContent}>
         <div className={styles.textContentColNum}>01</div>

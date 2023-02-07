@@ -3,8 +3,6 @@ import * as webpack from 'webpack'
 import 'webpack-dev-server'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-// import { HotModuleReplacementPlugin } from 'webpack';
-
 const config: webpack.Configuration = {
   mode: 'development',
   entry: './src/index.ts',

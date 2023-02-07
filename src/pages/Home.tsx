@@ -1,8 +1,8 @@
-import React from 'react'
-import { Slider } from '../components/Slider/Slider'
+import React, { RefObject } from 'react'
 import { Titles } from '../components/Titles/Titles'
 import { AboutUs } from '../components/AboutUs/AboutUs'
 import { HotelsContent } from '../components/Hotels/HotelsContent'
+import { Carousel } from '../components/Carousel/Carousel'
 
 const activitiesTitles = {
   title: 'Activities for Everyoune',
@@ -22,15 +22,17 @@ const aboutUsTitles = {
   className: 'Content',
 }
 
-export const Home = (): JSX.Element => {
+interface HomeProps {
+  testRef?: RefObject<HTMLDivElement>
+}
+
+export const Home = ({ testRef }: HomeProps): JSX.Element => {
   return (
     <>
       <Titles titles={activitiesTitles} />
-      <Slider />
+      <Carousel />
       <Titles titles={hotelsTitles} />
       <HotelsContent />
-      <Titles titles={aboutUsTitles} />
-      <AboutUs />
     </>
   )
 }

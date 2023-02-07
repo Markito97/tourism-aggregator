@@ -3,7 +3,7 @@ import styles from './SearchPanel.module.css'
 
 export const SeacrhPanel = (): JSX.Element => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className={styles.container}>
       <div className={styles.textField}>
         <label className={styles.textLable} htmlFor="">
           Place
