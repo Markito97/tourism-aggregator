@@ -16,9 +16,15 @@
   box-sizing: border-box;
 }
 
-*,
-html {
-  scroll-behavior: smooth !important;
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 ul,
@@ -32,15 +38,8 @@ li {
   overflow-x: hidden;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0 auto;
-  max-width: 1200px;
-}
-
 .swiper {
+  padding-top: 112px;
   width: 100%;
   height: 100%;
 }
@@ -61,23 +60,7 @@ li {
   object-fit: cover;
 }
 
-header {
-  height: 100vh;
-  display: block;
-  background: linear-gradient(
-      181.06deg,
-      rgba(0, 0, 0, 0.2) 0.91%,
-      rgba(255, 255, 255, 0) 116.71%,
-      rgba(255, 255, 255, 0) 116.72%
-    ),
-    url('/src/assets/resource/Rectangle.jpg') no-repeat center top / cover;
-}
-
-main {
-}
-
 footer {
-  margin-top: 200px;
   background: rgba(244, 244, 244, 1);
 }
 

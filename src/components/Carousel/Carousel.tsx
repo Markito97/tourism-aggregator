@@ -1,41 +1,31 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import Carousel1 from '../../assets/resource/Carousel1.jpg'
-import Carousel2 from '../../assets/resource/Carousel2.jpg'
-import Carousel3 from '../../assets/resource/Carousel3.jpg'
-import styles from './Carousel.module.css'
-import 'swiper/css/navigation'
+import CarouselImg from '../../assets/resource/Carousel.jpg'
+
 import 'swiper/css'
-import { CarouselBtn } from './CarouselBtn'
-const slides = [
-  { image: Carousel1 },
-  { image: Carousel2 },
-  { image: Carousel3 },
-]
-interface SliderProps {
-  sliderRef?: React.RefObject<HTMLDivElement>
-}
+import 'swiper/css/navigation'
 
-export const Carousel = ({ sliderRef }: SliderProps): JSX.Element => {
-  const [swipe, setSwipe] = useState<any>()
+import { Navigation } from 'swiper'
+import { Link } from 'react-router-dom'
 
+export const Carousel = (): JSX.Element => {
   return (
-    <div ref={sliderRef} className={styles.carousel}>
-      <CarouselBtn onClick={() => swipe?.slidePrev()}>BACK</CarouselBtn>
-      <Swiper
-        onBeforeInit={(swipper) => {
-          setSwipe(swipper)
-        }}
-        slidesPerView={3}
-        spaceBetween={30}
-      >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide.image}>
-            <img src={slide.image} alt="" />
-          </SwiperSlide>
-        ))}
+    <>
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <SwiperSlide>
+          <Link to={'/activities'}>
+            <img src={CarouselImg} alt="first carousel slide" />
+          </Link>
+        </SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
       </Swiper>
-      <CarouselBtn onClick={() => swipe?.slideNext()}>NEXT</CarouselBtn>
-    </div>
+    </>
   )
 }

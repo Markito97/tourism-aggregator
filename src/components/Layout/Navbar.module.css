@@ -1,5 +1,6 @@
-.links {
+.content {
   width: 100%;
+  padding: 35px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,7 +9,6 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  padding-top: 56px;
   color: #ffffff;
 }
 

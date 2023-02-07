@@ -1,15 +1,14 @@
-import React, { ReactNode, createRef, useEffect, useState } from 'react'
-import { Footer } from '../Footer/Footer'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { Titles } from '../Titles/Titles'
-import { NavBarLinks } from '../NavBar/NavBarLinks'
+import { useLocation } from 'react-router-dom'
+import { Navbar } from './Navbar'
+import styles from './Layout.module.css'
+import { Footer } from './Footer'
+
 const headerTitles = {
   title: 'Norway',
   subTitle: 'Explore',
   className: 'imageContent',
-}
-
-interface ITest {
-  current: HTMLDivElement | null
 }
 
 interface LayoutProps {
@@ -17,29 +16,32 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps): JSX.Element => {
-  const mainContentRef = createRef<HTMLElement>()
+  const location = useLocation()
+  const [isShow, setIsShow] = useState(true)
 
-  const hanldeScroll = (path: string): void => {
-    mainContentRef.current?.scrollIntoView()
-  }
-
-  console.log('rerender')
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setIsShow(false)
+    } else {
+      setIsShow(true)
+    }
+  }, [location])
 
   return (
-    <div className="wrapper">
-      <header>
-        <div className="container">
+    <div className={styles.wrapper}>
+      <header className={isShow ? styles.active : styles.inactive}>
+        <div className={styles.container}>
           <nav>
-            <NavBarLinks handle={hanldeScroll} />
-            <Titles titles={headerTitles} />
+            <Navbar />
+            {isShow && <Titles titles={headerTitles} />}
           </nav>
         </div>
       </header>
-      <main ref={mainContentRef}>
-        <div className="container">{children}</div>
+      <main className={styles.main}>
+        <div className={styles.container}>{children}</div>
       </main>
       <footer>
-        <div className="container">
+        <div className={styles.container}>
           <Footer />
         </div>
       </footer>

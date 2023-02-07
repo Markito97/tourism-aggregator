@@ -22,11 +22,7 @@ const aboutUsTitles = {
   className: 'Content',
 }
 
-interface HomeProps {
-  testRef?: RefObject<HTMLDivElement>
-}
-
-export const Home = ({ testRef }: HomeProps): JSX.Element => {
+export const Home = (): JSX.Element => {
   return (
     <>
       <Titles titles={activitiesTitles} />

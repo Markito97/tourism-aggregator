@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardProduct } from './Card/CardProduct'
+import { CardProduct } from './CardProduct'
 import Card1 from '../../assets/resource/Card1.jpg'
 import Card2 from '../../assets/resource/Card2.jpg'
 import Card3 from '../../assets/resource/Card3.jpg'
