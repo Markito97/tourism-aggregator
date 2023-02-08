@@ -10,14 +10,6 @@ export const Layout = (): JSX.Element => {
   const location = useLocation()
   const [isShow, setIsShow] = useState(true)
 
-  useEffect(() => {
-    if (location.pathname !== '/') {
-      setIsShow(false)
-    } else {
-      setIsShow(true)
-    }
-  }, [location])
-
   return (
     <div className={styles.wrapper}>
       <header className={isShow ? styles.active : styles.inactive}>
