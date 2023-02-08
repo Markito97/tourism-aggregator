@@ -1,6 +1,7 @@
 import React from 'react'
-import { Titles } from '../components/Titles/Titles'
 import { Carousel } from '../components/Carousel/Carousel'
+import { Titles } from '../components/Titles/Titles'
+import styles from './Home.module.css'
 
 const activitiesTitles = {
   title: 'Lakes for Everyoune',

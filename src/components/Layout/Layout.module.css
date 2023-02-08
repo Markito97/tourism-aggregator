@@ -27,10 +27,6 @@
   flex: 1 1 auto;
 }
 
-.footer {
-  padding-top: 55px;
-}
-
 .container {
   height: 100%;
   display: flex;

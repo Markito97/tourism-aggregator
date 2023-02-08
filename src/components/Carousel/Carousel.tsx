@@ -22,8 +22,6 @@ export const Carousel = (): JSX.Element => {
     }
   }, [width, slidesPerView])
 
-  console.log('rerender')
-
   return (
     <>
       <Swiper

@@ -30,7 +30,7 @@ export const Titles = ({ titles }: TitlesProps): JSX.Element => {
   const { title, subTitle, className } = titles
   const { content, subtitle, titleClass } = setClassName(className)
   return (
-    <div className={styles.content}>
+    <div className={content}>
       <h6 className={subtitle}>{subTitle}</h6>
       <h1 className={titleClass}>{title}</h1>
     </div>
