@@ -1,44 +1,8 @@
 .content {
+  padding-top: 112px;
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.contentImg {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  vertical-align: middle;
-}
-
-.subTitleImg {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 37px;
-  letter-spacing: 0.55em;
-  color: rgba(255, 255, 255, 0.7);
-  user-select: none;
-}
-
-.titleImg {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 220px;
-  line-height: 305px;
-  background: linear-gradient(
-      47.06deg,
-      #8f8e8e -3.87%,
-      rgba(135, 134, 134, 0) 36.89%
-    ),
-    #ffffff;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  user-select: none;
 }
 
 .subTitle {
@@ -53,7 +17,6 @@
 }
 
 .title {
-  padding-top: 27px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
@@ -63,22 +26,10 @@
   user-select: none;
 }
 
-@media screen and (max-width: 767.68px) {
-  .content {
-  }
-}
-
 @media (max-width: 479.97px) {
-  .titleImg {
-    font-size: 55px;
-    height: 100%;
-    text-align: start;
+  .content {
+    align-items: flex-start;
   }
-  .subTitleImg {
-    height: 100%;
-    font-size: 15px;
-  }
-
   .title {
     font-size: 50px;
   }
