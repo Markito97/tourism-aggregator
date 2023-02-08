@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Titles } from '../Titles/Titles'
-import { useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Navbar } from './Navbar'
 import styles from './Layout.module.css'
 import { Footer } from './Footer'
@@ -11,11 +11,7 @@ const headerTitles = {
   className: 'imageContent',
 }
 
-interface LayoutProps {
-  children: ReactNode
-}
-
-export const Layout = ({ children }: LayoutProps): JSX.Element => {
+export const Layout = (): JSX.Element => {
   const location = useLocation()
   const [isShow, setIsShow] = useState(true)
 
@@ -31,16 +27,18 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
     <div className={styles.wrapper}>
       <header className={isShow ? styles.active : styles.inactive}>
         <div className={styles.container}>
-          <nav>
-            <Navbar />
+          <Navbar />
+          <div className={styles.titleContainer}>
             {isShow && <Titles titles={headerTitles} />}
-          </nav>
+          </div>
         </div>
       </header>
       <main className={styles.main}>
-        <div className={styles.container}>{children}</div>
+        <div className={styles.container}>
+          <Outlet />
+        </div>
       </main>
-      <footer>
+      <footer className={styles.footer}>
         <div className={styles.container}>
           <Footer />
         </div>

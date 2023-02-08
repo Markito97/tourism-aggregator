@@ -21,6 +21,8 @@ module.exports = {
     quotes: [2, 'single', 'avoid-escape'],
     '@typescript-eslint/comma-dangle': 'off',
     // 'import/no-unresolved': 'off',
+    'space-before-function-paren': 'off',
+    '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/semi': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-non-null-assertion': 'off',

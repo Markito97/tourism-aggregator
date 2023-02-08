@@ -1,5 +1,4 @@
 .content {
-  padding-top: 112px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -9,7 +8,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 250px;
+  justify-content: center;
+  vertical-align: middle;
 }
 
 .subTitleImg {
@@ -61,4 +61,10 @@
   line-height: 56px;
   color: #2d2d2d;
   user-select: none;
+}
+
+@media screen and (max-width: 767.68px) {
+  .content {
+    display: none;
+  }
 }

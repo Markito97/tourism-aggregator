@@ -59,13 +59,3 @@ li {
 footer {
   background: rgba(244, 244, 244, 1);
 }
-
-.activeLink {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.inactiveLink {
-  color: #fff;
-  text-decoration: none;
-}

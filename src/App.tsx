@@ -1,12 +1,9 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import React, { FunctionComponent } from 'react'
 import { Provider } from './routes/provider'
 import './App.css'
 
-export const App = (): JSX.Element => {
-  return (
-    <BrowserRouter>
-      <Provider />
-    </BrowserRouter>
-  )
+const App: FunctionComponent<any> = () => {
+  return <Provider />
 }
+
+export default App
