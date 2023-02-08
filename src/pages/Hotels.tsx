@@ -23,8 +23,8 @@ export const Hotels = (): JSX.Element => {
 
   return (
     <>
-      <SeacrhPanel />
-      <CardField products={products} />
+      {/* <SeacrhPanel /> */}
+      {/* <CardField products={products} /> */}
     </>
   )
 }

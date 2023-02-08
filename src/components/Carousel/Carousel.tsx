@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Carousel1 from '@assets/resource/Carousel1.jpg'
 import Carousel2 from '@assets/resource/Carousel2.jpg'
 import Carousel3 from '@assets/resource/Carousel3.jpg'
+import { Navigation } from 'swiper'
+import { Link } from 'react-router-dom'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-import { Navigation } from 'swiper'
-import { Link } from 'react-router-dom'
-
 export const Carousel = (): JSX.Element => {
+  const { _, width } = useWindowDimensions()
+  const [slidesPerView, setSlidePerView] = useState<number>(3)
+
+  useEffect(() => {
+    if (width < 1130) {
+      setSlidePerView(1)
+    } else {
+      setSlidePerView(3)
+    }
+  }, [width, slidesPerView])
+
+  console.log('rerender')
+
   return (
     <>
       <Swiper
         navigation={true}
-        slidesPerView={3}
+        slidesPerView={slidesPerView}
         modules={[Navigation]}
         className="mySwiper"
       >
@@ -32,12 +45,6 @@ export const Carousel = (): JSX.Element => {
         <SwiperSlide>
           <img src={Carousel3} alt="first carousel slide" />
         </SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
       </Swiper>
     </>
   )

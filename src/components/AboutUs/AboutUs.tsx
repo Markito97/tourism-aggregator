@@ -2,6 +2,12 @@ import React, { RefObject } from 'react'
 import AboutUsImg from '../../assets/resource/AboutUs.jpg'
 import styles from './AboutUs.module.css'
 
+const aboutUsTitles = {
+  title: 'Our Philosophy',
+  subTitle: 'About Us',
+  className: 'Content',
+}
+
 interface AboutUsProps {
   aboutUsRef?: RefObject<HTMLDivElement>
 }

@@ -9,15 +9,17 @@ import { Activities } from '../pages/Activities'
 
 export const Provider = (): JSX.Element => {
   return (
-    <Layout>
+    <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/hotels/:lake" element={<Hotels />} />
-        <Route path="/aboutus" element={<About />} />
-        <Route path="/activities" element={<Activities />} />
-        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="hotels" element={<Hotels />} />
+          <Route path="hotels/:lake" element={<Hotels />} />
+          <Route path="aboutus" element={<About />} />
+          <Route path="activities" element={<Activities />} />
+          <Route path="contacts" element={<Contacts />} />
+        </Route>
       </Routes>
-    </Layout>
+    </>
   )
 }

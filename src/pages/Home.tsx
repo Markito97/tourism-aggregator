@@ -1,16 +1,9 @@
-import React, { RefObject } from 'react'
+import React from 'react'
 import { Titles } from '../components/Titles/Titles'
-import { HotelsContent } from '../components/Hotels/HotelsContent'
 import { Carousel } from '../components/Carousel/Carousel'
 
 const activitiesTitles = {
-  title: 'Activities for Everyoune',
-  subTitle: 'HUNDREDS OF',
-  className: 'Content',
-}
-
-const hotelsTitles = {
-  title: 'Hotels and Appartments',
+  title: 'Lakes for Everyoune',
   subTitle: 'Beauties',
   className: 'Content',
 }
@@ -20,8 +13,6 @@ export const Home = (): JSX.Element => {
     <>
       <Titles titles={activitiesTitles} />
       <Carousel />
-      <Titles titles={hotelsTitles} />
-      <HotelsContent />
     </>
   )
 }
