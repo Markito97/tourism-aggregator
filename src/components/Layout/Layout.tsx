@@ -15,9 +15,7 @@ export const Layout = (): JSX.Element => {
       <header className={isShow ? styles.active : styles.inactive}>
         <div className={styles.container}>
           <Navbar />
-          <div className={styles.titleContainer}>
-            <HeaderTitle />
-          </div>
+          <div className={styles.titleContainer}></div>
         </div>
       </header>
       <main className={styles.main}>
