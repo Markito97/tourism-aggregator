@@ -65,6 +65,25 @@
 
 @media screen and (max-width: 767.68px) {
   .content {
-    display: none;
+  }
+}
+
+@media (max-width: 479.97px) {
+  .titleImg {
+    font-size: 55px;
+    height: 100%;
+    text-align: start;
+  }
+  .subTitleImg {
+    height: 100%;
+    font-size: 15px;
+  }
+
+  .title {
+    font-size: 50px;
+  }
+
+  .subTitle {
+    font-size: 24px;
   }
 }

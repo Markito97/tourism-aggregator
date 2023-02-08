@@ -4,8 +4,17 @@ import { setIsActive } from '@utils/utility'
 import styles from './Navbar.module.css'
 import { BurgerMenu } from '../../assets/icons/BurgerMenu'
 
+const navigationLinks = [
+  { text: 'Home', path: '/' },
+  { text: 'Hotels', path: 'hotels' },
+  { text: 'Activities', path: 'activities' },
+  { text: 'About Us', path: 'aboutus' },
+  { text: 'Contacts', path: 'contacts' },
+]
+
 export const Navbar = (): JSX.Element => {
   const burgerMenuRef = createRef<HTMLUListElement>()
+
   const handleMenu = (): void => {
     if (burgerMenuRef.current!.style.display === 'flex') {
       burgerMenuRef.current!.style.display = 'none'
@@ -16,37 +25,18 @@ export const Navbar = (): JSX.Element => {
 
   return (
     <nav className={styles.navbar}>
-      <ul ref={burgerMenuRef} className={styles.content}>
-        <NavLink className={(status) => setIsActive(status, styles)} to={'/'}>
-          Home
-        </NavLink>
-        <NavLink
-          className={(status) => setIsActive(status, styles)}
-          to={'hotels'}
-        >
-          Hotels
-        </NavLink>
-        <NavLink
-          className={(status) => setIsActive(status, styles)}
-          to={'activities'}
-        >
-          Activities
-        </NavLink>
-
-        <NavLink
-          className={(status) => setIsActive(status, styles)}
-          to={'aboutus'}
-        >
-          About Us
-        </NavLink>
-        <NavLink
-          className={(status) => setIsActive(status, styles)}
-          to={'contacts'}
-        >
-          Contacts
-        </NavLink>
+      <ul ref={burgerMenuRef} className={styles.navigation}>
+        {navigationLinks.map((link) => (
+          <NavLink
+            key={link.text}
+            to={link.path}
+            className={(status) => setIsActive(status, styles)}
+          >
+            {link.text}
+          </NavLink>
+        ))}
       </ul>
-      <div className={styles.menu} onClick={handleMenu}>
+      <div className={styles.navigationBurger} onClick={handleMenu}>
         <BurgerMenu />
       </div>
     </nav>
