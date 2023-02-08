@@ -2,7 +2,28 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 55px;
+}
+
+.activeLink {
+  color: black;
+  text-decoration: underline;
+}
+
+.inactiveLink {
+  color: black;
+  text-decoration: underline;
+}
+
+@media (max-width: 479.97px) {
+  .content {
+    flex-direction: column;
+  }
+  .activeLink {
+    padding-bottom: 15px;
+  }
+  .inactiveLink {
+    padding-bottom: 15px;
+  }
 }
 
 /* .footerNavigation {

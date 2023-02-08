@@ -1,11 +1,11 @@
 .navbar {
   position: relative;
-  height: 90px;
   display: flex;
   align-items: center;
+  height: 120px;
 }
 
-.content {
+.navigation {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -18,38 +18,47 @@
   color: #ffffff;
 }
 
-.menu {
+.navigationBurger {
   display: none;
 }
 
 .activeLink {
-  padding: 25px;
   color: white;
   text-decoration: underline;
 }
 
 .inactiveLink {
-  padding: 25px;
   color: white;
   text-decoration: none;
 }
 
-@media screen and (max-width: 767.98px) {
-  .content {
+@media (max-width: 767.98px) {
+  .navbar {
+    height: 60px;
+    justify-content: flex-end;
+  }
+  .navigation {
     flex-direction: column;
     position: absolute;
-    top: 10px;
+    top: 120px;
     display: none;
+    font-size: 35px;
     transform: translateY(-150%);
     animation: show 1s forwards;
   }
-  .menu {
-    position: absolute;
-    right: 0;
-    padding-right: 30px;
-    display: flex;
-    align-items: center;
+  .navigationBurger {
+    display: block;
   }
+  .activeLink {
+    padding-bottom: 55px;
+  }
+
+  .inactiveLink {
+    padding-bottom: 55px;
+  }
+}
+
+@media screen and(max-width: 479.98) {
 }
 
 @keyframes show {
