@@ -2,7 +2,7 @@ import React, { createRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import { setIsActive } from '@utils/utility'
 import styles from './Navbar.module.css'
-import { BurgerMenu } from '@assets/icons/BurgerMenu'
+import { BurgerMenu } from '../../assets/icons/BurgerMenu'
 
 export const Navbar = (): JSX.Element => {
   const burgerMenuRef = createRef<HTMLUListElement>()
@@ -22,26 +22,26 @@ export const Navbar = (): JSX.Element => {
         </NavLink>
         <NavLink
           className={(status) => setIsActive(status, styles)}
-          to={'/hotels'}
+          to={'hotels'}
         >
           Hotels
         </NavLink>
         <NavLink
           className={(status) => setIsActive(status, styles)}
-          to={'/activities'}
+          to={'activities'}
         >
           Activities
         </NavLink>
 
         <NavLink
           className={(status) => setIsActive(status, styles)}
-          to={'/aboutus'}
+          to={'aboutus'}
         >
           About Us
         </NavLink>
         <NavLink
           className={(status) => setIsActive(status, styles)}
-          to={'/contacts'}
+          to={'contacts'}
         >
           Contacts
         </NavLink>

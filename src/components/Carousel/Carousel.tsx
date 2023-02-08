@@ -11,7 +11,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 export const Carousel = (): JSX.Element => {
-  const { _, width } = useWindowDimensions()
+  const { height, width } = useWindowDimensions()
   const [slidesPerView, setSlidePerView] = useState<number>(3)
 
   useEffect(() => {
