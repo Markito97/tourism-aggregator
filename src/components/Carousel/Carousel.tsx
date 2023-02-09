@@ -15,10 +15,14 @@ export const Carousel = (): JSX.Element => {
   const [slidesPerView, setSlidePerView] = useState<number>(3)
 
   useEffect(() => {
-    if (width < 1130) {
-      setSlidePerView(1)
-    } else {
+    if (width > 1225) {
       setSlidePerView(3)
+    }
+    if (width < 1225) {
+      setSlidePerView(2)
+    }
+    if (width < 991) {
+      setSlidePerView(1)
     }
   }, [width, slidesPerView])
 
@@ -39,6 +43,9 @@ export const Carousel = (): JSX.Element => {
           <Link to={'/hotels/second'}>
             <img src={Carousel2} alt="first carousel slide" />
           </Link>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={Carousel3} alt="first carousel slide" />
         </SwiperSlide>
         <SwiperSlide>
           <img src={Carousel3} alt="first carousel slide" />

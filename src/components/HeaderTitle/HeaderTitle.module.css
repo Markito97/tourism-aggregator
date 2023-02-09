@@ -32,13 +32,24 @@
   user-select: none;
 }
 
+@media (max-width: 991.98px) {
+  .title {
+    font-size: 150px;
+    line-height: 190px;
+  }
+}
+
+@media (max-width: 767.68px) {
+}
+
 @media (max-width: 479.97px) {
   .title {
+    display: none;
     font-size: 55px;
     line-height: 100px;
-    text-align: start;
   }
   .subtitle {
+    display: none;
     height: 100%;
     font-size: 15px;
   }

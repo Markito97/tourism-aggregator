@@ -28,13 +28,15 @@
 
 @media (max-width: 479.97px) {
   .content {
-    align-items: flex-start;
+    padding-top: 60px;
   }
   .title {
-    font-size: 50px;
+    font-size: 30px;
+    padding-top: 12px;
+    text-align: center;
   }
 
   .subTitle {
-    font-size: 24px;
+    font-size: 15px;
   }
 }
