@@ -22,6 +22,7 @@ export const Carousel = (): JSX.Element => {
           <button className={styles.unitBtn}>Look</button>
         </div>
       </div>
+      <hr className={styles.uninDivider} />
       <div className={styles.sectionUnit}>
         <div className={styles.imageContainer}>
           <img className={styles.unitImage} src={Lake2} alt="" />
@@ -37,6 +38,7 @@ export const Carousel = (): JSX.Element => {
           <button className={styles.unitBtn}>Look</button>
         </div>
       </div>
+      <hr className={styles.uninDivider} />
       <div className={styles.sectionUnit}>
         <div className={styles.imageContainer}>
           <img className={styles.unitImage} src={Lake3} alt="" />

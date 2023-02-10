@@ -1,4 +1,5 @@
 .content {
+  padding-top: 220px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -30,6 +31,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   user-select: none;
+  background-clip: text;
 }
 
 @media (max-width: 991.98px) {

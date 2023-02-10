@@ -1,15 +1,10 @@
-/* .wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-} */
-
 .content {
   padding-top: 120px;
   width: 100%;
   display: grid;
-  grid-template-columns: 370px 370px 370px;
+  grid-template-columns: 1fr 1fr 1fr;
   column-gap: 45px;
+  row-gap: 45px;
 }
 
 .contentView {
@@ -27,4 +22,16 @@
   letter-spacing: 5px;
   background: rgba(61, 61, 61, 1);
   text-transform: uppercase;
+}
+
+@media (max-width: 991.98px) {
+  .content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
 }

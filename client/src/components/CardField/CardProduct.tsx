@@ -19,7 +19,6 @@ export const CardProduct = ({ card }: CardProductProps): JSX.Element => {
           </button>
         </div>
       </div>
-      <div className={styles.shortDesc}>Short Description</div>
     </div>
   )
 }

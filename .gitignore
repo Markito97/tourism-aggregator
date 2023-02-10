@@ -1,7 +1,2 @@
 node_modules
-dist
-
 package-lock.json
-
-.development.env
-.production.env

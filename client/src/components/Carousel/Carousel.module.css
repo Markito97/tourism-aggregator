@@ -49,10 +49,9 @@
 }
 
 .unitBtn {
+  width: 100%;
   padding-top: 17px;
   padding-bottom: 17px;
-  padding-left: 79px;
-  padding-right: 79px;
   color: #fff;
   font-family: 'Montserrat';
   font-style: normal;
@@ -62,6 +61,12 @@
   letter-spacing: 5px;
   background: rgba(61, 61, 61, 1);
   text-transform: uppercase;
+}
+
+.uninDivider {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 0.5px solid rgba(61, 61, 61, 1);
 }
 
 @media (max-width: 991.98px) {
