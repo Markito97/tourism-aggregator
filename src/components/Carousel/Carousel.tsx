@@ -1,56 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import Carousel1 from '@assets/resource/Carousel1.jpg'
-import Carousel2 from '@assets/resource/Carousel2.jpg'
-import Carousel3 from '@assets/resource/Carousel3.jpg'
-import { Navigation } from 'swiper'
-import { Link } from 'react-router-dom'
-import useWindowDimensions from '../../hooks/useWindowDimensions'
-
-import 'swiper/css'
-import 'swiper/css/navigation'
+import React from 'react'
+import styles from './Carousel.module.css'
+import Lake1 from '../../assets/resource/Lake1.jpg'
+import Lake2 from '../../assets/resource/Lake2.jpg'
+import Lake3 from '../../assets/resource/Lake3.jpg'
 
 export const Carousel = (): JSX.Element => {
-  const { height, width } = useWindowDimensions()
-  const [slidesPerView, setSlidePerView] = useState<number>(3)
-
-  useEffect(() => {
-    if (width > 1225) {
-      setSlidePerView(3)
-    }
-    if (width < 1225) {
-      setSlidePerView(2)
-    }
-    if (width < 991) {
-      setSlidePerView(1)
-    }
-  }, [width, slidesPerView])
-
   return (
-    <>
-      <Swiper
-        navigation={true}
-        slidesPerView={slidesPerView}
-        modules={[Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <Link to={'/hotels/first'}>
-            <img src={Carousel1} alt="first carousel slide" />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to={'/hotels/second'}>
-            <img src={Carousel2} alt="first carousel slide" />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Carousel3} alt="first carousel slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Carousel3} alt="first carousel slide" />
-        </SwiperSlide>
-      </Swiper>
-    </>
+    <section className={styles.section}>
+      <div className={styles.sectionUnit}>
+        <div className={styles.imageContainer}>
+          <img className={styles.unitImage} src={Lake1} alt="" />
+        </div>
+        <div className={styles.unitContent}>
+          <div className={styles.unitContentTitle}>Lake One</div>
+          <div className={styles.unitContentText}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            assumenda officiis ratione ex, vero nostrum, aliquam repellat,
+            deleniti quas doloremque sit quasi culpa magnam exercitationem
+            voluptatem repellendus nihil consectetur perferendis.
+          </div>
+          <button className={styles.unitBtn}>Look</button>
+        </div>
+      </div>
+      <div className={styles.sectionUnit}>
+        <div className={styles.imageContainer}>
+          <img className={styles.unitImage} src={Lake2} alt="" />
+        </div>
+        <div className={styles.unitContent}>
+          <div className={styles.unitContentTitle}>Lake One</div>
+          <div className={styles.unitContentText}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            assumenda officiis ratione ex, vero nostrum, aliquam repellat,
+            deleniti quas doloremque sit quasi culpa magnam exercitationem
+            voluptatem repellendus nihil consectetur perferendis.
+          </div>
+          <button className={styles.unitBtn}>Look</button>
+        </div>
+      </div>
+      <div className={styles.sectionUnit}>
+        <div className={styles.imageContainer}>
+          <img className={styles.unitImage} src={Lake3} alt="" />
+        </div>
+        <div className={styles.unitContent}>
+          <div className={styles.unitContentTitle}>Lake One</div>
+          <div className={styles.unitContentText}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            assumenda officiis ratione ex, vero nostrum, aliquam repellat,
+            deleniti quas doloremque sit quasi culpa magnam exercitationem
+            voluptatem repellendus nihil consectetur perferendis.
+          </div>
+          <button className={styles.unitBtn}>Look</button>
+        </div>
+      </div>
+    </section>
   )
 }
