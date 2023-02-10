@@ -3,40 +3,41 @@
   flex-direction: column;
 }
 
-.contentItem {
+.sectionUnit {
+  padding-top: 30px;
   display: flex;
-  padding-top: 112px;
-}
-
-.contentItemRevers {
-  display: flex;
-  padding-top: 112px;
-}
-
-.textContent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.imgWrapper {
-  max-width: 800px;
-}
-
-.contentImg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.itemText {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  column-gap: 30px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+}
+
+.unitImage {
+  width: 100%;
+}
+
+.unitContent {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding-left: 25px;
-  padding-right: 25px;
-  max-width: 400px;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.unitContentTitle {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 56px;
+  color: #2d2d2d;
+  user-select: none;
+}
+
+.unitContentText {
   text-align: justify;
   font-family: 'Montserrat';
   font-style: normal;
@@ -47,29 +48,7 @@
   color: #6d6d6d;
 }
 
-.textTitle {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 46px;
-  line-height: 56px;
-  color: #2d2d2d;
-  user-select: none;
-  padding-bottom: 25px;
-}
-
-.textTitleReverse {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 46px;
-  line-height: 56px;
-  color: #2d2d2d;
-  user-select: none;
-  padding-bottom: 25px;
-}
-
-.itemBtn {
+.unitBtn {
   padding-top: 17px;
   padding-bottom: 17px;
   padding-left: 79px;
@@ -85,21 +64,44 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 479.97px) {
-  .contentItem {
-    padding-top: 25px;
+@media (max-width: 991.98px) {
+  .sectionUnit {
     flex-direction: column;
   }
-  .contentItemRevers {
-    flex-direction: column-reverse;
+  .unitContent {
+    max-width: 100%;
   }
+}
 
-  .itemText {
-    padding: 0;
-    padding-top: 12px;
+@media (max-width: 479.97px) {
+  .sectionUnit {
+    flex-direction: column;
+    padding-top: 45px;
+    column-gap: 0;
   }
-  .itemBtn {
+  .imageContainer {
+  }
+  .unitImage {
+  }
+  .unitContent {
+    padding-top: 15px;
+    max-width: 100%;
+    align-items: start;
+    row-gap: 15px;
+  }
+  .unitContentTitle {
+    font-size: 23px;
+    line-height: 23px;
+  }
+  .unitContentText {
+    font-size: 12px;
+    left: 12px;
+  }
+  .unitBtn {
     width: 100%;
-    margin-top: 12px;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 12px;
+    line-height: 12px;
   }
 }
