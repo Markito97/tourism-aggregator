@@ -11,6 +11,7 @@ import { Hotels } from '../pages/Hotels'
 import { About } from '../pages/About'
 import { Contacts } from '../pages/Contacts'
 import { Activities } from '../pages/Activities'
+import { AdminPage } from '../pages/AdminPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="aboutus" element={<About />} />
       <Route path="activities" element={<Activities />} />
       <Route path="contacts" element={<Contacts />} />
+      <Route path="admin" element={<AdminPage />} />
     </Route>
   )
 )

@@ -1,0 +1,35 @@
+.houseFormFields {
+  padding-top: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+
+.dragContainer {
+  margin-top: 45px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.drag {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 150px;
+}
+
+.drop {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 150px;
+}

@@ -1,9 +1,13 @@
 import { Schema } from '@nestjs/mongoose'
-import { Prop } from '@nestjs/mongoose/dist'
+import { Prop, SchemaFactory } from '@nestjs/mongoose/dist'
+import { HydratedDocument } from 'mongoose'
+
+export type HouseDocument = HydratedDocument<House>
+
 @Schema()
 export class House {
   @Prop()
-  price: number
+  price: string
   @Prop()
   name: string
   @Prop()
@@ -13,3 +17,5 @@ export class House {
   @Prop()
   image: string
 }
+
+export const HouseSchema = SchemaFactory.createForClass(House)
