@@ -1,4 +1,4 @@
-export const getHouses = async () => {
+export const handleGetHouses = async (): Promise<[]> => {
   try {
     const response = await fetch('http://localhost:3001/houses/allHouses', {
       method: 'GET',

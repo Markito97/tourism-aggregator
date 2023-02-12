@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { CardProduct } from './CardProduct'
 import styles from './CardField.module.css'
-import { getHouses } from '../../actions/getHouses.action'
 import houseService from '../../services/houses.service'
 import { observer } from 'mobx-react-lite'
 

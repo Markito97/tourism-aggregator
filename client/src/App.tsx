@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react'
-import { Provider } from './routes/provider'
+import { Provider } from '../src/routes/RouterProvider'
 import './App.css'
 
 const App: FunctionComponent<any> = () => {
-  const x = 123
   return <Provider />
 }
 
