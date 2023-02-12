@@ -25,7 +25,8 @@
       "strict": true,                                      /* Enable all strict type-checking options. */
       "strictFunctionTypes": true,
       "strictNullChecks": true,
-      "skipLibCheck": true                                
+      "skipLibCheck": true,         
+      "useDefineForClassFields": true                       
     }
   }
   

@@ -16,7 +16,6 @@ export const Layout = (): JSX.Element => {
       setIsShow(true)
     }
   }, [location])
-
   return (
     <div className={styles.wrapper}>
       <header className={isShow ? styles.active : styles.inactive}>

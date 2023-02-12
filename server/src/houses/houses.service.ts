@@ -11,7 +11,10 @@ export class HouseService {
   ) {}
 
   async createHouse(image: string, house: CreateHouseDto) {
-    const houses = await this.houseModel.create({ ...house, image: image })
-    console.log(houses)
+    return await this.houseModel.create({ ...house, image: image })
+  }
+
+  async getHouses() {
+    return await this.houseModel.find()
   }
 }

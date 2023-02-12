@@ -7,5 +7,5 @@ export const fileUpload = async (house: any, file: any) => {
     body: formData,
     mode: 'no-cors',
   })
-  return response.json()
+  return response
 }

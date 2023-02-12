@@ -40,46 +40,44 @@ export const HouseForm = () => {
 
   return (
     <div className={styles.houseFormFields}>
-      <div className={styles.form}>
-        <h1>Adding House</h1>
-        <form>
-          <TextFiled value={name} onChange={setName} placeholder={'Name'} />
-          <TextFiled
-            value={descirption}
-            onChange={setDescription}
-            placeholder={'Descirption'}
-          />
-          <TextFiled value={price} onChange={setPrice} placeholder={'Price'} />
-          <TextFiled
-            value={location}
-            onChange={setLocation}
-            placeholder={'Location'}
-          />
-        </form>
-        <div className={styles.dragContainer}>
-          {drag ? (
-            <div
-              className={styles.drag}
-              onDragStart={(e) => dragStartHandler(e)}
-              onDragOver={(e) => dragStartHandler(e)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
-              onDrop={(e) => onDropHandler(e)}
-            >
-              Drop files, to upload them
-            </div>
-          ) : (
-            <div
-              className={styles.drop}
-              onDragStart={(e) => dragStartHandler(e)}
-              onDragOver={(e) => dragStartHandler(e)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
-            >
-              Drag files, to upload them
-            </div>
-          )}
-        </div>
+      <h1>Adding House</h1>
+      <TextFiled value={name} onChange={setName} placeholder={'Name'} />
+      <TextFiled
+        value={descirption}
+        onChange={setDescription}
+        placeholder={'Descirption'}
+      />
+      <TextFiled value={price} onChange={setPrice} placeholder={'Price'} />
+      <TextFiled
+        value={location}
+        onChange={setLocation}
+        placeholder={'Location'}
+      />
+      <div className={styles.dragContainer}>
+        {drag ? (
+          <div
+            className={styles.drag}
+            onDragStart={(e) => dragStartHandler(e)}
+            onDragOver={(e) => dragStartHandler(e)}
+            onDragLeave={(e) => dragLeaveHandler(e)}
+            onDrop={(e) => onDropHandler(e)}
+          >
+            Drop files, to upload them
+          </div>
+        ) : (
+          <div
+            className={styles.drop}
+            onDragStart={(e) => dragStartHandler(e)}
+            onDragOver={(e) => dragStartHandler(e)}
+            onDragLeave={(e) => dragLeaveHandler(e)}
+          >
+            Drag files, to upload them
+          </div>
+        )}
       </div>
-      <button onClick={handleSendData}>Add a house</button>
+      <button className={styles.sendForm} onClick={handleSendData}>
+        Add a house
+      </button>
     </div>
   )
 }

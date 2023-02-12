@@ -28,8 +28,8 @@ export class HousesController {
     const res = this.houseService.createHouse(image, parse)
   }
 
-  @Get('test')
-  test() {
-    return 'test'
+  @Get('allHouses')
+  async getHouses() {
+    return await this.houseService.getHouses()
   }
 }
