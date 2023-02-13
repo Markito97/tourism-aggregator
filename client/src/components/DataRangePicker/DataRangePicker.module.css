@@ -1,3 +1,9 @@
+.container {
+  padding-top: 35px;
+  display: flex;
+  column-gap: 30px;
+}
+
 .calendar {
   width: 312px;
   border-radius: 5px;

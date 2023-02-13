@@ -10,7 +10,7 @@ import {
 
 interface UseCalendarParams {
   locale?: string
-  selectedDate: Date
+  date: Date
   firstWeekDayNumber?: number
 }
 
@@ -18,7 +18,7 @@ const DAYS_IN_WEEK = 7
 
 export const useCalendar = ({
   locale = 'default',
-  selectedDate: date,
+  date,
   firstWeekDayNumber = 2,
 }: UseCalendarParams) => {
   const [selectedDay, setSelectedDay] = useState(createDate({ date }))
@@ -35,8 +35,6 @@ export const useCalendar = ({
     () => getWeekDaysNames(firstWeekDayNumber, locale),
     []
   )
-
-  console.log(monthesNames)
 
   const days = useMemo(
     () => selectedMonth.createMonthDays(),
@@ -79,6 +77,7 @@ export const useCalendar = ({
 
     for (let i = 0; i < numberOfPrevDays; i += 1) {
       const inverted = numberOfPrevDays - i
+      console.log(inverted)
       result[i] = prevMonthDays[prevMonthDays.length - inverted]
     }
 
@@ -97,6 +96,8 @@ export const useCalendar = ({
     ) {
       result[i] = nextMonthDays[i - totalCalendarDays + numberOfNextDays]
     }
+
+    console.log(result)
 
     return result
   }, [selectedMonth.year, selectedMonth.monthIndex, selectedYear])
@@ -125,8 +126,8 @@ export const useCalendar = ({
     )
   }
 
-  return {
-    state: {
+  return [
+    {
       calendarDays,
       weekDaysNames,
       monthesNames,
@@ -134,10 +135,10 @@ export const useCalendar = ({
       selectedMonth,
       selectedYear,
     },
-    functions: {
+    {
       onClickArrow,
       setSelectedDay,
       setSelectedYear,
     },
-  }
+  ]
 }
