@@ -1,6 +1,6 @@
 import { useCalendar } from '../../hooks/useCalendar'
 import React, { FC, useState } from 'react'
-import { checkDateIsEqual, formatDate } from '../../utils/date/index'
+import { formatDate } from '../../utils/date/formatDate'
 import styles from './DataRangePicker.module.css'
 import { ChevronLeft } from '../../assets/icons/ChevronLeft'
 import { ChevronRight } from '../../assets/icons/ChevronRight'
@@ -8,6 +8,13 @@ import { ChevronRight } from '../../assets/icons/ChevronRight'
 interface CalendarProps {
   locale?: string
   firstWeekDayNumber?: number
+}
+
+const checkDateIsEqual = (firstDate: Date, secondDate: Date) => {
+  // if (!firstDate || !secondDate) return
+  firstDate.getDate() === secondDate.getDate() &&
+    firstDate.getMonth() === secondDate.getMonth() &&
+    firstDate.getFullYear() === secondDate.getFullYear()
 }
 
 export const DataRangePicker: FC<CalendarProps> = ({
@@ -19,12 +26,10 @@ export const DataRangePicker: FC<CalendarProps> = ({
   somedate.setDate(1)
   const [currentMonths, setCurrentMonths] = useState(new Date())
   const [nextMoths, setNextMoths] = useState(somedate)
+  const [dateRange, setDateRange] = useState({ start: '', end: '' })
 
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
-
-  console.log(startDate)
-  console.log(endDate)
 
   const [dateBegin, dateBeginHandlers]: any = useCalendar({
     locale,
@@ -41,47 +46,56 @@ export const DataRangePicker: FC<CalendarProps> = ({
   console.log(dateBegin)
 
   return (
-    <div className={styles.container}>
-      <div className={styles.calendar}>
-        {/* <div>{formatDate(startDate, 'DD MM YYYY')}</div> */}
-        <div className={styles.calendar__header}>
-          <ChevronLeft onClick={() => dateBeginHandlers.onClickArrow('left')} />
-          <div>
-            {dateBegin.monthesNames[dateBegin.selectedMonth.monthIndex].month}
-            {dateBegin.selectedYear}
+    <>
+      <div className={styles.dateRange}>
+        <input
+          type="text"
+          value={dateRange.start}
+          className={styles.rangeField}
+        />
+        <input
+          type="text"
+          value={dateRange.end}
+          className={styles.rangeField}
+        />
+      </div>
+      <div className={styles.container}>
+        <div className={styles.calendar}>
+          <div className={styles.calendarHeader}>
+            <ChevronLeft
+              onClick={() => dateBeginHandlers.onClickArrow('left')}
+            />
+            <span>
+              {dateBegin.monthesNames[dateBegin.selectedMonth.monthIndex].month}
+            </span>
+            <span>{dateBegin.selectedYear}</span>
           </div>
-        </div>
-        <div className="calendar__body">
-          <>
+          <div className={styles.calendarContent}>
             <div className={styles.calendarDaysNames}>
               {dateBegin.weekDaysNames.map((weekDaysName: any) => (
                 <div key={weekDaysName.dayShort}>{weekDaysName.dayShort}</div>
               ))}
             </div>
-            <div style={{ paddingTop: '25px' }}>
+            <div>
               <div className={styles.calendarDays}>
-                {dateBegin.calendarDays.map((day: any) => {
+                {dateBegin.calendarDays.map((day: any, index: number) => {
                   const isSelectedDay = checkDateIsEqual(
                     day.date,
                     dateBegin.selectedDay.date
                   )
+                  // console.log(isSelectedDay)
+                  // console.log(day.date)
+                  // console.log(dateBegin.selectedDay.date)
 
-                  const isAdditionalDay =
-                    day.monthIndex !== dateBegin.selectedMonth.monthIndex
-
+                  console.log(isSelectedDay)
                   return (
                     <div
-                      key={`${day.dayNumber}-${day.monthIndex}`}
+                      key={index + 1}
                       onClick={() => {
                         dateBeginHandlers.setSelectedDay(day)
-                        // тут выбор текущей даты
                         setStartDate(day.date)
                       }}
-                      className={[
-                        `${styles.calendarDay}`,
-                        isSelectedDay ? `${styles.calendarSelected}` : '',
-                        isAdditionalDay ? 'calendar__additional__day' : '',
-                      ].join(' ')}
+                      className={`${styles.calendarDay}`}
                     >
                       {day.dayNumber}
                     </div>
@@ -89,65 +103,45 @@ export const DataRangePicker: FC<CalendarProps> = ({
                 })}
               </div>
             </div>
-          </>
-        </div>
-      </div>
-      <hr />
-      <div className={styles.calendar}>
-        {/* <div>{formatDate(endDate, 'DD MM YYYY')}</div> */}
-        <div className={styles.calendar__header}>
-          <div>
-            {dateEnd.monthesNames[dateEnd.selectedMonth.monthIndex].month}
-            {dateEnd.selectedYear}
           </div>
-          <ChevronRight
-            onClick={() => {
-              dateEndHandlers.onClickArrow('right')
-              dateBeginHandlers.onClickArrow('right')
-            }}
-          />
         </div>
-        <div className="calendar__body">
-          <>
+        <hr />
+        <div className={styles.calendar}>
+          <div className={styles.calendarHeader}>
+            <span>
+              {dateEnd.monthesNames[dateEnd.selectedMonth.monthIndex].month}
+            </span>
+            <span>{dateEnd.selectedYear}</span>
+            <ChevronLeft
+              onClick={() => dateBeginHandlers.onClickArrow('left')}
+            />
+          </div>
+
+          <div className={styles.calendarContent}>
             <div className={styles.calendarDaysNames}>
-              {dateEnd.weekDaysNames.map((weekDaysName: any) => (
+              {dateBegin.weekDaysNames.map((weekDaysName: any) => (
                 <div key={weekDaysName.dayShort}>{weekDaysName.dayShort}</div>
               ))}
             </div>
-            <div style={{ paddingTop: '25px' }}>
+            <div>
               <div className={styles.calendarDays}>
-                {dateEnd.calendarDays.map((day: any) => {
-                  const isSelectedDay = checkDateIsEqual(
-                    day.date,
-                    dateEnd.selectedDay.date
-                  )
-
-                  const isAdditionalDay =
-                    day.monthIndex !== dateEnd.selectedMonth.monthIndex
-
-                  return (
-                    <div
-                      key={`${day.dayNumber}-${day.monthIndex}`}
-                      onClick={() => {
-                        dateEndHandlers.setSelectedDay(day)
-                        // тут выбор текущей даты
-                        setEndDate(day.date)
-                      }}
-                      className={[
-                        `${styles.calendarDay}`,
-                        isSelectedDay ? `${styles.calendarSelected}` : '',
-                        isAdditionalDay ? 'calendar__additional__day' : '',
-                      ].join(' ')}
-                    >
-                      {day.dayNumber}
-                    </div>
-                  )
-                })}
+                {dateEnd.calendarDays.map((day: any, index: number) => (
+                  <div
+                    key={index + 1}
+                    onClick={() => {
+                      dateBeginHandlers.setSelectedDay(day)
+                      setStartDate(day.date)
+                    }}
+                    className={`${styles.calendarDay}`}
+                  >
+                    {day.dayNumber}
+                  </div>
+                ))}
               </div>
             </div>
-          </>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

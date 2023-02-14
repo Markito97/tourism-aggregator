@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import {
   getMonthesNames,
@@ -77,9 +77,10 @@ export const useCalendar = ({
 
     for (let i = 0; i < numberOfPrevDays; i += 1) {
       const inverted = numberOfPrevDays - i
-      console.log(inverted)
       result[i] = prevMonthDays[prevMonthDays.length - inverted]
     }
+
+    // console.log(numberOfPrevDays)
 
     for (
       let i = numberOfPrevDays;
@@ -96,8 +97,6 @@ export const useCalendar = ({
     ) {
       result[i] = nextMonthDays[i - totalCalendarDays + numberOfNextDays]
     }
-
-    console.log(result)
 
     return result
   }, [selectedMonth.year, selectedMonth.monthIndex, selectedYear])
