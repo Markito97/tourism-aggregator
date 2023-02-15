@@ -7,6 +7,7 @@ import { handleGetHouses } from '../actions/getHouses.action'
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary'
 import { About } from '../pages/About'
 import { Activities } from '../pages/Activities'
+import { AdminPage } from '../pages/AdminPage'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
         path: 'activities',
         element: <Activities />,
       },
+      {path: 'admin',
+      element: <AdminPage/>
+    }
     ],
   },
 ])
