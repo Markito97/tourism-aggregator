@@ -1,22 +1,30 @@
-import React, {useMemo} from 'react'
-import { getMonthData } from 'utils/dateHelpers/getMonthData'
-import { getYearMonth } from 'utils/dateHelpers/getYearMonth'
-import { Days } from './Days'
-import { WeekDay } from './WeekDay'
+import React, { createContext, useMemo } from 'react'
+import { getMonthData } from '../../utils/dateHelpers/getMonthData'
+import { getYearMonth } from '../../utils/dateHelpers/getYearMonth'
+import { Days } from '../../components/DatePicker/Days'
+import { WeekDay } from '../../components/DatePicker/WeekDay'
+import styles from './Month.module.css'
 
-export const Month = ({year, month}: any): JSX.Element => {
+export const YearMonthContext = createContext<number[]>([0, 0])
 
-    const days = useMemo(() => getMonthData(year, month), [year, month])
-    const values = useMemo(() => [year, month], [year, month])
-    return (
-        <div>
-            <div>
-                {getYearMonth(year, month)}
-            </div>
-        <div>
-            <WeekDay/>
-            <Days days={days}/>
+interface MonthProps {
+  year: number
+  month: number
+}
+
+export const Month = ({ year, month }: MonthProps): JSX.Element => {
+  const days = useMemo(() => getMonthData(year, month), [year, month])
+  const value = useMemo(() => [year, month], [year, month])
+
+  return (
+    <YearMonthContext.Provider value={value}>
+      <div className={styles.content}>
+        <div className={styles.header}>{getYearMonth(year, month)}</div>
+        <div className={styles.datesContent}>
+          <WeekDay />
+          <Days days={days} />
         </div>
-        </div>
-    )
+      </div>
+    </YearMonthContext.Provider>
+  )
 }
