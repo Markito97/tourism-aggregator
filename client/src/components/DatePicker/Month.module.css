@@ -1,12 +1,28 @@
+.container {
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
 .content {
-  min-width: 300px;
-  margin-right: 25px;
+  /* min-width: 300px; */
 }
 
 .header {
   text-align: center;
+  font-size: 25px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.weekDays {
+  display: grid;
+  font-size: 12px;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 25px;
+  padding-top: 15px;
+  font-weight: bold;
 }
 
 .datesContent {
-  padding-top: 32px;
+  padding-top: 15px;
 }

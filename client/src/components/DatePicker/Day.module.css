@@ -1,3 +1,25 @@
 .selected {
-  background-color: grey;
+  background-color: rgb(86, 86, 254);
+  padding: 6px;
+  color: white;
+  border-radius: 3px;
+}
+
+.disabled {
+  color: grey;
+  padding: 6px;
+  pointer-events: none;
+}
+
+.firstPickedDate {
+}
+
+.dayCell {
+  padding: 6px;
+  cursor: pointer;
+}
+
+.dayCell:hover {
+  outline: 1px solid blue;
+  border-radius: 3px;
 }

@@ -1,14 +1,15 @@
 import React from 'react'
-import { DatePicker } from '../../src/components/DatePicker/DatePicker'
-import { DatePickerProvider, useDatePickGetter } from '../context/DateContext'
+import { useDatePickGetter } from '../hooks/useDatePickGetter'
+import { SeacrhPanel } from '../../src/components/SearchPanel/SearchPanel'
 
 export const Activities = (): JSX.Element => {
   const { pickedDates } = useDatePickGetter()
+
   return (
     <div>
-      <DatePicker disablePreviousDays />
-      <div>{pickedDates.firstPickedDate?.toString()}</div>
-      <div>{pickedDates.secondPickedDate?.toString()}</div>
+      <SeacrhPanel />
+      {/* <div>{pickedDates.firstPickedDate?.toString()}</div> */}
+      {/* <div>{pickedDates.secondPickedDate?.toString()}</div> */}
     </div>
   )
 }

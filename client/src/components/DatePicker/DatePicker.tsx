@@ -1,11 +1,12 @@
 import React, { useState, createContext } from 'react'
-import { getNextYearAndMonth } from '../../utils/dateHelpers/getNextYearAndMonth'
-import { getPrevYearAndMonth } from '../../utils/dateHelpers/getPrevYearAndMonth'
-import { getThisYearAndThisMonth } from '../../utils/dateHelpers/getThisYearAndThisMonth'
+import {
+  getNextYearAndMonth,
+  getPrevYearAndMonth,
+  getThisYearAndThisMonth,
+} from '../../utils/dateHelpers/index'
+import { DisablePreviousDaysContext } from '../../context/DateContext'
 import { Month } from '../../components/DatePicker/Month'
 import styles from './DatePicker.module.css'
-
-export const DisablePreviousDaysContext = createContext<boolean>(false)
 
 export const DatePicker = ({ disablePreviousDays = false }) => {
   const [thisYear, thisMonth] = getThisYearAndThisMonth()
@@ -48,21 +49,12 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
     )
   }
 
-  console.log(monthsDate)
-
   return (
     <DisablePreviousDaysContext.Provider value={disablePreviousDays}>
       <div className={styles.container}>
-        <div>
-          <button onClick={onClickPrevButton}>prev</button>
-        </div>
         {monthsDate.map(({ year, month }) => (
           <Month key={`${year}${month}`} year={year} month={month} />
         ))}
-
-        <div>
-          <button onClick={onClickNextButton}>next</button>
-        </div>
       </div>
     </DisablePreviousDaysContext.Provider>
   )

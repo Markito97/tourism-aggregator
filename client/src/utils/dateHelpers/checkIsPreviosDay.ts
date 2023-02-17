@@ -11,9 +11,7 @@ export const checkIsPreviousDay = ({
   month,
   day,
 }: CheckIsPreviousDayInput) => {
-  if (!day) {
-    return true
-  }
+  if (!day) return true
 
   const currentCellDate = new Date(year, month - 1, day)
   const today = startOfDay(new Date())

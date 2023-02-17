@@ -6,12 +6,10 @@ export const getMonthData = (
   year: number,
   month: number
 ): Array<Array<number | false>> => {
-  if (month < 1 || month > 12) {
-    return []
-  }
+  if (month < 1 || month > 12) return []
 
-  const startDay = getDay(startOfMonth(new Date(year, month - 1))) // День недели 0 1 2 3 4 5 6
-  const endDate = getDate(endOfMonth(new Date(year, month - 1))) // Последний день месяца
+  const startDay = getDay(startOfMonth(new Date(year, month - 1)))
+  const endDate = getDate(endOfMonth(new Date(year, month - 1)))
 
   let lengthNext = startDay - 1
   if (lengthNext === -1) {

@@ -1,7 +1,0 @@
-.header {
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}

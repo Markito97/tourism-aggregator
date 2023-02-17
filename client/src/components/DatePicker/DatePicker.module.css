@@ -1,4 +1,10 @@
 .container {
-  padding-top: 16px;
+  padding: 15px;
   display: flex;
+  column-gap: 30px;
+  position: absolute;
+  background: white;
+  border: 1px solid;
+  top: 228px;
+  left: 250px;
 }

@@ -1,5 +1,9 @@
-export const splitArray = (array: Array<number | false>, part: number) => {
+export const splitArray = (
+  array: Array<number | false>,
+  part: number
+): (number | false)[][] => {
   const tmp = []
+
   for (let i = 0; i < array.length; i += part) {
     tmp.push(array.slice(i, i + part))
   }

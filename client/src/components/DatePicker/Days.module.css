@@ -1,6 +1,7 @@
-.dayRow {
-  padding-top: 30px;
+.dateRows {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  column-gap: 15px;
+  padding-top: 15px;
   text-align: center;
 }

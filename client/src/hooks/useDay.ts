@@ -1,29 +1,5 @@
-import { isEqual } from 'date-fns'
-
-import { PickedDateUnit, useDatePick } from '../context/DateContext'
-
-/* util */
-
-const dateUnitToDateObj = (dateUnit: PickedDateUnit | null): Date | false => {
-  if (!dateUnit) return false
-  const { year, month, day } = dateUnit
-  if (!day) return false
-  return new Date(year, month - 1, day)
-}
-
-interface IsEqualDate {
-  (date1: Date | null | false, date2: Date | null | false): boolean
-}
-
-const isEqualDate: IsEqualDate = (date1, date2) => {
-  if (!date1 || !date2) {
-    return false
-  }
-
-  return isEqual(date1, date2)
-}
-
-/* **** */
+import { useDatePick } from '../hooks/useDatePick'
+import { dateUnitToDateObj, isEqualDate } from '../utils/dateHelpers/index'
 
 interface DayCellDate {
   year: number
@@ -102,7 +78,6 @@ export const useDayCell: UseDayCell = ({ year, month, day }) => {
     }
 
     if (isEqualDate(firstPickedDate, currentCellDate)) {
-      // firstPick을 다시 클릭하면 secondPick이 firstPick이 된다.
       setPickedDateUnits((prevPickedDateUnits) => ({
         firstPickedDateUnit: prevPickedDateUnits.secondPickedDateUnit
           ? pickedDateUnits.secondPickedDateUnit
