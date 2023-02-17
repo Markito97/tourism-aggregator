@@ -1,18 +1,17 @@
 import { makeAutoObservable } from 'mobx'
 
 interface IHouse {
-  price: string
-  name: string
-  location: string
-  image: string
+  price: string | null
+  name: string | null
+  location: string | null
+  image: string | null
 }
 
-class HousesService {
+export class HousesService {
   houses: IHouse[] = []
 
   constructor() {
     this.houses = []
-
     makeAutoObservable(this)
   }
 
@@ -20,16 +19,22 @@ class HousesService {
     this.houses = data
   }
 
+  addHouse = () => {}
+
+  removeHouse = () => {}
+
   get getHouses() {
     return this.houses
   }
 
-  load() {
-    fetch('http://localhost:3001/houses/allHouses')
-      .then((res) => res.json())
-      .then((data: IHouse[]) => (houseService.houses = data))
+  get getHouse() {
+    return
   }
-}
 
-const houseService = new HousesService()
-export default houseService
+  // хз пока как загружать эти дома // целиком или по отдельности
+  // load() {
+  //   fetch('http://localhost:3001/houses/allHouses')
+  //     .then((res) => res.json())
+  //     .then((data: IHouse[]) => (houseService.houses = data))
+  // }
+}

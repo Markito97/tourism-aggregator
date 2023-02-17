@@ -3,7 +3,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { Layout } from '../components/Layout/Layout'
 import { Hotels } from '../pages/Hotels'
-import { handleGetHouses } from '../actions/getHouses.action'
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary'
 import { About } from '../pages/About'
 import { Activities } from '../pages/Activities'
@@ -21,7 +20,6 @@ const router = createBrowserRouter([
       {
         path: 'hotels',
         element: <Hotels />,
-        loader: handleGetHouses,
         errorElement: <ErrorBoundary />,
       },
       {
@@ -32,9 +30,7 @@ const router = createBrowserRouter([
         path: 'activities',
         element: <Activities />,
       },
-      {path: 'admin',
-      element: <AdminPage/>
-    }
+      { path: 'admin', element: <AdminPage /> },
     ],
   },
 ])

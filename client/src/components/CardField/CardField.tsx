@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { CardProduct } from './CardProduct'
 import styles from './CardField.module.css'
-import houseService from '../../services/houses.service'
 import { observer } from 'mobx-react-lite'
+import { ServiceContext } from '../../context/ServiceContext'
 
 export interface IProduct {
   id: number
@@ -18,7 +18,9 @@ interface CardFieldProps {
 
 export const CardField = observer(
   ({ products }: CardFieldProps): JSX.Element => {
-    const houses = houseService.houses.map((house) => console.log(house))
+    const { houses } = useContext(ServiceContext)
+
+    console.log(houses)
 
     return (
       <div className={styles.content}>
