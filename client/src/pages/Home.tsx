@@ -1,19 +1,13 @@
 import React from 'react'
-import { Carousel } from '../components/Carousel/Carousel'
-import { Titles } from '../components/Titles/Titles'
-import styles from './Home.module.css'
-
-const activitiesTitles = {
-  title: 'Lakes for Everyoune',
-  subTitle: 'Beauties',
-  className: 'Content',
-}
+import { Lakes } from '@components/Lakes/Lakes'
+import { Titles } from '@components/Titles/Titles'
+import { ACTIVITIES_TITLES } from '../app.consts'
 
 export const Home = (): JSX.Element => {
   return (
     <>
-      <Titles titles={activitiesTitles} />
-      <Carousel />
+      <Titles titles={ACTIVITIES_TITLES} />
+      <Lakes/>
     </>
   )
 }

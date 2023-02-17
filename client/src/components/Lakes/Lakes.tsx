@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from './Carousel.module.css'
+import styles from './Lakes.module.css'
 import Lake1 from '@assets/Lake1.jpg'
 import Lake2 from '@assets/Lake2.jpg'
 import Lake3 from '@assets/Lake3.jpg'
 
-export const Carousel = (): JSX.Element => {
+export const Lakes = (): JSX.Element => {
   return (
     <section className={styles.section}>
       <div className={styles.sectionUnit}>
