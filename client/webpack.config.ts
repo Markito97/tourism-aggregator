@@ -60,7 +60,8 @@ const config: webpack.Configuration = {
     alias: {
       '@assets': path.resolve(__dirname, 'src/assets/resource/'),
       '@utils': path.resolve(__dirname, 'src/utils'),
-      '@components': path.resolve(__dirname, 'src/components/')
+      '@components': path.resolve(__dirname, 'src/components/'),
+      '@hooks': path.resolve(__dirname, 'src/hooks')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
