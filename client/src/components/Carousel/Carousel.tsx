@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './Carousel.module.css'
-import Lake1 from '../../assets/resource/Lake1.jpg'
-import Lake2 from '../../assets/resource/Lake2.jpg'
-import Lake3 from '../../assets/resource/Lake3.jpg'
+import Lake1 from '@assets/Lake1.jpg'
+import Lake2 from '@assets/Lake2.jpg'
+import Lake3 from '@assets/Lake3.jpg'
 
 export const Carousel = (): JSX.Element => {
   return (

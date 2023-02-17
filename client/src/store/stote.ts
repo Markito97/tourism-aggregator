@@ -1,13 +1,13 @@
-import Card1 from '@assets/resource/Card1.jpg'
-import Card2 from '@assets/resource/Card2.jpg'
-import Card3 from '@assets/resource/Card3.jpg'
-import Card4 from '@assets/resource/Card4.jpg'
-import Card5 from '@assets/resource/Card5.jpg'
+import Card1 from '@assets/Card1.jpg'
+import Card2 from '@assets/Card2.jpg'
+import Card3 from '@assets/Card3.jpg'
+import Card4 from '@assets/Card4.jpg'
+import Card5 from '@assets/Card5.jpg'
 
-import PCard from '@assets/resource/PCard.jpg'
-import PCard1 from '@assets/resource/PCard1.jpg'
-import PCard2 from '@assets/resource/PCard2.jpg'
-import PCard3 from '@assets/resource/PCard3.jpg'
+import PCard from '@assets/PCard.jpg'
+import PCard1 from '@assets/PCard1.jpg'
+import PCard2 from '@assets/PCard2.jpg'
+import PCard3 from '@assets/PCard3.jpg'
 
 export const productsFirsLake = [
   {
