@@ -11,6 +11,8 @@ export const getMonthData = (
   const startDay = getDay(startOfMonth(new Date(year, month - 1)))
   const endDate = getDate(endOfMonth(new Date(year, month - 1)))
 
+  // getDaysInMonth
+
   let lengthNext = startDay - 1
   if (lengthNext === -1) {
     lengthNext = 6
