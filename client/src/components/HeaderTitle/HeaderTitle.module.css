@@ -34,6 +34,12 @@
   background-clip: text;
 }
 
+@media (max-height: 920px) {
+ .content {
+  padding-top:  120px
+ } 
+}
+
 @media (max-width: 991.98px) {
   .title {
     font-size: 150px;
