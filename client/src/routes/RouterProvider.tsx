@@ -17,11 +17,11 @@ import { ActivitiesList } from '../pages/ActivitiesList'
 
 const router = createHashRouter([
   {
-    path: '/tourism-aggregator',
+    path: '/',
     element: <Layout />,
     children: [
       {
-        index: true,
+        path: 'home',
         element: <Home />,
       },
       {
