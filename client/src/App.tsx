@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import { Provider } from '../src/routes/RouterProvider'
 import './App.css'
 import { DatePickerProvider } from '../../client/src/context/DateContext'
