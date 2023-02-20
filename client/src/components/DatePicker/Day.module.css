@@ -11,7 +11,10 @@
   pointer-events: none;
 }
 
-.firstPickedDate {
+.range {
+  padding: 6px;
+  color: white;
+  background-color: rgb(130, 130, 247);
 }
 
 .dayCell {

@@ -1,60 +1,99 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './House.module.css'
-import { fileUpload } from '../../actions/fileUpload.action'
-import { TextFiled } from '../../UI/TextField'
+import { useForm } from 'react-hook-form'
+import { useFileDrop } from '../../hooks/useFileDrop'
 
 export const HouseForm = () => {
-  const [drag, setDrag] = useState<boolean>(false)
-  const [name, setName] = useState<string>('')
-  const [descirption, setDescription] = useState<string>('')
-  const [price, setPrice] = useState<string>('')
-  const [location, setLocation] = useState<string>('')
-  const [file, setFile] = useState()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const [
+    dragStartHandler,
+    dragLeaveHandler,
+    onDropHandler,
+    imagesPreviews,
+    files,
+  ] = useFileDrop()
 
-  const dragStartHandler = (e: any) => {
-    e.preventDefault()
-    setDrag(true)
+  const onSubmit = (data: any) => {
+    console.log(JSON.stringify(data))
   }
 
-  const dragLeaveHandler = (e: any) => {
-    e.preventDefault()
-    setDrag(false)
-  }
-
-  const onDropHandler = (e: any) => {
-    e.preventDefault()
-    let files = e.dataTransfer.files
-    setFile(files['0'])
-    setDrag(false)
-  }
-
-  const handleSendData = () => {
-    const house = {
-      name,
-      descirption,
-      price,
-      location,
-    }
-    fileUpload(house, file)
-  }
+  console.log(files)
 
   return (
     <div className={styles.houseFormFields}>
       <h1>Adding House</h1>
-      <TextFiled value={name} onChange={setName} placeholder={'Name'} />
-      <TextFiled
-        value={descirption}
-        onChange={setDescription}
-        placeholder={'Descirption'}
-      />
-      <TextFiled value={price} onChange={setPrice} placeholder={'Price'} />
-      <TextFiled
-        value={location}
-        onChange={setLocation}
-        placeholder={'Location'}
-      />
-      <div className={styles.dragContainer}>
-        {drag ? (
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formItem}>
+          <label className={styles.textLable}>Name</label>
+          <input
+            className={styles.textField}
+            placeholder="Name"
+            {...register('name', {
+              required: 'This is required.',
+              minLength: {
+                value: 5,
+                message: 'Minimum 5 characters',
+              },
+            })}
+          />
+          {errors?.name && (
+            <p className={styles.error}>{errors.name?.message}</p>
+          )}
+        </div>
+        <div className={styles.formItem}>
+          <label className={styles.textLable}>Description</label>
+          <textarea
+            className={styles.textarea}
+            placeholder="Description"
+            {...register('description', {
+              required: 'This is required.',
+              maxLength: {
+                value: 300,
+                message: 'Maximum 300 characters',
+              },
+            })}
+          ></textarea>
+          {errors?.description && (
+            <p className={styles.error}>{errors.description?.message}</p>
+          )}
+        </div>
+
+        <div className={styles.formItem}>
+          <label className={styles.textLable}>Price</label>
+          <input
+            className={styles.textField}
+            placeholder="price"
+            {...register('price', {
+              required: 'This is required.',
+            })}
+          />
+          {errors?.price && (
+            <p className={styles.error}>{errors.price?.message}</p>
+          )}
+        </div>
+
+        <div className={styles.formItem}>
+          <label className={styles.textLable}>Location</label>
+          <input
+            className={styles.textField}
+            placeholder="Location"
+            {...register('location', {
+              required: 'This is required.',
+              maxLength: {
+                value: 300,
+                message: 'Maximum 300 characters',
+              },
+            })}
+          />
+          {errors?.location && (
+            <p className={styles.error}>{errors.location?.message}</p>
+          )}
+        </div>
+        <div className={styles.dragContainer}>
           <div
             className={styles.drag}
             onDragStart={(e) => dragStartHandler(e)}
@@ -62,22 +101,14 @@ export const HouseForm = () => {
             onDragLeave={(e) => dragLeaveHandler(e)}
             onDrop={(e) => onDropHandler(e)}
           >
-            Drop files, to upload them
+            Drop
           </div>
-        ) : (
-          <div
-            className={styles.drop}
-            onDragStart={(e) => dragStartHandler(e)}
-            onDragOver={(e) => dragStartHandler(e)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
-          >
-            Drag files, to upload them
-          </div>
-        )}
-      </div>
-      <button className={styles.sendForm} onClick={handleSendData}>
-        Add a house
-      </button>
+        </div>
+        <input type="submit" />
+        <input type="file" />
+      </form>
+
+      {/* <div ref={testRef}></div> */}
     </div>
   )
 }
