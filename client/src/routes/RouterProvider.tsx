@@ -3,6 +3,9 @@ import {
   RouterProvider,
   createBrowserRouter,
   createHashRouter,
+  BrowserRouter,
+  Route,
+  Routes,
 } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { Layout } from '../components/Layout/Layout'
@@ -50,19 +53,19 @@ const router = createHashRouter([
   },
 ])
 
-export const Provider = (): JSX.Element => {
-  return <RouterProvider router={router} />
-}
-
 // export const Provider = (): JSX.Element => {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="admin/*" element={<AdminLayout />}>
-//           <Route path="contacts" element={<p>Contacts</p>} />
-//           <Route path="team" element={<p>Team</p>} />
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   )
+//   return <RouterProvider router={router} />
 // }
+
+export const Provider = (): JSX.Element => {
+  return (
+    <BrowserRouter basename="https://markito97.github.io/tourism-aggregator/">
+      <Routes>
+        <Route path="admin/*" element={<AdminLayout />}>
+          <Route path="contacts" element={<p>Contacts</p>} />
+          <Route path="team" element={<p>Team</p>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
