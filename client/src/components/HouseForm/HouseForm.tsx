@@ -1,6 +1,7 @@
-import React, { createRef, useState } from 'react'
+import React from 'react'
 import styles from './House.module.css'
 import { useForm } from 'react-hook-form'
+import { useFileDrop } from '../../hooks/useFileDrop'
 
 export const HouseForm = () => {
   const {
@@ -8,46 +9,19 @@ export const HouseForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const [drag, setDrag] = useState<boolean>(false)
-  const [file, setFile] = useState()
-  const testRef = createRef()
-
-  const [imagesPreviews, setImagesPreviews] = useState([])
-
-  const dragStartHandler = (e: any) => {
-    e.preventDefault()
-    setDrag(true)
-  }
-
-  const dragLeaveHandler = (e: any) => {
-    e.preventDefault()
-    setDrag(false)
-  }
-
-  const onDropHandler = (e: any) => {
-    e.preventDefault()
-    let files = [...e.dataTransfer.files]
-    files.map((file) => {
-      const reader = new FileReader()
-      reader.onload = (file) => {
-        setImagesPreviews([...imagesPreviews, file.target?.result])
-      }
-      reader.readAsDataURL(file)
-    })
-
-    // бек пока не принимает массив файлов надо
-  }
-
-  const handleSendData = () => {
-    const house = {}
-  }
+  const [
+    dragStartHandler,
+    dragLeaveHandler,
+    onDropHandler,
+    imagesPreviews,
+    files,
+  ] = useFileDrop()
 
   const onSubmit = (data: any) => {
-    console.log(file)
     console.log(JSON.stringify(data))
   }
 
-  console.log('rerender')
+  console.log(files)
 
   return (
     <div className={styles.houseFormFields}>
@@ -120,39 +94,18 @@ export const HouseForm = () => {
           )}
         </div>
         <div className={styles.dragContainer}>
-          {drag ? (
-            <div
-              className={styles.drag}
-              onDragStart={(e) => dragStartHandler(e)}
-              onDragOver={(e) => dragStartHandler(e)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
-              onDrop={(e) => onDropHandler(e)}
-            >
-              <div className={styles.imageContainer}>
-                {imagesPreviews.map((image) => {
-                  return (
-                    <div className={styles.imageUnit}>
-                      <img src={image} />
-                    </div>
-                  )
-                })}
-              </div>
-              {imagesPreviews.length === 0 ? (
-                <p>Drop files, to upload them</p>
-              ) : null}
-            </div>
-          ) : (
-            <div
-              className={styles.drop}
-              onDragStart={(e) => dragStartHandler(e)}
-              onDragOver={(e) => dragStartHandler(e)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
-            >
-              Drag files, to upload them
-            </div>
-          )}
+          <div
+            className={styles.drag}
+            onDragStart={(e) => dragStartHandler(e)}
+            onDragOver={(e) => dragStartHandler(e)}
+            onDragLeave={(e) => dragLeaveHandler(e)}
+            onDrop={(e) => onDropHandler(e)}
+          >
+            Drop
+          </div>
         </div>
         <input type="submit" />
+        <input type="file" />
       </form>
 
       {/* <div ref={testRef}></div> */}
