@@ -1,47 +1,6 @@
-import React, { useState } from 'react'
+import React, { createRef, useState } from 'react'
 import styles from './House.module.css'
-import { Resolver, useForm } from 'react-hook-form'
-
-// interface IHouseForm {
-//   name: string
-//   description: string
-//   location: string
-// }
-
-// /^[a-zA-Z]+$/
-
-// const resolver: Resolver<IHouseForm> = async (values) => {
-//   return {
-//     values: values.name || values.description ? values : {},
-//     errors:
-//       !values.name && !values.description
-//         ? {
-//             name: {
-//               type: 'required',
-//               message: 'This is required.',
-//             },
-//             description: {
-//               type: 'required',
-//               message: 'This is required.',
-//             },
-//           }
-//         : !values.name
-//         ? {
-//             name: {
-//               type: 'required',
-//               message: 'This is required.',
-//             },
-//           }
-//         : !values.description
-//         ? {
-//             description: {
-//               type: 'required',
-//               message: 'This is required.',
-//             },
-//           }
-//         : {},
-//   }
-// }
+import { useForm } from 'react-hook-form'
 
 export const HouseForm = () => {
   const {
@@ -51,6 +10,7 @@ export const HouseForm = () => {
   } = useForm()
   const [drag, setDrag] = useState<boolean>(false)
   const [file, setFile] = useState()
+  const testRef = createRef()
 
   const dragStartHandler = (e: any) => {
     e.preventDefault()
@@ -65,8 +25,22 @@ export const HouseForm = () => {
   const onDropHandler = (e: any) => {
     e.preventDefault()
     let files = e.dataTransfer.files
-    setFile(files['0'])
-    setDrag(false)
+    const reader = new FileReader()
+
+    reader.onload = (file) => {
+      let img = document.createElement('img')
+      img.src = file.target?.result
+      testRef.current.appendChild(img)
+    }
+
+    reader.readAsDataURL(files)
+
+    // reader.onload = file => {
+    //   let img
+    // }
+
+    // setFile(files['0'])
+    // setDrag(false)
   }
 
   const handleSendData = () => {
@@ -74,6 +48,7 @@ export const HouseForm = () => {
   }
 
   const onSubmit = (data: any) => {
+    console.log(file)
     console.log(JSON.stringify(data))
   }
 
@@ -159,6 +134,7 @@ export const HouseForm = () => {
         </div>
         <input type="submit" />
       </form>
+      <div ref={testRef}></div>
     </div>
   )
 }
