@@ -12,6 +12,8 @@ export const HouseForm = () => {
   const [file, setFile] = useState()
   const testRef = createRef()
 
+  const [imagesPreviews, setImagesPreviews] = useState([])
+
   const dragStartHandler = (e: any) => {
     e.preventDefault()
     setDrag(true)
@@ -24,23 +26,16 @@ export const HouseForm = () => {
 
   const onDropHandler = (e: any) => {
     e.preventDefault()
-    let files = e.dataTransfer.files
-    const reader = new FileReader()
+    let files = [...e.dataTransfer.files]
+    files.map((file) => {
+      const reader = new FileReader()
+      reader.onload = (file) => {
+        setImagesPreviews([...imagesPreviews, file.target?.result])
+      }
+      reader.readAsDataURL(file)
+    })
 
-    reader.onload = (file) => {
-      let img = document.createElement('img')
-      img.src = file.target?.result
-      testRef.current.appendChild(img)
-    }
-
-    reader.readAsDataURL(files)
-
-    // reader.onload = file => {
-    //   let img
-    // }
-
-    // setFile(files['0'])
-    // setDrag(false)
+    // бек пока не принимает массив файлов надо
   }
 
   const handleSendData = () => {
@@ -94,6 +89,20 @@ export const HouseForm = () => {
         </div>
 
         <div className={styles.formItem}>
+          <label className={styles.textLable}>Price</label>
+          <input
+            className={styles.textField}
+            placeholder="price"
+            {...register('price', {
+              required: 'This is required.',
+            })}
+          />
+          {errors?.price && (
+            <p className={styles.error}>{errors.price?.message}</p>
+          )}
+        </div>
+
+        <div className={styles.formItem}>
           <label className={styles.textLable}>Location</label>
           <input
             className={styles.textField}
@@ -119,7 +128,18 @@ export const HouseForm = () => {
               onDragLeave={(e) => dragLeaveHandler(e)}
               onDrop={(e) => onDropHandler(e)}
             >
-              Drop files, to upload them
+              <div className={styles.imageContainer}>
+                {imagesPreviews.map((image) => {
+                  return (
+                    <div className={styles.imageUnit}>
+                      <img src={image} />
+                    </div>
+                  )
+                })}
+              </div>
+              {imagesPreviews.length === 0 ? (
+                <p>Drop files, to upload them</p>
+              ) : null}
             </div>
           ) : (
             <div
@@ -134,7 +154,8 @@ export const HouseForm = () => {
         </div>
         <input type="submit" />
       </form>
-      <div ref={testRef}></div>
+
+      {/* <div ref={testRef}></div> */}
     </div>
   )
 }

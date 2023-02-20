@@ -51,7 +51,6 @@
 }
 
 .dragContainer {
-  margin-top: 45px;
   width: 100%;
   border: 1px solid black;
 }
@@ -61,7 +60,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 150px;
+  min-height: 250px;
 }
 
 .drop {
@@ -69,7 +68,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 150px;
+  min-height: 250px;
 }
 
 .sendForm {
@@ -79,4 +78,23 @@
   background: #2d2d2d;
   padding-top: 17px;
   padding-bottom: 17px;
+}
+
+/* .imageContainer {
+  display: flex;
+} */
+
+.imageUnit {
+  max-width: 250px;
+  height: 250px;
+}
+
+.imageUnit img {
+  width: 100%;
+  height: 100%;
+}
+
+.removeUnit {
+  display: flex;
+  justify-content: flex-end;
 }
