@@ -53,19 +53,6 @@ const router = createBrowserRouter([
   },
 ])
 
-// export const Provider = (): JSX.Element => {
-//   return <RouterProvider router={router} />
-// }
-
 export const Provider = (): JSX.Element => {
-  return (
-    <BrowserRouter basename="/tourism-aggregator">
-      <Routes>
-        <Route path="admin/*" element={<AdminLayout />}>
-          <Route path="contacts" element={<p>Contacts</p>} />
-          <Route path="team" element={<p>Team</p>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+  return <RouterProvider router={router} />
 }
