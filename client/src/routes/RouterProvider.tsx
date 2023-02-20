@@ -18,7 +18,7 @@ import { AdminLayout } from '../components/Layout/AdminLayout'
 import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
@@ -59,7 +59,7 @@ const router = createHashRouter([
 
 export const Provider = (): JSX.Element => {
   return (
-    <BrowserRouter basename="https://markito97.github.io/tourism-aggregator/">
+    <BrowserRouter basename="/tourism-aggregator">
       <Routes>
         <Route path="admin/*" element={<AdminLayout />}>
           <Route path="contacts" element={<p>Contacts</p>} />
