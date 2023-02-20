@@ -1,10 +1,8 @@
 import React from 'react'
 import {
-  BrowserRouter,
-  Route,
   RouterProvider,
-  Routes,
   createBrowserRouter,
+  createHashRouter,
 } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { Layout } from '../components/Layout/Layout'
@@ -17,7 +15,7 @@ import { AdminLayout } from '../components/Layout/AdminLayout'
 import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Layout />,
