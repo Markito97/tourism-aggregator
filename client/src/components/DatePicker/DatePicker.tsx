@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState } from 'react'
 import {
   getNextYearAndMonth,
   getPrevYearAndMonth,
@@ -7,6 +7,8 @@ import {
 import { DisablePreviousDaysContext } from '../../context/DateContext'
 import { Month } from '../../components/DatePicker/Month'
 import styles from './DatePicker.module.css'
+import { ChevronLeft } from '../../assets/icons/ChevronLeft'
+import { ChevronRight } from '../../assets/icons/ChevronRight'
 
 export const DatePicker = ({ disablePreviousDays = false }) => {
   const [thisYear, thisMonth] = getThisYearAndThisMonth()
@@ -52,9 +54,15 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
   return (
     <DisablePreviousDaysContext.Provider value={disablePreviousDays}>
       <div className={styles.container}>
+        <div>
+          <ChevronLeft onClick={onClickPrevButton} />
+        </div>
         {monthsDate.map(({ year, month }) => (
           <Month key={`${year}${month}`} year={year} month={month} />
         ))}
+        <div>
+          <ChevronRight onClick={onClickNextButton} />
+        </div>
       </div>
     </DisablePreviousDaysContext.Provider>
   )

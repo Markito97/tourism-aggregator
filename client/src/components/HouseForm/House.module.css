@@ -1,9 +1,53 @@
 .houseFormFields {
+  position: absolute;
+  top: 35px;
+  font-family: 'Montserrat';
   padding-top: 112px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-width: 500px;
+  min-width: 700px;
+  background: white;
+  padding: 35px;
+  border: 1px solid black;
+  row-gap: 25px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+}
+
+.formItem {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.textLable {
+  font-size: 18px;
+}
+
+.textarea {
+  margin-top: 5px;
+  min-height: 150px;
+  border-radius: 3px;
+  resize: none;
+  border: 1px solid black;
+}
+
+.textField {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.error {
+  position: absolute;
+  font-size: 16px;
+  color: red;
+  bottom: -25px;
 }
 
 .dragContainer {
@@ -29,11 +73,10 @@
 }
 
 .sendForm {
+  cursor: pointer;
   margin-top: 15px;
   color: white;
   background: #2d2d2d;
   padding-top: 17px;
   padding-bottom: 17px;
-  padding-right: 90px;
-  padding-left: 90px;
 }

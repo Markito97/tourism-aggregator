@@ -8,8 +8,9 @@ const config: webpack.Configuration = {
   entry: './src/index.tsx',
   devtool: 'inline-source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js',
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist/',
+    filename: 'bundle.js',
     assetModuleFilename: 'images/[hash][ext][query]',
   },
   devServer: {
@@ -61,7 +62,7 @@ const config: webpack.Configuration = {
       '@assets': path.resolve(__dirname, 'src/assets/resource/'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@components': path.resolve(__dirname, 'src/components/'),
-      '@hooks': path.resolve(__dirname, 'src/hooks')
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },

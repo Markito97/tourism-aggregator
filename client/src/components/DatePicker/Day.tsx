@@ -28,15 +28,17 @@ export const Day = ({ day }: DayProps): JSX.Element => {
   }
 
   return (
-    <div
-    // className={isSelected ? `${styles.selected}` : `${styles.dayCell}`}
-    >
+    <div>
       <div
         onClick={onClickDayCell}
         onKeyDown={onKeyUpDayCell}
         className={
           isPreviousDaysDisabled && isPreviousDay
             ? `${styles.disabled}`
+            : isSelected
+            ? `${styles.selected}`
+            : isBetweenPickedDates
+            ? `${styles.range}`
             : `${styles.dayCell}`
         }
       >

@@ -19,6 +19,7 @@
     "date-fns": "^2.29.3",
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.0",
+    "react-hook-form": "^7.43.1",
     "react-router-dom": "^6.8.0",
     "ts-node": "^10.9.1"
   },
