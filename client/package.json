@@ -8,7 +8,7 @@
     "tscheck": "tsc",
     "start": "webpack-cli serve --env development",
     "build": "webpack",
-    "serve": "serve dist 3004"
+    "serve": "serve dist -s 3004"
   },
   "author": "markito",
   "license": "MIT",
