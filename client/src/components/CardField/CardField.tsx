@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { CardProduct } from './CardProduct'
 import styles from './CardField.module.css'
 import { observer } from 'mobx-react-lite'

@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './Lakes.module.css'
 import Lake1 from '@assets/Lake1.jpg'
 import Lake2 from '@assets/Lake2.jpg'

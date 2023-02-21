@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './House.module.css'
 import { useForm } from 'react-hook-form'
 import { useFileDrop } from '../../hooks/useFileDrop'

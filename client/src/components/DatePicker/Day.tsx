@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react'
+import { useContext } from 'react'
 import { YearMonthContext } from '../../components/DatePicker/Month'
 import { useDayCell } from '../../hooks/useDay'
 import { DisablePreviousDaysContext } from '../../context/DateContext'

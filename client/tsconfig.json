@@ -1,34 +1,7 @@
 {
-    "ts-node": {
-      "compilerOptions": {
-        "module": "CommonJS",
-        "target": "ES5",
-        "esModuleInterop": true,
-      }
-    },
-    "include": ["./**/*"],
-    "compilerOptions": {
-      "baseUrl": "./src",
-      "paths": {
-        "@assets": ["assets"],
-        // "@components": ["components"]
-      },
-      "lib": ["es6", "dom"],
-      "noImplicitAny": true,
-      "noImplicitThis": true,
-      "plugins": [{"name": "typescript-plugin-css-modules"}],
-      "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-      "jsx": "react",                                /* Specify what JSX code is generated. */
-      "module": "ESNext",                                /* Specify what module code is generated. */
-      "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
-      "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
-      "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
-      "strict": true,                                      /* Enable all strict type-checking options. */
-      "strictFunctionTypes": true,
-      "strictNullChecks": true,
-      "skipLibCheck": true,         
-      "useDefineForClassFields": true                       
-    }
+  "compilerOptions": {
+    "sourceMap": true,
+    "strict": true,
+    "jsx": "react-jsx"
   }
-  
-  
+}

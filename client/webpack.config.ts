@@ -1,22 +1,29 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import 'webpack-dev-server'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import * as TerserPlugin from 'terser-webpack-plugin'
 
 const config: webpack.Configuration = {
   mode: 'development',
   entry: './src/index.tsx',
   devtool: 'inline-source-map',
-  output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
-    filename: 'bundle.js',
-    assetModuleFilename: 'images/[hash][ext][query]',
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
+  // output: {
+  //   path: path.join(__dirname, 'dist'),
+  //   publicPath: '/dist/',
+  //   filename: 'bundle.js',
+  //   assetModuleFilename: 'images/[hash][ext][query]',
+  // },
   devServer: {
-    client: {
-      overlay: false,
+    static: {
+      directory: path.join(__dirname, 'dist'),
     },
+    port: 3000,
     historyApiFallback: true,
   },
   module: {
@@ -36,25 +43,21 @@ const config: webpack.Configuration = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'esbuild-loader',
+        loader: 'babel-loader',
+        exclude: /node_modules/,
         options: {
-          loader: 'tsx',
-          target: 'esnext',
+          presets: [
+            ['@babel/preset-react', { runtime: 'automatic' }],
+            '@babel/preset-typescript',
+          ],
         },
       },
     ],
   },
-  optimization: {
-    emitOnErrors: true,
-    minimize: false,
-  },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-    }),
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom',
     }),
   ],
   resolve: {

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Day } from '../../components/DatePicker/Day'
 import styles from './Days.module.css'
 
