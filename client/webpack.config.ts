@@ -2,7 +2,7 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import 'webpack-dev-server'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
+// import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as TerserPlugin from 'terser-webpack-plugin'
 
 const config: webpack.Configuration = {
@@ -55,7 +55,7 @@ const config: webpack.Configuration = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    // new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
