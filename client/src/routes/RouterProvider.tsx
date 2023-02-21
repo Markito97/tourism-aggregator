@@ -1,12 +1,4 @@
-import React from 'react'
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createHashRouter,
-  BrowserRouter,
-  Route,
-  Routes,
-} from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { Layout } from '../components/Layout/Layout'
 import { Hotels } from '../pages/Hotels'
@@ -18,40 +10,45 @@ import { AdminLayout } from '../components/Layout/AdminLayout'
 import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        {
+          path: 'home',
+          element: <Home />,
+        },
+        {
+          path: 'hotels',
+          element: <Hotels />,
+          errorElement: <ErrorBoundary />,
+        },
+        {
+          path: 'aboutus',
+          element: <About />,
+        },
+        {
+          path: 'activities',
+          element: <Activities />,
+        },
+      ],
+    },
+    {
+      path: 'admin/*',
+      element: <AdminLayout />,
+      children: [
+        { index: true, element: <InfoPage /> },
+        { path: 'houseslist', element: <HousesList /> },
+        { path: 'activitieslist', element: <ActivitiesList /> },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        path: 'home',
-        element: <Home />,
-      },
-      {
-        path: 'hotels',
-        element: <Hotels />,
-        errorElement: <ErrorBoundary />,
-      },
-      {
-        path: 'aboutus',
-        element: <About />,
-      },
-      {
-        path: 'activities',
-        element: <Activities />,
-      },
-    ],
-  },
-  {
-    path: 'admin/*',
-    element: <AdminLayout />,
-    children: [
-      { index: true, element: <InfoPage /> },
-      { path: 'houseslist', element: <HousesList /> },
-      { path: 'activitieslist', element: <ActivitiesList /> },
-    ],
-  },
-])
+    basename: '/tourism',
+  }
+)
 
 export const Provider = (): JSX.Element => {
   return <RouterProvider router={router} />
