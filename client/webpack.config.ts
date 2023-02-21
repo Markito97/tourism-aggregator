@@ -26,6 +26,9 @@ const config: webpack.Configuration = {
     port: 3004,
     historyApiFallback: true,
   },
+  output: {
+    publicPath: 'auto',
+  },
   module: {
     rules: [
       {

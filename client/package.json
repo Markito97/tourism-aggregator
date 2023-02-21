@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "tscheck": "tsc",
-    "start:dev": "webpack server --open",
-    "build": "webpack --config webpack.config.ts",
+    "start": "webpack-cli serve --env development",
+    "build": "webpack",
     "serve": "serve dist -p 3004"
   },
   "author": "markito",
