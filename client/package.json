@@ -7,7 +7,7 @@
   "scripts": {
     "tscheck": "tsc",
     "start": "webpack-cli serve --env development",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "serve": "serve dist -p 3004"
   },
   "author": "markito",

@@ -5,73 +5,67 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 // import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as TerserPlugin from 'terser-webpack-plugin'
 
-const config: webpack.Configuration = {
-  mode: 'development',
-  entry: './src/index.tsx',
-  devtool: 'inline-source-map',
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
-  // output: {
-  //   path: path.join(__dirname, 'dist'),
-  //   publicPath: '/dist/',
-  //   filename: 'bundle.js',
-  //   assetModuleFilename: 'images/[hash][ext][query]',
-  // },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
+module.exports = function (): webpack.Configuration {
+  return {
+    mode: 'development',
+    entry: './src/index',
+    devtool: 'inline-source-map',
+    optimization: {
+      minimize: true,
+      minimizer: [new TerserPlugin()],
     },
-    port: 3004,
-    historyApiFallback: true,
-  },
-  output: {
-    publicPath: 'auto',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css/i,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          'css-loader',
-        ],
+    devServer: {
+      static: {
+        directory: path.join(__dirname, 'dist'),
       },
-      {
-        test: /\.(png|jpg|gif)$/,
-        type: 'asset/resource',
+
+      port: 3004,
+      historyApiFallback: true,
+    },
+    output: {
+      publicPath: '/',
+    },
+    resolve: {
+      alias: {
+        '@assets': path.resolve(__dirname, 'src/assets/resource/'),
+        '@utils': path.resolve(__dirname, 'src/utils'),
+        '@components': path.resolve(__dirname, 'src/components/'),
+        '@hooks': path.resolve(__dirname, 'src/hooks'),
       },
-      {
-        test: /\.tsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          presets: [
-            ['@babel/preset-react', { runtime: 'automatic' }],
-            '@babel/preset-typescript',
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css/i,
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            'css-loader',
           ],
         },
-      },
-    ],
-  },
-  plugins: [
-    // new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
-  ],
-  resolve: {
-    alias: {
-      '@assets': path.resolve(__dirname, 'src/assets/resource/'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@components': path.resolve(__dirname, 'src/components/'),
-      '@hooks': path.resolve(__dirname, 'src/hooks'),
+        {
+          test: /\.(png|jpg|gif)$/,
+          type: 'asset/resource',
+        },
+        {
+          test: /\.tsx?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          options: {
+            presets: [
+              ['@babel/preset-react', { runtime: 'automatic' }],
+              '@babel/preset-typescript',
+            ],
+          },
+        },
+      ],
     },
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-  },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
+      }),
+    ],
+  }
 }
-
-export default config

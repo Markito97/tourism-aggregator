@@ -1,4 +1,3 @@
-import React from 'react'
 import { Lakes } from '@components/Lakes/Lakes'
 import { Titles } from '@components/Titles/Titles'
 import { ACTIVITIES_TITLES } from '../app.consts'

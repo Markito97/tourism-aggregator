@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CardField, IProduct } from '../components/CardField/CardField'
 import { SeacrhPanel } from '../components/SearchPanel/SearchPanel'
 import { productsFirsLake, productsSecondLake } from '../store/stote'
