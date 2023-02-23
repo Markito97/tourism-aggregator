@@ -1,44 +1,45 @@
 import * as path from 'path'
-import * as webpack from 'webpack'
 import 'webpack-dev-server'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 // import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import * as TerserPlugin from 'terser-webpack-plugin'
-import { getWebpackRulesReact } from './src/app.consts'
+import {
+  IEnv,
+  getOptimization,
+  getWebpackRulesReact,
+} from '../client/app.consts'
+import * as dotenv from 'dotenv'
+import * as webpack from 'webpack'
 
-module.exports = function (): webpack.Configuration {
+interface LocalEnv extends NodeJS.ProcessEnv {}
+
+module.exports = function (env: IEnv): webpack.Configuration {
+  const { development } = env
+  dotenv.config({
+    path: development ? './.development.env' : './.production.env',
+  })
+  const config: LocalEnv = process.env
+
   return {
-    mode: 'development',
-    entry: './src/index.tsx',
-    devtool: 'inline-source-map',
-    optimization: {
-      minimize: true,
-      minimizer: [new TerserPlugin()],
-    },
-
-    output: {
-      path: path.join(__dirname, 'dist'),
-      filename: 'index.js',
-      publicPath: '/',
-    },
+    entry: './src/index',
+    ...getOptimization(env),
     devServer: {
-      // static: {
-      //   directory: path.join(__dirname, 'dist'),
-      // },
-      port: 3004,
-      historyApiFallback: true,
-      proxy: {
-        '/': 'http:localhost:3004',
+      static: {
+        directory: path.join(__dirname, 'dist'),
       },
+      port: config.APP_MAIN_PORT,
+      historyApiFallback: true,
+    },
+    output: {
+      publicPath: '/',
     },
     resolve: {
       alias: {
-        '@assets': path.resolve(__dirname, './src/assets/resource/'),
-        '@utils': path.resolve(__dirname, './src/utils'),
-        '@components': path.resolve(__dirname, './src/components/'),
-        '@hooks': path.resolve(__dirname, './src/hooks'),
+        '@assets': path.resolve(__dirname, 'src/assets/resource/'),
+        '@utils': path.resolve(__dirname, 'src/utils'),
+        '@components': path.resolve(__dirname, 'src/components/'),
+        '@hooks': path.resolve(__dirname, 'src/hooks'),
       },
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
       rules: getWebpackRulesReact(),
