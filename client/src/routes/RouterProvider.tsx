@@ -14,13 +14,13 @@ import { AdminLayout } from '../components/Layout/AdminLayout'
 import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     children: [
       {
-        path: 'home',
+        index: true,
         element: <Home />,
       },
       {

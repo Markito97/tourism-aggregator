@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './Titles.module.css'
 
 interface ITitles {

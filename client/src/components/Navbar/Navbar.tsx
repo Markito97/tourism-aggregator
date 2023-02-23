@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import { createRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import { setIsActive } from '@utils/utility'
 import styles from './Navbar.module.css'

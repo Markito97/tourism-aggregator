@@ -19,7 +19,7 @@
 }
 
 .inactive {
-  background: #6d6d6d;
+  background: rgba(61, 61, 61, 1);
 }
 
 .footer {

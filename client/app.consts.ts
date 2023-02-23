@@ -17,10 +17,10 @@ export function getOptimization(env: IEnv): Partial<webpack.Configuration> {
   return {
     devtool,
     mode,
-    optimization: {
-      minimize: true,
-      minimizer: [new TerserPlugin()],
-    },
+    // optimization: {
+    //   minimize: true,
+    //   minimizer: [new TerserPlugin()],
+    // },
   }
 }
 

@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const ActivitiesList = (): JSX.Element => {
-  return <div>activities list</div>
+  return <div>activities a list</div>
 }
