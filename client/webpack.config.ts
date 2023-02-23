@@ -26,6 +26,9 @@ module.exports = function (): webpack.Configuration {
       // },
       port: 3004,
       historyApiFallback: true,
+      proxy: {
+        '/': 'http:localhost:3004',
+      },
     },
     resolve: {
       alias: {
