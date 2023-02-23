@@ -4,6 +4,7 @@ import 'webpack-dev-server'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 // import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as TerserPlugin from 'terser-webpack-plugin'
+import { getWebpackRulesReact } from './src/app.consts'
 
 module.exports = function (): webpack.Configuration {
   return {
@@ -32,40 +33,15 @@ module.exports = function (): webpack.Configuration {
     },
     resolve: {
       alias: {
-        '@assets': path.resolve(__dirname, 'src/assets/resource/'),
-        '@utils': path.resolve(__dirname, 'src/utils'),
-        '@components': path.resolve(__dirname, 'src/components/'),
-        '@hooks': path.resolve(__dirname, 'src/hooks'),
+        '@assets': path.resolve(__dirname, './src/assets/resource/'),
+        '@utils': path.resolve(__dirname, './src/utils'),
+        '@components': path.resolve(__dirname, './src/components/'),
+        '@hooks': path.resolve(__dirname, './src/hooks'),
       },
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     module: {
-      rules: [
-        {
-          test: /\.css/i,
-          use: [
-            {
-              loader: 'style-loader',
-            },
-            'css-loader',
-          ],
-        },
-        {
-          test: /\.(png|jpg|gif)$/,
-          type: 'asset/resource',
-        },
-        {
-          test: /\.tsx?$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-          options: {
-            presets: [
-              ['@babel/preset-react', { runtime: 'automatic' }],
-              '@babel/preset-typescript',
-            ],
-          },
-        },
-      ],
+      rules: getWebpackRulesReact(),
     },
     plugins: [
       new HtmlWebpackPlugin({
