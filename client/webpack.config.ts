@@ -8,22 +8,24 @@ import * as TerserPlugin from 'terser-webpack-plugin'
 module.exports = function (): webpack.Configuration {
   return {
     mode: 'development',
-    entry: './src/index',
+    entry: './src/index.tsx',
     devtool: 'inline-source-map',
     optimization: {
       minimize: true,
       minimizer: [new TerserPlugin()],
     },
-    devServer: {
-      static: {
-        directory: path.join(__dirname, 'dist'),
-      },
 
+    output: {
+      path: path.join(__dirname, 'dist'),
+      filename: 'index.js',
+      publicPath: '/',
+    },
+    devServer: {
+      // static: {
+      //   directory: path.join(__dirname, 'dist'),
+      // },
       port: 3004,
       historyApiFallback: true,
-    },
-    output: {
-      publicPath: 'auto',
     },
     resolve: {
       alias: {
