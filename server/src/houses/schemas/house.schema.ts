@@ -15,7 +15,7 @@ export class House {
   @Prop()
   location: string
   @Prop()
-  image: string
+  image: Array<string>
 }
 
 export const HouseSchema = SchemaFactory.createForClass(House)

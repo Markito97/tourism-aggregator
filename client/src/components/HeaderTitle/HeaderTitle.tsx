@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './HeaderTitle.module.css'
 
 export const HeaderTitle = (): JSX.Element => {

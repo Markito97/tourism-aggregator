@@ -5,17 +5,31 @@ import { v4 as uuidv4 } from 'uuid'
 
 @Injectable()
 export class FilesService {
-  createFile(file: Express.Multer.File): string {
+  createFile(images: Array<Express.Multer.File>): Array<string> {
     try {
-      const fileExtension = file.originalname.split('.').pop()
-      const fileName = uuidv4() + '.' + fileExtension
+      const imagesExtensions = images.map((img) => ({
+        ...img,
+        fileName: img.originalname.split('.').pop(),
+      }))
+      console.log(imagesExtensions)
+      const imagesNames = imagesExtensions.map((img) => ({
+        ...img,
+        fileName: uuidv4() + '.' + img.fileName,
+      }))
+
+      // const fileExtension = file.originalname.split('.').pop()
+      // const fileName = uuidv4() + '.' + fileExtension
       const filePath = path.resolve(__dirname, '..', 'static', 'images')
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, { recursive: true })
       }
-      fs.writeFileSync(path.resolve(filePath, fileName), file.buffer)
+      imagesNames.forEach((img) =>
+        fs.writeFileSync(path.resolve(filePath, img.fileName), img.buffer)
+      )
 
-      return 'images' + '/' + fileName
+      const paths = imagesNames.map((img) => 'images' + '/' + img.fileName)
+      console.log(paths)
+      return paths
     } catch (err) {}
   }
 }

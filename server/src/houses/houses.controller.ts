@@ -1,6 +1,23 @@
-import { Body, Controller, Post, UploadedFile } from '@nestjs/common'
-import { Get, UseInterceptors } from '@nestjs/common/decorators'
-import { FileInterceptor } from '@nestjs/platform-express'
+import {
+  Body,
+  Controller,
+  FileTypeValidator,
+  MaxFileSizeValidator,
+  ParseFilePipe,
+  ParseFilePipeBuilder,
+  Post,
+} from '@nestjs/common'
+import {
+  Get,
+  UploadedFile,
+  UploadedFiles,
+  UseInterceptors,
+} from '@nestjs/common/decorators'
+import {
+  AnyFilesInterceptor,
+  FileInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express'
 import { InjectModel } from '@nestjs/mongoose'
 import { House, HouseDocument } from './schemas/house.schema'
 import { Model } from 'mongoose'
@@ -17,18 +34,27 @@ export class HousesController {
   ) {}
 
   @Post('/createHouse')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FilesInterceptor('images'))
   createHouse(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFiles(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType: 'jpeg',
+        })
+        .build({
+          errorHttpStatusCode: 400,
+        })
+    )
+    images: Array<Express.Multer.File>,
     @Body() createHouseDto: any
   ) {
-    const house = { ...createHouseDto }
-    const parse = JSON.parse(house.house)
-    const image = this.filesService.createFile(file)
-    const res = this.houseService.createHouse(image, parse)
+    console.log(images)
+    const house = JSON.parse(createHouseDto.house)
+    const imagesPaths = this.filesService.createFile(images)
+    return this.houseService.createHouse(imagesPaths, house)
   }
 
-  @Get('allHouses')
+  @Get('/all')
   async getHouses() {
     return await this.houseService.getHouses()
   }

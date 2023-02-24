@@ -10,8 +10,8 @@ export class HouseService {
     @InjectModel(House.name) private houseModel: Model<HouseDocument>
   ) {}
 
-  async createHouse(image: string, house: CreateHouseDto) {
-    return await this.houseModel.create({ ...house, image: image })
+  async createHouse(images: Array<string>, house: CreateHouseDto) {
+    return await this.houseModel.create({ ...house, image: images })
   }
 
   async getHouses() {

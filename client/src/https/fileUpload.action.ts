@@ -1,11 +1,11 @@
-export const fileUpload = async (house: any, file: any) => {
+export const fileUpload = async (files: any) => {
   const formData = new FormData()
-  formData.append('file', file)
-  formData.append('house', JSON.stringify(house))
+  formData.append('files', files[0])
+  // formData.append('house', JSON.stringify(house))
   const response = await fetch('http://localhost:3001/houses/createHouse', {
     method: 'POST',
     body: formData,
-    mode: 'no-cors',
+    // mode: 'no-cors',
   })
   return response
 }

@@ -1,13 +1,24 @@
 import styles from './House.module.css'
 import { useForm } from 'react-hook-form'
 import { useFileDrop } from '../../hooks/useFileDrop'
+import { observer } from 'mobx-react-lite'
+import { useContext } from 'react'
+import { ServiceContext } from '../../context/ServiceContext'
 
-export const HouseForm = () => {
+export interface IHouse {
+  name: string
+  description: string
+  price: string
+  location: string
+}
+
+export const HouseForm = observer(() => {
+  const { houses } = useContext(ServiceContext)
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm<IHouse>()
   const [
     dragStartHandler,
     dragLeaveHandler,
@@ -16,11 +27,9 @@ export const HouseForm = () => {
     files,
   ] = useFileDrop()
 
-  const onSubmit = (data: any) => {
-    console.log(JSON.stringify(data))
+  const onSubmit = (house: any) => {
+    houses.createHouse(house, files)
   }
-
-  console.log(files)
 
   return (
     <div className={styles.houseFormFields}>
@@ -104,10 +113,10 @@ export const HouseForm = () => {
           </div>
         </div>
         <input type="submit" />
-        <input type="file" />
+        {/* <input type="file" /> */}
       </form>
 
       {/* <div ref={testRef}></div> */}
     </div>
   )
-}
+})

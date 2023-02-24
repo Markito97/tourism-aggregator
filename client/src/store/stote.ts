@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import Card1 from '@assets/Card1.jpg'
 import Card2 from '@assets/Card2.jpg'
 import Card3 from '@assets/Card3.jpg'
@@ -9,9 +10,15 @@ import PCard1 from '@assets/PCard1.jpg'
 import PCard2 from '@assets/PCard2.jpg'
 import PCard3 from '@assets/PCard3.jpg'
 
-export const productsFirsLake = [
+const sequensor = (hotels: any) => {
+  return hotels.map((hotel: any) => ({
+    ...hotel,
+    id: uuidv4(),
+  }))
+}
+
+const hotelsFirstLakes = [
   {
-    id: 1,
     image: Card1,
     title: 'Title',
     description:
@@ -19,7 +26,6 @@ export const productsFirsLake = [
     price: 1000,
   },
   {
-    id: 2,
     image: Card2,
     title: 'Title',
     description:
@@ -27,7 +33,6 @@ export const productsFirsLake = [
     price: 1000,
   },
   {
-    id: 3,
     image: Card3,
     title: 'Title',
     description:
@@ -35,7 +40,6 @@ export const productsFirsLake = [
     price: 1000,
   },
   {
-    id: 4,
     image: Card4,
     title: 'Title',
     description:
@@ -52,9 +56,8 @@ export const productsFirsLake = [
   },
 ]
 
-export const productsSecondLake = [
+const hotelsSecondLakes = [
   {
-    id: 1,
     image: PCard,
     title: 'Title',
     description:
@@ -62,7 +65,6 @@ export const productsSecondLake = [
     price: 1000,
   },
   {
-    id: 2,
     image: PCard1,
     title: 'Title',
     description:
@@ -70,7 +72,6 @@ export const productsSecondLake = [
     price: 1000,
   },
   {
-    id: 3,
     image: PCard2,
     title: 'Title',
     description:
@@ -78,7 +79,6 @@ export const productsSecondLake = [
     price: 1000,
   },
   {
-    id: 4,
     image: PCard3,
     title: 'Title',
     description:
@@ -86,7 +86,6 @@ export const productsSecondLake = [
     price: 1000,
   },
   {
-    id: 5,
     image: 'not found',
     title: 'Title',
     description:
@@ -94,3 +93,6 @@ export const productsSecondLake = [
     price: 1000,
   },
 ]
+
+export const productsFirsLake = sequensor(hotelsFirstLakes)
+export const productsSecondLake = sequensor(hotelsSecondLakes)

@@ -19,16 +19,31 @@ export class HousesService {
     this.houses = data
   }
 
-  addHouse = () => {}
+  createHouse = async (house: any, images: Array<File>) => {
+    console.log(house)
+    const requestUrl = 'http://localhost:3001/houses/createHouse'
+    const formData: any = new FormData()
+    images.forEach((img) => {
+      formData.append('images', img)
+    })
+    formData.append('house', JSON.stringify({ ...house }))
+    const response = await fetch(requestUrl, {
+      method: 'POST',
+      body: formData,
+    })
+    return response
+  }
 
   removeHouse = () => {}
 
-  get getHouses() {
-    return this.houses
+  getHouses = async () => {
+    const requestUrl = 'http://localhost:3001/houses/all'
+    const response = await fetch(requestUrl).then((response) => response.json())
+    this.houses = response
   }
 
-  get getHouse() {
-    return
+  get allHouses() {
+    return this.houses
   }
 
   // хз пока как загружать эти дома // целиком или по отдельности

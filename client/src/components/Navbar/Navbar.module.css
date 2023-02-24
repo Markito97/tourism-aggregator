@@ -1,5 +1,4 @@
 .navbar {
-  position: relative;
   display: flex;
   align-items: center;
   height: 120px;
@@ -20,6 +19,7 @@
 
 .navigationBurger {
   display: none;
+  z-index: 1000;
 }
 
 .activeLink {
@@ -32,29 +32,43 @@
   text-decoration: none;
 }
 
+.burger {
+  padding-top: 55px;
+  display: flex;
+  background-color: rgba(45, 45, 45, 1);
+  row-gap: 55px;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 35px;
+  transform: translateY(-150%);
+  animation: show 1s forwards;
+}
+
 @media (max-width: 767.98px) {
   .navbar {
     height: 60px;
     justify-content: flex-end;
   }
+
   .navigation {
-    flex-direction: column;
-    position: absolute;
-    top: 120px;
     display: none;
-    font-size: 35px;
-    transform: translateY(-150%);
-    animation: show 1s forwards;
   }
+
   .navigationBurger {
     display: block;
+    padding-right: 25px;
   }
   .activeLink {
-    padding-bottom: 55px;
   }
 
   .inactiveLink {
-    padding-bottom: 55px;
   }
 }
 

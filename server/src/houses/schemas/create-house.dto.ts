@@ -3,5 +3,4 @@ export class CreateHouseDto {
   name: string
   description: string
   location: string
-  image: string
 }

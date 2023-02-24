@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from './SearchPanel.module.css'
 import { DatePicker } from '../../components/DatePicker/DatePicker'
 

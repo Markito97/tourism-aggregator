@@ -1,9 +1,4 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createHashRouter,
-} from 'react-router-dom'
-import { Home } from '../pages/Home'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Layout } from '../components/Layout/Layout'
 import { Hotels } from '../pages/Hotels'
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary'
@@ -13,6 +8,10 @@ import { InfoPage } from '../pages/InfoPage'
 import { AdminLayout } from '../components/Layout/AdminLayout'
 import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
+import { lazy } from 'react'
+import { HotelPage } from '../pages/HotelPage'
+
+const Home = lazy(() => import('../pages/Home'))
 
 const router = createBrowserRouter([
   {
@@ -27,6 +26,10 @@ const router = createBrowserRouter([
         path: 'hotels',
         element: <Hotels />,
         errorElement: <ErrorBoundary />,
+      },
+      {
+        path: 'hotel/:id',
+        element: <HotelPage />,
       },
       {
         path: 'aboutus',
@@ -49,6 +52,8 @@ const router = createBrowserRouter([
   },
 ])
 
-export const Provider = (): JSX.Element => {
+const Provider = (): JSX.Element => {
   return <RouterProvider router={router} />
 }
+
+export default Provider

@@ -3,8 +3,6 @@ import { CardField, IProduct } from '../components/CardField/CardField'
 import { SeacrhPanel } from '../components/SearchPanel/SearchPanel'
 import { productsFirsLake, productsSecondLake } from '../store/stote'
 import { useParams } from 'react-router-dom'
-import { ServiceContext } from '../../src/context/ServiceContext'
-import { HousesService } from '../../src/services/houses.service'
 
 export const Hotels = (): JSX.Element => {
   const [products, setProducts] = useState<IProduct[]>(productsFirsLake)
@@ -18,21 +16,14 @@ export const Hotels = (): JSX.Element => {
       setProducts([...productsSecondLake])
     }
     if (lake === undefined) {
-      console.log(lake)
       setProducts([...productsFirsLake, ...productsSecondLake])
     }
   }, [lake])
 
   return (
-    <ServiceContext.Provider
-      value={{
-        houses: new HousesService(),
-      }}
-    >
-      <div>
-        <SeacrhPanel />
-        <CardField products={products} />
-      </div>
-    </ServiceContext.Provider>
+    <div>
+      {/* <SeacrhPanel /> */}
+      <CardField products={products} />
+    </div>
   )
 }

@@ -1,5 +1,6 @@
 import * as webpack from 'webpack'
 import * as TerserPlugin from 'terser-webpack-plugin'
+import * as ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 
 export interface IEnv {
   WEBPACK_SERVE?: boolean
@@ -17,6 +18,18 @@ export function getOptimization(env: IEnv): Partial<webpack.Configuration> {
   return {
     devtool,
     mode,
+    optimization: {
+      minimizer: [
+        new ImageMinimizerPlugin({
+          minimizer: {
+            implementation: ImageMinimizerPlugin.squooshMinify,
+            options: {
+              // Your options for `squoosh`
+            },
+          },
+        }),
+      ],
+    },
     // optimization: {
     //   minimize: true,
     //   minimizer: [new TerserPlugin()],

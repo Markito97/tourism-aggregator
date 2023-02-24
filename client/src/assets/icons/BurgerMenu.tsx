@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const BurgerMenu = (): JSX.Element => {
   return (
     <svg

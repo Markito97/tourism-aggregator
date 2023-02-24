@@ -19,7 +19,7 @@
 }
 
 .inactive {
-  background: rgba(61, 61, 61, 1);
+  background: rgba(45, 45, 45, 1);
 }
 
 .footer {
@@ -56,6 +56,8 @@
 @media (max-width: 991.98px) {
   .container {
     max-width: 750px;
+    padding: 0;
+    /* overflow-x: hidden; */
   }
 }
 

@@ -7,7 +7,7 @@ export const ACTIVITIES_TITLES = {
   className: 'Content',
 }
 
-export const Home = (): JSX.Element => {
+const Home = (): JSX.Element => {
   return (
     <>
       <Titles titles={ACTIVITIES_TITLES} />
@@ -15,3 +15,5 @@ export const Home = (): JSX.Element => {
     </>
   )
 }
+
+export default Home

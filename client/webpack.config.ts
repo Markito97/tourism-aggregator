@@ -1,7 +1,6 @@
 import * as path from 'path'
 import 'webpack-dev-server'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
-// import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import {
   IEnv,
   getOptimization,
@@ -43,6 +42,10 @@ module.exports = function (env: IEnv): webpack.Configuration {
     },
     module: {
       rules: getWebpackRulesReact(),
+    },
+    performance: {
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
     },
     plugins: [
       new HtmlWebpackPlugin({
