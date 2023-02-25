@@ -9,7 +9,7 @@ import { AdminLayout } from '../components/Layout/AdminLayout'
 import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
 import { lazy } from 'react'
-import { HotelPage } from '../pages/HotelPage'
+import { HousePage } from '../pages/HousePage'
 
 const Home = lazy(() => import('../pages/Home'))
 
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'hotel/:id',
-        element: <HotelPage />,
+        element: <HousePage />,
       },
       {
         path: 'aboutus',

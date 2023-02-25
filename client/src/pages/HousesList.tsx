@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from './HousesList.module.css'
 import { HouseForm } from '../components/HouseForm/HouseForm'
 

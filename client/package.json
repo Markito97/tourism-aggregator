@@ -14,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@emotion/react": "^11.10.5",
+    "@pbe/react-yandex-maps": "^1.2.2",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "mobx": "^6.8.0",

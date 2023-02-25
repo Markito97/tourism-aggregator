@@ -1,10 +1,30 @@
 import { makeAutoObservable } from 'mobx'
+import { resolverLink } from '../utils/resolver'
 
-interface IHouse {
-  price: string | null
-  name: string | null
-  location: string | null
-  image: string | null
+export interface IHouse {
+  _id: string
+  name: string
+  description: string
+  location: string
+  price: string
+  image: Array<string>
+}
+
+class CreateHouseDto {
+  id: string
+  name: string
+  description: string
+  location: string
+  price: string
+  image: Array<string>
+  constructor(data: IHouse) {
+    ;(this.name = data.name),
+      (this.id = data._id),
+      (this.description = data.description)
+    this.location = data.location
+    this.price = data.price
+    this.image = data.image
+  }
 }
 
 export class HousesService {
@@ -15,41 +35,41 @@ export class HousesService {
     makeAutoObservable(this)
   }
 
-  setData = (data: any) => {
-    this.houses = data
-  }
-
   createHouse = async (house: any, images: Array<File>) => {
-    console.log(house)
-    const requestUrl = 'http://localhost:3001/houses/createHouse'
     const formData: any = new FormData()
     images.forEach((img) => {
       formData.append('images', img)
     })
     formData.append('house', JSON.stringify({ ...house }))
-    const response = await fetch(requestUrl, {
+    return await fetch(resolverLink('houses/createHouse'), {
       method: 'POST',
       body: formData,
     })
-    return response
   }
 
   removeHouse = () => {}
 
-  getHouses = async () => {
-    const requestUrl = 'http://localhost:3001/houses/all'
-    const response = await fetch(requestUrl).then((response) => response.json())
-    this.houses = response
+  getHouses = async (): Promise<void> => {
+    try {
+      const response = await fetch(resolverLink('houses/all'))
+      const data = await response.json()
+      return (this.houses = data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  get allHouses() {
+  getHouse = async (id: string) => {
+    try {
+      const response = await fetch(resolverLink(`houses/${id}`))
+      const data = await response.json()
+      return new CreateHouseDto(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  get allHouses(): Array<IHouse> {
     return this.houses
   }
-
-  // хз пока как загружать эти дома // целиком или по отдельности
-  // load() {
-  //   fetch('http://localhost:3001/houses/allHouses')
-  //     .then((res) => res.json())
-  //     .then((data: IHouse[]) => (houseService.houses = data))
-  // }
 }

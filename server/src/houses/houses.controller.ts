@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common'
 import {
   Get,
+  Param,
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
@@ -24,6 +25,14 @@ import { Model } from 'mongoose'
 import { FilesService } from 'src/files/files.service'
 import { CreateHouseDto } from './schemas/create-house.dto'
 import { HouseService } from './houses.service'
+
+interface IHouse {
+  price: string
+  name: string
+  description: string
+  location: string
+  image: Array<string>
+}
 
 @Controller('houses')
 export class HousesController {
@@ -48,14 +57,18 @@ export class HousesController {
     images: Array<Express.Multer.File>,
     @Body() createHouseDto: any
   ) {
-    console.log(images)
     const house = JSON.parse(createHouseDto.house)
     const imagesPaths = this.filesService.createFile(images)
     return this.houseService.createHouse(imagesPaths, house)
   }
 
   @Get('/all')
-  async getHouses() {
+  async getHouses(): Promise<IHouse[]> {
     return await this.houseService.getHouses()
+  }
+
+  @Get(':id')
+  async getHouse(@Param() params): Promise<IHouse> {
+    return await this.houseService.getHouse(params.id)
   }
 }

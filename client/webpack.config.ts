@@ -13,6 +13,7 @@ interface LocalEnv extends NodeJS.ProcessEnv {}
 
 module.exports = function (env: IEnv): webpack.Configuration {
   const { development } = env
+  console.log(development)
   dotenv.config({
     path: development ? './.development.env' : './.production.env',
   })
@@ -50,6 +51,9 @@ module.exports = function (env: IEnv): webpack.Configuration {
     plugins: [
       new HtmlWebpackPlugin({
         template: './public/index.html',
+      }),
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(process.env),
       }),
     ],
   }

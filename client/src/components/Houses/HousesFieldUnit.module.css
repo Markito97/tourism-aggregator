@@ -16,6 +16,7 @@
 }
 
 .content {
+  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,21 +28,28 @@
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
-  line-height: 39px;
+  /* line-height: 39px; */
   text-transform: capitalize;
 }
 
 .cardBtn {
+  height: 100%;
   border: none;
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 700;
+  font-size: 14px;
   line-height: 22px;
   letter-spacing: 5px;
-  padding: 3px 16px 3px 16px;
+  padding: 8px 16px;
   color: #fff;
   background-color: rgba(45, 45, 45, 1);
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .shortDesc {

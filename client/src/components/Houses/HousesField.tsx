@@ -1,18 +1,10 @@
 import { useContext, useEffect } from 'react'
-import { CardProduct } from './CardProduct'
-import styles from './CardField.module.css'
+import styles from './HousesFiled..module.css'
 import { observer } from 'mobx-react-lite'
 import { ServiceContext } from '../../context/ServiceContext'
+import { HouseFieldUnit } from './HouseFieldUnit'
 
-// export interface IProduct {
-//   id: number
-//   image: string
-//   title: string
-//   description: string
-//   price: number
-// }
-
-export const CardField = observer((): JSX.Element => {
+export const HousesField = observer((): JSX.Element | null => {
   const { houses } = useContext(ServiceContext)
 
   useEffect(() => {
@@ -20,11 +12,10 @@ export const CardField = observer((): JSX.Element => {
   }, [houses])
 
   if (!houses.allHouses) return null
-
   return (
     <div className={styles.content}>
-      {houses.allHouses.map((card) => (
-        <CardProduct key={card.image} card={card} />
+      {houses.allHouses.map((card: { image: any }, index: any) => (
+        <HouseFieldUnit key={card.image + index} card={card} />
       ))}
     </div>
   )

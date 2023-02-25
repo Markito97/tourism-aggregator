@@ -1,4 +1,4 @@
-import { createRef, useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { setIsActive } from '@utils/utility'
 import styles from './Navbar.module.css'
@@ -15,7 +15,7 @@ const navigationLinks = [
 ]
 
 export const Navbar = (): JSX.Element => {
-  const { width, height } = useWindowDimensions()
+  const { width } = useWindowDimensions()
   const [isBurger, setIsBurger] = useState<boolean>(false)
 
   useEffect(() => {
