@@ -1,5 +1,4 @@
 import * as path from 'path'
-import 'webpack-dev-server'
 import {
   AppName,
   IEnv,
@@ -7,8 +6,9 @@ import {
   getWebpackRulesReact,
   sharedReact,
 } from '../app.consts'
-import * as dotenv from 'dotenv'
+import 'webpack-dev-server'
 import * as webpack from 'webpack'
+import * as dotenv from 'dotenv'
 
 interface LocalEnv extends NodeJS.ProcessEnv {}
 
@@ -48,15 +48,6 @@ module.exports = function (env: IEnv): webpack.Configuration {
       maxEntrypointSize: 512000,
       maxAssetSize: 512000,
     },
-    plugins: [
-      new webpack.container.ModuleFederationPlugin({
-        name: AppName.APP_ROOT,
-        remotes: {},
-        shared: sharedReact,
-      }),
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify(process.env),
-      }),
-    ],
+    plugins: [],
   }
 }
