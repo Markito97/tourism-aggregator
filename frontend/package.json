@@ -1,0 +1,19 @@
+{
+    "private": true,
+    "author": {
+        "email": "jetblade0@gmail.com",
+        "name": "Mark Sorokin"
+    },
+    "version": "1.0.0",
+    "workspaces": {
+        "packages": [
+            "app_root"
+        ]
+    },
+    "scripts": {
+        "start": "lerna run --parallel start"
+    },
+    "devDependencies": {
+        "lerna": "^6.5.1"
+    }
+}

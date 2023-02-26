@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "sourceMap": true,
+      "strict": true,
+      "jsx": "react-jsx",
+      "composite": true,
+      "baseUrl": ".",
+      "resolveJsonModule": true,
+      "experimentalDecorators": true,
+    }
+  }
+  
+  
