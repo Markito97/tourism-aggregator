@@ -27,7 +27,6 @@ export class HouseService {
   }
 
   async getHouse(id: string): Promise<IHouse> {
-    const house = await this.houseModel.findById(id)
-    return house
+    return await this.houseModel.findById(id)
   }
 }

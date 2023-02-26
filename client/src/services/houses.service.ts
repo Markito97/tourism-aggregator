@@ -72,4 +72,6 @@ export class HousesService {
   get allHouses(): Array<IHouse> {
     return this.houses
   }
+
+  
 }
