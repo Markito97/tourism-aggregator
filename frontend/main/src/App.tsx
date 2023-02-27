@@ -6,6 +6,8 @@ import { ServiceContext } from '../src/context/ServiceContext'
 import { HousesService } from '../src/services/houses.service'
 import { AdminMf } from './dts/components'
 
+const str = 'aboba'
+
 const OtherComponent = lazy(() => import('./routes/RouterProvider'))
 const App: FunctionComponent<any> = () => {
   console.log(AdminMf)
@@ -22,7 +24,7 @@ const App: FunctionComponent<any> = () => {
       </DatePickerProvider>
     </ServiceContext.Provider>
     // <>
-     // {/* <AdminMf.button text="aboba" onClick={() => void 0} /> */}
+    // {/* <AdminMf.button text="aboba" onClick={() => void 0} /> */}
     // </>
   )
 }

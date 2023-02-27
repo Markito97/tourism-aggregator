@@ -1,6 +1,8 @@
 import * as webpack from 'webpack'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 
+const str = 'aboba'
+
 export enum AppName {
   APP_MAIN = 'main',
   APP_ADMIN = 'admin',
