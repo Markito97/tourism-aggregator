@@ -1,6 +1,10 @@
 import * as webpack from 'webpack'
-import * as TerserPlugin from 'terser-webpack-plugin'
-import * as ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+
+export enum AppName {
+  APP_MAIN = 'main',
+  APP_ADMIN = 'admin',
+}
 
 export interface IEnv {
   WEBPACK_SERVE?: boolean
@@ -8,6 +12,17 @@ export interface IEnv {
   WEBPACK_BUILD?: boolean
   development?: boolean
   production?: boolean
+}
+
+export const sharedReact = {
+  react: {
+    singleton: true,
+    requiredVersion: '18.2.0',
+  },
+  'react-dom': {
+    singleton: true,
+    requiredVersion: '18.2.0',
+  },
 }
 
 export function getOptimization(env: IEnv): Partial<webpack.Configuration> {
@@ -18,18 +33,6 @@ export function getOptimization(env: IEnv): Partial<webpack.Configuration> {
   return {
     devtool,
     mode,
-    optimization: {
-      minimizer: [
-        new ImageMinimizerPlugin({
-          minimizer: {
-            implementation: ImageMinimizerPlugin.squooshMinify,
-            options: {
-              // Your options for `squoosh`
-            },
-          },
-        }),
-      ],
-    },
     // optimization: {
     //   minimize: true,
     //   minimizer: [new TerserPlugin()],
@@ -77,5 +80,13 @@ export const getWebpackRulesReact = () => {
         ],
       },
     },
+  ]
+}
+
+export function getCommonPlugins() {
+  return [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
   ]
 }

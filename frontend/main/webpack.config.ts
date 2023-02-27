@@ -1,21 +1,22 @@
 import * as path from 'path'
-import 'webpack-dev-server'
-import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import {
+  AppName,
   IEnv,
+  getCommonPlugins,
   getOptimization,
   getWebpackRulesReact,
-} from '../client/app.consts'
-import * as dotenv from 'dotenv'
+  sharedReact,
+} from '../app.consts'
+import 'webpack-dev-server'
 import * as webpack from 'webpack'
+import * as dotenv from 'dotenv'
 
 interface LocalEnv extends NodeJS.ProcessEnv {}
 
 module.exports = function (env: IEnv): webpack.Configuration {
   const { development } = env
-  console.log(development)
   dotenv.config({
-    path: development ? './.development.env' : './.production.env',
+    path: development ? '../.development.env' : '../.production.env',
   })
   const config: LocalEnv = process.env
 
@@ -30,7 +31,7 @@ module.exports = function (env: IEnv): webpack.Configuration {
       historyApiFallback: true,
     },
     output: {
-      publicPath: '/',
+      publicPath: 'auto',
     },
     resolve: {
       alias: {
@@ -44,16 +45,15 @@ module.exports = function (env: IEnv): webpack.Configuration {
     module: {
       rules: getWebpackRulesReact(),
     },
-    performance: {
-      maxEntrypointSize: 512000,
-      maxAssetSize: 512000,
-    },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: './public/index.html',
-      }),
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify(process.env),
+      ...getCommonPlugins(),
+      new webpack.container.ModuleFederationPlugin({
+        name: AppName.APP_MAIN,
+        remotes: {
+          admin: 'admin@http://localhost:3004/remoteEntry.js',
+          // [AppName.APP_ADMIN]: `${AppName.APP_ADMIN}@//${config.APP_ADMIN_URL}/remoteEntry.js`,
+        },
+        shared: sharedReact,
       }),
     ],
   }

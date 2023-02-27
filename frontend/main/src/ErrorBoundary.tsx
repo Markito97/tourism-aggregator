@@ -9,7 +9,7 @@ export class ErrorBoundary extends Component<PropsWithChildren> {
 
   render(): ReactNode {
     if (this.state.error) {
-      return <div>Error :</div>
+      return <div>Error </div>
     }
 
     return this.props.children

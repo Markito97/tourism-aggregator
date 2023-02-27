@@ -3,5 +3,9 @@ dist
 
 package-lock.json
 
+yarn.lock
+yarn-error.log
+
 .development.env
 .production.env
+
