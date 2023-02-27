@@ -9,6 +9,7 @@ import { Month } from '../../components/DatePicker/Month'
 import styles from './DatePicker.module.css'
 import { ChevronLeft } from '../../assets/icons/ChevronLeft'
 import { ChevronRight } from '../../assets/icons/ChevronRight'
+import { useDatePickGetter } from 'main/src/hooks/useDatePickGetter'
 
 export const DatePicker = ({ disablePreviousDays = false }) => {
   const [thisYear, thisMonth] = getThisYearAndThisMonth()
@@ -22,7 +23,8 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
       month: thisMonth + 2,
     },
   ])
-
+  const {pickedDates} = useDatePickGetter()
+  console.log(pickedDates.firstPickedDate, pickedDates.secondPickedDate)
   const onClickNextButton = () => {
     setMonthData(
       ([, { year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {

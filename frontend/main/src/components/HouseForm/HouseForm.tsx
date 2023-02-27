@@ -30,7 +30,7 @@ export const HouseForm = observer(() => {
   const onSubmit = (house: any) => {
     houses.createHouse(house, files)
   }
-
+  console.log(files)
   return (
     <div className={styles.houseFormFields}>
       <h1>Adding House</h1>

@@ -10,20 +10,20 @@ const OtherComponent = lazy(() => import('./routes/RouterProvider'))
 const App: FunctionComponent<any> = () => {
   console.log(AdminMf)
   return (
-    // <ServiceContext.Provider
-    //   value={{
-    //     houses: new HousesService(),
-    //   }}
-    // >
-    //   <DatePickerProvider>
-    //     <Suspense>
-    //       <OtherComponent />
-    //     </Suspense>
-    //   </DatePickerProvider>
-    // </ServiceContext.Provider>
-    <>
-      <AdminMf.button text="aboba" onClick={() => void 0} />
-    </>
+    <ServiceContext.Provider
+      value={{
+        houses: new HousesService(),
+      }}
+    >
+      <DatePickerProvider>
+        <Suspense>
+          <OtherComponent />
+        </Suspense>
+      </DatePickerProvider>
+    </ServiceContext.Provider>
+    // <>
+     // {/* <AdminMf.button text="aboba" onClick={() => void 0} /> */}
+    // </>
   )
 }
 

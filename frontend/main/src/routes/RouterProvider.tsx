@@ -10,7 +10,7 @@ import { HousesList } from '../pages/HousesList'
 import { ActivitiesList } from '../pages/ActivitiesList'
 import { lazy } from 'react'
 import { HousePage } from '../pages/HousePage'
-
+import { Test } from '../pages/test'
 const Home = lazy(() => import('../pages/Home'))
 
 const router = createBrowserRouter([
@@ -48,6 +48,7 @@ const router = createBrowserRouter([
       { index: true, element: <InfoPage /> },
       { path: 'houseslist', element: <HousesList /> },
       { path: 'activitieslist', element: <ActivitiesList /> },
+      {path: 'test', element: <Test/>}
     ],
   },
 ])
