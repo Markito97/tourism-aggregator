@@ -48,6 +48,25 @@ function getWebpackRulesReactCss() {
       test: /\.css/i,
       use: [styleExtract, { loader: 'css-loader' }],
     },
+    {
+      test: /\.sass/,
+      use: [
+        styleExtract,
+        {
+          loader: 'css-loader',
+          options: {
+            esModule: true,
+            modules: {
+              exportLocalsConvention: 'dashesOnly',
+              namedExport: true,
+            },
+          },
+        },
+        {
+          loader: 'sass-loader',
+        },
+      ],
+    },
   ]
 }
 
