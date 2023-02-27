@@ -4,6 +4,7 @@ import { useDayCell } from '../../hooks/useDay'
 import { DisablePreviousDaysContext } from '../../context/DateContext'
 import { checkIsPreviousDay } from '../../utils/dateHelpers/checkIsPreviosDay'
 import styles from './Day.module.css'
+import { yearsToMonths } from 'date-fns'
 
 interface DayProps {
   day: number | false
@@ -11,7 +12,6 @@ interface DayProps {
 
 export const Day = ({ day }: DayProps): JSX.Element => {
   const [year, month] = useContext(YearMonthContext)
-
   const {
     isSelected,
     isBetweenPickedDates,
@@ -21,7 +21,7 @@ export const Day = ({ day }: DayProps): JSX.Element => {
   } = useDayCell({ year, month, day })
   const isPreviousDaysDisabled = useContext(DisablePreviousDaysContext)
   const isPreviousDay = checkIsPreviousDay({ year, month, day })
-
+  // console.log(isFirstPickedDate, isSecondPickedDate)
   const onKeyUpDayCell = (e: React.KeyboardEvent<HTMLDivElement>): void => {
     if (e.key !== 'Enter') return
     onClickDayCell()

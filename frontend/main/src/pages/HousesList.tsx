@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './HousesList.module.css'
 import { HouseForm } from '../components/HouseForm/HouseForm'
+import { Link } from 'react-router-dom'
 
 export const HousesList = () => {
   const [showForm, setShowForm] = useState(false)
@@ -39,10 +40,10 @@ export const HousesList = () => {
           </div>
         </div>
         <div style={{ paddingLeft: '180px', paddingRight: '180px' }}>
-          <button>Add new Houses</button>
+          {/* <button>Add new Houses</button> */}
         </div>
       </div>
-      <HouseForm />
+      <button><Link to ='/admin/test'>Test</Link></button>
     </div>
   )
 }
