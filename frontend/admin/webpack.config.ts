@@ -27,19 +27,13 @@ module.exports = function (env: IEnv): webpack.Configuration {
       static: {
         directory: path.join(__dirname, 'dist'),
       },
-      port: config.APP_MAIN_PORT,
+      port: config.APP_ADMIN_PORT,
       historyApiFallback: true,
     },
     output: {
       publicPath: 'auto',
     },
     resolve: {
-      alias: {
-        '@assets': path.resolve(__dirname, './src/assets/resource/'),
-        '@utils': path.resolve(__dirname, './src/utils'),
-        '@components': path.resolve(__dirname, './src/components/'),
-        '@hooks': path.resolve(__dirname, './src/hooks'),
-      },
       extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
@@ -48,10 +42,10 @@ module.exports = function (env: IEnv): webpack.Configuration {
     plugins: [
       ...getCommonPlugins(),
       new webpack.container.ModuleFederationPlugin({
-        name: AppName.APP_MAIN,
-        remotes: {
-          admin: 'admin@http://localhost:3004/remoteEntry.js',
-          // [AppName.APP_ADMIN]: `${AppName.APP_ADMIN}@//${config.APP_ADMIN_URL}/remoteEntry.js`,
+        name: 'admin',
+        filename: 'remoteEntry.js',
+        exposes: {
+          './Button': './src/Button',
         },
         shared: sharedReact,
       }),

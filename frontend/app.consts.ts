@@ -2,7 +2,8 @@ import * as webpack from 'webpack'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export enum AppName {
-  APP_ROOT = 'app_root',
+  APP_MAIN = 'main',
+  APP_ADMIN = 'admin',
 }
 
 export interface IEnv {
