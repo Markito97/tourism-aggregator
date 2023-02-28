@@ -25,14 +25,14 @@ module.exports = function (env: IEnv): webpack.Configuration {
     entry: './src/index',
     ...getOptimization(env),
     devServer: {
-      static: {
-        directory: path.join(__dirname, 'dist'),
-      },
+      // static: {
+      //   directory: path.join(__dirname, 'dist'),
+      // },
       port: config.APP_ADMIN_PORT,
       historyApiFallback: true,
     },
     output: {
-      publicPath: 'auto',
+      publicPath: '/',
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
@@ -43,12 +43,12 @@ module.exports = function (env: IEnv): webpack.Configuration {
     plugins: [
       ...getCommonPlugins(),
       // new webpack.container.ModuleFederationPlugin({
-        // name: 'admin',
-        // filename: 'remoteEntry.js',
-        // exposes: {
-          // './Layout': './src/components/Layout/AdminLayout',
-        // },
-        // shared: sharedReact,
+      // name: 'admin',
+      // filename: 'remoteEntry.js',
+      // exposes: {
+      // './Layout': './src/components/Layout/AdminLayout',
+      // },
+      // shared: sharedReact,
       // }),
     ],
   };
