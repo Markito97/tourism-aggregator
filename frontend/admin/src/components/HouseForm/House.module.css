@@ -1,5 +1,4 @@
 .houseFormFields {
-  position: absolute;
   font-family: 'Montserrat';
   padding-top: 112px;
   display: flex;
@@ -7,26 +6,68 @@
   min-width: 500px;
   background: white;
   padding: 15px;
-  border: 1px solid black;
   row-gap: 15px;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 45px;
 }
 
 .form {
+  margin: 0 auto;
+  gap: 100px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   row-gap: 25px;
+  width: 100%;
+  justify-content: center;
 }
-
-.formItem {
+.rightFormPart{
   display: flex;
   flex-direction: column;
   position: relative;
 }
-
+.errorDescription {
+  position: absolute;
+  font-size: 12px;
+  color: red;
+  margin-top: 165px;
+}
+.formItem {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 60px;
+  width: 435px;
+}
+.leftInputs {
+  width: 300px;
+}
 .textLable {
   font-size: 15px;
 }
-
+.btnText {
+  color: white;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+}
+.submitFormBtn {
+  background: #2d2d2d;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 180px;
+  height: 50px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-bottom: -100px;
+}
 .textarea {
   padding: 10px;
   margin-top: 5px;
@@ -47,7 +88,7 @@
   position: absolute;
   font-size: 12px;
   color: red;
-  bottom: -20px;
+  margin-top: 60px;
 }
 
 .dragContainer {
