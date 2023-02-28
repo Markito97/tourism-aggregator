@@ -1,7 +1,5 @@
-import * as webpack from 'webpack'
-import * as HtmlWebpackPlugin from 'html-webpack-plugin'
-
-const str = 'aboba'
+import * as webpack from 'webpack';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export enum AppName {
   APP_MAIN = 'main',
@@ -9,11 +7,11 @@ export enum AppName {
 }
 
 export interface IEnv {
-  WEBPACK_SERVE?: boolean
-  WEBPACK_BUNDLE?: boolean
-  WEBPACK_BUILD?: boolean
-  development?: boolean
-  production?: boolean
+  WEBPACK_SERVE?: boolean;
+  WEBPACK_BUNDLE?: boolean;
+  WEBPACK_BUILD?: boolean;
+  development?: boolean;
+  production?: boolean;
 }
 
 export const sharedReact = {
@@ -25,13 +23,13 @@ export const sharedReact = {
     singleton: true,
     requiredVersion: '18.2.0',
   },
-}
+};
 
 export function getOptimization(env: IEnv): Partial<webpack.Configuration> {
-  const { development } = env
-  const devtool = development ? 'inline-source-map' : 'eval-source-map'
-  const mode = development ? 'development' : 'production'
-  console.log(mode)
+  const { development } = env;
+  const devtool = development ? 'inline-source-map' : 'eval-source-map';
+  const mode = development ? 'development' : 'production';
+
   return {
     devtool,
     mode,
@@ -39,11 +37,11 @@ export function getOptimization(env: IEnv): Partial<webpack.Configuration> {
     //   minimize: true,
     //   minimizer: [new TerserPlugin()],
     // },
-  }
+  };
 }
 
 function getWebpackRulesReactCss() {
-  const styleExtract = { loader: 'style-loader' }
+  const styleExtract = { loader: 'style-loader' };
 
   return [
     {
@@ -69,7 +67,7 @@ function getWebpackRulesReactCss() {
         },
       ],
     },
-  ]
+  ];
 }
 
 export const getWebpackRulesReact = () => {
@@ -101,13 +99,13 @@ export const getWebpackRulesReact = () => {
         ],
       },
     },
-  ]
-}
+  ];
+};
 
 export function getCommonPlugins() {
   return [
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-  ]
+  ];
 }

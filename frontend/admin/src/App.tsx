@@ -1,11 +1,5 @@
-import LocalButton from './Button'
-
 const App = () => {
-  return (
-    <div>
-      <LocalButton />
-    </div>
-  )
-}
+  return <div>asdasd</div>;
+};
 
-export default App
+export default App;

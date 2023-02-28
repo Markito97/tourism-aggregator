@@ -1,29 +1,29 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-export function useFileDrop() {
-  const [imagesPreviews, setImagesPreviews] = useState<any>([])
-  const [files, setFiles] = useState<any>()
+export default function useFileDrop() {
+  const [imagesPreviews, setImagesPreviews] = useState<any>([]);
+  const [files, setFiles] = useState<any>();
 
   const dragStartHandler = (e: DragEvent): void => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   const dragLeaveHandler = (e: DragEvent): void => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   const onDropHandler = (e: any): void => {
-    e.preventDefault()
-    const files = [...e.dataTransfer.files]
-    setFiles([...files])
+    e.preventDefault();
+    const files = [...e.dataTransfer.files];
+    setFiles([...files]);
     files.map((file) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (file) => {
-        setImagesPreviews([...imagesPreviews, file.target?.result])
-      }
-      reader.readAsDataURL(file)
-    })
-  }
+        setImagesPreviews([...imagesPreviews, file.target?.result]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   return [
     dragStartHandler,
@@ -31,5 +31,5 @@ export function useFileDrop() {
     onDropHandler,
     imagesPreviews,
     files,
-  ]
+  ];
 }

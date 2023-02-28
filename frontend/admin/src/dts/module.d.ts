@@ -1,4 +1,4 @@
 declare module '*.sass' {
-  const css: { [key: string]: string }
-  export = css
+  const css: { [key: string]: string };
+  export = css;
 }
