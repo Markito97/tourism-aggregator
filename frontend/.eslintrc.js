@@ -9,8 +9,8 @@ module.exports = {
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    // 'standard-with-typescript',
     // 'plugin:prettier/recommended',
+    // 'standard-with-typescript',
   ],
   ignorePatterns: ['.eslintrc.js'],
   overrides: [],
@@ -20,7 +20,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react'],
+  plugins: ['react', ],
   rules: {
     'import/no-extraneous-dependencies': ['off'],
     'react/react-in-jsx-scope': 'off',
@@ -34,6 +34,9 @@ module.exports = {
     'arrow-body-style': ['error', 'always'],
     'react/prop-types': ['off'],
     'import/no-relative-packages': ['off'],
+    'react/require-default-props': ['off'],
+    'import/prefer-default-export': ['off'],
+    // "prettier/prettier": "error"
     // 'comma-dangle': 'off',
     // quotes: [2, 'single', 'avoid-escape'],
     // '@typescript-eslint/comma-dangle': 'off',

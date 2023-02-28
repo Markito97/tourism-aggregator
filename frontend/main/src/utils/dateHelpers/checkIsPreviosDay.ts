@@ -1,9 +1,9 @@
-import { startOfDay } from 'date-fns'
+import { startOfDay } from 'date-fns';
 
 interface CheckIsPreviousDayInput {
-  year: number
-  month: number
-  day: number | false
+  year: number;
+  month: number;
+  day: number | false;
 }
 
 export const checkIsPreviousDay = ({
@@ -11,10 +11,10 @@ export const checkIsPreviousDay = ({
   month,
   day,
 }: CheckIsPreviousDayInput) => {
-  if (!day) return true
+  if (!day) return true;
 
-  const currentCellDate = new Date(year, month - 1, day)
-  const today = startOfDay(new Date())
+  const currentCellDate = new Date(year, month - 1, day);
+  const today = startOfDay(new Date());
 
-  return today > currentCellDate
-}
+  return today > currentCellDate;
+};

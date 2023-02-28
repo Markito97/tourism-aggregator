@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import styles from './HousesList.module.css'
-import { HouseForm } from '../components/HouseForm/HouseForm'
-import { Link } from 'react-router-dom'
+/* eslint-disable react/button-has-type */
+import { Link } from 'react-router-dom';
+import styles from './HousesList.module.css';
 
 export const HousesList = () => {
-  const [showForm, setShowForm] = useState(false)
   return (
     <div className={styles.container}>
       <div style={{ paddingTop: '35px' }}>Houses List</div>
@@ -39,11 +37,10 @@ export const HousesList = () => {
             <div>X</div>
           </div>
         </div>
-        <div style={{ paddingLeft: '180px', paddingRight: '180px' }}>
-          {/* <button>Add new Houses</button> */}
-        </div>
       </div>
-      <button><Link to ='/admin/test'>Test</Link></button>
+      <button>
+        <Link to="/admin/test">Test</Link>
+      </button>
     </div>
-  )
-}
+  );
+};

@@ -1,34 +1,34 @@
-import { useContext, createContext, useState } from 'react'
+/* eslint-disable @typescript-eslint/indent */
+import { useContext, createContext, useState } from 'react';
 
 export interface PickedDateUnit {
-  year: number
-  month: number
-  day: number
+  year: number;
+  month: number;
+  day: number;
 }
 
 export type PickedDateUnits = {
-  firstPickedDateUnit: PickedDateUnit | null
-  secondPickedDateUnit: PickedDateUnit | null
-}
+  firstPickedDateUnit: PickedDateUnit | null;
+  secondPickedDateUnit: PickedDateUnit | null;
+};
 export type PickedDateUnitsDispatch = React.Dispatch<
   React.SetStateAction<PickedDateUnits>
->
-export const DisablePreviousDaysContext = createContext<boolean>(false)
+>;
+export const DisablePreviousDaysContext = createContext<boolean>(false);
 export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(
-  null
-)
-export const PickedDateUnitsDispatchContext =
-  createContext<PickedDateUnitsDispatch | null>(null)
+  null,
+);
+export const PickedDateUnitsDispatchContext = createContext<PickedDateUnitsDispatch | null>(null);
 
-export function DatePickerProvider({
+export const DatePickerProvider = ({
   children,
 }: {
-  children: React.ReactNode
-}) {
+  children: React.ReactNode;
+}) => {
   const [pickedDateUnits, setPickedDateUnits] = useState<PickedDateUnits>({
     firstPickedDateUnit: null,
     secondPickedDateUnit: null,
-  })
+  });
 
   return (
     <PickedDateUnitsDispatchContext.Provider value={setPickedDateUnits}>
@@ -36,15 +36,15 @@ export function DatePickerProvider({
         {children}
       </PickedDateUnitsContext.Provider>
     </PickedDateUnitsDispatchContext.Provider>
-  )
-}
+  );
+};
 
 export const useDatePickSetter = () => {
-  const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext)
+  const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext);
 
   if (!setPickedDateUnits) {
-    throw new Error('DatePickSetter Error')
+    throw new Error('DatePickSetter Error');
   }
 
-  return setPickedDateUnits
-}
+  return setPickedDateUnits;
+};

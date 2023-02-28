@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable @typescript-eslint/no-shadow */
 import { useState } from 'react';
 
 export default function useFileDrop() {

@@ -7,6 +7,7 @@ import { HousesService } from './services/houses.service';
 const OtherComponent = lazy(() => {
   return import('./routes/RouterProvider');
 });
+
 const App = () => {
   const serviceWrapper = useMemo(() => {
     return { houses: new HousesService() };

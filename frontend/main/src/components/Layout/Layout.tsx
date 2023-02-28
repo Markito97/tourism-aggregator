@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import { Footer } from '../Footer/Footer'
-import { Navbar } from '../Navbar/Navbar'
-import { HeaderTitle } from '../HeaderTitle/HeaderTitle'
-import styles from './Layout.module.css'
+import { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { Footer } from '../Footer/Footer';
+import { Navbar } from '../Navbar/Navbar';
+import { HeaderTitle } from '../HeaderTitle/HeaderTitle';
+import styles from './Layout.module.css';
 
 export const Layout = (): JSX.Element => {
-  const location = useLocation()
-  const [isShow, setIsShow] = useState(true)
+  const location = useLocation();
+  const [isShow, setIsShow] = useState(true);
 
   useEffect(() => {
     if (location.pathname !== '/') {
-      setIsShow(false)
+      setIsShow(false);
     } else {
-      setIsShow(true)
+      setIsShow(true);
     }
-  }, [location])
+  }, [location]);
   return (
     <div className={styles.wrapper}>
       <header className={isShow ? styles.active : styles.inactive}>
@@ -39,5 +39,5 @@ export const Layout = (): JSX.Element => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};

@@ -1,15 +1,9 @@
-import React, { RefObject } from 'react'
-import AboutUsImg from '../../assets/resource/AboutUs.jpg'
-import styles from './AboutUs.module.css'
-
-const aboutUsTitles = {
-  title: 'Our Philosophy',
-  subTitle: 'About Us',
-  className: 'Content',
-}
+import { RefObject } from 'react';
+import AboutUsImg from '../../assets/resource/AboutUs.jpg';
+import styles from './AboutUs.module.css';
 
 interface AboutUsProps {
-  aboutUsRef?: RefObject<HTMLDivElement>
+  aboutUsRef?: RefObject<HTMLDivElement>;
 }
 
 export const AboutUs = ({ aboutUsRef }: AboutUsProps): JSX.Element => {
@@ -51,5 +45,5 @@ export const AboutUs = ({ aboutUsRef }: AboutUsProps): JSX.Element => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

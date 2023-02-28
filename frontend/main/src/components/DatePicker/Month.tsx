@@ -1,13 +1,14 @@
-import { createContext, useMemo } from 'react'
+import { createContext, useMemo } from 'react';
 import {
   getMonthData,
   getYearMonth,
   WEEK_DAYS,
-} from '../../utils/dateHelpers/index'
-import { Days } from '../../components/DatePicker/Days'
-import styles from './Month.module.css'
+} from '../../utils/dateHelpers/index';
+// eslint-disable-next-line import/no-cycle
+import { Days } from './Days';
+import styles from './Month.module.css';
 
-export const YearMonthContext = createContext<number[]>([0, 0])
+export const YearMonthContext = createContext<number[]>([0, 0]);
 
 interface MonthProps {
   year: number
@@ -15,8 +16,8 @@ interface MonthProps {
 }
 
 export const Month = ({ year, month }: MonthProps): JSX.Element => {
-  const days = useMemo(() => getMonthData(year, month), [year, month])
-  const value = useMemo(() => [year, month], [year, month])
+  const days = useMemo(() => { return getMonthData(year, month); }, [year, month]);
+  const value = useMemo(() => { return [year, month]; }, [year, month]);
 
   return (
     <YearMonthContext.Provider value={value}>
@@ -24,9 +25,11 @@ export const Month = ({ year, month }: MonthProps): JSX.Element => {
         <div className={styles.header}>{getYearMonth(year, month)}</div>
 
         <div className={styles.weekDays}>
-          {WEEK_DAYS.map((weekDay) => (
-            <div key={`${weekDay}`}>{weekDay}</div>
-          ))}
+          {WEEK_DAYS.map((weekDay) => {
+            return (
+              <div key={`${weekDay}`}>{weekDay}</div>
+            );
+          })}
         </div>
 
         <div className={styles.datesContent}>
@@ -34,5 +37,5 @@ export const Month = ({ year, month }: MonthProps): JSX.Element => {
         </div>
       </div>
     </YearMonthContext.Provider>
-  )
-}
+  );
+};

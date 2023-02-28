@@ -1,20 +1,22 @@
-import { ErrorBoundary } from './ErrorBoundary'
-import { Suspense, ComponentType, Component, ExoticComponent } from 'react'
+/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/jsx-props-no-spreading */
+import {
+  Suspense, ComponentType, Component, ExoticComponent,
+} from 'react';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
 export function reactLazyComponentHoc<P>(
-  LazyComponent: ExoticComponent<P>
+  LazyComponent: ExoticComponent<P>,
 ): ComponentType<P> {
   return class SyncComponent extends Component<P> {
     render() {
       return (
-        <>
-          <ErrorBoundary>
-            <Suspense fallback="Loading...">
-              <LazyComponent {...this.props} />
-            </Suspense>
-          </ErrorBoundary>
-        </>
-      )
+        <ErrorBoundary>
+          <Suspense fallback="Loading...">
+            <LazyComponent {...this.props} />
+          </Suspense>
+        </ErrorBoundary>
+      );
     }
-  }
+  };
 }

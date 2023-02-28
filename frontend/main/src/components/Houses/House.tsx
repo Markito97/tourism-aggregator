@@ -1,26 +1,25 @@
-import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { ServiceContext } from '../../context/ServiceContext'
-import { IHouse } from '../../services/houses.service'
-import Map from '@assets/Maps.jpg'
-console.log(Map)
-import styles from './House.module.css'
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ServiceContext } from '../../context/ServiceContext';
+import { IHouse } from '../../services/houses.service';
+import styles from './House.module.css';
 
 export const House = () => {
-  const { id } = useParams()
-  const { houses } = useContext(ServiceContext)
-  const [house, setHouse] = useState<IHouse>()
+  const { id } = useParams();
+  const { houses } = useContext(ServiceContext);
+  const [house, setHouse] = useState<IHouse>();
 
   useEffect(() => {
     const fetchHouse = async () => {
-      const data = await houses.getHouse(id)
-      if (!data) return
-      setHouse(data)
-    }
-    fetchHouse()
-  }, [id])
+      const data = await houses.getHouse(id);
+      if (!data) return;
+      setHouse(data);
+    };
+    fetchHouse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
-  if (!house) return null
+  if (!house) return null;
   return (
     <div className={styles.houseUnit}>
       <h1 className={styles.houseUnitTitle}>{house.name}</h1>
@@ -30,7 +29,7 @@ export const House = () => {
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
-          <button className={styles.unitBooking} style={{}}>
+          <button type="button" className={styles.unitBooking}>
             booking
           </button>
         </div>
@@ -50,7 +49,7 @@ export const House = () => {
         </ul>
       </div>
       <div style={{ width: '100%' }}>
-        <img style={{ width: '100%', paddingTop: '30px' }} src={Map} alt="" />
+        <img style={{ width: '100%', paddingTop: '30px' }} alt="" />
       </div>
       <div className={styles.unitContacts}>
         <h6 className={styles.unitIncludesTitle}>Contacts</h6>
@@ -59,5 +58,5 @@ export const House = () => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
