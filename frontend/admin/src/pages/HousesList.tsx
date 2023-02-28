@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import styles from './HousesList.module.css';
 
 export const HousesList = () => {
@@ -39,7 +39,8 @@ export const HousesList = () => {
         </div>
       </div>
       {/* <button> */}
-        <Link to="/houseslist/Myform">Form</Link>
+      <Outlet />
+      <Link to="/houseslist/aboba">Form</Link>
       {/* </button> */}
     </div>
   );

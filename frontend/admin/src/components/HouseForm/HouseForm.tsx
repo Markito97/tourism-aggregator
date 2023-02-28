@@ -29,8 +29,11 @@ export const HouseForm = observer(() => {
   ] = useFileDrop();
 
   const onSubmit = (house: any) => {
-    console.log(house);
+    console.log(imagesPreviews);
+    console.log(files);
+    // console.log(house);
   };
+
   return (
     <div className={styles.houseFormFields}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -41,7 +44,7 @@ export const HouseForm = observer(() => {
               className={styles.textField}
               placeholder="Name"
               {...register('name', {
-                required: 'This is required.',
+                // required: 'This is required.',
                 // minLength: {
                 // value: 5,
                 // message: 'Minimum 5 characters',
@@ -59,11 +62,11 @@ export const HouseForm = observer(() => {
               className={styles.textField}
               placeholder="LOCATION"
               {...register('location', {
-                required: 'This is required.',
-                maxLength: {
-                  value: 300,
-                  message: 'Maximum 300 characters',
-                },
+                // required: 'This is required.',
+                // maxLength: {
+                //   value: 300,
+                //   message: 'Maximum 300 characters',
+                // },
               })}
             />
             {errors?.location && (
@@ -76,7 +79,7 @@ export const HouseForm = observer(() => {
               className={styles.textField}
               placeholder="SOME FIELD"
               {...register('testField', {
-                required: 'This is required.',
+                // required: 'This is required.',
               })}
             />
             {errors?.price && (
@@ -89,7 +92,7 @@ export const HouseForm = observer(() => {
               className={styles.textField}
               placeholder="SOME FIELD"
               {...register('price', {
-                required: 'This is required.',
+                // required: 'This is required.',
               })}
             />
             {errors?.price && (
@@ -102,7 +105,7 @@ export const HouseForm = observer(() => {
               className={styles.textField}
               placeholder="PRICE"
               {...register('price', {
-                required: 'This is required.',
+                // required: 'This is required.',
               })}
             />
             {errors?.price && (
@@ -117,7 +120,7 @@ export const HouseForm = observer(() => {
               className={styles.textField}
               placeholder="CHECK-IN"
               {...register('checkin', {
-                required: 'This is required.',
+                // required: 'This is required.',
               })}
             />
             {errors?.price && (
@@ -144,11 +147,11 @@ export const HouseForm = observer(() => {
               className={styles.textarea}
               placeholder="Description"
               {...register('description', {
-                required: 'This is required.',
-                maxLength: {
-                  value: 300,
-                  message: 'Maximum 300 characters',
-                },
+                // required: 'This is required.',
+                // maxLength: {
+                //   value: 300,
+                //   message: 'Maximum 300 characters',
+                // },
               })}
             />
             {errors?.description && (
