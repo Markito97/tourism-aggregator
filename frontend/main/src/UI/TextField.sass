@@ -1,0 +1,41 @@
+.textField
+    display: flex
+    flex-direction: column
+    position: relative
+    margin: 5px
+
+.field
+    height: 50px
+    padding: 5px
+
+.field::placeholder
+    text-transform: capitalize
+
+.active
+    font-family: Montsserat
+    background: white
+    position: absolute
+    left: 7px
+    font-size: 20px
+    padding: 5px
+    transform: translateY(-15px)
+
+.inactive
+    font-family: Montsserat
+    background: white
+    position: absolute
+    left: 7px
+    top: 10px
+    font-size: 20px
+    padding: 5px
+
+.textFieldLable
+    position: absolute
+    text-transform: capitalize
+    top: -25px
+
+.error
+    position: absolute
+    color: red
+    font-size: 14px
+    bottom: -20px

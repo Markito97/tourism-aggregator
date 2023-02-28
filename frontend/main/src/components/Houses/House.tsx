@@ -9,14 +9,14 @@ export const House = () => {
   const { houses } = useContext(ServiceContext);
   const [house, setHouse] = useState<IHouse>();
 
-  useEffect(() => {
-    const fetchHouse = async () => {
-      const data = await houses.getHouse(id);
-      if (!data) return;
-      setHouse(data);
-    };
-    fetchHouse();
-  }, [id, houses]);
+  // useEffect(() => {
+  //   const fetchHouse = async () => {
+  //     const data = await houses.getHouse(id);
+  //     if (!data) return;
+  //     setHouse(data);
+  //   };
+  //   fetchHouse();
+  // }, [id, houses]);
 
   if (!house) return null;
   return (

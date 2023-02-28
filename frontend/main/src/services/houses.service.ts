@@ -32,15 +32,15 @@ export class HousesService {
     });
   };
 
-  getHouses = async (): Promise<void> => {
-    try {
-      const response = await fetch(resolverLink('houses/all'));
-      const data = await response.json();
-      this.houses = data;
-    } catch (error: any) {
-      throw new Error(error);
-    }
-  };
+  // getHouses = async (): Promise<void> => {
+  //   try {
+  //     const response = await fetch(resolverLink('houses/all'));
+  //     const data = await response.json();
+  //     this.houses = data;
+  //   } catch (error: any) {
+  //     throw new Error(error);
+  //   }
+  // };
 
   getHouse = async (id: string) => {
     try {

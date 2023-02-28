@@ -6,9 +6,9 @@ import { HouseFieldUnit } from './HouseFieldUnit';
 
 export const HousesField = observer((): JSX.Element | null => {
   const { houses } = useContext(ServiceContext);
-  useEffect(() => {
-    houses.getHouses();
-  }, [houses]);
+  // useEffect(() => {
+  //   houses.getHouses();
+  // }, [houses]);
 
   if (!houses.allHouses) return null;
   return (
