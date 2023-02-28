@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
-import useFileDrop from '../../hooks/useFileDrop';
+import useFileDrop from 'admin/src/hooks/useFileDrop';
 import styles from './House.module.css';
-import { ServiceContext } from '../../context/ServiceContext';
 
 export interface IHouse {
   name: string;
@@ -14,7 +12,6 @@ export interface IHouse {
 }
 
 export const HouseForm = observer(() => {
-  const { houses } = useContext(ServiceContext);
   const {
     register,
     handleSubmit,
@@ -29,7 +26,7 @@ export const HouseForm = observer(() => {
   ] = useFileDrop();
 
   const onSubmit = (house: any) => {
-    houses.createHouse(house, files);
+    console.log(house);
   };
   return (
     <div className={styles.houseFormFields}>

@@ -3,9 +3,9 @@ import { lazy } from 'react';
 import { reactLazyComponentHoc } from '../withLazy';
 
 export const AdminMf = {
-  button: reactLazyComponentHoc(
+  AdminLayout: reactLazyComponentHoc(
     lazy(() => {
-      return import('admin/Button');
+      return import('admin/Layout');
     }),
   ),
 };

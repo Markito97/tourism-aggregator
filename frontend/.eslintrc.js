@@ -52,6 +52,13 @@ module.exports = {
 
     'no-underscore-dangle': ['off'],
     'class-methods-use-this': ['off'],
+
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     // "prettier/prettier": "error"
     // 'comma-dangle': 'off',
     // quotes: [2, 'single', 'avoid-escape'],

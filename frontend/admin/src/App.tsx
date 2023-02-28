@@ -1,5 +1,7 @@
+import Provider from './routes/RouterProvider';
+
 const App = () => {
-  return <div>asdasd</div>;
+  return <Provider />;
 };
 
 export default App;

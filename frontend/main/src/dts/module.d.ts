@@ -1,9 +1,9 @@
 interface IReactComponent<T> {
-  default: React.ComponentType<T>;
+  default: React.ComponentType<any>;
 }
 
-declare module 'admin/Button' {
-  const component: IReactComponent<{ text: string; onClick: VoidFunction }>;
+declare module 'admin/Layout' {
+  const component: IReactComponent<any>;
   export = component;
 }
 
