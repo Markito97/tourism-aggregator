@@ -1,53 +1,56 @@
-import styles from './House.module.css'
-import { useForm } from 'react-hook-form'
-import { useFileDrop } from '../../hooks/useFileDrop'
-import { observer } from 'mobx-react-lite'
-import { useContext } from 'react'
-import { ServiceContext } from '../../context/ServiceContext'
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useForm } from 'react-hook-form';
+import { observer } from 'mobx-react-lite';
+import { useContext } from 'react';
+import useFileDrop from '../../hooks/useFileDrop';
+import styles from './House.module.css';
+import { ServiceContext } from '../../context/ServiceContext';
 
 export interface IHouse {
-  name: string
-  description: string
-  price: string
-  location: string
+  name: string;
+  description: string;
+  price: string;
+  location: string;
 }
 
 export const HouseForm = observer(() => {
-  const { houses } = useContext(ServiceContext)
+  const { houses } = useContext(ServiceContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IHouse>()
+  } = useForm<IHouse>();
   const [
     dragStartHandler,
     dragLeaveHandler,
     onDropHandler,
     imagesPreviews,
     files,
-  ] = useFileDrop()
+  ] = useFileDrop();
 
   const onSubmit = (house: any) => {
-    houses.createHouse(house, files)
-  }
-  console.log(files)
+    houses.createHouse(house, files);
+  };
   return (
     <div className={styles.houseFormFields}>
       <h1>Adding House</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formItem}>
-          <label className={styles.textLable}>Name</label>
-          <input
-            className={styles.textField}
-            placeholder="Name"
-            {...register('name', {
-              required: 'This is required.',
-              minLength: {
-                value: 5,
-                message: 'Minimum 5 characters',
-              },
-            })}
-          />
+          <label className={styles.textLable}>
+            Name
+            <input
+              className={styles.textField}
+              placeholder="Name"
+              {...register('name', {
+                required: 'This is required.',
+                minLength: {
+                  value: 5,
+                  message: 'Minimum 5 characters',
+                },
+              })}
+            />
+          </label>
+
           {errors?.name && (
             <p className={styles.error}>{errors.name?.message}</p>
           )}
@@ -64,7 +67,7 @@ export const HouseForm = observer(() => {
                 message: 'Maximum 300 characters',
               },
             })}
-          ></textarea>
+          />
           {errors?.description && (
             <p className={styles.error}>{errors.description?.message}</p>
           )}
@@ -104,19 +107,24 @@ export const HouseForm = observer(() => {
         <div className={styles.dragContainer}>
           <div
             className={styles.drag}
-            onDragStart={(e) => dragStartHandler(e)}
-            onDragOver={(e) => dragStartHandler(e)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
-            onDrop={(e) => onDropHandler(e)}
+            onDragStart={(e) => {
+              return dragStartHandler(e);
+            }}
+            onDragOver={(e) => {
+              return dragStartHandler(e);
+            }}
+            onDragLeave={(e) => {
+              return dragLeaveHandler(e);
+            }}
+            onDrop={(e) => {
+              return onDropHandler(e);
+            }}
           >
             Drop
           </div>
         </div>
         <input type="submit" />
-        {/* <input type="file" /> */}
       </form>
-
-      {/* <div ref={testRef}></div> */}
     </div>
-  )
-})
+  );
+});

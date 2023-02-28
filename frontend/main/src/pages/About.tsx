@@ -1,5 +1,5 @@
-import { AboutUs } from '../components/AboutUs/AboutUs'
+import { AboutUs } from '../components/AboutUs/AboutUs';
 
 export const About = (): JSX.Element => {
-  return <AboutUs />
-}
+  return <AboutUs />;
+};

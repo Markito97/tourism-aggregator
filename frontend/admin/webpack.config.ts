@@ -1,24 +1,23 @@
-import * as path from 'path'
+import * as path from 'path';
 import {
-  AppName,
   IEnv,
   getCommonPlugins,
   getOptimization,
   getWebpackRulesReact,
   sharedReact,
-} from '../app.consts'
-import 'webpack-dev-server'
-import * as webpack from 'webpack'
-import * as dotenv from 'dotenv'
+} from '../app.consts';
+import 'webpack-dev-server';
+import * as webpack from 'webpack';
+import * as dotenv from 'dotenv';
 
 interface LocalEnv extends NodeJS.ProcessEnv {}
 
 module.exports = function (env: IEnv): webpack.Configuration {
-  const { development } = env
+  const { development } = env;
   dotenv.config({
     path: development ? '../.development.env' : '../.production.env',
-  })
-  const config: LocalEnv = process.env
+  });
+  const config: LocalEnv = process.env;
 
   return {
     entry: './src/index',
@@ -50,5 +49,5 @@ module.exports = function (env: IEnv): webpack.Configuration {
         shared: sharedReact,
       }),
     ],
-  }
-}
+  };
+};

@@ -1,18 +1,17 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   getNextYearAndMonth,
   getPrevYearAndMonth,
   getThisYearAndThisMonth,
-} from '../../utils/dateHelpers/index'
-import { DisablePreviousDaysContext } from '../../context/DateContext'
-import { Month } from '../../components/DatePicker/Month'
-import styles from './DatePicker.module.css'
-import { ChevronLeft } from '../../assets/icons/ChevronLeft'
-import { ChevronRight } from '../../assets/icons/ChevronRight'
-import { useDatePickGetter } from 'main/src/hooks/useDatePickGetter'
+} from '../../utils/dateHelpers/index';
+import { DisablePreviousDaysContext } from '../../context/DateContext';
+import { Month } from './Month';
+import styles from './DatePicker.module.css';
+import { ChevronLeft } from '../../assets/icons/ChevronLeft';
+import { ChevronRight } from '../../assets/icons/ChevronRight';
 
 export const DatePicker = ({ disablePreviousDays = false }) => {
-  const [thisYear, thisMonth] = getThisYearAndThisMonth()
+  const [thisYear, thisMonth] = getThisYearAndThisMonth();
   const [monthsDate, setMonthData] = useState([
     {
       year: thisYear,
@@ -22,36 +21,35 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
       year: thisYear,
       month: thisMonth + 2,
     },
-  ])
-  const {pickedDates} = useDatePickGetter()
-  console.log(pickedDates.firstPickedDate, pickedDates.secondPickedDate)
+  ]);
+
   const onClickNextButton = () => {
     setMonthData(
       ([, { year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
         const [nextRightDisplayYear, nextRightDisplayMonth] =
-          getNextYearAndMonth(prevRightDisplayYear, prevRightDisplayMonth)
+          getNextYearAndMonth(prevRightDisplayYear, prevRightDisplayMonth);
         return [
           { year: prevRightDisplayYear, month: prevRightDisplayMonth },
           { year: nextRightDisplayYear, month: nextRightDisplayMonth },
-        ]
-      }
-    )
-  }
+        ];
+      },
+    );
+  };
 
   const onClickPrevButton = () => {
     setMonthData(
       ([{ year: prevLeftDisplayYear, month: prevLeftDisplayMonth }]) => {
         const [nextLeftDisplayYear, nextLeftDisplayMonth] = getPrevYearAndMonth(
           prevLeftDisplayYear,
-          prevLeftDisplayMonth
-        )
+          prevLeftDisplayMonth,
+        );
         return [
           { year: nextLeftDisplayYear, month: nextLeftDisplayMonth },
           { year: prevLeftDisplayYear, month: prevLeftDisplayMonth },
-        ]
-      }
-    )
-  }
+        ];
+      },
+    );
+  };
 
   return (
     <DisablePreviousDaysContext.Provider value={disablePreviousDays}>
@@ -59,13 +57,13 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
         <div>
           <ChevronLeft onClick={onClickPrevButton} />
         </div>
-        {monthsDate.map(({ year, month }) => (
-          <Month key={`${year}${month}`} year={year} month={month} />
-        ))}
+        {monthsDate.map(({ year, month }) => {
+          return <Month key={`${year}${month}`} year={year} month={month} />;
+        })}
         <div>
           <ChevronRight onClick={onClickNextButton} />
         </div>
       </div>
     </DisablePreviousDaysContext.Provider>
-  )
-}
+  );
+};

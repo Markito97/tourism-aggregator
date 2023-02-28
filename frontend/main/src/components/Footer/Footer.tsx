@@ -1,37 +1,50 @@
-import styles from './Footer.module.css'
-import { NavLink } from 'react-router-dom'
-import { setIsActive } from '@utils/utility'
+import { NavLink } from 'react-router-dom';
+import { setIsActive } from '@utils/utility';
+import styles from './Footer.module.css';
 
 export const Footer = (): JSX.Element => {
   return (
     <div className={styles.content}>
       <NavLink
-        className={(status) => setIsActive(status, styles)}
-        to={'/partnership'}
+        className={(status) => {
+          return setIsActive(status, styles);
+        }}
+        to="/partnership"
       >
         Partnership
       </NavLink>
       <NavLink
-        className={(status) => setIsActive(status, styles)}
-        to={'/rules'}
+        className={(status) => {
+          return setIsActive(status, styles);
+        }}
+        to="/rules"
       >
         Residence Rules
       </NavLink>
-      <NavLink className={(status) => setIsActive(status, styles)} to={'/get'}>
+      <NavLink
+        className={(status) => {
+          return setIsActive(status, styles);
+        }}
+        to="/get"
+      >
         How to get there
       </NavLink>
       <NavLink
-        className={(status) => setIsActive(status, styles)}
-        to={'/contact'}
+        className={(status) => {
+          return setIsActive(status, styles);
+        }}
+        to="/contact"
       >
         Contact
       </NavLink>
       <NavLink
-        className={(status) => setIsActive(status, styles)}
-        to={'/policy'}
+        className={(status) => {
+          return setIsActive(status, styles);
+        }}
+        to="/policy"
       >
         Privacy policy
       </NavLink>
     </div>
-  )
-}
+  );
+};

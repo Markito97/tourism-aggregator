@@ -1,18 +1,20 @@
+import { useContext } from 'react';
 import {
   PickedDateUnits,
   PickedDateUnitsContext,
   PickedDateUnitsDispatch,
   PickedDateUnitsDispatchContext,
-} from '../context/DateContext'
-import { useContext } from 'react'
+} from '../context/DateContext';
 
-export const useDatePick = (): [PickedDateUnits, PickedDateUnitsDispatch] => {
-  const pickedDateUnits = useContext(PickedDateUnitsContext)
-  const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext)
+const useDatePick = (): [PickedDateUnits, PickedDateUnitsDispatch] => {
+  const pickedDateUnits = useContext(PickedDateUnitsContext);
+  const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext);
 
   if (!pickedDateUnits || !setPickedDateUnits) {
-    throw new Error('DatePick Error')
+    throw new Error('DatePick Error');
   }
 
-  return [pickedDateUnits, setPickedDateUnits]
-}
+  return [pickedDateUnits, setPickedDateUnits];
+};
+
+export default useDatePick;

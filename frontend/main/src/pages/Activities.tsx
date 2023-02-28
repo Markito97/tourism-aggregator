@@ -1,3 +1,3 @@
 export const Activities = (): JSX.Element => {
-  return <div></div>
-}
+  return <div />;
+};

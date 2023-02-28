@@ -7,7 +7,7 @@
       "baseUrl": ".",
       "resolveJsonModule": true,
       "experimentalDecorators": true,
-    }
+    },
   }
   
   

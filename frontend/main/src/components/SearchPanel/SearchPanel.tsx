@@ -1,9 +1,13 @@
-import { useState } from 'react'
-import styles from './SearchPanel.module.css'
-import { DatePicker } from '../../components/DatePicker/DatePicker'
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useState } from 'react';
+import styles from './SearchPanel.module.css';
+import { DatePicker } from '../DatePicker/DatePicker';
 
 export const SeacrhPanel = (): JSX.Element => {
-  const [isShow, setIsShow] = useState(false)
+  const [isShow, setIsShow] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -17,7 +21,12 @@ export const SeacrhPanel = (): JSX.Element => {
           placeholder="Where"
         />
       </div>
-      <div className={styles.textField} onClick={() => setIsShow(true)}>
+      <div
+        className={styles.textField}
+        onClick={() => {
+          return setIsShow(true);
+        }}
+      >
         <label className={styles.textLable} htmlFor="">
           Start date
         </label>
@@ -36,5 +45,5 @@ export const SeacrhPanel = (): JSX.Element => {
       <button className={styles.searchBtn}>Search</button>
       {isShow && <DatePicker disablePreviousDays />}
     </div>
-  )
-}
+  );
+};

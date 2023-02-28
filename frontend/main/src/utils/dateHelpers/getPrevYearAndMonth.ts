@@ -1,9 +1,9 @@
-import { FIRST_MONTH, LAST_MONTH } from './date.consts'
+import { FIRST_MONTH, LAST_MONTH } from './date.consts';
 
 export const getPrevYearAndMonth = (
   year: number,
-  month: number
+  month: number,
 ): [number, number] => {
-  if (month === FIRST_MONTH) return [year - 1, LAST_MONTH]
-  return [year, month - 1]
-}
+  if (month === FIRST_MONTH) return [year - 1, LAST_MONTH];
+  return [year, month - 1];
+};

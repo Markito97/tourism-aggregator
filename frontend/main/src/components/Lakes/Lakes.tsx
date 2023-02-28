@@ -1,7 +1,7 @@
-import styles from './Lakes.module.css'
-import Lake1 from '@assets/Lake1.jpg'
-import Lake2 from '@assets/Lake2.jpg'
-import Lake3 from '@assets/Lake3.jpg'
+import Lake1 from '@assets/Lake1.jpg';
+import Lake2 from '@assets/Lake2.jpg';
+import Lake3 from '@assets/Lake3.jpg';
+import styles from './Lakes.module.css';
 
 export const Lakes = (): JSX.Element => {
   return (
@@ -18,7 +18,9 @@ export const Lakes = (): JSX.Element => {
             deleniti quas doloremque sit quasi culpa magnam exercitationem
             voluptatem repellendus nihil consectetur perferendis.
           </div>
-          <button className={styles.unitBtn}>Look</button>
+          <button type="button" className={styles.unitBtn}>
+            Look
+          </button>
         </div>
       </div>
       <hr className={styles.uninDivider} />
@@ -34,7 +36,9 @@ export const Lakes = (): JSX.Element => {
             deleniti quas doloremque sit quasi culpa magnam exercitationem
             voluptatem repellendus nihil consectetur perferendis.
           </div>
-          <button className={styles.unitBtn}>Look</button>
+          <button type="button" className={styles.unitBtn}>
+            Look
+          </button>
         </div>
       </div>
       <hr className={styles.uninDivider} />
@@ -50,9 +54,11 @@ export const Lakes = (): JSX.Element => {
             deleniti quas doloremque sit quasi culpa magnam exercitationem
             voluptatem repellendus nihil consectetur perferendis.
           </div>
-          <button className={styles.unitBtn}>Look</button>
+          <button type="button" className={styles.unitBtn}>
+            Look
+          </button>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

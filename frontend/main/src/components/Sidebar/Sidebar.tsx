@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import styles from './Sidebar.module.css'
+import { Link } from 'react-router-dom';
+import styles from './Sidebar.module.css';
 
 export const Sidebar = (): JSX.Element => {
   return (
@@ -15,5 +15,5 @@ export const Sidebar = (): JSX.Element => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};

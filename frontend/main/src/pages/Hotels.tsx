@@ -1,5 +1,5 @@
-import { HousesField } from '../components/Houses/HousesField'
-import { SeacrhPanel } from '../components/SearchPanel/SearchPanel'
+import { HousesField } from '../components/Houses/HousesField';
+import { SeacrhPanel } from '../components/SearchPanel/SearchPanel';
 
 export const Hotels = (): JSX.Element => {
   return (
@@ -7,5 +7,5 @@ export const Hotels = (): JSX.Element => {
       <SeacrhPanel />
       <HousesField />
     </>
-  )
-}
+  );
+};

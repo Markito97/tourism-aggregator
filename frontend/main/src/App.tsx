@@ -1,30 +1,26 @@
-import { FunctionComponent, lazy, Suspense } from 'react'
-// import { Provider } from '../src/routes/RouterProvider'
-import './App.css'
-import { DatePickerProvider } from '../src/context/DateContext'
-import { ServiceContext } from '../src/context/ServiceContext'
-import { HousesService } from '../src/services/houses.service'
-import { AdminMf } from './dts/components'
+import { lazy, Suspense, useMemo } from 'react';
+import './App.css';
+import { DatePickerProvider } from './context/DateContext';
+import { ServiceContext } from './context/ServiceContext';
+import { HousesService } from './services/houses.service';
 
-const OtherComponent = lazy(() => import('./routes/RouterProvider'))
-const App: FunctionComponent<any> = () => {
-  console.log(AdminMf)
+const OtherComponent = lazy(() => {
+  return import('./routes/RouterProvider');
+});
+
+const App = () => {
+  const serviceWrapper = useMemo(() => {
+    return { houses: new HousesService() };
+  }, []);
   return (
-    <ServiceContext.Provider
-      value={{
-        houses: new HousesService(),
-      }}
-    >
+    <ServiceContext.Provider value={serviceWrapper}>
       <DatePickerProvider>
         <Suspense>
           <OtherComponent />
         </Suspense>
       </DatePickerProvider>
     </ServiceContext.Provider>
-    // <>
-     // {/* <AdminMf.button text="aboba" onClick={() => void 0} /> */}
-    // </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
