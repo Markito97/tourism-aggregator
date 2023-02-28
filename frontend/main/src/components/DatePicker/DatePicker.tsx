@@ -26,8 +26,8 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
   const onClickNextButton = () => {
     setMonthData(
       ([, { year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
-        // eslint-disable-next-line max-len
-        const [nextRightDisplayYear, nextRightDisplayMonth] = getNextYearAndMonth(prevRightDisplayYear, prevRightDisplayMonth);
+        const [nextRightDisplayYear, nextRightDisplayMonth] =
+          getNextYearAndMonth(prevRightDisplayYear, prevRightDisplayMonth);
         return [
           { year: prevRightDisplayYear, month: prevRightDisplayMonth },
           { year: nextRightDisplayYear, month: nextRightDisplayMonth },

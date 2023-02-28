@@ -7,10 +7,10 @@ import styles from './House.module.css';
 import { ServiceContext } from '../../context/ServiceContext';
 
 export interface IHouse {
-  name: string
-  description: string
-  price: string
-  location: string
+  name: string;
+  description: string;
+  price: string;
+  location: string;
 }
 
 export const HouseForm = observer(() => {
@@ -31,7 +31,6 @@ export const HouseForm = observer(() => {
   const onSubmit = (house: any) => {
     houses.createHouse(house, files);
   };
-  console.log(files);
   return (
     <div className={styles.houseFormFields}>
       <h1>Adding House</h1>
@@ -42,7 +41,6 @@ export const HouseForm = observer(() => {
             <input
               className={styles.textField}
               placeholder="Name"
-            // eslint-disable-next-line react/jsx-props-no-spreading
               {...register('name', {
                 required: 'This is required.',
                 minLength: {
@@ -62,7 +60,6 @@ export const HouseForm = observer(() => {
           <textarea
             className={styles.textarea}
             placeholder="Description"
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('description', {
               required: 'This is required.',
               maxLength: {
@@ -81,7 +78,6 @@ export const HouseForm = observer(() => {
           <input
             className={styles.textField}
             placeholder="price"
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('price', {
               required: 'This is required.',
             })}
@@ -96,7 +92,6 @@ export const HouseForm = observer(() => {
           <input
             className={styles.textField}
             placeholder="Location"
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('location', {
               required: 'This is required.',
               maxLength: {
@@ -112,10 +107,18 @@ export const HouseForm = observer(() => {
         <div className={styles.dragContainer}>
           <div
             className={styles.drag}
-            onDragStart={(e) => { return dragStartHandler(e); }}
-            onDragOver={(e) => { return dragStartHandler(e); }}
-            onDragLeave={(e) => { return dragLeaveHandler(e); }}
-            onDrop={(e) => { return onDropHandler(e); }}
+            onDragStart={(e) => {
+              return dragStartHandler(e);
+            }}
+            onDragOver={(e) => {
+              return dragStartHandler(e);
+            }}
+            onDragLeave={(e) => {
+              return dragLeaveHandler(e);
+            }}
+            onDrop={(e) => {
+              return onDropHandler(e);
+            }}
           >
             Drop
           </div>

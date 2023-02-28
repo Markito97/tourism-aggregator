@@ -18,7 +18,10 @@ export const DisablePreviousDaysContext = createContext<boolean>(false);
 export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(
   null,
 );
-export const PickedDateUnitsDispatchContext = createContext<PickedDateUnitsDispatch | null>(null);
+export const YearMonthContext = createContext<number[]>([0, 0]);
+
+export const PickedDateUnitsDispatchContext =
+  createContext<PickedDateUnitsDispatch | null>(null);
 
 export const DatePickerProvider = ({
   children,

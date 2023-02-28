@@ -16,8 +16,7 @@ export const House = () => {
       setHouse(data);
     };
     fetchHouse();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, houses]);
 
   if (!house) return null;
   return (

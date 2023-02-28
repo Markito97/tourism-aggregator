@@ -1,5 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/state-in-constructor */
 import { Component, PropsWithChildren, ReactNode } from 'react';
 
 export class ErrorBoundary extends Component<PropsWithChildren> {
@@ -11,9 +9,7 @@ export class ErrorBoundary extends Component<PropsWithChildren> {
 
   render(): ReactNode {
     if (this.state.error) {
-      return (
-        <div>Error :(</div>
-      );
+      return <div>Error :(</div>;
     }
 
     return this.props.children;

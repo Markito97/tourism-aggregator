@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import styles from './HousesFiled..module.css';
@@ -15,9 +14,7 @@ export const HousesField = observer((): JSX.Element | null => {
   return (
     <div className={styles.content}>
       {houses.allHouses.map((card: { image: any }, index: any) => {
-        return (
-          <HouseFieldUnit key={card.image + index} card={card} />
-        );
+        return <HouseFieldUnit key={card._id} card={card} />;
       })}
     </div>
   );

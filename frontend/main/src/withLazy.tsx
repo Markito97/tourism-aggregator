@@ -1,8 +1,4 @@
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/jsx-props-no-spreading */
-import {
-  Suspense, ComponentType, Component, ExoticComponent,
-} from 'react';
+import { Suspense, ComponentType, Component, ExoticComponent } from 'react';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
 export function reactLazyComponentHoc<P>(

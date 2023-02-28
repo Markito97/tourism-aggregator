@@ -8,8 +8,10 @@ module.exports = {
     'airbnb-typescript',
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    // 'plugin:prettier/recommended',
+    // 'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+    // 'prettier/react',
     // 'standard-with-typescript',
   ],
   ignorePatterns: ['.eslintrc.js'],
@@ -20,7 +22,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react', ],
+  plugins: ['react', 'prettier'],
   rules: {
     'import/no-extraneous-dependencies': ['off'],
     'react/react-in-jsx-scope': 'off',
@@ -36,6 +38,20 @@ module.exports = {
     'import/no-relative-packages': ['off'],
     'react/require-default-props': ['off'],
     'import/prefer-default-export': ['off'],
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    'react/prefer-stateless-function': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
+
+    'no-nested-ternary': 'off',
+
+    'react/state-in-constructor': ['off'],
+    'react/destructuring-assignment': ['off'],
+
+    'no-underscore-dangle': ['off'],
+    'class-methods-use-this': ['off'],
     // "prettier/prettier": "error"
     // 'comma-dangle': 'off',
     // quotes: [2, 'single', 'avoid-escape'],
