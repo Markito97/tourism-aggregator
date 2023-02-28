@@ -1,4 +1,9 @@
+/* eslint-disable import/no-import-module-exports */
 import * as path from 'path';
+import 'webpack-dev-server';
+import * as webpack from 'webpack';
+import * as dotenv from 'dotenv';
+
 import {
   IEnv,
   getCommonPlugins,
@@ -6,11 +11,8 @@ import {
   getWebpackRulesReact,
   sharedReact,
 } from '../app.consts';
-import 'webpack-dev-server';
-import * as webpack from 'webpack';
-import * as dotenv from 'dotenv';
 
-interface LocalEnv extends NodeJS.ProcessEnv {}
+type LocalEnv = NodeJS.ProcessEnv;
 
 module.exports = function (env: IEnv): webpack.Configuration {
   const { development } = env;
@@ -44,7 +46,7 @@ module.exports = function (env: IEnv): webpack.Configuration {
         name: 'admin',
         filename: 'remoteEntry.js',
         exposes: {
-          './Button': './src/Button',
+          './Layout': './src/components/Layout/AdminLayout',
         },
         shared: sharedReact,
       }),

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-sequences */
+// eslint-disable-next-line import/no-cycle
 import { IHouse } from '../services/houses.service';
 
 export class CreateHouseDto {
