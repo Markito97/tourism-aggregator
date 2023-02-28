@@ -42,14 +42,14 @@ module.exports = function (env: IEnv): webpack.Configuration {
     },
     plugins: [
       ...getCommonPlugins(),
-      new webpack.container.ModuleFederationPlugin({
-        name: 'admin',
-        filename: 'remoteEntry.js',
-        exposes: {
-          './Layout': './src/components/Layout/AdminLayout',
-        },
-        shared: sharedReact,
-      }),
+      // new webpack.container.ModuleFederationPlugin({
+        // name: 'admin',
+        // filename: 'remoteEntry.js',
+        // exposes: {
+          // './Layout': './src/components/Layout/AdminLayout',
+        // },
+        // shared: sharedReact,
+      // }),
     ],
   };
 };

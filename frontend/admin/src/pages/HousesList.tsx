@@ -38,9 +38,9 @@ export const HousesList = () => {
           </div>
         </div>
       </div>
-      <button>
-        <Link to="/admin/test">Test</Link>
-      </button>
+      {/* <button> */}
+        <Link to="/houseslist/Myform">Form</Link>
+      {/* </button> */}
     </div>
   );
 };
