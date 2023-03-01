@@ -10,7 +10,7 @@ import styles from './DatePicker.module.css';
 import { ChevronLeft } from '../../assets/icons/ChevronLeft';
 import { ChevronRight } from '../../assets/icons/ChevronRight';
 
-export const DatePicker = ({ disablePreviousDays = false }) => {
+export const DatePicker = ({ pickerRef, disablePreviousDays = false }: any) => {
   const [thisYear, thisMonth] = getThisYearAndThisMonth();
   const [monthsDate, setMonthData] = useState([
     {
@@ -53,7 +53,7 @@ export const DatePicker = ({ disablePreviousDays = false }) => {
 
   return (
     <DisablePreviousDaysContext.Provider value={disablePreviousDays}>
-      <div className={styles.container}>
+      <div ref={pickerRef} className={styles.container}>
         <div>
           <ChevronLeft onClick={onClickPrevButton} />
         </div>

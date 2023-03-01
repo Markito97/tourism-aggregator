@@ -22,7 +22,6 @@ export const Day = ({ day }: DayProps): JSX.Element => {
   } = useDayCell({ year, month, day });
   const isPreviousDaysDisabled = useContext(DisablePreviousDaysContext);
   const isPreviousDay = checkIsPreviousDay({ year, month, day });
-
   const onKeyUpDayCell = (e: React.KeyboardEvent<HTMLDivElement>): void => {
     if (e.key !== 'Enter') return;
     onClickDayCell();

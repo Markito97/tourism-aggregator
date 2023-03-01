@@ -6,17 +6,11 @@ import { IHouse } from '../services/houses.service';
 
 export class CreateHouseDto {
   id: string;
-
   name: string;
-
   description: string;
-
   location: string;
-
   price: string;
-
   image: Array<string>;
-
   constructor(data: IHouse) {
     (this.name = data.name),
       (this.id = data._id),
