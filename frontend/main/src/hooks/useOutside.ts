@@ -7,6 +7,7 @@ export function useOutside(
   flag = true,
 ): void {
   useEffect(() => {
+    // console.log(pickerRef, fieldRef);
     if (!flag) return;
     const handleClick = (e: MouseEvent) => {
       if (
