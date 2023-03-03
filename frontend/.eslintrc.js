@@ -56,6 +56,8 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+
+    'consistent-return': 'off',
     // "prettier/prettier": "error"
     // 'comma-dangle': 'off',
     // quotes: [2, 'single', 'avoid-escape'],

@@ -11,7 +11,7 @@ const useDatePickGetter = () => {
     secondPickedDate: dateUnitToDateObj(secondPickedDateUnit),
   };
 
-  return { pickedDateUnits, pickedDates };
+  return { pickedDates, pickedDateUnits };
 };
 
 export default useDatePickGetter;

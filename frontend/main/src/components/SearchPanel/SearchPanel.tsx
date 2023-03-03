@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-sequences */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable consistent-return */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -5,11 +8,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm, Controller } from 'react-hook-form';
 import { TextField } from 'main/src/UI/TextField';
-// import styles from './SearchPanel.module.css';
-import * as css from './SearchPanel.sass';
-import { createRef, useEffect, useState } from 'react';
-import { DatePicker } from '../DatePicker/DatePicker';
+import { useEffect, useRef, useState } from 'react';
 import useDatePickGetter from 'main/src/hooks/useDatePickGetter';
+import { useOutside } from 'main/src/hooks/useOutside';
+import { DatePicker } from '../DatePicker/DatePicker';
+import * as css from './SearchPanel.sass';
+
+interface ISearchForm {
+  lake: string;
+  dateStart: string;
+  dateEnd: string;
+}
 
 export const SeacrhPanel = (): JSX.Element => {
   const { control, handleSubmit, setFocus, setValue } = useForm({
@@ -19,44 +28,78 @@ export const SeacrhPanel = (): JSX.Element => {
       dateEnd: '',
     },
   });
-  const pickerRef = createRef();
-  const fieldRef = createRef();
+  const pickerRef = useRef<HTMLDivElement>(null);
+  const fieldRef = useRef<HTMLDivElement>(null);
   const [isDatePicker, setIsDatePicker] = useState(false);
-  const { pickedDateUnits } = useDatePickGetter();
-  const { year, month, day } = { ...pickedDateUnits.firstPickedDateUnit };
+  const { pickedDates, pickedDateUnits } = useDatePickGetter();
+  useOutside(handleClose, pickerRef, fieldRef, isDatePicker);
+  const [test, setTest] = useState(false);
 
   useEffect(() => {
-    if (day) {
-      setValue('dateStart', `${day}`);
+    if (pickedDates.firstPickedDate !== false) {
+      setTest(true);
     }
-  }, [day]);
+  }, [pickedDates.firstPickedDate]);
 
-  const handleClose = () => {
-    setIsDatePicker(false);
-  };
+  console.log(test);
 
   useEffect(() => {
-    if (!isDatePicker) return;
-    const handleClick = (e) => {
-      if (
-        pickerRef.current &&
-        !pickerRef.current.contains(e.target) &&
-        !fieldRef.current.contains(e.target)
-      ) {
-        handleClose();
-      }
-    };
-    document.addEventListener('click', handleClick, true);
-    return () => {
-      document.removeEventListener('click', handleClick, true);
-    };
-  });
+    if (
+      !pickedDateUnits.firstPickedDateUnit?.day ||
+      !pickedDateUnits.firstPickedDateUnit?.month ||
+      !pickedDateUnits.firstPickedDateUnit?.year
+    )
+      return;
+    setValue(
+      'dateStart',
+      `${
+        pickedDateUnits.firstPickedDateUnit?.day < 10
+          ? `0${pickedDateUnits.firstPickedDateUnit?.day}`
+          : pickedDateUnits.firstPickedDateUnit?.day
+      }  / ${
+        pickedDateUnits.firstPickedDateUnit?.month < 10
+          ? `0${pickedDateUnits.firstPickedDateUnit?.month}`
+          : pickedDateUnits.firstPickedDateUnit?.month
+      } / ${pickedDateUnits.firstPickedDateUnit?.year}`,
+    );
+  }, [
+    pickedDateUnits.firstPickedDateUnit?.day,
+    pickedDateUnits.firstPickedDateUnit?.month,
+    pickedDateUnits.firstPickedDateUnit?.year,
+    setValue,
+  ]);
 
-  // console.log(year, month, day);
+  useEffect(() => {
+    if (
+      !pickedDateUnits.secondPickedDateUnit?.day ||
+      !pickedDateUnits.secondPickedDateUnit?.month ||
+      !pickedDateUnits.secondPickedDateUnit?.year
+    )
+      return;
+    setValue(
+      'dateEnd',
+      `${
+        pickedDateUnits.secondPickedDateUnit?.day < 10
+          ? `0${pickedDateUnits.secondPickedDateUnit?.day}`
+          : pickedDateUnits.secondPickedDateUnit?.day
+      }  / ${
+        pickedDateUnits.secondPickedDateUnit?.month < 10
+          ? `0${pickedDateUnits.secondPickedDateUnit?.month}`
+          : pickedDateUnits.secondPickedDateUnit?.month
+      } / ${pickedDateUnits.secondPickedDateUnit?.year}`,
+    );
+  }, [
+    pickedDateUnits.secondPickedDateUnit?.day,
+    pickedDateUnits.secondPickedDateUnit?.month,
+    pickedDateUnits.secondPickedDateUnit?.year,
+    setValue,
+  ]);
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+  function handleClose() {
+    setIsDatePicker(false);
+  }
+
+  const onSubmit = (data: any) => {};
 
   const handleClick = (show: boolean) => {
     setIsDatePicker(show);
@@ -69,11 +112,7 @@ export const SeacrhPanel = (): JSX.Element => {
           control={control}
           name="lake"
           rules={{ required: 'This required field.' }}
-          render={({
-            field: { onChange, onBlur, value, ref },
-            formState,
-            fieldState,
-          }) => {
+          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
             return (
               <TextField
                 onChange={onChange}
@@ -93,11 +132,7 @@ export const SeacrhPanel = (): JSX.Element => {
           control={control}
           name="dateStart"
           rules={{ required: 'This required field.' }}
-          render={({
-            field: { onChange, onBlur, value, ref },
-            formState,
-            fieldState,
-          }) => {
+          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
             return (
               <TextField
                 onChange={onChange}
@@ -120,14 +155,9 @@ export const SeacrhPanel = (): JSX.Element => {
           control={control}
           name="dateEnd"
           rules={{ required: 'This required field.' }}
-          render={({
-            field: { onChange, onBlur, value, ref },
-            formState,
-            fieldState,
-          }) => {
+          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
             return (
               <TextField
-                onFocus={setFocus}
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -137,6 +167,7 @@ export const SeacrhPanel = (): JSX.Element => {
                 inputType="date"
                 placeholder="dd/mm/yyyy"
                 customPlaceholder="Check in"
+                test={test}
               />
             );
           }}
