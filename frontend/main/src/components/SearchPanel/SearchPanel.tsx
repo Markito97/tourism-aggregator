@@ -19,8 +19,9 @@ export const SeacrhPanel = (): JSX.Element => {
   const [checkin, setCheckin] = useState<string>('');
   const [checkout, setCheckout] = useState<string>('');
   // show picker
-  const [isCheckIn, setIsCheckIn] = useState(false);
-  const [isCheckOut, setIsCheckOut] = useState(false);
+  // const [isCheckIn, setIsCheckIn] = useState(false);
+  // const [isCheckOut, setIsCheckOut] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   // input refs
   const checkinRef = useRef<HTMLInputElement>(null);
   const checkoutRef = useRef<HTMLInputElement>(null);
@@ -30,14 +31,13 @@ export const SeacrhPanel = (): JSX.Element => {
   // close picker
   const handleClose = () => {
     setIsClose(true);
-    setIsCheckIn(false);
+    setIsShow(false);
   };
 
   const [pickedDateUnits, setPickedDateUnits] = useDatePick();
 
-  console.log(pickedDateUnits);
-
   useEffect(() => {
+    console.log('effect');
     setIsClose(false);
   }, [pickedDateUnits.firstPickedDateUnit]);
 
@@ -53,6 +53,22 @@ export const SeacrhPanel = (): JSX.Element => {
     );
   });
 
+  useEffect(() => {
+    if (
+      !pickedDateUnits.secondPickedDateUnit?.day ||
+      !pickedDateUnits.secondPickedDateUnit?.month ||
+      !pickedDateUnits.secondPickedDateUnit?.year
+    )
+      return;
+    setCheckout(
+      `${pickedDateUnits.secondPickedDateUnit?.day} / ${pickedDateUnits.secondPickedDateUnit?.month} / ${pickedDateUnits.secondPickedDateUnit?.year}`,
+    );
+    setIsShow(false);
+    setIsClose(true);
+  }, [pickedDateUnits.secondPickedDateUnit]);
+
+  console.log(pickedDateUnits);
+
   // useEffect(() => {
   //   if (isCheckIn) {
   //     // setPickedDateUnits({
@@ -61,12 +77,14 @@ export const SeacrhPanel = (): JSX.Element => {
   //     // });
   //   }
   // }, [pickedDateUnits, setPickedDateUnits]);
+  useOutside(handleClose, pickerRef, checkinRef, isShow);
 
-  useOutside(handleClose, pickerRef, checkinRef, isCheckIn);
   return (
     <div>
       <input
-        onFocus={() => setIsCheckIn(true)}
+        onFocus={() => {
+          setIsShow(true);
+        }}
         // onBlur={() => setis}
         ref={checkinRef}
         value={checkin}
@@ -77,7 +95,7 @@ export const SeacrhPanel = (): JSX.Element => {
         value={checkout}
         onChange={(e) => setCheckout(e.target.value)}
       />
-      {isCheckIn && (
+      {isShow && (
         <FieldsContext.Provider value={{ isClose: isClose }}>
           <DatePicker pickerRef={pickerRef} />
         </FieldsContext.Provider>
