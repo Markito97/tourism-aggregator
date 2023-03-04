@@ -9,7 +9,7 @@ import { DatePicker } from '../DatePicker/DatePicker';
 
 interface IField {
   isClose?: boolean;
-  endDate?: boolean;
+  isLast?: boolean;
 }
 
 export const FieldsContext = createContext<IField | null>(null);
@@ -19,9 +19,10 @@ export const SeacrhPanel = (): JSX.Element => {
   const [checkin, setCheckin] = useState<string>('');
   const [checkout, setCheckout] = useState<string>('');
   // show picker
-  // const [isCheckIn, setIsCheckIn] = useState(false);
-  // const [isCheckOut, setIsCheckOut] = useState(false);
-  const [isShow, setIsShow] = useState(false);
+  const [isCheckIn, setIsCheckIn] = useState(false);
+  const [isCheckOut, setIsCheckOut] = useState(false);
+
+  // const [isShow, setIsShow] = useState(false);
   // input refs
   const checkinRef = useRef<HTMLInputElement>(null);
   const checkoutRef = useRef<HTMLInputElement>(null);
@@ -31,7 +32,8 @@ export const SeacrhPanel = (): JSX.Element => {
   // close picker
   const handleClose = () => {
     setIsClose(true);
-    setIsShow(false);
+    setIsCheckIn(false);
+    setIsCheckOut(false);
   };
 
   const [pickedDateUnits, setPickedDateUnits] = useDatePick();
@@ -62,32 +64,44 @@ export const SeacrhPanel = (): JSX.Element => {
     setCheckout(
       `${pickedDateUnits.secondPickedDateUnit?.day} / ${pickedDateUnits.secondPickedDateUnit?.month} / ${pickedDateUnits.secondPickedDateUnit?.year}`,
     );
-    setIsShow(false);
+    setIsCheckIn(false);
+    setIsCheckOut(false);
     setIsClose(true);
   }, [pickedDateUnits.secondPickedDateUnit]);
 
-  useOutside(handleClose, pickerRef, checkinRef, isShow);
+  useOutside(
+    handleClose,
+    pickerRef,
+    checkinRef,
+    checkoutRef,
+    isCheckIn,
+    isCheckOut,
+  );
 
   return (
     <div>
       <input
         onFocus={() => {
-          setIsShow(true);
+          setIsCheckIn(true);
         }}
         ref={checkinRef}
         value={checkin}
         onChange={(e) => setCheckin(e.target.value)}
       />
       <input
+        onFocus={() => {
+          setIsCheckOut(true);
+          setIsClose(false);
+        }}
         ref={checkoutRef}
         value={checkout}
         onChange={(e) => setCheckout(e.target.value)}
       />
-      {isShow && (
+      {isCheckIn || isCheckOut ? (
         <FieldsContext.Provider value={{ isClose: isClose }}>
-          <DatePicker pickerRef={pickerRef} />
+          <DatePicker disablePreviousDays pickerRef={pickerRef} />
         </FieldsContext.Provider>
-      )}
+      ) : null}
     </div>
   );
 };

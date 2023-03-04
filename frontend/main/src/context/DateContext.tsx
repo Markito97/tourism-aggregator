@@ -14,7 +14,6 @@ export type PickedDateUnits = {
 export type PickedDateUnitsDispatch = React.Dispatch<
   React.SetStateAction<PickedDateUnits>
 >;
-export const DisablePreviousDaysContext = createContext<boolean>(false);
 export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(
   null,
 );
