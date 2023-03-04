@@ -8,7 +8,6 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
 import { ControllerFieldState, Noop } from 'react-hook-form';
 import * as css from './TextField.sass';
-import { useOutside } from '../hooks/useOutside';
 
 interface ITextField {
   value: string;
@@ -35,6 +34,7 @@ export const TextField = (props: ITextField): JSX.Element => {
   const hanldeFocus = () => {
     setUp(true);
     if (!props.onShow) return;
+    if (props.startDate) return;
     props.onShow(true, inputRef);
   };
 
@@ -43,8 +43,6 @@ export const TextField = (props: ITextField): JSX.Element => {
     if (!props.value) setWidthValue(false);
     setUp(false);
   };
-
-  console.log(props.startDate);
 
   useEffect(() => {
     if (props.startDate) hanldeFocus();

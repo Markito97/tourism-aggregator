@@ -1,34 +1,34 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 interface IDimensions {
-  width: number
-  height: number
+  width: number;
+  height: number;
 }
 
 function getWindowDimensions(): IDimensions {
-  const { innerWidth: width, innerHeight: height } = window
+  const { innerWidth: width, innerHeight: height } = window;
   return {
     width,
     height,
-  }
+  };
 }
 
 export default function useWindowDimensions(): IDimensions {
   const [windowDimensions, setWindowDimesions] = useState<IDimensions>(
-    getWindowDimensions()
-  )
+    getWindowDimensions(),
+  );
 
   useEffect(() => {
     const handleResize = (): void => {
-      setWindowDimesions(getWindowDimensions())
-    }
+      setWindowDimesions(getWindowDimensions());
+    };
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  })
+      window.removeEventListener('resize', handleResize);
+    };
+  });
 
-  return windowDimensions
+  return windowDimensions;
 }

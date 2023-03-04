@@ -41,13 +41,3 @@ export const DatePickerProvider = ({
     </PickedDateUnitsDispatchContext.Provider>
   );
 };
-
-export const useDatePickSetter = () => {
-  const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext);
-
-  if (!setPickedDateUnits) {
-    throw new Error('DatePickSetter Error');
-  }
-
-  return setPickedDateUnits;
-};

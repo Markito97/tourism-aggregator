@@ -58,6 +58,7 @@ module.exports = {
     ],
 
     'consistent-return': 'off',
+    'arrow-body-style': 'off',
     // "prettier/prettier": "error"
     // 'comma-dangle': 'off',
     // quotes: [2, 'single', 'avoid-escape'],

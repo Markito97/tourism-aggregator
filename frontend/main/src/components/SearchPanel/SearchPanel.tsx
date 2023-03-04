@@ -1,32 +1,45 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-void */
-import { useForm, Controller } from 'react-hook-form';
-import { TextField } from 'main/src/UI/TextField';
-import { RefObject, useEffect, useRef, useState } from 'react';
-import useDatePickGetter from 'main/src/hooks/useDatePickGetter';
+/* eslint-disable object-shorthand */
+/* eslint-disable import/no-cycle */
+/* eslint-disable react/jsx-no-constructed-context-values */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useEffect, useRef, useState } from 'react';
 import { useOutside } from 'main/src/hooks/useOutside';
+import useDatePick from 'main/src/hooks/useDatePick';
 import { DatePicker } from '../DatePicker/DatePicker';
-import * as css from './SearchPanel.sass';
+
+interface IField {
+  isClose?: boolean;
+  endDate?: boolean;
+}
+
+export const FieldsContext = createContext<IField | null>(null);
 
 export const SeacrhPanel = (): JSX.Element => {
-  const { control, handleSubmit, setValue } = useForm({
-    defaultValues: {
-      lake: '',
-      dateStart: '',
-      dateEnd: '',
-    },
-  });
+  // inputs value
+  const [checkin, setCheckin] = useState<string>('');
+  const [checkout, setCheckout] = useState<string>('');
+  // show picker
+  const [isCheckIn, setIsCheckIn] = useState(false);
+  const [isCheckOut, setIsCheckOut] = useState(false);
+  // input refs
+  const checkinRef = useRef<HTMLInputElement>(null);
+  const checkoutRef = useRef<HTMLInputElement>(null);
   const pickerRef = useRef<HTMLDivElement>(null);
-  const [isDatePicker, setIsDatePicker] = useState(false);
-  const { pickedDates, pickedDateUnits } = useDatePickGetter();
-  const [fieldRef, setFieldRef] = useState<RefObject<HTMLDivElement>>();
-  useOutside(handleClose, pickerRef, fieldRef, isDatePicker);
-  const [startDate, setStartDate] = useState(false);
 
-  const handleClick = (show: boolean, ref: RefObject<HTMLDivElement>) => {
-    void setFieldRef(ref);
-    void setIsDatePicker(show);
+  const [isClose, setIsClose] = useState(false);
+  // close picker
+  const handleClose = () => {
+    setIsClose(true);
+    setIsCheckIn(false);
   };
+
+  const [pickedDateUnits, setPickedDateUnits] = useDatePick();
+
+  console.log(pickedDateUnits);
+
+  useEffect(() => {
+    setIsClose(false);
+  }, [pickedDateUnits.firstPickedDateUnit]);
 
   useEffect(() => {
     if (
@@ -35,111 +48,40 @@ export const SeacrhPanel = (): JSX.Element => {
       !pickedDateUnits.firstPickedDateUnit?.year
     )
       return;
-    setValue(
-      'dateStart',
-      `${
-        pickedDateUnits.firstPickedDateUnit?.day < 10
-          ? `0${pickedDateUnits.firstPickedDateUnit?.day}`
-          : pickedDateUnits.firstPickedDateUnit?.day
-      }  / ${
-        pickedDateUnits.firstPickedDateUnit?.month < 10
-          ? `0${pickedDateUnits.firstPickedDateUnit?.month}`
-          : pickedDateUnits.firstPickedDateUnit?.month
-      } / ${pickedDateUnits.firstPickedDateUnit?.year}`,
+    setCheckin(
+      `${pickedDateUnits.firstPickedDateUnit?.day} / ${pickedDateUnits.firstPickedDateUnit?.month} / ${pickedDateUnits.firstPickedDateUnit?.year}`,
     );
-    setStartDate(true);
-  }, [
-    pickedDateUnits.firstPickedDateUnit?.day,
-    pickedDateUnits.firstPickedDateUnit?.month,
-    pickedDateUnits.firstPickedDateUnit?.year,
-    setValue,
-  ]);
+  });
 
-  useEffect(() => {
-    if (
-      !pickedDateUnits.secondPickedDateUnit?.day ||
-      !pickedDateUnits.secondPickedDateUnit?.month ||
-      !pickedDateUnits.secondPickedDateUnit?.year
-    )
-      return;
-    setValue(
-      'dateEnd',
-      `${
-        pickedDateUnits.secondPickedDateUnit?.day < 10
-          ? `0${pickedDateUnits.secondPickedDateUnit?.day}`
-          : pickedDateUnits.secondPickedDateUnit?.day
-      }  / ${
-        pickedDateUnits.secondPickedDateUnit?.month < 10
-          ? `0${pickedDateUnits.secondPickedDateUnit?.month}`
-          : pickedDateUnits.secondPickedDateUnit?.month
-      } / ${pickedDateUnits.secondPickedDateUnit?.year}`,
-    );
-    void setStartDate(false);
-    void setIsDatePicker(false);
-  }, [
-    pickedDateUnits.secondPickedDateUnit?.day,
-    pickedDateUnits.secondPickedDateUnit?.month,
-    pickedDateUnits.secondPickedDateUnit?.year,
-    setValue,
-  ]);
+  // useEffect(() => {
+  //   if (isCheckIn) {
+  //     // setPickedDateUnits({
+  //     //   ...pickedDateUnits,
+  //     //   firstPickedDateUnit: null,
+  //     // });
+  //   }
+  // }, [pickedDateUnits, setPickedDateUnits]);
 
-  function handleClose(): void {
-    void setIsDatePicker(false);
-  }
-
-  const onSubmit = (data: any) => {};
-
+  useOutside(handleClose, pickerRef, checkinRef, isCheckIn);
   return (
-    <div className={css.container}>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          control={control}
-          name="dateStart"
-          rules={{ required: 'This required field.' }}
-          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
-            return (
-              <TextField
-                onChange={onChange}
-                onBlur={onBlur}
-                onShow={handleClick}
-                value={value}
-                inputRef={ref}
-                fieldState={fieldState}
-                pickerRef={pickerRef}
-                type="text"
-                inputType="date"
-                placeholder="dd/mm/yyyy"
-                customPlaceholder="Check in"
-              />
-            );
-          }}
-        />
-        <Controller
-          control={control}
-          name="dateEnd"
-          rules={{ required: 'This required field.' }}
-          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
-            return (
-              <TextField
-                onChange={onChange}
-                onBlur={onBlur}
-                onShow={handleClick}
-                value={value}
-                inputRef={ref}
-                fieldState={fieldState}
-                pickerRef={pickerRef}
-                type="text"
-                inputType="date"
-                placeholder="dd/mm/yyyy"
-                customPlaceholder="Check in"
-                startDate={startDate}
-              />
-            );
-          }}
-        />
-        <input style={{ height: '50px' }} type="submit" />
-      </form>
-      {isDatePicker && <DatePicker pickerRef={pickerRef} />}
+    <div>
+      <input
+        onFocus={() => setIsCheckIn(true)}
+        // onBlur={() => setis}
+        ref={checkinRef}
+        value={checkin}
+        onChange={(e) => setCheckin(e.target.value)}
+      />
+      <input
+        ref={checkoutRef}
+        value={checkout}
+        onChange={(e) => setCheckout(e.target.value)}
+      />
+      {isCheckIn && (
+        <FieldsContext.Provider value={{ isClose: isClose }}>
+          <DatePicker pickerRef={pickerRef} />
+        </FieldsContext.Provider>
+      )}
     </div>
   );
 };

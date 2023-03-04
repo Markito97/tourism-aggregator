@@ -3,8 +3,8 @@ import { RefObject, useEffect } from 'react';
 export function useOutside(
   onClose: () => void,
   pickerRef: RefObject<HTMLDivElement>,
-  fieldRef: RefObject<HTMLDivElement>,
-  flag = true,
+  fieldRef: RefObject<HTMLInputElement>,
+  flag: boolean,
 ): void {
   useEffect(() => {
     // console.log(pickerRef, fieldRef);
