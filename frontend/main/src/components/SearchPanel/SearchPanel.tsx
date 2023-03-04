@@ -37,7 +37,6 @@ export const SeacrhPanel = (): JSX.Element => {
   const [pickedDateUnits, setPickedDateUnits] = useDatePick();
 
   useEffect(() => {
-    console.log('effect');
     setIsClose(false);
   }, [pickedDateUnits.firstPickedDateUnit]);
 
@@ -67,16 +66,6 @@ export const SeacrhPanel = (): JSX.Element => {
     setIsClose(true);
   }, [pickedDateUnits.secondPickedDateUnit]);
 
-  console.log(pickedDateUnits);
-
-  // useEffect(() => {
-  //   if (isCheckIn) {
-  //     // setPickedDateUnits({
-  //     //   ...pickedDateUnits,
-  //     //   firstPickedDateUnit: null,
-  //     // });
-  //   }
-  // }, [pickedDateUnits, setPickedDateUnits]);
   useOutside(handleClose, pickerRef, checkinRef, isShow);
 
   return (
@@ -85,7 +74,6 @@ export const SeacrhPanel = (): JSX.Element => {
         onFocus={() => {
           setIsShow(true);
         }}
-        // onBlur={() => setis}
         ref={checkinRef}
         value={checkin}
         onChange={(e) => setCheckin(e.target.value)}

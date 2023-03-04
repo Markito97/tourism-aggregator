@@ -82,6 +82,16 @@ const useDayCell: UseDayCell = ({ year, month, day, isClose }) => {
       return;
     }
 
+    if (!isClose) {
+      setPickedDateUnits((prevPickedDateUnits) => {
+        return {
+          firstPickedDateUnit: prevPickedDateUnits.firstPickedDateUnit,
+          secondPickedDateUnit: curPickedDateUnit,
+        };
+      });
+      return;
+    }
+
     // if (isClose) {
     //   console.log('aboba')
     //   if (secondPickedDateUnit === null) {
