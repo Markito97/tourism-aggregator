@@ -11,14 +11,22 @@ export type PickedDateUnits = {
   firstPickedDateUnit: PickedDateUnit | null;
   secondPickedDateUnit: PickedDateUnit | null;
 };
+
+export interface IField {
+  isClose?: boolean;
+  isCheckIn: boolean;
+  isCheckOut: boolean;
+}
+
 export type PickedDateUnitsDispatch = React.Dispatch<
   React.SetStateAction<PickedDateUnits>
 >;
+
+export const FieldsContext = createContext<IField | null>(null);
 export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(
   null,
 );
 export const YearMonthContext = createContext<number[]>([0, 0]);
-
 export const PickedDateUnitsDispatchContext =
   createContext<PickedDateUnitsDispatch | null>(null);
 

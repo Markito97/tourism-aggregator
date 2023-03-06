@@ -4,9 +4,8 @@ import { memo, useContext } from 'react';
 import useDayCell from '../../hooks/useDay';
 import { YearMonthContext } from '../../context/DateContext';
 import { checkIsPreviousDay } from '../../utils/dateHelpers/checkIsPreviosDay';
-import { FieldsContext } from '../SearchPanel/SearchPanel';
-import styles from './Day.module.css';
 import { DisablePreviousDaysContext } from './DatePicker';
+import styles from './Day.module.css';
 
 interface DayProps {
   day: number | false;
@@ -14,12 +13,16 @@ interface DayProps {
 
 const Day = ({ day }: DayProps): JSX.Element => {
   const [year, month] = useContext(YearMonthContext);
-  const fieldsContext = useContext(FieldsContext);
-  const { isSelected, isBetweenPickedDates, handleDay } = useDayCell({
+  const {
+    isSelected,
+    isFirstPickedDate,
+    isSecondPickedDate,
+    isBetweenPickedDates,
+    handleDay,
+  } = useDayCell({
     year,
     month,
     day,
-    isClose: fieldsContext?.isClose,
   });
   const isPreviousDaysDisabled = useContext(DisablePreviousDaysContext);
   const isPreviousDay = checkIsPreviousDay({ year, month, day });
@@ -32,11 +35,16 @@ const Day = ({ day }: DayProps): JSX.Element => {
         className={
           isPreviousDaysDisabled && isPreviousDay
             ? `${styles.disabled}`
-            : isSelected
+            : isSecondPickedDate
+            ? `${styles.selected}`
+            : isFirstPickedDate
             ? `${styles.selected}`
             : isBetweenPickedDates
             ? `${styles.range}`
             : `${styles.dayCell}`
+
+          // : isBetweenPickedDates
+          // ? `${styles.range}`
         }
       >
         {day}
