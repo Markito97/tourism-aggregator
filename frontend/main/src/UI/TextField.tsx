@@ -9,7 +9,7 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { ControllerFieldState, Noop } from 'react-hook-form';
 import * as css from './TextField.sass';
 
-interface ITextField {
+interface TextFieldProps {
   value: string;
   onChange?: () => void;
   onBlur?: Noop;
@@ -23,51 +23,36 @@ interface ITextField {
   customPlaceholder?: string;
   onShow?: (show: boolean, ref: RefObject<HTMLDivElement>) => void;
   pickerRef?: RefObject<HTMLDivElement>;
-  startDate: boolean;
+  fieldRef: RefObject<HTMLInputElement>;
 }
 
-export const TextField = (props: ITextField): JSX.Element => {
-  const [up, setUp] = useState(false);
-  const [withValue, setWidthValue] = useState(false);
-  const inputRef = useRef<HTMLDivElement>(null);
+export const TextField = (props: TextFieldProps): JSX.Element => {
+  const [isPlaceHolder, setIsPlaceHolder] = useState(false);
 
-  const hanldeFocus = () => {
-    setUp(true);
-    if (!props.onShow) return;
-    if (props.startDate) return;
-    props.onShow(true, inputRef);
-  };
-
-  const hanldeBlur = () => {
-    if (props.value) setWidthValue(true);
-    if (!props.value) setWidthValue(false);
-    setUp(false);
-  };
-
-  useEffect(() => {
-    if (props.startDate) hanldeFocus();
-  });
+  console.log(props.onFocus);
 
   return (
-    <div ref={inputRef} className={css.textField}>
+    <div className={css.textField}>
       <label className={css.textFieldLable}>{props?.label}</label>
       <input
+        ref={props.fieldRef}
         className={css.field}
         value={props.value}
-        onFocus={hanldeFocus}
-        onBlur={!props.onShow ? hanldeBlur : null}
+        onFocus={() => {
+          setIsPlaceHolder(true);
+          props.onFocus(true);
+        }}
         onChange={props.onChange}
-        ref={props.inputRef}
-        type={props.type}
-        placeholder={props.placeholder}
+        // onFocus={hanldeFocus}
+        // onBlur={!props.onShow ? hanldeBlur : null}
+        // onChange={props.onChange}
+        // ref={props.inputRef}
+        // type={props.type}
+        // placeholder={props.placeholder}
       />
       <div
         className={
-          up
-            ? css.placeholder__active
-            : withValue
-            ? css.placeholder__with
-            : css.placeholder__inactive
+          isPlaceHolder ? css.placeholder__active : css.placeholder__inactive
         }
       >
         {props.customPlaceholder}

@@ -49,18 +49,6 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
     currentCellDate <= secondPickedDate &&
     firstPickedDate &&
     secondPickedDate >= currentCellDate;
-  // console.log(firstPickedDate);
-  // console.log(isBetweenPickedDates);
-  // console.log(firstPickedDate <= currentCellDate);
-  // console.log(secondPickedDate <= currentCellDate);
-  const isBetweenPickedDatesFromCheckOut =
-    firstPickedDate <= currentCellDate &&
-    currentCellDate <= secondPickedDate &&
-    firstPickedDate &&
-    secondPickedDate >= currentCellDate;
-
-  // console.log(isBetweenPickedDatesFromCheckOut);
-  // console.log(isBetweenPickedDatesFromCheckOut);
 
   const isFirstPickedDate = isEqualDate(currentCellDate, firstPickedDate);
   const isSecondPickedDate = isEqualDate(currentCellDate, secondPickedDate);
@@ -150,7 +138,6 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
   return {
     isSelected,
     isBetweenPickedDates,
-    isBetweenPickedDatesFromCheckOut,
     isFirstPickedDate,
     isSecondPickedDate,
     handleDay,

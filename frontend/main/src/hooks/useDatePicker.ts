@@ -12,9 +12,6 @@ export function useDatePicker() {
   const [isCheckIn, setIsCheckIn] = useState<boolean>(false);
   const [isCheckOut, setIsCheckOut] = useState<boolean>(false);
 
-  // console.log(isCheckIn);
-  // console.log(isCheckOut);
-
   const [pickedDateUnits, setPickedDateUnits] = useDatePick();
 
   const [isClose, setIsClose] = useState(false);

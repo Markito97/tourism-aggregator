@@ -42,9 +42,6 @@ const Day = ({ day }: DayProps): JSX.Element => {
             : isBetweenPickedDates
             ? `${styles.range}`
             : `${styles.dayCell}`
-
-          // : isBetweenPickedDates
-          // ? `${styles.range}`
         }
       >
         {day}
