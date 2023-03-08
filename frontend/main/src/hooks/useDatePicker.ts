@@ -12,6 +12,9 @@ export function useDatePicker() {
   const [isCheckIn, setIsCheckIn] = useState<boolean>(false);
   const [isCheckOut, setIsCheckOut] = useState<boolean>(false);
 
+  const [dateStart, setDateStart] = useState<boolean>(false);
+  const [dateEnd, setDateEnd] = useState<boolean>(false);
+
   const [pickedDateUnits, setPickedDateUnits] = useDatePick();
 
   const [isClose, setIsClose] = useState(false);
@@ -66,6 +69,7 @@ export function useDatePicker() {
     onChangeCheckIn(
       `${pickedDateUnits.firstPickedDateUnit?.day} / ${pickedDateUnits.firstPickedDateUnit?.month} / ${pickedDateUnits.firstPickedDateUnit?.year}`,
     );
+    setDateStart(true);
     if (
       pickedDateUnits.firstPickedDateUnit &&
       pickedDateUnits.secondPickedDateUnit
@@ -88,6 +92,7 @@ export function useDatePicker() {
     onChangeCheckOut(
       `${pickedDateUnits.secondPickedDateUnit?.day} / ${pickedDateUnits.secondPickedDateUnit?.month} / ${pickedDateUnits.secondPickedDateUnit?.year}`,
     );
+    setDateEnd(true);
     if (
       pickedDateUnits.firstPickedDateUnit &&
       pickedDateUnits.secondPickedDateUnit
@@ -116,6 +121,8 @@ export function useDatePicker() {
     datePicker: {
       checkin,
       checkout,
+      dateStart,
+      dateEnd,
       isCheckIn,
       isCheckOut,
       isClose,

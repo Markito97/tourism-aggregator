@@ -1,14 +1,17 @@
+/* eslint-disable import/order */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useDatePicker } from 'main/src/hooks/useDatePicker';
 import { Controller, useForm } from 'react-hook-form';
-import { TextField } from 'main/src/UI/TextField';
+import TextField from 'main/src/UI/TextField';
 import { FieldsContext } from '../../context/DateContext';
 import { DatePicker } from '../DatePicker/DatePicker';
+import { useRef } from 'react';
 import * as css from './SearchPanel.sass';
 
 export const SeacrhPanel = (): JSX.Element => {
   const { refs, datePicker, handlers } = useDatePicker();
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, setFocus, setValue } = useForm({
     defaultValues: {
       lake: '',
       dateStart: '',
@@ -16,79 +19,99 @@ export const SeacrhPanel = (): JSX.Element => {
     },
   });
 
+  const onSubmit = (data: any) => {};
+
+  // useEffect(() => {
+  //   setValue('dateStart', datePicker.checkin);
+  // }, [datePicker.checkin]);
+
+  // useEffect(() => {
+  //   setValue('dateEnd', datePicker.checkout);
+  // }, [datePicker.checkout]);
+  // console.log(datePicker.checkin);
+
   return (
     <div className={css.container}>
-      <form className={css.form}>
-        <Controller
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          onShow={handlers.onToggleIsCheckin}
+          date={datePicker.checkin}
+          // date={'aboba'}
+          fieldRef={refs.checkinRef}
+          type="text"
+          placeholder="dd/mm/yyyy"
+          customPlaceholder="Check in"
+          pickerRef={refs.pickerRef}
+          // test={refs.pickerRef}
+          // dateEnd={datePicker.dateEnd}
+        />
+
+        {/* <Controller
           control={control}
           name="lake"
-          render={({
-            field: { onChange, onBlur, value, ref },
-            formState,
-            fieldState,
-          }) => {
-            return <TextField onChange={onChange} customPlaceholder="Lake" />;
+          rules={{ required: 'This required field.' }}
+          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
+            return (
+              <TextField
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
+                type="text"
+                inputType="text"
+                placeholder="Lake"
+                customPlaceholder="Lake"
+              />
+            );
           }}
-        />
-        <Controller
+        /> */}
+        {/* <Controller
           control={control}
           name="dateStart"
-          render={({
-            field: { onChange, onBlur, value, ref },
-            formState,
-            fieldState,
-          }) => {
+          rules={{ required: 'This required field.' }}
+          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
             return (
               <TextField
-                onFocus={handlers.onToggleIsCheckin}
                 onChange={onChange}
+                onBlur={onBlur}
+                onShow={handlers.onToggleIsCheckin}
                 value={datePicker.checkin}
+                inputRef={ref}
                 fieldRef={refs.checkinRef}
-                placeholder='"DD/MM/YYYY"'
-                customPlaceholder="Check-in"
+                type="text"
+                inputType="date"
+                placeholder="dd/mm/yyyy"
+                customPlaceholder="Check in"
+                datePicker={refs.pickerRef}
+                dateEnd={datePicker.dateEnd}
               />
             );
           }}
-        />
-        <Controller
+        /> */}
+        {/* <Controller
           control={control}
           name="dateEnd"
-          render={({
-            field: { onChange, onBlur, value, ref },
-            formState,
-            fieldState,
-          }) => {
+          rules={{ required: 'This required field.' }}
+          render={({ field: { onChange, onBlur, value, ref }, fieldState }) => {
             return (
               <TextField
-                onFocus={handlers.onToggleIsCheckout}
                 onChange={onChange}
-                value={datePicker.checkout}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
                 fieldRef={refs.checkoutRef}
-                customPlaceholder="Check-out"
+                type="text"
+                inputType="date"
+                placeholder="dd/mm/yyyy"
+                customPlaceholder="Check in"
+                dateStart={datePicker.dateStart}
               />
             );
           }}
-        />
+        /> */}
         <input style={{ height: '50px' }} type="submit" />
       </form>
 
-      {/* <input
-        onFocus={() => {
-          handlers.onToggleIsCheckin(true);
-        }}
-        ref={refs.checkinRef}
-        value={datePicker.checkin}
-        onChange={handlers.onChangeCheckIn}
-      />
-      <input
-        onFocus={() => {
-          handlers.onToggleIsCheckout(true);
-          // handlers.setIsClose(false);
-        }}
-        ref={refs.checkoutRef}
-        value={datePicker.checkout}
-        onChange={handlers.onChangeCheckOut}
-      /> */}
       {datePicker.isCheckIn || datePicker.isCheckOut ? (
         <FieldsContext.Provider
           value={{
