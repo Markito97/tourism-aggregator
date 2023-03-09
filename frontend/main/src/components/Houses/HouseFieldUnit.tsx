@@ -9,11 +9,11 @@ export const HouseFieldUnit = ({ card }: any): JSX.Element => {
       <img
         className={styles.cardImg}
         draggable={false}
-        src={
-          card.image[0] !== undefined
-            ? `${resolverLink(card.image[0])}`
-            : 'no image'
-        }
+        // src={
+        //   card.image[0] !== undefined
+        //     ? `${resolverLink(card.image[0])}`
+        //     : 'no image'
+        // }
         alt=""
       />
       <div className={styles.content}>

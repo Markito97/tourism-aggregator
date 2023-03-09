@@ -131,7 +131,7 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
         });
         // return;
       }
-      return;
+      // return;
     }
   };
 

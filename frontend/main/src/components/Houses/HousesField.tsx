@@ -1,14 +1,18 @@
+/* eslint-disable import/order */
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import styles from './HousesFiled..module.css';
 import { ServiceContext } from '../../context/ServiceContext';
 import { HouseFieldUnit } from './HouseFieldUnit';
+import { resolverLink } from 'main/src/utils/resolver';
 
 export const HousesField = observer((): JSX.Element | null => {
   const { houses } = useContext(ServiceContext);
-  // useEffect(() => {
-  //   houses.getHouses();
-  // }, [houses]);
+
+  useEffect(() => {
+    resolverLink('123');
+    houses.getHouses();
+  }, [houses]);
 
   if (!houses.allHouses) return null;
   return (

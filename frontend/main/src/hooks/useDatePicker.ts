@@ -1,9 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable func-names */
-/* eslint-disable no-void */
-import { useEffect, useRef, useState } from 'react';
-import useDatePick from './useDatePick';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useOutside } from './useOutside';
+import { PickedDateUnitsContext } from '../context/DateContext';
 
 export function useDatePicker() {
   const [checkin, setCheckin] = useState<string>('');
@@ -12,10 +9,9 @@ export function useDatePicker() {
   const [isCheckIn, setIsCheckIn] = useState<boolean>(false);
   const [isCheckOut, setIsCheckOut] = useState<boolean>(false);
 
-  const [dateStart, setDateStart] = useState<boolean>(false);
-  const [dateEnd, setDateEnd] = useState<boolean>(false);
+  const pickedDateUnits = useContext(PickedDateUnitsContext);
 
-  const [pickedDateUnits, setPickedDateUnits] = useDatePick();
+  if (!pickedDateUnits) throw new Error('DatePick Error');
 
   const [isClose, setIsClose] = useState(false);
 
@@ -23,82 +19,56 @@ export function useDatePicker() {
   const checkoutRef = useRef<HTMLInputElement>(null);
   const pickerRef = useRef<HTMLDivElement>(null);
 
-  const onChange = (dispatch: React.Dispatch<React.SetStateAction<string>>) => {
-    return function (value: any): void {
-      void dispatch(value);
-    };
-  };
-
-  const onToggle = (
-    dispatch: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => {
-    return function (value: boolean): void {
-      dispatch(value);
-    };
-  };
-
-  const onChangeCheckIn = onChange(setCheckin);
-  const onChangeCheckOut = onChange(setCheckout);
-
-  const onToggleIsCheckin = onToggle(setIsCheckIn);
-  const onToggleIsCheckout = onToggle(setIsCheckOut);
-
   useEffect(() => {
     setIsClose(false);
-  }, [pickedDateUnits.firstPickedDateUnit]);
-
-  useEffect(() => {
-    setIsClose(false);
-  }, [pickedDateUnits.secondPickedDateUnit]);
-
-  useEffect(() => {});
+  }, [
+    pickedDateUnits.firstPickedDateUnit,
+    pickedDateUnits.secondPickedDateUnit,
+  ]);
 
   const handleClose = () => {
-    onToggleIsCheckin(false);
+    setIsCheckIn(false);
     setIsClose(true);
-    onToggleIsCheckout(false);
+    setIsCheckOut(false);
   };
 
+  const isFirstPicked =
+    !pickedDateUnits.firstPickedDateUnit?.day ||
+    !pickedDateUnits.firstPickedDateUnit?.month ||
+    !pickedDateUnits.firstPickedDateUnit?.year;
+
+  const isSecondPicked =
+    !pickedDateUnits.secondPickedDateUnit?.day ||
+    !pickedDateUnits.secondPickedDateUnit?.month ||
+    !pickedDateUnits.secondPickedDateUnit?.year;
+
+  const firstValue = `${pickedDateUnits.firstPickedDateUnit?.day} / ${pickedDateUnits.firstPickedDateUnit?.month} / ${pickedDateUnits.firstPickedDateUnit?.year}`;
+  const secondValue = `${pickedDateUnits.secondPickedDateUnit?.day} / ${pickedDateUnits.secondPickedDateUnit?.month} / ${pickedDateUnits.secondPickedDateUnit?.year}`;
+
   useEffect(() => {
-    if (
-      !pickedDateUnits.firstPickedDateUnit?.day ||
-      !pickedDateUnits.firstPickedDateUnit?.month ||
-      !pickedDateUnits.firstPickedDateUnit?.year
-    )
-      return;
-    onChangeCheckIn(
-      `${pickedDateUnits.firstPickedDateUnit?.day} / ${pickedDateUnits.firstPickedDateUnit?.month} / ${pickedDateUnits.firstPickedDateUnit?.year}`,
-    );
-    setDateStart(true);
+    if (isFirstPicked) return;
+    setCheckin(firstValue);
     if (
       pickedDateUnits.firstPickedDateUnit &&
       pickedDateUnits.secondPickedDateUnit
     ) {
       if (!isClose) {
-        onToggleIsCheckin(false);
-        onToggleIsCheckout(false);
+        setIsCheckIn(false);
+        setIsCheckOut(false);
         setIsClose(true);
       }
     }
   }, [pickedDateUnits.firstPickedDateUnit]);
 
   useEffect(() => {
-    if (
-      !pickedDateUnits.secondPickedDateUnit?.day ||
-      !pickedDateUnits.secondPickedDateUnit?.month ||
-      !pickedDateUnits.secondPickedDateUnit?.year
-    )
-      return;
-    onChangeCheckOut(
-      `${pickedDateUnits.secondPickedDateUnit?.day} / ${pickedDateUnits.secondPickedDateUnit?.month} / ${pickedDateUnits.secondPickedDateUnit?.year}`,
-    );
-    setDateEnd(true);
+    if (isSecondPicked) return;
+    setCheckout(secondValue);
     if (
       pickedDateUnits.firstPickedDateUnit &&
       pickedDateUnits.secondPickedDateUnit
     ) {
-      onToggleIsCheckin(false);
-      onToggleIsCheckout(false);
+      setIsCheckIn(false);
+      setIsCheckOut(false);
       setIsClose(true);
     }
   }, [pickedDateUnits.secondPickedDateUnit]);
@@ -121,17 +91,13 @@ export function useDatePicker() {
     datePicker: {
       checkin,
       checkout,
-      dateStart,
-      dateEnd,
       isCheckIn,
       isCheckOut,
       isClose,
     },
     handlers: {
-      onChangeCheckIn,
-      onChangeCheckOut,
-      onToggleIsCheckin,
-      onToggleIsCheckout,
+      setIsCheckIn,
+      setIsCheckOut,
       setIsClose,
     },
   };
