@@ -13,7 +13,6 @@ const useDatePick = (): [PickedDateUnits, PickedDateUnitsDispatch] => {
   if (!pickedDateUnits || !setPickedDateUnits) {
     throw new Error('DatePick Error');
   }
-
   return [pickedDateUnits, setPickedDateUnits];
 };
 

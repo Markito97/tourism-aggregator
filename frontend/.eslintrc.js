@@ -8,11 +8,8 @@ module.exports = {
     'airbnb-typescript',
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
-    // 'plugin:react/recommended',
     'plugin:prettier/recommended',
     'prettier',
-    // 'prettier/react',
-    // 'standard-with-typescript',
   ],
   ignorePatterns: ['.eslintrc.js'],
   overrides: [],
@@ -59,6 +56,9 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+
+    'consistent-return': 'off',
+    'arrow-body-style': 'off',
     // "prettier/prettier": "error"
     // 'comma-dangle': 'off',
     // quotes: [2, 'single', 'avoid-escape'],

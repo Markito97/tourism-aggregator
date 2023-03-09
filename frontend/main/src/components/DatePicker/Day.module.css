@@ -1,5 +1,5 @@
 .selected {
-  background-color: rgb(86, 86, 254);
+  background-color: rgba(45, 45, 45, 1);
   padding: 6px;
   color: white;
   border-radius: 3px;
@@ -14,7 +14,7 @@
 .range {
   padding: 6px;
   color: white;
-  background-color: rgb(130, 130, 247);
+  background-color: #9b9b9b;
 }
 
 .dayCell {

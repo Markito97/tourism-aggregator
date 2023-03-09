@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { resolverLink } from '../utils/resolver';
+// import { resolverLink } from '../utils/resolver';
 // eslint-disable-next-line import/no-cycle
 import { CreateHouseDto } from '../dto/house.dto';
 
@@ -20,37 +20,39 @@ export class HousesService {
     makeAutoObservable(this);
   }
 
-  createHouse = async (house: any, images: Array<File>) => {
-    const formData: any = new FormData();
-    images.forEach((img) => {
-      formData.append('images', img);
-    });
-    formData.append('house', JSON.stringify({ ...house }));
-    return fetch(resolverLink('houses/createHouse'), {
-      method: 'POST',
-      body: formData,
-    });
-  };
+  // createHouse = async (house: any, images: Array<File>) => {
+  //   const formData: any = new FormData();
+  //   images.forEach((img) => {
+  //     formData.append('images', img);
+  //   });
+  //   formData.append('house', JSON.stringify({ ...house }));
+  //   return fetch(resolverLink('houses/createHouse'), {
+  //     method: 'POST',
+  //     body: formData,
+  //   });
+  // };
 
   getHouses = async (): Promise<void> => {
+    // console.log(resolverLink('houses/all'));
     try {
-      const response = await fetch(resolverLink('houses/all'));
+      const response = await fetch('http://localhost:3001/houses/all');
       const data = await response.json();
       this.houses = data;
     } catch (error: any) {
-      throw new Error(error);
+      // throw new Error(error);
+      console.log(error);
     }
   };
 
-  getHouse = async (id: string) => {
-    try {
-      const response = await fetch(resolverLink(`houses/${id}`));
-      const data = await response.json();
-      return new CreateHouseDto(data);
-    } catch (error: any) {
-      throw new Error(error);
-    }
-  };
+  // getHouse = async (id: string) => {
+  //   try {
+  //     const response = await fetch(resolverLink(`houses/${id}`));
+  //     const data = await response.json();
+  //     return new CreateHouseDto(data);
+  //   } catch (error: any) {
+  //     throw new Error(error);
+  //   }
+  // };
 
   get allHouses(): Array<IHouse> {
     return this.houses;

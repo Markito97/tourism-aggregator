@@ -16,10 +16,12 @@ type LocalEnv = NodeJS.ProcessEnv;
 
 module.exports = function (env: IEnv): webpack.Configuration {
   const { development } = env;
+
   dotenv.config({
     path: development ? '../.development.env' : '../.production.env',
   });
   const config: LocalEnv = process.env;
+  console.log(process.env.SERVER_URL);
 
   return {
     entry: './src/index',

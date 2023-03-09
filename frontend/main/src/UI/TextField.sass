@@ -1,0 +1,92 @@
+$ff: Montsserat
+$clo-blue: #007FFF
+$clo-grey: #6D6D6D
+$tn-placeholder: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms, transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms, max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms
+
+@mixin field__placeholder($status)
+    @if $status == active
+        padding: 0.5px
+        pointer-events: none
+        font-family: $ff
+        background: white
+        position: absolute
+        left: 0
+        top: 0
+        font-size: 20px
+        transform-origin: top left
+        text-transform: uppercase
+        color: $clo-blue
+        transform: translate(16px, -9px) scale(0.75)
+        transition: $tn-placeholder
+        user-select: none
+
+    @else if $status == inactive
+        pointer-events: none
+        font-family: Montsserat
+        background: white
+        position: absolute
+        left: 0
+        top: 0
+        text-transform: uppercase
+        font-size: 20px
+        font-weight: 400
+        color: $clo-grey
+        letter-spacing: 5px
+        transform: translate(16px, 16px) scale(1)
+        transition: $tn-placeholder
+        user-select: none
+
+    @else
+        padding: 0.5px
+        pointer-events: none
+        font-family: $ff
+        background: white
+        position: absolute
+        left: 0
+        top: 0
+        font-size: 20px
+        transform-origin: top left
+        text-transform: uppercase
+        user-select: none
+        color: $clo-grey
+        transform: translate(16px, -9px) scale(0.75)
+        transition: $tn-placeholder
+
+.textField
+    display: flex
+    flex-direction: column
+    position: relative
+    margin: 5px
+
+.field
+    padding: 16px 16px
+    border: 1px solid #6D6D6D
+    word-spacing: -3px
+    text-transform: capitalize
+
+.field:focus
+    outline: 1px solid $clo-blue
+    border-radius: 3px
+
+.placeholder__active
+    @include field__placeholder($status: active )
+
+.placeholder__inactive
+    @include field__placeholder($status: inactive )
+
+.placeholder__with
+    @include field__placeholder($status: with )
+
+.textFieldLable
+    position: absolute
+    text-transform: capitalize
+    top: -25px
+
+.error
+    position: absolute
+    left: 5px
+    top: 60px
+    color: red
+    font-size: 18px
+    bottom: -20px
+    user-select: none

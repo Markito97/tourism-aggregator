@@ -1,6 +1,8 @@
-/* eslint-disable operator-linebreak */
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useContext } from 'react';
 import useDatePick from './useDatePick';
 import { dateUnitToDateObj, isEqualDate } from '../utils/dateHelpers/index';
+import { FieldsContext } from '../context/DateContext';
 
 interface DayCellDate {
   year: number;
@@ -14,7 +16,7 @@ interface UseDayCell {
     isBetweenPickedDates: boolean;
     isFirstPickedDate: boolean;
     isSecondPickedDate: boolean;
-    onClickDayCell: () => void;
+    handleDay: () => void;
   };
 }
 
@@ -25,11 +27,12 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
       isBetweenPickedDates: false,
       isFirstPickedDate: false,
       isSecondPickedDate: false,
-      onClickDayCell: () => {},
+      handleDay: () => {},
     };
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const fieldContext = useContext(FieldsContext);
+
   const [pickedDateUnits, setPickedDateUnits] = useDatePick();
   const { firstPickedDateUnit, secondPickedDateUnit } = pickedDateUnits;
 
@@ -41,56 +44,94 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
     isEqualDate(firstPickedDate, currentCellDate) ||
     isEqualDate(secondPickedDate, currentCellDate);
 
-  // eslint-disable-next-line max-len
   const isBetweenPickedDates =
-    firstPickedDate <= currentCellDate && currentCellDate <= secondPickedDate;
+    firstPickedDate <= currentCellDate &&
+    currentCellDate <= secondPickedDate &&
+    firstPickedDate &&
+    secondPickedDate >= currentCellDate;
 
   const isFirstPickedDate = isEqualDate(currentCellDate, firstPickedDate);
   const isSecondPickedDate = isEqualDate(currentCellDate, secondPickedDate);
 
-  const onClickDayCell = () => {
+  const handleDay = () => {
     const curPickedDateUnit = { year, month, day };
+    if (fieldContext?.isCheckIn) {
+      if (firstPickedDateUnit === null) {
+        setPickedDateUnits({
+          ...pickedDateUnits,
+          firstPickedDateUnit: curPickedDateUnit,
+        });
+        return;
+      }
 
-    if (firstPickedDateUnit === null) {
-      setPickedDateUnits({
-        ...pickedDateUnits,
-        firstPickedDateUnit: curPickedDateUnit,
-      });
-      return;
-    }
+      if (fieldContext?.isClose) {
+        setPickedDateUnits({
+          ...pickedDateUnits,
+          firstPickedDateUnit: curPickedDateUnit,
+        });
+        return;
+      }
 
-    if (secondPickedDateUnit === null) {
-      if (firstPickedDate > currentCellDate) {
+      if (secondPickedDateUnit === null) {
         setPickedDateUnits((prevPickedDateUnits) => {
           return {
-            firstPickedDateUnit: curPickedDateUnit,
-            secondPickedDateUnit: prevPickedDateUnits.firstPickedDateUnit,
+            firstPickedDateUnit: prevPickedDateUnits.firstPickedDateUnit,
+            secondPickedDateUnit: curPickedDateUnit,
           };
         });
         return;
       }
 
-      setPickedDateUnits({
-        ...pickedDateUnits,
-        secondPickedDateUnit: curPickedDateUnit,
-      });
+      if (!fieldContext?.isClose) {
+        setPickedDateUnits((prevPickedDateUnits) => {
+          return {
+            firstPickedDateUnit: prevPickedDateUnits.firstPickedDateUnit,
+            secondPickedDateUnit: curPickedDateUnit,
+          };
+        });
+        return;
+      }
+
       return;
     }
 
-    if (isEqualDate(currentCellDate, secondPickedDate)) {
-      setPickedDateUnits({ ...pickedDateUnits, secondPickedDateUnit: null });
-      return;
-    }
+    if (fieldContext?.isCheckOut) {
+      if (secondPickedDateUnit === null) {
+        setPickedDateUnits({
+          ...pickedDateUnits,
+          secondPickedDateUnit: curPickedDateUnit,
+        });
+        return;
+      }
 
-    if (isEqualDate(firstPickedDate, currentCellDate)) {
-      setPickedDateUnits((prevPickedDateUnits) => {
-        return {
-          firstPickedDateUnit: prevPickedDateUnits.secondPickedDateUnit
-            ? pickedDateUnits.secondPickedDateUnit
-            : null,
-          secondPickedDateUnit: null,
-        };
-      });
+      if (fieldContext?.isClose) {
+        setPickedDateUnits({
+          ...pickedDateUnits,
+          secondPickedDateUnit: curPickedDateUnit,
+        });
+        return;
+      }
+
+      if (firstPickedDateUnit === null) {
+        setPickedDateUnits((prevPickedDateUnits) => {
+          return {
+            firstPickedDateUnit: curPickedDateUnit,
+            secondPickedDateUnit: prevPickedDateUnits.secondPickedDateUnit,
+          };
+        });
+        return;
+      }
+
+      if (!fieldContext?.isClose) {
+        setPickedDateUnits((prevPickedDateUnits) => {
+          return {
+            firstPickedDateUnit: prevPickedDateUnits.firstPickedDateUnit,
+            secondPickedDateUnit: curPickedDateUnit,
+          };
+        });
+        // return;
+      }
+      // return;
     }
   };
 
@@ -99,7 +140,7 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
     isBetweenPickedDates,
     isFirstPickedDate,
     isSecondPickedDate,
-    onClickDayCell,
+    handleDay,
   };
 };
 

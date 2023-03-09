@@ -7,11 +7,6 @@ declare module 'admin/Layout' {
   export = component;
 }
 
-declare module '*.module.sass' {
-  const css: { [key: string]: string };
-  export = css;
-}
-
 declare module '*.sass' {
   const css: { [key: string]: string };
   export = css;

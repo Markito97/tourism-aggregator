@@ -11,15 +11,22 @@ export type PickedDateUnits = {
   firstPickedDateUnit: PickedDateUnit | null;
   secondPickedDateUnit: PickedDateUnit | null;
 };
+
+export interface IField {
+  isClose?: boolean;
+  isCheckIn: boolean;
+  isCheckOut: boolean;
+}
+
 export type PickedDateUnitsDispatch = React.Dispatch<
   React.SetStateAction<PickedDateUnits>
 >;
-export const DisablePreviousDaysContext = createContext<boolean>(false);
+
+export const FieldsContext = createContext<IField | null>(null);
 export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(
   null,
 );
 export const YearMonthContext = createContext<number[]>([0, 0]);
-
 export const PickedDateUnitsDispatchContext =
   createContext<PickedDateUnitsDispatch | null>(null);
 
@@ -40,14 +47,4 @@ export const DatePickerProvider = ({
       </PickedDateUnitsContext.Provider>
     </PickedDateUnitsDispatchContext.Provider>
   );
-};
-
-export const useDatePickSetter = () => {
-  const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext);
-
-  if (!setPickedDateUnits) {
-    throw new Error('DatePickSetter Error');
-  }
-
-  return setPickedDateUnits;
 };

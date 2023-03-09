@@ -1,3 +1,5 @@
 export function resolverLink(url: string): string {
-  return `${process.env.SERVER_URL}${url}`;
+  console.log(process.env.APP_MAIN_PORT);
+
+  // return `${process.env.SERVER_URL}${url}`;
 }

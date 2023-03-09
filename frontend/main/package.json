@@ -8,11 +8,13 @@
     "build": "webpack --mode production",
     "serve": "serve dist -p 3004"
   },
-
   "license": "MIT",
   "dependencies": {
-    "@emotion/react": "^11.10.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.12",
     "date-fns": "^2.29.3",
+    "dotenv-webpack": "^8.0.1",
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.0",
     "node-sass": "^8.0.0",
