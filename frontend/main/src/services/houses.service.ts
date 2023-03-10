@@ -1,6 +1,4 @@
 import { makeAutoObservable } from 'mobx';
-// import { resolverLink } from '../utils/resolver';
-// eslint-disable-next-line import/no-cycle
 import { CreateHouseDto } from '../dto/house.dto';
 
 export interface IHouse {
@@ -20,39 +18,44 @@ export class HousesService {
     makeAutoObservable(this);
   }
 
-  // createHouse = async (house: any, images: Array<File>) => {
-  //   const formData: any = new FormData();
-  //   images.forEach((img) => {
-  //     formData.append('images', img);
-  //   });
-  //   formData.append('house', JSON.stringify({ ...house }));
-  //   return fetch(resolverLink('houses/createHouse'), {
-  //     method: 'POST',
-  //     body: formData,
-  //   });
-  // };
+  getFreeHouses = async () => {
+    try {
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
 
   getHouses = async (): Promise<void> => {
-    // console.log(resolverLink('houses/all'));
     try {
       const response = await fetch('http://localhost:3001/houses/all');
       const data = await response.json();
       this.houses = data;
     } catch (error: any) {
-      // throw new Error(error);
-      console.log(error);
+      throw new Error(error);
     }
   };
 
-  // getHouse = async (id: string) => {
-  //   try {
-  //     const response = await fetch(resolverLink(`houses/${id}`));
-  //     const data = await response.json();
-  //     return new CreateHouseDto(data);
-  //   } catch (error: any) {
-  //     throw new Error(error);
-  //   }
-  // };
+  getHouse = async (id: string) => {
+    try {
+      const response = await fetch(`http://localhost:3001/houses/${id}`);
+      const data = await response.json();
+      return new CreateHouseDto(data);
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
+
+  bookingHouse = async (id: string, house: any) => {
+    try {
+      const response = await fetch(`http://localhost:3001/houses/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(house),
+      });
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
 
   get allHouses(): Array<IHouse> {
     return this.houses;

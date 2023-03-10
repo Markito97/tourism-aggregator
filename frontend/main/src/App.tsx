@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo } from 'react';
+import { lazy, Suspense, useMemo, useState } from 'react';
 import './App.css';
 import { DatePickerProvider } from './context/DateContext';
 import { ServiceContext } from './context/ServiceContext';
@@ -9,6 +9,7 @@ const OtherComponent = lazy(() => {
 });
 
 const App = () => {
+  const [test, setTest] = useState();
   const serviceWrapper = useMemo(() => {
     return { houses: new HousesService() };
   }, []);

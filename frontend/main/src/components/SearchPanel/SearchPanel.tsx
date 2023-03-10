@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable no-return-assign */
-/* eslint-disable no-param-reassign */
 import { useDatePicker } from 'main/src/hooks/useDatePicker';
 import { FieldsContext } from '../../context/DateContext';
 import { DatePicker } from '../DatePicker/DatePicker';
@@ -9,9 +6,15 @@ import { TextField } from '../../UI/TextField';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 
-export const SeacrhPanel = (): JSX.Element => {
+export interface SearchPanelForm {
+  lake: string;
+  checkIn: string;
+  checkOut: string;
+}
+
+export const SearchPanel = (): JSX.Element => {
   const { refs, datePicker, handlers } = useDatePicker();
-  const { handleSubmit, control, setValue } = useForm({
+  const { handleSubmit, control, setValue } = useForm<SearchPanelForm>({
     defaultValues: {
       lake: '',
       checkIn: '',
@@ -32,7 +35,7 @@ export const SeacrhPanel = (): JSX.Element => {
     }
   }, [datePicker.checkout]);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <div className={css.container}>

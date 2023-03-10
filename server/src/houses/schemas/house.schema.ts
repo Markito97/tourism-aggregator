@@ -1,21 +1,25 @@
-import { Schema } from '@nestjs/mongoose'
-import { Prop, SchemaFactory } from '@nestjs/mongoose/dist'
-import { HydratedDocument } from 'mongoose'
+import { Schema } from '@nestjs/mongoose';
+import { Prop, SchemaFactory } from '@nestjs/mongoose/dist';
+import { HydratedDocument } from 'mongoose';
 
-export type HouseDocument = HydratedDocument<House>
+export type HouseDocument = HydratedDocument<House>;
 
 @Schema()
 export class House {
   @Prop()
-  price: string
+  price: string;
   @Prop()
-  name: string
+  name: string;
   @Prop()
-  description: string
+  description: string;
   @Prop()
-  location: string
+  location: string;
   @Prop()
-  image: Array<string>
+  checkIn: number | null;
+  @Prop()
+  checkOut: number | null;
+  @Prop()
+  image: Array<string>;
 }
 
-export const HouseSchema = SchemaFactory.createForClass(House)
+export const HouseSchema = SchemaFactory.createForClass(House);
