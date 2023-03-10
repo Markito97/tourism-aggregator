@@ -6,7 +6,7 @@ import { Activities } from '../pages/Activities';
 import { House } from '../components/Houses/House';
 import { Layout } from '../components/Layout/Layout';
 import { BookinForm } from '../components/BookingForm/BookingForm';
-
+import {AdminLayout} from '../components/Layout/AdminLayout'
 const Home = lazy(() => {
   return import('../pages/Home');
 });
@@ -39,16 +39,16 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: 'admin/*',
-  //   element: <AdminMf.AdminLayout />,
-  //   // children: [
-  //   //   { index: true, element: <InfoPage /> },
-  //   //   { path: 'houseslist', element: <HousesList /> },
-  //   //   { path: 'activitieslist', element: <ActivitiesList /> },
-  //   //   { path: 'test', element: <HouseFormPage /> },
-  //   // ],
-  // },
+  {
+    path: 'admin/*',
+    element: <AdminLayout />,
+    // children: [
+    //   { index: true, element: <InfoPage /> },
+    //   { path: 'houseslist', element: <HousesList /> },
+    //   { path: 'activitieslist', element: <ActivitiesList /> },
+    //   { path: 'test', element: <HouseFormPage /> },
+    // ],
+  },
 ]);
 
 const Provider = (): JSX.Element => {

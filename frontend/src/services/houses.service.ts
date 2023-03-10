@@ -8,6 +8,9 @@ export interface IHouse {
   location: string;
   price: string;
   image: Array<string>;
+  checkin: number;
+  checkout: number;
+  testField: number;
 }
 
 export class HousesService {
@@ -45,10 +48,25 @@ export class HousesService {
     }
   };
 
+  createHouse = async (house: IHouse) => {
+    try {
+      const formData = new FormData();
+      // formData.append('images', 'HYI')
+      formData.append('houses', JSON.stringify(house))
+      const response = await fetch('http://localhost:3001/houses/createHouse', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: formData,
+      })
+    } catch(error: any){
+      throw new Error(error);
+    }
+  };
+
   bookingHouse = async (id: string, house: any) => {
     try {
-      const response = await fetch(`http://localhost:3001/houses/${id}`, {
-        method: 'PUT',
+        const response = await fetch(`http://localhost:3001/houses/${id}`, {
+        method: 'PUT', //POST
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(house),
       });
