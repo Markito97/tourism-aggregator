@@ -12,7 +12,7 @@ import * as path from 'path';
     }),
     HouseModule,
     FilesModue,
-    MongooseModule.forRoot('mongodb://localhost/houses'),
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/houses'),
   ],
 })
 export class AppModule {}
