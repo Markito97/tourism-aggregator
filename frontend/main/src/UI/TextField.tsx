@@ -1,21 +1,15 @@
-import { useController } from 'react-hook-form';
+import { UseControllerProps, useController } from 'react-hook-form';
 import { RefObject } from 'react';
 import * as css from './TextField.sass';
-
-interface TextFieldProps {
-  fieldRef: RefObject<HTMLInputElement>;
-  name: string;
-  onFocus: () => void;
-}
+import { SearchPanelForm } from '../components/SearchPanel/SearchPanel';
 
 export const TextField = ({
-  fieldRef,
   ...props
-}: TextFieldProps): JSX.Element => {
+}: UseControllerProps<SearchPanelForm> | any): JSX.Element => {
   const { field, fieldState } = useController(props);
 
   return (
-    <div ref={fieldRef} className={css.textField}>
+    <div ref={props.fieldRef} className={css.textField}>
       <input
         className={css.field}
         {...field}

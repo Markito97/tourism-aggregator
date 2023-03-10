@@ -3,22 +3,26 @@ import { useParams } from 'react-router-dom';
 import { ServiceContext } from '../../context/ServiceContext';
 import { IHouse } from '../../services/houses.service';
 import styles from './House.module.css';
+import { Link } from 'react-router-dom';
 
 export const House = () => {
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
   const [house, setHouse] = useState<IHouse>();
 
-  // useEffect(() => {
-  //   const fetchHouse = async () => {
-  //     const data = await houses.getHouse(id);
-  //     if (!data) return;
-  //     setHouse(data);
-  //   };
-  //   fetchHouse();
-  // }, [id, houses]);
+  useEffect(() => {
+    console.log(123);
+    const fetchHouse = async () => {
+      const data = await houses.getHouse(id);
+      console.log(data);
 
-  if (!house) return null;
+      if (!data) return;
+      setHouse(data);
+    };
+    fetchHouse();
+  }, []);
+
+  if (!house) return <p>aboba</p>;
   return (
     <div className={styles.houseUnit}>
       <h1 className={styles.houseUnitTitle}>{house.name}</h1>
@@ -29,7 +33,7 @@ export const House = () => {
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
           <button type="button" className={styles.unitBooking}>
-            booking
+            <Link to={`/booking/${id}`}>booking</Link>
           </button>
         </div>
       </div>

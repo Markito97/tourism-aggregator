@@ -1,29 +1,17 @@
-import {
-  Body,
-  Controller,
-  FileTypeValidator,
-  MaxFileSizeValidator,
-  ParseFilePipe,
-  ParseFilePipeBuilder,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, ParseFilePipeBuilder, Post } from '@nestjs/common';
 import {
   Get,
   Param,
-  UploadedFile,
+  Put,
   UploadedFiles,
   UseInterceptors,
+  Req,
 } from '@nestjs/common/decorators';
-import {
-  AnyFilesInterceptor,
-  FileInterceptor,
-  FilesInterceptor,
-} from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { InjectModel } from '@nestjs/mongoose';
 import { House, HouseDocument } from './schemas/house.schema';
 import { Model } from 'mongoose';
 import { FilesService } from 'src/files/files.service';
-import { CreateHouseDto } from './schemas/create-house.dto';
 import { HouseService } from './houses.service';
 
 interface IHouse {
@@ -70,5 +58,15 @@ export class HousesController {
   @Get(':id')
   async getHouse(@Param() params): Promise<IHouse> {
     return await this.houseService.getHouse(params.id);
+  }
+
+  @Get()
+  async getHousesWithoutBooking(): Promise<IHouse[]> {
+    return await this.houseService.getHousesWithoutBooking();
+  }
+
+  @Put(':id')
+  async bookingHouse(@Param('id') id: string, @Body() updateHouseDto: any) {
+    return await this.houseService.bookingHouse(id, updateHouseDto);
   }
 }

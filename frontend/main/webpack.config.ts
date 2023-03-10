@@ -34,7 +34,7 @@ module.exports = function (env: IEnv): webpack.Configuration {
       historyApiFallback: true,
     },
     output: {
-      publicPath: 'auto',
+      publicPath: '/',
     },
     resolve: {
       alias: {
