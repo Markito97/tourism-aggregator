@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { TextField } from '../../UI/TextField';
 import { useParams } from 'react-router-dom';
-import { ServiceContext } from 'main/src/context/ServiceContext';
+
 import { useEffect, useState, useContext } from 'react';
 import { DatePicker } from '../DatePicker/DatePicker';
-import { useDatePicker } from 'main/src/hooks/useDatePicker';
 import { FieldsContext } from '../SearchPanel/SearchPanel';
+import { ServiceContext } from '../../context/ServiceContext';
+import { useDatePicker } from '../../hooks/useDatePicker';
 
 export const BookinForm = () => {
   const { refs, datePicker, handlers } = useDatePicker();

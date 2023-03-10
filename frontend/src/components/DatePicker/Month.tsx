@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { YearMonthContext } from 'main/src/context/DateContext';
 import {
   getMonthData,
   getYearMonth,
@@ -7,6 +6,7 @@ import {
 } from '../../utils/dateHelpers/index';
 import { Days } from './Days';
 import styles from './Month.module.css';
+import { YearMonthContext } from '../../context/DateContext';
 
 interface MonthProps {
   year: number;

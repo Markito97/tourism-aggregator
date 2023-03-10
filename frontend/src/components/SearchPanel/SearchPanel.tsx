@@ -1,10 +1,10 @@
-import { useDatePicker } from 'main/src/hooks/useDatePicker';
 import { FieldsContext } from '../../context/DateContext';
 import { DatePicker } from '../DatePicker/DatePicker';
 import * as css from './SearchPanel.sass';
 import { TextField } from '../../UI/TextField';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
+import { useDatePicker } from '../../hooks/useDatePicker';
 
 export interface SearchPanelForm {
   lake: string;

@@ -1,36 +1,29 @@
-/* eslint-disable import/no-import-module-exports */
 import * as path from 'path';
 import 'webpack-dev-server';
 import * as webpack from 'webpack';
 import * as dotenv from 'dotenv';
-import {
-  AppName,
-  IEnv,
-  getCommonPlugins,
-  getOptimization,
-  getWebpackRulesReact,
-  sharedReact,
-} from '../app.consts';
+import { getWebpackRulesReact } from './app.consts';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
 type LocalEnv = NodeJS.ProcessEnv;
 
-module.exports = function (env: IEnv): webpack.Configuration {
+module.exports = function (env: any): webpack.Configuration {
   const { development } = env;
-
   dotenv.config({
     path: development ? '../.development.env' : '../.production.env',
   });
   const config: LocalEnv = process.env;
-  console.log(process.env.SERVER_URL);
-
+  const devtool = development ? 'inline-source-map' : 'eval-source-map';
+  const mode = development ? 'development' : 'production';
   return {
     entry: './src/index',
-    ...getOptimization(env),
+    devtool,
+    mode,
     devServer: {
       static: {
         directory: path.join(__dirname, 'dist'),
       },
-      port: config.APP_MAIN_PORT,
+      port: 3003,
       historyApiFallback: true,
     },
     output: {
@@ -49,14 +42,8 @@ module.exports = function (env: IEnv): webpack.Configuration {
       rules: getWebpackRulesReact(),
     },
     plugins: [
-      ...getCommonPlugins(),
-      new webpack.container.ModuleFederationPlugin({
-        name: AppName.APP_MAIN,
-        remotes: {
-          admin: 'admin@http://localhost:3004/remoteEntry.js',
-          // [AppName.APP_ADMIN]: `${AppName.APP_ADMIN}@//${config.APP_ADMIN_URL}/remoteEntry.js`,
-        },
-        shared: sharedReact,
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
       }),
     ],
   };
