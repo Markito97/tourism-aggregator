@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common'
-import * as path from 'path'
-import * as fs from 'fs'
-import { v4 as uuidv4 } from 'uuid'
+import { Injectable } from '@nestjs/common';
+import * as path from 'path';
+import * as fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class FilesService {
@@ -10,26 +10,25 @@ export class FilesService {
       const imagesExtensions = images.map((img) => ({
         ...img,
         fileName: img.originalname.split('.').pop(),
-      }))
-      console.log(imagesExtensions)
+      }));
+      console.log(imagesExtensions);
       const imagesNames = imagesExtensions.map((img) => ({
         ...img,
         fileName: uuidv4() + '.' + img.fileName,
-      }))
+      }));
 
       // const fileExtension = file.originalname.split('.').pop()
       // const fileName = uuidv4() + '.' + fileExtension
-      const filePath = path.resolve(__dirname, '..', 'static', 'images')
+      const filePath = path.resolve(__dirname, '..', 'static', 'images');
       if (!fs.existsSync(filePath)) {
-        fs.mkdirSync(filePath, { recursive: true })
+        fs.mkdirSync(filePath, { recursive: true });
       }
       imagesNames.forEach((img) =>
-        fs.writeFileSync(path.resolve(filePath, img.fileName), img.buffer)
-      )
+        fs.writeFileSync(path.resolve(filePath, img.fileName), img.buffer),
+      );
 
-      const paths = imagesNames.map((img) => 'images' + '/' + img.fileName)
-      console.log(paths)
-      return paths
+      const paths = imagesNames.map((img) => 'images' + '/' + img.fileName);
+      return paths;
     } catch (err) {}
   }
 }

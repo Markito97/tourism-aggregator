@@ -32,13 +32,6 @@ export class HouseService {
     return await this.houseModel.findById(id);
   }
 
-  async getHousesWithoutBooking(): Promise<IHouse[]> {
-    const houses = await this.houseModel.find();
-    console.log(houses);
-
-    return houses;
-  }
-
   async bookingHouse(id: string, updateHouseDto: any) {
     return await this.houseModel.findByIdAndUpdate(id, updateHouseDto);
   }

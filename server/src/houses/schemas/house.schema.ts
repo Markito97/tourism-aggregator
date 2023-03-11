@@ -7,13 +7,19 @@ export type HouseDocument = HydratedDocument<House>;
 @Schema()
 export class House {
   @Prop()
+  houseName: string;
+  @Prop()
+  adress: string;
+  @Prop()
+  lake: string;
+  @Prop()
   price: string;
   @Prop()
-  name: string;
+  persons: string;
+  @Prop()
+  geoData: string;
   @Prop()
   description: string;
-  @Prop()
-  location: string;
   @Prop()
   checkIn: number | null;
   @Prop()

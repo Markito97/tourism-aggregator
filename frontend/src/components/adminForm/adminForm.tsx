@@ -1,209 +1,102 @@
 import { useForm } from 'react-hook-form';
-import { ServiceContext } from '../../context/ServiceContext'
-// import useFileDrop from 'admin/src/hooks/useFileDrop';
-import styles from '../adminForm/adminForm.modules.css'
-import { useContext } from 'react';
+import { ServiceContext } from '../../context/ServiceContext';
+import { useContext, useState } from 'react';
+import { TextField } from '../../UI/TextField';
+import styles from './AdminForm.module.css';
+
 export interface IHouse {
-  name: string;
-  description: string;
+  houseName: string;
+  adress: string;
+  lake: string;
   price: string;
-  location: string;
-  testField: string;
-  checkin: string;
-  checkout: string;
+  geoData: string | null;
+  persons: string | null;
+  checkin: string | null;
+  checkout: string | null;
 }
 
 export const AdminForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IHouse>();
-  const {houses} = useContext(ServiceContext)
+  const { control, handleSubmit } = useForm<IHouse>({
+    defaultValues: {
+      houseName: '',
+      adress: '',
+      lake: '',
+      price: '',
+      persons: '',
+      geoData: '',
+      checkin: '',
+      checkout: '',
+    },
+  });
+  const { houses } = useContext(ServiceContext);
+  const [files, setFiles] = useState<Array<File>>([]);
+  const [filesError, setFilesError] = useState(false);
 
-  // const [
-    // dragStartHandler,
-    // dragLeaveHandler,
-    // onDropHandler,
-    // imagesPreviews,
-    // files,
-  // ] = useFileDrop();
+  const dragStartHandler = (e: DragEvent): void => {
+    e.preventDefault();
+  };
+
+  const dragLeaveHandler = (e: DragEvent): void => {
+    e.preventDefault();
+  };
+
+  const onDropHandler = (e: any): void => {
+    e.preventDefault();
+    const f = [...e.dataTransfer.files];
+    setFiles([...f]);
+  };
 
   const onSubmit = (house: any) => {
-    houses.createHouse(house)
+    if (!files.length) {
+      setFilesError(true);
+      throw new Error('The field cannot be empty');
+    }
+    setFilesError(false);
+    houses.createHouse(files, house);
   };
   return (
-    <div className={styles.houseFormFields}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.leftFormPart}>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>NAME</label>
-            <input
-              className={styles.textField}
-              placeholder="Name"
-              {...register('name', {
-                required: 'This is required.',
-                // minLength: {
-                // value: 5,
-                // message: 'Minimum 5 characters',
-                // },
-              })}
-            />
-
-            {errors?.name && (
-              <p className={styles.error}>{errors.name?.message}</p>
-            )}
-          </div>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>LOCATION</label>
-            <input
-              className={styles.textField}
-              placeholder="LOCATION"
-              {...register('location', {
-                required: 'This is required.',
-                maxLength: {
-                  value: 300,
-                  message: 'Maximum 300 characters',
-                },
-              })}
-            />
-            {errors?.location && (
-              <p className={styles.error}>{errors.location?.message}</p>
-            )}
-          </div>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>SOME FIELD</label>
-            <input
-              className={styles.textField}
-              placeholder="SOME FIELD"
-              {...register('testField', {
-                required: 'This is required.',
-              })}
-            />
-            {errors?.price && (
-              <p className={styles.error}>{errors.price?.message}</p>
-            )}
-          </div>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>SOME FIELD</label>
-            <input
-              className={styles.textField}
-              placeholder="SOME FIELD"
-              {...register('price', {
-                required: 'This is required.',
-              })}
-            />
-            {errors?.price && (
-              <p className={styles.error}>{errors.price?.message}</p>
-            )}
-          </div>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>PRICE</label>
-            <input
-              className={styles.textField}
-              placeholder="PRICE"
-              {...register('price', {
-                required: 'This is required.',
-              })}
-            />
-            {errors?.price && (
-              <p className={styles.error}>{errors.price?.message}</p>
-            )}
-          </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.container}>
+        <div className={styles.requiredFields}>
+          <TextField
+            control={control}
+            rules={{ required: true }}
+            name="houseName"
+          />
+          <TextField
+            control={control}
+            rules={{ required: true }}
+            name="adress"
+          />
+          <TextField control={control} rules={{ required: true }} name="lake" />
+          <TextField
+            control={control}
+            rules={{ required: true }}
+            type="number"
+            name="price"
+          />
         </div>
-        <div className={styles.rightFormPart}>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>FROM</label>
-            <input
-              className={styles.textField}
-              placeholder="CHECK-IN"
-              {...register('checkin', {
-                required: 'This is required.',
-              })}
-            />
-            {errors?.price && (
-              <p className={styles.error}>{errors.price?.message}</p>
-            )}
-          </div>
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>TO</label>
-            <input
-              className={styles.textField}
-              placeholder="CHECK-OUT"
-              {...register('checkout', {
-                required: 'This is required.',
-              })}
-            />
-            {errors?.price && (
-              <p className={styles.error}>{errors.price?.message}</p>
-            )}
-          </div>
-
-          <div className={styles.formItem}>
-            <label className={styles.textLable}>Description</label>
-            <textarea
-              className={styles.textarea}
-              placeholder="Description"
-              {...register('description', {
-                required: 'This is required.',
-                maxLength: {
-                  value: 300,
-                  message: 'Maximum 300 characters',
-                },
-              })}
-            />
-            {errors?.description && (
-              <p className={styles.errorDescription}>
-                {errors.description?.message}
-              </p>
-            )}
-          </div>
+        <div className={styles.rightFields}>
+          <TextField control={control} name="geoData" />
+          <TextField control={control} name="persons" />
           <label className={styles.textLable}>IMAGES</label>
           <div className={styles.dragContainer}>
+            <div
+              className={styles.drag}
+              onDragStart={(e) => dragStartHandler(e)}
+              onDragOver={(e) => dragStartHandler(e)}
+              onDragLeave={(e) => dragLeaveHandler(e)}
+              onDrop={(e) => onDropHandler(e)}
+            >
+              Drop
+            </div>
           </div>
-          <button type="submit" className={styles.submitFormBtn}>
-            <span className={styles.btnText}>SUBMIT</span>
-          </button>
+          <p style={{ color: 'red' }}>
+            {filesError && 'This field is required'}
+          </p>
+          <input type="submit" />
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-     
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-

@@ -10,6 +10,7 @@ export const TextField = ({
 
   return (
     <div ref={props.fieldRef} className={css.textField}>
+      <label htmlFor={field.name}>{props?.name}</label>
       <input
         className={css.field}
         {...field}
@@ -17,9 +18,7 @@ export const TextField = ({
         onFocus={props.onFocus}
       />
       <p className={css.error}>
-        {fieldState.error && (
-          <span>{fieldState.error.message || 'This is required'}</span>
-        )}
+        {fieldState.error && (fieldState.error.message || 'This is required')}
       </p>
     </div>
   );

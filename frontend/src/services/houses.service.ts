@@ -48,24 +48,33 @@ export class HousesService {
     }
   };
 
-  createHouse = async (house: IHouse) => {
+  createHouse = async (images: Array<File>, house: any) => {
     try {
+      if (!images) throw new Error('Is empty');
       const formData = new FormData();
-      // formData.append('images', 'HYI')
-      formData.append('houses', JSON.stringify(house))
+      images.forEach((img) => {
+        formData.append('images', img);
+      });
+      formData.append('house', JSON.stringify({ ...house }));
       const response = await fetch('http://localhost:3001/houses/createHouse', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        // mode: 'cors',
+        // headers: {
+        //   // 'Content-Type': 'application/json',
+        //   'Content-Type': 'multipart/form-data',
+        // },
         body: formData,
-      })
-    } catch(error: any){
+      });
+
+      console.log(response.json());
+    } catch (error: any) {
       throw new Error(error);
     }
   };
 
   bookingHouse = async (id: string, house: any) => {
     try {
-        const response = await fetch(`http://localhost:3001/houses/${id}`, {
+      const response = await fetch(`http://localhost:3001/houses/${id}`, {
         method: 'PUT', //POST
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(house),

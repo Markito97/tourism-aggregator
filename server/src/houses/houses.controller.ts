@@ -33,16 +33,15 @@ export class HousesController {
   @Post('/createHouse')
   @UseInterceptors(FilesInterceptor('images'))
   createHouse(
-    @UploadedFiles(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType: 'jpeg',
-        })
-        .build({
-          errorHttpStatusCode: 400,
-        }),
-    )
-    images: Array<Express.Multer.File>,
+    @UploadedFiles()
+    images: // new ParseFilePipeBuilder()
+    //   .addFileTypeValidator({
+    //     fileType: 'jpeg',
+    //   })
+    //   .build({
+    //     errorHttpStatusCode: 400,
+    //   }),
+    Array<Express.Multer.File>,
     @Body() createHouseDto: any,
   ) {
     const house = JSON.parse(createHouseDto.house);
@@ -58,11 +57,6 @@ export class HousesController {
   @Get(':id')
   async getHouse(@Param() params): Promise<IHouse> {
     return await this.houseService.getHouse(params.id);
-  }
-
-  @Get()
-  async getHousesWithoutBooking(): Promise<IHouse[]> {
-    return await this.houseService.getHousesWithoutBooking();
   }
 
   @Put(':id')
