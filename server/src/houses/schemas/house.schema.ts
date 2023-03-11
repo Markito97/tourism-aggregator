@@ -1,30 +1,25 @@
-import { Schema } from '@nestjs/mongoose';
-import { Prop, SchemaFactory } from '@nestjs/mongoose/dist';
-import { HydratedDocument } from 'mongoose';
+import { Schema } from "@nestjs/mongoose";
+import { Prop, SchemaFactory } from "@nestjs/mongoose/dist";
+import { HydratedDocument } from "mongoose";
 
 export type HouseDocument = HydratedDocument<House>;
-export type RaitingDocument = HydratedDocument<Raiting>
-// interface IRatinig {
-  // oneStars: Array<string>,
-  // twoStars:Array<string>,
-  // threeStars: Array<string>,
-  // fourStars: Array<string>,
-  // fiveStarts: Array<string>
-// }
-@Schema()
+export type RaitingDocument = HydratedDocument<Raiting>;
+
 export class Raiting {
   @Prop()
-  oneStars: Array<string>
+  oneStar: Array<string>;
   @Prop()
-  twoStars:Array<string>
+  twoStar: Array<string>;
   @Prop()
-  threeStars: Array<string>
+  threeStar: Array<string>;
   @Prop()
-  fourStars: Array<string>
+  fourStar: Array<string>;
   @Prop()
-  fiveStarts: Array<string>
+  fiveStar: Array<string>;
 }
-export const RaitingSchema = SchemaFactory.createForClass(Raiting)
+
+export const RaitingSchema = SchemaFactory.createForClass(Raiting);
+
 @Schema()
 export class House {
   @Prop()
@@ -46,7 +41,7 @@ export class House {
   @Prop()
   image: Array<string>;
   @Prop()
-  raiting: Raiting;
+  rating: Raiting;
 }
 // const rating = {
   // oneStars: [],

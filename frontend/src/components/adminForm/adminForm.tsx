@@ -59,7 +59,14 @@ export const AdminForm = () => {
       fiveStarts: [],
     }
     setFilesError(false);
-    houses.createHouse(files, {...house, rating});
+    const rating = {
+      oneStar: [],
+      twoStar: [],
+      threeStar: [],
+      fourStar: [],
+      fiveStart: [],
+    };
+    houses.createHouse(files, { ...house, rating });
   };
   // rating:{
     // one: [...],
