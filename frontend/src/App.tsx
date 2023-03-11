@@ -9,7 +9,6 @@ const OtherComponent = lazy(() => {
 });
 
 const App = () => {
-  const [test, setTest] = useState();
   const serviceWrapper = useMemo(() => {
     return { houses: new HousesService() };
   }, []);

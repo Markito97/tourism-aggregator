@@ -52,7 +52,14 @@ export const AdminForm = () => {
       throw new Error('The field cannot be empty');
     }
     setFilesError(false);
-    houses.createHouse(files, house);
+    const rating = {
+      oneStar: [],
+      twoStar: [],
+      threeStar: [],
+      fourStar: [],
+      fiveStart: [],
+    };
+    houses.createHouse(files, { ...house, rating });
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
