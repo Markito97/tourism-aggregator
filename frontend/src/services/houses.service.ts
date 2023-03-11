@@ -3,14 +3,17 @@ import { CreateHouseDto } from '../dto/house.dto';
 
 export interface IHouse {
   _id: string;
-  name: string;
-  description: string;
+  houseName: string;
   location: string;
   price: string;
   image: Array<string>;
-  checkin: number;
-  checkout: number;
-  testField: number;
+  checkIn?: number | null;
+  checkOut?: number | null;
+  adress: string;
+  lake: string;
+  persons?: string | undefined;
+  geoData?: string | undefined;
+
 }
 
 export class HousesService {

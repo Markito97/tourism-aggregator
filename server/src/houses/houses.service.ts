@@ -7,11 +7,14 @@ import { CreateHouseDto } from './schemas/create-house.dto';
 interface IHouse {
   price: string;
   name: string;
-  description: string;
   location: string;
   checkIn?: number | null;
   checkOut?: number | null;
   image: Array<string>;
+  adress: string;
+  lake: string;
+  persons?: string | undefined;
+  geoData?: string | undefined;
 }
 
 @Injectable()

@@ -11,10 +11,9 @@ export const House = () => {
   const [house, setHouse] = useState<IHouse>();
 
   useEffect(() => {
-    console.log(123);
     const fetchHouse = async () => {
       const data = await houses.getHouse(id);
-      console.log(data);
+      console.log('dataFromHouseSerivce', data);
 
       if (!data) return;
       setHouse(data);
