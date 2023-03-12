@@ -1,28 +1,28 @@
 import { makeAutoObservable } from 'mobx';
-import { CreateHouseDto } from '../dto/house.dto';
-
-export interface IHouse {
-  _id: string;
-  name: string;
-  description: string;
-  location: string;
-  price: string;
-  image: Array<string>;
-  checkin: number;
-  checkout: number;
-  testField: number;
-}
+import { CreateHouseDto, IHouse } from '../dto/house.dto';
 
 export class HousesService {
   houses: IHouse[] = [];
+  withOutBooking: IHouse[] = [];
 
   constructor() {
     this.houses = [];
     makeAutoObservable(this);
   }
 
-  getFreeHouses = async () => {
+  getFreeHouses = async (dateRange: any) => {
     try {
+      const response = await fetch('http://localhost:3001/houses/test', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dateRange),
+      });
+      const data = await response.json();
+      console.log(data);
+
+      this.withOutBooking = data;
     } catch (error: any) {
       throw new Error(error);
     }
@@ -30,7 +30,7 @@ export class HousesService {
 
   getHouses = async (): Promise<void> => {
     try {
-      const response = await fetch('http://localhost:3001/houses/all');
+      const response = await fetch('http://localhost:3001/houses');
       const data = await response.json();
       this.houses = data;
     } catch (error: any) {
@@ -50,13 +50,12 @@ export class HousesService {
 
   createHouse = async (images: Array<File>, house: any) => {
     try {
-      if (!images) throw new Error('Is empty');
       const formData = new FormData();
       images.forEach((img) => {
         formData.append('images', img);
       });
       formData.append('house', JSON.stringify({ ...house }));
-      const response = await fetch('http://localhost:3001/houses/createHouse', {
+      const response = await fetch('http://localhost:3001/houses/', {
         method: 'POST',
         // mode: 'cors',
         // headers: {
@@ -65,7 +64,6 @@ export class HousesService {
         // },
         body: formData,
       });
-
       console.log(response.json());
     } catch (error: any) {
       throw new Error(error);
@@ -75,7 +73,7 @@ export class HousesService {
   bookingHouse = async (id: string, house: any) => {
     try {
       const response = await fetch(`http://localhost:3001/houses/${id}`, {
-        method: 'PUT', //POST
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(house),
       });
@@ -86,5 +84,9 @@ export class HousesService {
 
   get allHouses(): Array<IHouse> {
     return this.houses;
+  }
+
+  get freeHouses(): Array<IHouse> {
+    return this.withOutBooking;
   }
 }

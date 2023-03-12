@@ -1,66 +1,63 @@
 import { useForm } from 'react-hook-form';
 import { ServiceContext } from '../../context/ServiceContext';
-import { useContext, useState } from 'react';
+import {
+  DragEventHandler,
+  Profiler,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { TextField } from '../../UI/TextField';
 import styles from './AdminForm.module.css';
+import { IRating } from 'src/dto/house.dto';
+import { DragForm } from './DragForm';
 
-export interface IHouse {
+export interface FormValues {
   houseName: string;
-  adress: string;
+  address: string;
   lake: string;
   price: string;
-  geoData: string | null;
-  persons: string | null;
-  checkin: string | null;
-  checkout: string | null;
+  persons?: string;
+  geoData?: string;
+  files: Array<File>;
 }
 
+const rating: IRating = {
+  oneStar: [],
+  twoStar: [],
+  threeStar: [],
+  fourStar: [],
+  fiveStar: [],
+};
+
 export const AdminForm = () => {
-  const { control, handleSubmit } = useForm<IHouse>({
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    setError,
+    formState: { errors, defaultValues },
+  } = useForm<FormValues>({
     defaultValues: {
       houseName: '',
-      adress: '',
+      address: '',
       lake: '',
       price: '',
       persons: '',
       geoData: '',
-      checkin: '',
-      checkout: '',
+      files: [],
     },
   });
   const { houses } = useContext(ServiceContext);
-  const [files, setFiles] = useState<Array<File>>([]);
-  const [filesError, setFilesError] = useState(false);
 
-  const dragStartHandler = (e: DragEvent): void => {
-    e.preventDefault();
+  const handleFiles = (files: Array<File>) => {
+    setValue('files', files);
   };
 
-  const dragLeaveHandler = (e: DragEvent): void => {
-    e.preventDefault();
+  const onSubmit = (house: FormValues) => {
+    console.log(house);
   };
 
-  const onDropHandler = (e: any): void => {
-    e.preventDefault();
-    const f = [...e.dataTransfer.files];
-    setFiles([...f]);
-  };
-
-  const onSubmit = (house: any) => {
-    if (!files.length) {
-      setFilesError(true);
-      throw new Error('The field cannot be empty');
-    }
-    setFilesError(false);
-    const rating = {
-      oneStar: [],
-      twoStar: [],
-      threeStar: [],
-      fourStar: [],
-      fiveStart: [],
-    };
-    houses.createHouse(files, { ...house, rating });
-  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.container}>
@@ -73,7 +70,7 @@ export const AdminForm = () => {
           <TextField
             control={control}
             rules={{ required: true }}
-            name="adress"
+            name="address"
           />
           <TextField control={control} rules={{ required: true }} name="lake" />
           <TextField
@@ -86,21 +83,12 @@ export const AdminForm = () => {
         <div className={styles.rightFields}>
           <TextField control={control} name="geoData" />
           <TextField control={control} name="persons" />
-          <label className={styles.textLable}>IMAGES</label>
-          <div className={styles.dragContainer}>
-            <div
-              className={styles.drag}
-              onDragStart={(e) => dragStartHandler(e)}
-              onDragOver={(e) => dragStartHandler(e)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
-              onDrop={(e) => onDropHandler(e)}
-            >
-              Drop
-            </div>
-          </div>
-          <p style={{ color: 'red' }}>
-            {filesError && 'This field is required'}
-          </p>
+          <DragForm
+            control={control}
+            name="files"
+            onFiles={handleFiles}
+            rules={{ required: true }}
+          />
           <input type="submit" />
         </div>
       </div>

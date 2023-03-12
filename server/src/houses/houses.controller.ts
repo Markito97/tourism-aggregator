@@ -6,6 +6,7 @@ import {
   UploadedFiles,
   UseInterceptors,
   Req,
+  Res,
 } from "@nestjs/common/decorators";
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { InjectModel } from "@nestjs/mongoose";
@@ -14,12 +15,32 @@ import { Model } from "mongoose";
 import { FilesService } from "src/files/files.service";
 import { HouseService } from "./houses.service";
 
-interface IHouse {
+interface IBooking {
+  CHECK_IN: number;
+  CHECK_OUT: number;
+}
+
+interface IRating {
+  oneStar: Array<string>;
+  twoStar: Array<string>;
+  threeStar: Array<string>;
+  fourStar: Array<string>;
+  fiveStar: Array<string>;
+}
+
+export interface IHouse {
+  [x: string]: any;
+  checkOut: number | null;
+  checkIn: number | null;
+  houseName: string;
+  address: string;
+  lake: string;
   price: string;
-  name: string;
-  description: string;
-  location: string;
+  persons: string;
+  geoData: string;
   image: Array<string>;
+  rating: IRating;
+  booking: Array<IBooking>;
 }
 
 @Controller("houses")
@@ -30,7 +51,22 @@ export class HousesController {
     private houseService: HouseService
   ) {}
 
-  @Post("/createHouse")
+  @Post("test")
+  async bookingQuery(@Body() date: IBooking, @Res() res: any) {
+    const houses = await this.houseService.getHouses();
+    const withoutBooking = houses.filter((house) => !house.booking.length);
+    const withBooking = houses.filter((house) => house.booking.length);
+    const withinTheRange = withBooking.filter((house) =>
+      house.booking.every(
+        (range) =>
+          (date.CHECK_IN < range.CHECK_IN && date.CHECK_OUT < range.CHECK_IN) ||
+          (date.CHECK_IN > range.CHECK_OUT && date.CHECK_OUT > range.CHECK_OUT)
+      )
+    );
+    return res.json(withoutBooking.concat(withinTheRange));
+  }
+
+  @Post()
   @UseInterceptors(FilesInterceptor("images"))
   createHouse(
     @UploadedFiles()
@@ -45,13 +81,11 @@ export class HousesController {
     @Body() createHouseDto: any
   ) {
     const house = JSON.parse(createHouseDto.house);
-    console.log(house);
-
     const imagesPaths = this.filesService.createFile(images);
     return this.houseService.createHouse(imagesPaths, house);
   }
 
-  @Get("/all")
+  @Get()
   async getHouses(): Promise<IHouse[]> {
     return await this.houseService.getHouses();
   }

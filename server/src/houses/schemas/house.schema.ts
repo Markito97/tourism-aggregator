@@ -3,9 +3,17 @@ import { Prop, SchemaFactory } from "@nestjs/mongoose/dist";
 import { HydratedDocument } from "mongoose";
 
 export type HouseDocument = HydratedDocument<House>;
-export type RaitingDocument = HydratedDocument<Raiting>;
+export type RatingDocument = HydratedDocument<Rating>;
+export type BookingDocument = HydratedDocument<Booking>;
 
-export class Raiting {
+export class Booking {
+  @Prop()
+  checkIn: number | null;
+  @Prop()
+  checkOut: number | null;
+}
+
+export class Rating {
   @Prop()
   oneStar: Array<string>;
   @Prop()
@@ -18,14 +26,14 @@ export class Raiting {
   fiveStar: Array<string>;
 }
 
-export const RaitingSchema = SchemaFactory.createForClass(Raiting);
+export const RaitingSchema = SchemaFactory.createForClass(Rating);
 
 @Schema()
 export class House {
   @Prop()
   houseName: string;
   @Prop()
-  adress: string;
+  address: string;
   @Prop()
   lake: string;
   @Prop()
@@ -35,15 +43,11 @@ export class House {
   @Prop()
   geoData: string;
   @Prop()
-  description: string;
-  @Prop()
-  checkIn: number | null;
-  @Prop()
-  checkOut: number | null;
+  booking: [Booking];
   @Prop()
   image: Array<string>;
   @Prop()
-  rating: Raiting;
+  rating: Rating;
 }
 
 export const HouseSchema = SchemaFactory.createForClass(House);

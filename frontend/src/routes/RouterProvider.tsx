@@ -12,7 +12,6 @@ const Home = lazy(() => import('../pages/Home'));
 const InfoPage = lazy(() => import('../pages/InfoPage'));
 const HousesList = lazy(() => import('../pages/HousesList'));
 const ActivitiesList = lazy(() => import('../pages/ActivitiesList'));
-
 const router = createBrowserRouter([
   {
     path: '/',
