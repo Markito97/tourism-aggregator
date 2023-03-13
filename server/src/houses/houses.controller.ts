@@ -80,6 +80,7 @@ export class HousesController {
     Array<Express.Multer.File>,
     @Body() createHouseDto: any
   ) {
+    console.log(createHouseDto)
     const house = JSON.parse(createHouseDto.house);
     const imagesPaths = this.filesService.createFile(images);
     return this.houseService.createHouse(imagesPaths, house);

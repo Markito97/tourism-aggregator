@@ -49,5 +49,12 @@ export class House {
   @Prop()
   rating: Rating;
 }
+// const rating = {
+  // oneStars: [],
+  // twoStars: [],
+  // threeStars: [],
+  // fourStars: [],
+  // fiveStarts: [],
+// }
 
 export const HouseSchema = SchemaFactory.createForClass(House);
