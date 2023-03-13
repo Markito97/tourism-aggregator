@@ -6,7 +6,7 @@ import {
   PickedDateUnitsDispatchContext,
 } from '../context/DateContext';
 
-const useDatePick = (): [PickedDateUnits, PickedDateUnitsDispatch] => {
+export const useDatePick = (): [PickedDateUnits, PickedDateUnitsDispatch] => {
   const pickedDateUnits = useContext(PickedDateUnitsContext);
   const setPickedDateUnits = useContext(PickedDateUnitsDispatchContext);
 
@@ -16,4 +16,4 @@ const useDatePick = (): [PickedDateUnits, PickedDateUnitsDispatch] => {
   return [pickedDateUnits, setPickedDateUnits];
 };
 
-export default useDatePick;
+export type DatePick = ReturnType<typeof useDatePick>;

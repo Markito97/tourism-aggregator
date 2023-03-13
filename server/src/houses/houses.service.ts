@@ -1,26 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { House, HouseDocument } from './schemas/house.schema';
-import { Model } from 'mongoose';
-import { CreateHouseDto } from './schemas/create-house.dto';
-
-interface IHouse {
-  price: string;
-  name: string;
-  location: string;
-  checkIn?: number | null;
-  checkOut?: number | null;
-  image: Array<string>;
-  adress: string;
-  lake: string;
-  persons?: string | undefined;
-  geoData?: string | undefined;
-}
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { House, HouseDocument } from "./schemas/house.schema";
+import { Model } from "mongoose";
+import { CreateHouseDto } from "./schemas/create-house.dto";
+import { IHouse } from "./houses.controller";
 
 @Injectable()
 export class HouseService {
   constructor(
-    @InjectModel(House.name) private houseModel: Model<HouseDocument>,
+    @InjectModel(House.name) private houseModel: Model<HouseDocument>
   ) {}
 
   async createHouse(images: Array<string>, house: CreateHouseDto) {

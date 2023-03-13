@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useContext } from 'react';
-import useDatePick from './useDatePick';
+import { useDatePick } from './useDatePick';
 import { dateUnitToDateObj, isEqualDate } from '../utils/dateHelpers/index';
 import { FieldsContext } from '../context/DateContext';
 

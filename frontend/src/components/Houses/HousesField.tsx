@@ -15,9 +15,13 @@ export const HousesField = observer((): JSX.Element | null => {
   if (!houses.allHouses) return null;
   return (
     <div className={styles.content}>
-      {houses.allHouses.map((card: { image: any }, index: any) => {
-        return <HouseFieldUnit key={card._id} card={card} />;
-      })}
+      {!houses.freeHouses.length
+        ? houses.allHouses.map((card: { image: any }, index: any) => (
+            <HouseFieldUnit key={card._id} card={card} />
+          ))
+        : houses.freeHouses.map((card: { image: any }, index: any) => (
+            <HouseFieldUnit key={card._id} card={card} />
+          ))}
     </div>
   );
 });

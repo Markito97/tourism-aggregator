@@ -3,8 +3,6 @@ import styles from './HousesFieldUnit.module.css';
 import { toJS } from 'mobx';
 
 export const HouseFieldUnit = ({ card }: any): JSX.Element => {
-  console.log(toJS(card));
-
   return (
     <div className={styles.card}>
       <img

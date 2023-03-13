@@ -68,15 +68,6 @@ $tn-placeholder: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms, transform 200ms cub
     outline: 1px solid $clo-blue
     border-radius: 3px
 
-.placeholder__active
-    @include field__placeholder($status: active )
-
-.placeholder__inactive
-    @include field__placeholder($status: inactive )
-
-.placeholder__with
-    @include field__placeholder($status: with )
-
 .textFieldLable
     position: absolute
     text-transform: capitalize
@@ -85,8 +76,7 @@ $tn-placeholder: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms, transform 200ms cub
 .error
     position: absolute
     left: 5px
-    top: 60px
     color: red
-    font-size: 18px
-    bottom: -20px
+    font-size: 16px
+    bottom: -21px
     user-select: none
