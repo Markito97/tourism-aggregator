@@ -26,7 +26,7 @@ export const House = () => {
       <h1 className={styles.houseUnitTitle}>{house.houseName}</h1>
       <div className={styles.houseUnitHeader}>
         <div className={styles.imageContainer}>
-          {/* <img src={`http://localhost:3001/${house?.image[0]}`} alt="" /> */}
+          <img src={`http://localhost:3001/${house?.image[0]}`} alt="" />
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
