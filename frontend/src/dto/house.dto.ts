@@ -22,6 +22,7 @@ export interface IHouse {
   booking: Array<IBooking>;
   checkout: number | null;
   image: Array<string>;
+  files: Array<File>;
   rating: IRating;
 }
 

@@ -1,34 +1,32 @@
 .drag__container
     width: 100%
     height: 171.26px
-    border: 1px solid black
     display: flex
     justify-content: center
     align-items: center
+    border: 1px solid black
+    padding: 15px
 
 .drag__error
     color: red
     font-size: 16px
 
-.image__unit
-    width: 150px
-    height: 150px
-    position: relative
-
-.image
+.drag
+    display: flex
+    justify-content: center
+    flex-direction: column
+    align-items: center
     width: 100%
     height: 100%
+    border: 1px solid black
 
-.image__unit__remove
-    position: absolute
-    background: black
+.drop
     display: flex
-    align-items: center
     justify-content: center
-    top: 0px
-    right: 0px
-    margin: 5px
-    height: 25px
-    opacity: 0.75
-    width: 32px
-    border-radius: 5px
+    flex-direction: column
+    align-items: center
+    width: 100%
+    height: 100%
+    border: 1px
+    border-color: black
+    border-style: dashed solid

@@ -15,6 +15,7 @@
 }
 
 .rightFields {
+  max-width: 500px;
   min-width: 500px;
   display: flex;
   flex-direction: column;

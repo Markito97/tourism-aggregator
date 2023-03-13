@@ -1,12 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { ServiceContext } from '../../context/ServiceContext';
-import {
-  DragEventHandler,
-  Profiler,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { DragEventHandler, Profiler, useContext, useEffect, useState } from 'react';
 import { TextField } from '../../UI/TextField';
 import styles from './AdminForm.module.css';
 import { IRating } from 'src/dto/house.dto';
@@ -31,13 +25,7 @@ const rating: IRating = {
 };
 
 export const AdminForm = () => {
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    setError,
-    formState: { errors, defaultValues },
-  } = useForm<FormValues>({
+  const { control, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: {
       houseName: '',
       address: '',
@@ -54,31 +42,18 @@ export const AdminForm = () => {
     setValue('files', files);
   };
 
-  const onSubmit = (house: FormValues) => {
-    console.log(house);
+  const onSubmit = (house: FormValues): void => {
+    houses.createHouse({ ...house, rating });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.container}>
         <div className={styles.requiredFields}>
-          <TextField
-            control={control}
-            rules={{ required: true }}
-            name="houseName"
-          />
-          <TextField
-            control={control}
-            rules={{ required: true }}
-            name="address"
-          />
+          <TextField control={control} rules={{ required: true }} name="houseName" />
+          <TextField control={control} rules={{ required: true }} name="address" />
           <TextField control={control} rules={{ required: true }} name="lake" />
-          <TextField
-            control={control}
-            rules={{ required: true }}
-            type="number"
-            name="price"
-          />
+          <TextField control={control} rules={{ required: true }} type="number" name="price" />
         </div>
         <div className={styles.rightFields}>
           <TextField control={control} name="geoData" />

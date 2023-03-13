@@ -48,10 +48,10 @@ export class HousesService {
     }
   };
 
-  createHouse = async (images: Array<File>, house: any) => {
+  createHouse = async (house: IHouse) => {
     try {
       const formData = new FormData();
-      images.forEach((img) => {
+      house.files.forEach((img) => {
         formData.append('images', img);
       });
       formData.append('house', JSON.stringify({ ...house }));
