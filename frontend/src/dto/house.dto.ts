@@ -17,12 +17,12 @@ export interface IHouse {
   address: string;
   lake: string;
   price: string;
-  persons: string;
-  geoData: string;
+  persons: string | undefined;
+  geoData: string | undefined;
   booking: Array<IBooking>;
   checkout: number | null;
   image: Array<string>;
-  files: Array<File>;
+  files: Array<File> | undefined;
   rating: IRating;
 }
 

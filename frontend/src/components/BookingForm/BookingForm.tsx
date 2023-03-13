@@ -8,6 +8,7 @@ import { FieldsContext } from '../SearchPanel/SearchPanel';
 import { ServiceContext } from '../../context/ServiceContext';
 import { useDatePicker } from '../../hooks/useDatePicker';
 
+// TODO: Сделать нормальую форму для бронирования
 export const BookinForm = () => {
   const { refs, datePicker, handlers } = useDatePicker();
   const [house, setHouse] = useState<any>();
@@ -24,7 +25,6 @@ export const BookinForm = () => {
   useEffect(() => {
     const fetchHouse = async () => {
       const data = await houses.getHouse(id);
-
       if (!data) return;
       setHouse(data);
     };
@@ -39,11 +39,7 @@ export const BookinForm = () => {
       Number(MONTH_START - 1),
       Number(DAY_START),
     ).getTime();
-    const CHECK_OUT = new Date(
-      Number(YEAR_END),
-      Number(MONTH_END - 1),
-      Number(DAY_END),
-    ).getTime();
+    const CHECK_OUT = new Date(Number(YEAR_END), Number(MONTH_END - 1), Number(DAY_END)).getTime();
     houses.bookingHouse(id, {
       ...house,
       booking: [...house.booking, { CHECK_IN, CHECK_OUT }],

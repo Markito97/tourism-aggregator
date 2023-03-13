@@ -1,12 +1,6 @@
 export const Trash = (props: any) => {
   return (
-    <svg
-      onClick={props.onClick}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-    >
+    <svg onClick={props.onClick} width="16" height="16" viewBox="0 0 16 16">
       <path
         d="M7 6.5C7 6.22386 6.77614 6 6.5 6C6.22386 6 6 6.22386 6 6.5V10.5C6 10.7761 6.22386 11 6.5 11C6.77614 11 7 10.7761 7 10.5V6.5Z"
         fill="white"

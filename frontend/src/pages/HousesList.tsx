@@ -1,12 +1,12 @@
-import { AdminForm } from '../components/AdminForm/AdminForm';
+import { AdminForm } from '../components/AdminForm/adminForm';
+import { List } from '../components/List/List';
+// import * as css from './HousesList.sass';
 
-const HousesList = () => {
-  //   return <AdminForm />;
+export const HousesList = () => {
   return (
     <>
-      <AdminForm />
+      <List />
+      {/* <AdminForm /> */}
     </>
   );
 };
-
-export default HousesList;

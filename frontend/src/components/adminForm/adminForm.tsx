@@ -4,7 +4,7 @@ import { DragEventHandler, Profiler, useContext, useEffect, useState } from 'rea
 import { TextField } from '../../UI/TextField';
 import styles from './AdminForm.module.css';
 import { IRating } from 'src/dto/house.dto';
-import { DragForm } from './DragForm';
+import { DragForm } from '../../components/AdminForm/DragForm';
 
 export interface FormValues {
   houseName: string;

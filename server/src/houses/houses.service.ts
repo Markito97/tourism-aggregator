@@ -7,9 +7,7 @@ import { IHouse } from "./houses.controller";
 
 @Injectable()
 export class HouseService {
-  constructor(
-    @InjectModel(House.name) private houseModel: Model<HouseDocument>
-  ) {}
+  constructor(@InjectModel(House.name) private houseModel: Model<HouseDocument>) {}
 
   async createHouse(images: Array<string>, house: CreateHouseDto) {
     return await this.houseModel.create({ ...house, image: images });
@@ -25,5 +23,9 @@ export class HouseService {
 
   async bookingHouse(id: string, updateHouseDto: any) {
     return await this.houseModel.findByIdAndUpdate(id, updateHouseDto);
+  }
+
+  async removeHouse(id: string) {
+    return await this.houseModel.findByIdAndDelete(id);
   }
 }

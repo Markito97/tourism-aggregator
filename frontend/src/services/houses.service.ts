@@ -28,11 +28,12 @@ export class HousesService {
     }
   };
 
-  getHouses = async (): Promise<void> => {
+  getHouses = async (): Promise<IHouse[]> => {
     try {
       const response = await fetch('http://localhost:3001/houses');
       const data = await response.json();
       this.houses = data;
+      return data;
     } catch (error: any) {
       throw new Error(error);
     }
@@ -51,7 +52,7 @@ export class HousesService {
   createHouse = async (house: IHouse) => {
     try {
       const formData = new FormData();
-      house.files.forEach((img) => {
+      house.files?.forEach((img) => {
         formData.append('images', img);
       });
       formData.append('house', JSON.stringify({ ...house }));
@@ -72,11 +73,23 @@ export class HousesService {
 
   bookingHouse = async (id: string, house: any) => {
     try {
-      const response = await fetch(`http://localhost:3001/houses/${id}`, {
+      return await fetch(`http://localhost:3001/houses/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(house),
       });
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
+
+  removeHouse = async (id: string): Promise<IHouse> => {
+    try {
+      this.houses = this.houses.filter((house) => house._id !== id);
+      const response = await fetch(`http://localhost:3001/houses/${id}`, {
+        method: 'DELETE',
+      });
+      return await response.json();
     } catch (error: any) {
       throw new Error(error);
     }
