@@ -29,7 +29,6 @@ export const DragForm = ({ ...props }: UseControllerProps<FormValues> | any): JS
 
   return (
     <div style={{ margin: '5px' }}>
-      <label htmlFor="">Images</label>
       <div className={css.drag__container}>
         <ImagesPreview images={previewImages} onRemove={hanldeRemoveFile} />
         {!isDrag ? (
@@ -40,7 +39,7 @@ export const DragForm = ({ ...props }: UseControllerProps<FormValues> | any): JS
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            Drag files here
+            Drag images here
           </div>
         ) : (
           <div

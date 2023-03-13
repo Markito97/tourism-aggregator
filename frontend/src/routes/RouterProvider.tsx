@@ -8,7 +8,7 @@ import { Layout } from '../components/Layout/Layout';
 import { BookinForm } from '../components/BookingForm/BookingForm';
 import { AdminLayout } from '../components/Layout/AdminLayout';
 import { HousesList } from '../pages/HousesList';
-import { AdminForm } from '../components/AdminForm/adminForm';
+import { AdminForm } from '../components/AdminForm/AdminForm';
 
 const Home = lazy(() => import('../pages/Home'));
 const InfoPage = lazy(() => import('../pages/InfoPage'));
