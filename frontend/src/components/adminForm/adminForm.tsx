@@ -51,13 +51,6 @@ export const AdminForm = () => {
       setFilesError(true);
       throw new Error('The field cannot be empty');
     }
-    const rating = {
-      oneStars: [],
-      twoStars: [],
-      threeStars: [],
-      fourStars: [],
-      fiveStarts: [],
-    }
     setFilesError(false);
     const rating = {
       oneStar: [],
@@ -68,13 +61,6 @@ export const AdminForm = () => {
     };
     houses.createHouse(files, { ...house, rating });
   };
-  // rating:{
-    // one: [...],
-    // two: [...],
-    // three: [...],
-    // four: [...],
-    // five: [...],
-//}
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.container}>

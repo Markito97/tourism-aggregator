@@ -44,7 +44,6 @@ export class HousesController {
     Array<Express.Multer.File>,
     @Body() createHouseDto: any
   ) {
-    console.log(createHouseDto)
     const house = JSON.parse(createHouseDto.house);
     console.log(house);
 
@@ -53,12 +52,12 @@ export class HousesController {
   }
 
   @Get("/all")
-  async getHouses(): Promise<IHouse[]> {
+  async getHouses(): Promise<any> {
     return await this.houseService.getHouses();
   }
 
   @Get(":id")
-  async getHouse(@Param() params): Promise<IHouse> {
+  async getHouse(@Param() params): Promise<any> {
     return await this.houseService.getHouse(params.id);
   }
 
