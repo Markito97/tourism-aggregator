@@ -3,8 +3,9 @@ import { DatePicker } from '../DatePicker/DatePicker';
 import * as css from './SearchPanel.sass';
 import { TextField } from '../../UI/TextField';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useDatePicker } from '../../hooks/useDatePicker';
+import { ServiceContext } from '../../context/ServiceContext';
 
 export interface SearchPanelForm {
   lake: string;
@@ -13,6 +14,7 @@ export interface SearchPanelForm {
 }
 
 export const SearchPanel = (): JSX.Element => {
+  const { houses } = useContext(ServiceContext);
   const { refs, datePicker, handlers } = useDatePicker();
   const { handleSubmit, control, setValue } = useForm<SearchPanelForm>({
     defaultValues: {
@@ -35,12 +37,28 @@ export const SearchPanel = (): JSX.Element => {
     }
   }, [datePicker.checkout]);
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    const [DAY_START, MONTH_START, YEAR_START] = data.checkIn.split('/');
+    const [DAY_END, MONTH_END, YEAR_END] = data.checkOut.split('/');
+    const CHECK_IN = new Date(
+      Number(YEAR_START),
+      Number(MONTH_START - 1),
+      Number(DAY_START),
+    ).getTime();
+    const CHECK_OUT = new Date(
+      Number(YEAR_END),
+      Number(MONTH_END - 1),
+      Number(DAY_END),
+    ).getTime();
+    // console.log(CHECK_IN);
+    // console.log(CHECK_OUT);
+    houses.getFreeHouses({ CHECK_IN, CHECK_OUT });
+  };
 
   return (
     <div className={css.container}>
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <TextField control={control} name="lake" rules={{ required: true }} />
+        {/* <TextField control={control} name="lake" rules={{ required: true }} /> */}
         <TextField
           control={control}
           name="checkIn"

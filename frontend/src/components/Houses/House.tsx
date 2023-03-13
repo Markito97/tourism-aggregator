@@ -11,11 +11,9 @@ export const House = () => {
   const [house, setHouse] = useState<IHouse>();
 
   useEffect(() => {
-    console.log(123);
     const fetchHouse = async () => {
       const data = await houses.getHouse(id);
       console.log(data);
-
       if (!data) return;
       setHouse(data);
     };
@@ -25,10 +23,10 @@ export const House = () => {
   if (!house) return <p>aboba</p>;
   return (
     <div className={styles.houseUnit}>
-      <h1 className={styles.houseUnitTitle}>{house.name}</h1>
+      <h1 className={styles.houseUnitTitle}>{house.houseName}</h1>
       <div className={styles.houseUnitHeader}>
         <div className={styles.imageContainer}>
-          <img src={`http://localhost:3001/${house.image[0]}`} alt="" />
+          {/* <img src={`http://localhost:3001/${house?.image[0]}`} alt="" /> */}
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>

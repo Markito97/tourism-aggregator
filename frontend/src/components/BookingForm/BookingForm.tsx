@@ -10,7 +10,7 @@ import { useDatePicker } from '../../hooks/useDatePicker';
 
 export const BookinForm = () => {
   const { refs, datePicker, handlers } = useDatePicker();
-  const [house, setHouse] = useState({});
+  const [house, setHouse] = useState<any>();
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
   const { handleSubmit, control, setValue } = useForm({
@@ -44,11 +44,9 @@ export const BookinForm = () => {
       Number(MONTH_END - 1),
       Number(DAY_END),
     ).getTime();
-
     houses.bookingHouse(id, {
       ...house,
-      checkIn: CHECK_IN,
-      checkOut: CHECK_OUT,
+      booking: [...house.booking, { CHECK_IN, CHECK_OUT }],
     });
   };
 
