@@ -30,7 +30,7 @@ export const House = () => {
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
-         <Ratinig/>
+         <Ratinig house = {house}/>
           <button type="button" className={styles.unitBooking}>
             <Link to={`/booking/${id}`}>booking</Link>
           </button>
