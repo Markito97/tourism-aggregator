@@ -12,6 +12,7 @@ export interface IRating {
 }
 
 export interface IHouse {
+  house: any;
   _id: string;
   houseName: string;
   address: string;
@@ -32,8 +33,8 @@ export class CreateHouseDto {
   address: string;
   lake: string;
   price: string;
-  persons: string | null;
-  geoData: string | null;
+  persons: string | undefined;
+  geoData: string | undefined;
   booking: Array<IBooking>;
   image: Array<string>;
   rating: IRating;

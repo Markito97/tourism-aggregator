@@ -9,6 +9,8 @@ import { BookinForm } from '../components/BookingForm/BookingForm';
 import { AdminLayout } from '../components/Layout/AdminLayout';
 import { HousesList } from '../pages/HousesList';
 import { AdminForm } from '../components/AdminForm/AdminForm';
+import { EditHousePage } from '../pages/EditHousePage';
+import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
 
 const Home = lazy(() => import('../pages/Home'));
 const InfoPage = lazy(() => import('../pages/InfoPage'));
@@ -56,12 +58,20 @@ const router = createBrowserRouter([
         path: 'houseslist/*',
         element: <HousesLayout />,
         children: [
-          { index: true, element: <HousesList /> },
+          {
+            index: true,
+            element: <HousesList />,
+          },
+
           { path: 'create', element: <AdminForm /> },
         ],
       },
       { path: 'activitieslist', element: <ActivitiesList /> },
-      // { path: 'test', element: <HouseFormPage /> },
+      {
+        path: 'edit/:id',
+        element: <EditHousePage />,
+        errorElement: <ErrorBoundary />,
+      },
     ],
   },
 ]);

@@ -13,7 +13,6 @@ export const House = () => {
   useEffect(() => {
     const fetchHouse = async () => {
       const data = await houses.getHouse(id);
-      console.log(data);
       if (!data) return;
       setHouse(data);
     };
@@ -36,10 +35,9 @@ export const House = () => {
         </div>
       </div>
       <div className={styles.unitDescription}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        Aspernaturrerum, quisquam neque dignissimos omnis, adipisci alias
-        accusamusveritatis unde quas quia voluptatibus ducimus in temporibus
-        cupiditate molestiae hic? Ab, praesentium?
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernaturrerum, quisquam neque
+        dignissimos omnis, adipisci alias accusamusveritatis unde quas quia voluptatibus ducimus in
+        temporibus cupiditate molestiae hic? Ab, praesentium?
       </div>
       <div className={styles.unitIncludes}>
         <h6 className={styles.unitIncludesTitle}>Include</h6>
