@@ -4,7 +4,7 @@ import { ServiceContext } from '../../context/ServiceContext';
 // import { IHouse } from '../../services/houses.service';
 import styles from './House.module.css';
 import { Link } from 'react-router-dom';
-
+import { Ratinig } from '../Rating/Rating';
 export const House = () => {
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
@@ -25,10 +25,11 @@ export const House = () => {
       <h1 className={styles.houseUnitTitle}>{house.houseName}</h1>
       <div className={styles.houseUnitHeader}>
         <div className={styles.imageContainer}>
-          {/* <img src={`http://localhost:3001/${house?.image[0]}`} alt="" /> */}
+          <img src={`http://localhost:3001/${house?.image[0]}`} alt="" />
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
+         <Ratinig house = {house}/>
           <button type="button" className={styles.unitBooking}>
             <Link to={`/booking/${id}`}>booking</Link>
           </button>
