@@ -7,6 +7,7 @@ import {
   UseInterceptors,
   Req,
   Res,
+  Delete,
 } from "@nestjs/common/decorators";
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { InjectModel } from "@nestjs/mongoose";
@@ -99,5 +100,10 @@ export class HousesController {
   @Put(":id")
   async bookingHouse(@Param("id") id: string, @Body() updateHouseDto: any) {
     return await this.houseService.bookingHouse(id, updateHouseDto);
+  }
+
+  @Delete(":id")
+  async removeHouse(@Param("id") id: string) {
+    return this.houseService.removeHouse(id);
   }
 }

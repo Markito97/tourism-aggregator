@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const ArrowNext = (): JSX.Element => {
   return (
     <svg
@@ -21,5 +19,5 @@ export const ArrowNext = (): JSX.Element => {
         fill="#9B9B9B"
       />
     </svg>
-  )
-}
+  );
+};

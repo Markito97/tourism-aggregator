@@ -1,17 +1,22 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
-import { Hotels } from '../pages/Hotels';
-import { About } from '../pages/About';
-import { Activities } from '../pages/Activities';
-import { House } from '../components/Houses/House';
-import { Layout } from '../components/Layout/Layout';
-import { BookinForm } from '../components/BookingForm/BookingForm';
-import { AdminLayout } from '../components/Layout/AdminLayout';
+import { House } from '../pages/App/House';
+import { Layout } from '../components/Layout/App/Layout';
+import { BookinForm } from '../components/Forms/BookingForm';
+import { AdminLayout } from '../components/Layout/Admin/AdminLayout';
+import { HousesList } from '../pages/Admin/HousesList';
+import { AdminForm } from '../components/Forms/CreateHouseFrom';
+import { EditHousePage } from '../pages/Admin/EditHousePage';
+import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
 
-const Home = lazy(() => import('../pages/Home'));
-const InfoPage = lazy(() => import('../pages/InfoPage'));
-const HousesList = lazy(() => import('../pages/HousesList'));
-const ActivitiesList = lazy(() => import('../pages/ActivitiesList'));
+const Home = lazy(() => import('../pages/App/Home'));
+const InfoPage = lazy(() => import('../pages/Admin/InfoPage'));
+const Houses = lazy(() => import('../pages/App/Houses'));
+
+const HousesLayout = () => {
+  return <Outlet />;
+};
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -22,22 +27,14 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'hotels',
-        element: <Hotels />,
+        path: 'houses',
+        element: <Houses />,
       },
       {
         path: 'hotels/:id',
         element: <House />,
       },
       { path: 'booking/:id', element: <BookinForm /> },
-      {
-        path: 'aboutus',
-        element: <About />,
-      },
-      {
-        path: 'activities',
-        element: <Activities />,
-      },
     ],
   },
   {
@@ -45,9 +42,23 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       { index: true, element: <InfoPage /> },
-      { path: 'houseslist', element: <HousesList /> },
-      { path: 'activitieslist', element: <ActivitiesList /> },
-      // { path: 'test', element: <HouseFormPage /> },
+      {
+        path: 'houseslist/*',
+        element: <HousesLayout />,
+        children: [
+          {
+            index: true,
+            element: <HousesList />,
+          },
+
+          { path: 'create', element: <AdminForm /> },
+        ],
+      },
+      {
+        path: 'edit/:id',
+        element: <EditHousePage />,
+        errorElement: <ErrorBoundary />,
+      },
     ],
   },
 ]);

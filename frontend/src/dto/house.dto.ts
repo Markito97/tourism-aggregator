@@ -17,12 +17,12 @@ export interface IHouse {
   address: string;
   lake: string;
   price: string;
-  persons: string;
-  geoData: string;
+  persons: string | undefined;
+  geoData: string | undefined;
   booking: Array<IBooking>;
   checkout: number | null;
   image: Array<string>;
-  files: Array<File>;
+  files: Array<File> | undefined;
   rating: IRating;
 }
 
@@ -32,8 +32,8 @@ export class CreateHouseDto {
   address: string;
   lake: string;
   price: string;
-  persons: string | null;
-  geoData: string | null;
+  persons: string | undefined;
+  geoData: string | undefined;
   booking: Array<IBooking>;
   image: Array<string>;
   rating: IRating;
@@ -48,5 +48,22 @@ export class CreateHouseDto {
     this.booking = house.booking;
     this.image = house.image;
     this.rating = house.rating;
+  }
+}
+
+export class HouseEdit {
+  houseName: string;
+  address: string;
+  lake: string;
+  price: string;
+  persons: string | undefined;
+  geoData: string | undefined;
+  constructor(house: IHouse) {
+    this.houseName = house.houseName;
+    this.address = house.address;
+    this.lake = house.lake;
+    this.price = house.price;
+    this.persons = house.persons;
+    this.geoData = house.geoData;
   }
 }
