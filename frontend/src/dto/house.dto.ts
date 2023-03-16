@@ -12,7 +12,6 @@ export interface IRating {
 }
 
 export interface IHouse {
-  house: any;
   _id: string;
   houseName: string;
   address: string;
@@ -49,5 +48,22 @@ export class CreateHouseDto {
     this.booking = house.booking;
     this.image = house.image;
     this.rating = house.rating;
+  }
+}
+
+export class HouseEdit {
+  houseName: string;
+  address: string;
+  lake: string;
+  price: string;
+  persons: string | undefined;
+  geoData: string | undefined;
+  constructor(house: IHouse) {
+    this.houseName = house.houseName;
+    this.address = house.address;
+    this.lake = house.lake;
+    this.price = house.price;
+    this.persons = house.persons;
+    this.geoData = house.geoData;
   }
 }

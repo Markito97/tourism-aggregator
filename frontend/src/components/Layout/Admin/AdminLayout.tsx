@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
-import { useToggle } from '../../hooks/useToggle';
+import { useToggle } from '../../../hooks/useToggle';
 
 export const AdminLayout = () => {
   const [isToggle, handleToggle] = useToggle();

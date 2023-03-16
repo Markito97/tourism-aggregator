@@ -1,5 +1,5 @@
 import { Lakes } from '@components/Lakes/Lakes';
-import { Titles } from '@components/Titles/Titles';
+import { Titles } from '../../components/Layout/App/Titles';
 
 export const ACTIVITIES_TITLES = {
   title: 'Lakes for Everyoune',

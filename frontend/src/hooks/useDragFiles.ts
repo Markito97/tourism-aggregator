@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function useDrag() {
+export function useDragFiles() {
   const [preloadFiles, setPreloadFiles] = useState<Array<File>>([]);
   const [isDrag, setIsDrag] = useState(false);
 

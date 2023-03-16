@@ -1,19 +1,14 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setIsActive } from '@utils/utility';
+import { BurgerMenu } from '../../../assets/icons/BurgerMenu';
+import useWindowDimensions from '../../../hooks/useWindowDimensions';
+import { Cross } from '../../../assets/icons/Cross';
 import styles from './Navbar.module.css';
-import { BurgerMenu } from '../../assets/icons/BurgerMenu';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { Cross } from '../../assets/icons/Cross';
 
 const navigationLinks = [
   { text: 'Home', path: '/' },
-  { text: 'Hotels', path: 'hotels' },
-  { text: 'Activities', path: 'activities' },
-  { text: 'About Us', path: 'aboutus' },
-  { text: 'Contacts', path: 'contacts' },
+  { text: 'Houses', path: 'houses' },
 ];
 
 export const Navbar = (): JSX.Element => {
@@ -57,6 +52,3 @@ export const Navbar = (): JSX.Element => {
     </nav>
   );
 };
-function useCotext(): { houses: any } {
-  throw new Error('Function not implemented.');
-}

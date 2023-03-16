@@ -3,10 +3,12 @@ import { CreateHouseDto, IHouse } from '../dto/house.dto';
 
 export class HousesService {
   houses: IHouse[] = [];
+  house = null;
   withOutBooking: IHouse[] = [];
 
   constructor() {
     this.houses = [];
+    this.house;
     makeAutoObservable(this);
   }
 
@@ -43,7 +45,9 @@ export class HousesService {
     try {
       const response = await fetch(`http://localhost:3001/houses/${id}`);
       const data = await response.json();
-      return new CreateHouseDto(data);
+      const deserialize = new CreateHouseDto(data);
+      this.house = { ...deserialize };
+      return { ...deserialize };
     } catch (error: any) {
       throw new Error(error);
     }
@@ -72,12 +76,18 @@ export class HousesService {
   };
 
   bookingHouse = async (id: string, house: any) => {
+    console.log(house);
+
     try {
-      return await fetch(`http://localhost:3001/houses/${id}`, {
+      const response = await fetch(`http://localhost:3001/houses/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(house),
       });
+      const data = await response.json();
+      const deserialize = new CreateHouseDto(data);
+      this.house = { ...deserialize };
+      return data;
     } catch (error: any) {
       throw new Error(error);
     }
@@ -94,6 +104,10 @@ export class HousesService {
       throw new Error(error);
     }
   };
+
+  get currentHouse() {
+    return this.house;
+  }
 
   get allHouses(): Array<IHouse> {
     return this.houses;

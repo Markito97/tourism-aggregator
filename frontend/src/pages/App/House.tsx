@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ServiceContext } from '../../context/ServiceContext';
-import { IHouse } from '../../services/houses.service';
+// import { IHouse } from '../../services/houses.service';
 import styles from './House.module.css';
 import { Link } from 'react-router-dom';
 
 export const House = () => {
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
-  const [house, setHouse] = useState<IHouse>();
+  const [house, setHouse] = useState();
 
   useEffect(() => {
     const fetchHouse = async () => {

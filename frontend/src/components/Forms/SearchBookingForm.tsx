@@ -1,11 +1,11 @@
 import { FieldsContext } from '../../context/DateContext';
 import { DatePicker } from '../DatePicker/DatePicker';
-import * as css from './SearchPanel.sass';
 import { TextField } from '../../UI/TextField';
 import { useForm } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
 import { useDatePicker } from '../../hooks/useDatePicker';
 import { ServiceContext } from '../../context/ServiceContext';
+import * as css from './SearchBookingForm.sass';
 
 export interface SearchPanelForm {
   lake: string;
@@ -45,11 +45,7 @@ export const SearchPanel = (): JSX.Element => {
       Number(MONTH_START - 1),
       Number(DAY_START),
     ).getTime();
-    const CHECK_OUT = new Date(
-      Number(YEAR_END),
-      Number(MONTH_END - 1),
-      Number(DAY_END),
-    ).getTime();
+    const CHECK_OUT = new Date(Number(YEAR_END), Number(MONTH_END - 1), Number(DAY_END)).getTime();
     // console.log(CHECK_IN);
     // console.log(CHECK_OUT);
     houses.getFreeHouses({ CHECK_IN, CHECK_OUT });

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { useEffect, useState, useContext } from 'react';
 import { DatePicker } from '../DatePicker/DatePicker';
-import { FieldsContext } from '../SearchPanel/SearchPanel';
+import { FieldsContext } from './SearchBookingForm';
 import { ServiceContext } from '../../context/ServiceContext';
 import { useDatePicker } from '../../hooks/useDatePicker';
 

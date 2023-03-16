@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { Footer } from '../Footer/Footer';
-import { Navbar } from '../Navbar/Navbar';
-import { HeaderTitle } from '../HeaderTitle/HeaderTitle';
+import { Footer } from './Footer';
+import { Navbar } from './Navbar';
+import { HeaderTitle } from './HeaderTitle';
 import styles from './Layout.module.css';
 
 export const Layout = (): JSX.Element => {

@@ -1,5 +1,5 @@
 import { UseControllerProps, useController } from 'react-hook-form';
-import { SearchPanelForm } from '../components/SearchPanel/SearchPanel';
+import { SearchPanelForm } from '../components/Forms/SearchBookingForm';
 import * as css from './TextField.sass';
 
 export const TextField = ({ ...props }: UseControllerProps<SearchPanelForm> | any): JSX.Element => {

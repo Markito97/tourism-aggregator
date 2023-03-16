@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
-import { FormValues } from './AdminForm';
 import { ImagesPreview } from './ImagesPreview';
-import * as css from './DragForm.sass';
-import { useDrag } from './useDrag';
 import { toBase64 } from '../../utils/files/toBase64';
+import { AdminFormValues } from './CreateHouseFrom';
+import { useDragFiles } from '../../hooks/useDragFiles';
+import * as css from './DragForm.sass';
 
-export const DragForm = ({ ...props }: UseControllerProps<FormValues> | any): JSX.Element => {
+export const DragForm = ({ ...props }: UseControllerProps<AdminFormValues> | any): JSX.Element => {
   const [previewImages, setPreviewImages] = useState<Array<string | ArrayBuffer | null>>([]);
   const { field, fieldState } = useController(props);
   const { isDrag, preloadFiles, handleDragStart, handleDragLeave, handleDrop, handleRemove } =
-    useDrag();
+    useDragFiles();
 
   const hanldeRemoveFile = (index: number) => {
     if (!preloadFiles) return;
@@ -30,7 +30,6 @@ export const DragForm = ({ ...props }: UseControllerProps<FormValues> | any): JS
   return (
     <div style={{ margin: '5px' }}>
       <div className={css.drag__container}>
-        <ImagesPreview images={previewImages} onRemove={hanldeRemoveFile} />
         {!isDrag ? (
           <div
             className={css.drag}
@@ -48,13 +47,14 @@ export const DragForm = ({ ...props }: UseControllerProps<FormValues> | any): JS
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            Drop files here
+            Drop images here
           </div>
         )}
       </div>
       <p className={css.drag__error}>
         {fieldState.error && (fieldState.error.message || 'This is required')}
       </p>
+      <ImagesPreview images={previewImages} onRemove={hanldeRemoveFile} />
     </div>
   );
 };

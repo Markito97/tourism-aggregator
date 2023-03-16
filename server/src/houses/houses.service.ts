@@ -22,7 +22,12 @@ export class HouseService {
   }
 
   async bookingHouse(id: string, updateHouseDto: any) {
-    return await this.houseModel.findByIdAndUpdate(id, updateHouseDto);
+    const house = await this.houseModel.findOneAndUpdate({ _id: id }, updateHouseDto, {
+      new: true,
+    });
+    console.log(house);
+
+    return house;
   }
 
   async removeHouse(id: string) {
