@@ -81,7 +81,7 @@ export class HousesController {
     Array<Express.Multer.File>,
     @Body() createHouseDto: any
   ) {
-    console.log(createHouseDto)
+    console.log(createHouseDto);
     const house = JSON.parse(createHouseDto.house);
     const imagesPaths = this.filesService.createFile(images);
     return this.houseService.createHouse(imagesPaths, house);
@@ -95,6 +95,11 @@ export class HousesController {
   @Get(":id")
   async getHouse(@Param() params): Promise<IHouse> {
     return await this.houseService.getHouse(params.id);
+  }
+
+  @Post(":id")
+  async check(@Param() id: string) {
+    console.log(id);
   }
 
   @Put(":id")

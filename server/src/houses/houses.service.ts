@@ -25,8 +25,6 @@ export class HouseService {
     const house = await this.houseModel.findOneAndUpdate({ _id: id }, updateHouseDto, {
       new: true,
     });
-    console.log(house);
-
     return house;
   }
 

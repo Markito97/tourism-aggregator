@@ -21,10 +21,7 @@ export function useDatePicker() {
 
   useEffect(() => {
     setIsClose(false);
-  }, [
-    pickedDateUnits.firstPickedDateUnit,
-    pickedDateUnits.secondPickedDateUnit,
-  ]);
+  }, [pickedDateUnits.firstPickedDateUnit, pickedDateUnits.secondPickedDateUnit]);
 
   const handleClose = () => {
     setIsCheckIn(false);
@@ -48,10 +45,7 @@ export function useDatePicker() {
   useEffect(() => {
     if (isFirstPicked) return;
     setCheckin(firstValue);
-    if (
-      pickedDateUnits.firstPickedDateUnit &&
-      pickedDateUnits.secondPickedDateUnit
-    ) {
+    if (pickedDateUnits.firstPickedDateUnit && pickedDateUnits.secondPickedDateUnit) {
       if (!isClose) {
         setIsCheckIn(false);
         setIsCheckOut(false);
@@ -63,24 +57,14 @@ export function useDatePicker() {
   useEffect(() => {
     if (isSecondPicked) return;
     setCheckout(secondValue);
-    if (
-      pickedDateUnits.firstPickedDateUnit &&
-      pickedDateUnits.secondPickedDateUnit
-    ) {
+    if (pickedDateUnits.firstPickedDateUnit && pickedDateUnits.secondPickedDateUnit) {
       setIsCheckIn(false);
       setIsCheckOut(false);
       setIsClose(true);
     }
   }, [pickedDateUnits.secondPickedDateUnit]);
 
-  useOutside(
-    handleClose,
-    pickerRef,
-    checkinRef,
-    checkoutRef,
-    isCheckIn,
-    isCheckOut,
-  );
+  useOutside(handleClose, pickerRef, checkinRef, checkoutRef, isCheckIn, isCheckOut);
 
   return {
     refs: {
@@ -96,6 +80,8 @@ export function useDatePicker() {
       isClose,
     },
     handlers: {
+      setCheckin,
+      setCheckout,
       setIsCheckIn,
       setIsCheckOut,
       setIsClose,

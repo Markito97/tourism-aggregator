@@ -1,27 +1,105 @@
-/* eslint-disable import/order */
-import { useContext, useEffect } from 'react';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import styles from './HousesFiled..module.css';
-import { ServiceContext } from '../../context/ServiceContext';
-import { HouseFieldUnit } from './HouseFieldUnit';
+import { Link } from 'react-router-dom';
 
-export const HousesField = observer((): JSX.Element | null => {
-  const { houses } = useContext(ServiceContext);
-
-  useEffect(() => {
-    houses.getHouses();
-  }, []);
-
-  if (!houses.allHouses) return null;
+export const HousesField = observer((props: any): JSX.Element | null => {
   return (
-    <div className={styles.content}>
-      {!houses.freeHouses.length
-        ? houses.allHouses.map((card: { image: any }, index: any) => (
-            <HouseFieldUnit key={card._id} card={card} />
-          ))
-        : houses.freeHouses.map((card: { image: any }, index: any) => (
-            <HouseFieldUnit key={card._id} card={card} />
-          ))}
-    </div>
+    <Box sx={{ flexGrow: 1, m: '15px', pt: '120px' }}>
+      <Grid
+        container
+        spacing={{
+          smallMobile: 16,
+          averageMobileL: 8,
+          tablet: 6,
+          laptop: 4,
+          desktop: 3,
+        }}
+        columns={{
+          smallMobile: 16,
+          averageMobileL: 8,
+          tablet: 6,
+          laptop: 4,
+          desktop: 3,
+        }}
+      >
+        {props.houses.map((house, index) => {
+          return (
+            <Grid
+              key={index}
+              item
+              smallMobile={16}
+              averageMobile={8}
+              tablet={3}
+              laptop={2}
+              desktop={1}
+            >
+              <Card
+                sx={{
+                  maxHeight: 350,
+                  minHeight: 350,
+                  margin: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <CardMedia
+                  sx={{ height: 160 }}
+                  title="green iguana"
+                  image={`http://localhost:3001/${house.image[0]}`}
+                />
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{
+                      fontFamily: 'Montserrat',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {house.houseName}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'end',
+                  }}
+                >
+                  <Link to={`/house/${house._id}`}>
+                    <Button
+                      variant="contained"
+                      component="label"
+                      sx={{
+                        fontFamily: 'Montserrat',
+                        backgroundColor: '#2D2D2D',
+                        '&:hover': {
+                          backgroundColor: '#2D2D2D',
+                        },
+                      }}
+                      size="small"
+                    >
+                      Check booking
+                    </Button>
+                  </Link>
+                </CardActions>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
   );
 });

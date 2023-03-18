@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ServiceContext } from '../../context/ServiceContext';
 import styles from './House.module.css';
-import { Link } from 'react-router-dom';
+import { SearchPanel } from '../../components/Forms/SearchBookingForm';
+import { Typography } from '@mui/material';
+import { Rating } from '../../components/Rating/Rating';
 
 export const House = () => {
   const { id } = useParams();
@@ -28,11 +30,13 @@ export const House = () => {
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
-          <button type="button" className={styles.unitBooking}>
-            <Link to={`/booking/${id}`}>booking</Link>
-          </button>
+          <Rating house={house} />
         </div>
       </div>
+      <Typography sx={{ fontFamily: 'Montserrat', fontSize: 35, pt: 3 }}>
+        Check available dates{' '}
+      </Typography>
+      <SearchPanel house={house} />
       <div className={styles.unitDescription}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernaturrerum, quisquam neque
         dignissimos omnis, adipisci alias accusamusveritatis unde quas quia voluptatibus ducimus in

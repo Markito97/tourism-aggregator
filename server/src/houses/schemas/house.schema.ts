@@ -50,11 +50,11 @@ export class House {
   rating: Rating;
 }
 // const rating = {
-  // oneStars: [],
-  // twoStars: [],
-  // threeStars: [],
-  // fourStars: [],
-  // fiveStarts: [],
+// oneStars: [],
+// twoStars: [],
+// threeStars: [],
+// fourStars: [],
+// fiveStarts: [],
 // }
 
 export const HouseSchema = SchemaFactory.createForClass(House);

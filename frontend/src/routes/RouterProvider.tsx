@@ -1,4 +1,4 @@
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
 import { lazy } from 'react';
 import { House } from '../pages/App/House';
 import { Layout } from '../components/Layout/App/Layout';
@@ -8,6 +8,7 @@ import { HousesList } from '../pages/Admin/HousesList';
 import { AdminForm } from '../components/Forms/CreateHouseFrom';
 import { EditHousePage } from '../pages/Admin/EditHousePage';
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
+import { Lake } from '../pages/App/Lake';
 
 const Home = lazy(() => import('../pages/App/Home'));
 const InfoPage = lazy(() => import('../pages/Admin/InfoPage'));
@@ -31,10 +32,11 @@ const router = createBrowserRouter([
         element: <Houses />,
       },
       {
-        path: 'hotels/:id',
+        path: 'house/:id',
         element: <House />,
       },
       { path: 'booking/:id', element: <BookinForm /> },
+      { path: '/:lake', element: <Lake /> },
     ],
   },
   {
