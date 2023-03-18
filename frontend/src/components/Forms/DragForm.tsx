@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
-import { ImagesPreview } from './ImagesPreview';
 import { toBase64 } from '../../utils/files/toBase64';
 import { AdminFormValues } from './CreateHouseFrom';
 import { useDragFiles } from '../../hooks/useDragFiles';
@@ -54,7 +53,6 @@ export const DragForm = ({ ...props }: UseControllerProps<AdminFormValues> | any
       <p className={css.drag__error}>
         {fieldState.error && (fieldState.error.message || 'This is required')}
       </p>
-      <ImagesPreview images={previewImages} onRemove={hanldeRemoveFile} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export function MuiTextField<
         textTransform: 'capitalize',
       }}
       multiline={props.multiline}
-      autoFocus
+      autoFocus={props.autoFocus}
       inputProps={{
         onBlur: () => !!props.onBlur && props.onBlur(),
       }}

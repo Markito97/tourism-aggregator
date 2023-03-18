@@ -1,91 +1,116 @@
-import { useForm } from 'react-hook-form';
-import { TextField } from '../../UI/TextField';
+import { Box, Button, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-
+import { MuiTextField } from '../../UI/MuiTextField';
+import { useForm } from 'react-hook-form';
 import { useEffect, useState, useContext } from 'react';
-import { DatePicker } from '../DatePicker/DatePicker';
-import { FieldsContext } from './SearchBookingForm';
+import { fromUnixTime } from 'date-fns';
 import { ServiceContext } from '../../context/ServiceContext';
-import { useDatePicker } from '../../hooks/useDatePicker';
 
-// TODO: Сделать нормальую форму для бронирования
 export const BookinForm = () => {
-  const { refs, datePicker, handlers } = useDatePicker();
-  const [house, setHouse] = useState<any>();
   const { id } = useParams();
+  const { control } = useForm();
+  const [date, setDate] = useState();
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
   const { houses } = useContext(ServiceContext);
-  const { handleSubmit, control, setValue } = useForm({
-    defaultValues: {
-      checkIn: '',
-      checkOut: '',
-    },
-    mode: 'onChange',
-  });
 
   useEffect(() => {
-    const fetchHouse = async () => {
-      const data = await houses.getHouse(id);
-      if (!data) return;
-      setHouse(data);
-    };
-    fetchHouse();
+    const range = localStorage.getItem('range');
+    if (range) {
+      setDate(JSON.parse(range));
+    }
   }, []);
 
-  const onSubmit = (data: any) => {
-    const [DAY_START, MONTH_START, YEAR_START] = data.checkIn.split('/');
-    const [DAY_END, MONTH_END, YEAR_END] = data.checkOut.split('/');
-    const CHECK_IN = new Date(
-      Number(YEAR_START),
-      Number(MONTH_START - 1),
-      Number(DAY_START),
-    ).getTime();
-    const CHECK_OUT = new Date(Number(YEAR_END), Number(MONTH_END - 1), Number(DAY_END)).getTime();
-    houses.bookingHouse(id, {
-      ...house,
-      booking: [...house.booking, { CHECK_IN, CHECK_OUT }],
+  useEffect(() => {
+    if (date !== undefined) {
+      setStart(new Date(date.CHECK_IN));
+      setEnd(new Date(date.CHECK_OUT));
+    }
+  }, [date]);
+
+  const handleBooking = () => {
+    if (!houses.currentHouse) return;
+    houses.bookingHouse(houses.currentHouse.id, {
+      ...houses.currentHouse,
+      booking: [...houses.currentHouse.booking, date],
     });
+    localStorage.clear();
   };
 
-  useEffect(() => {
-    if (datePicker.checkin) {
-      setValue('checkIn', datePicker.checkin);
-    }
-  }, [datePicker.checkin]);
-
-  useEffect(() => {
-    if (datePicker.checkout) {
-      setValue('checkOut', datePicker.checkout);
-    }
-  }, [datePicker.checkout]);
-
   return (
-    <div>
-      <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          control={control}
-          name="checkIn"
-          fieldRef={refs.checkinRef}
-          onFocus={handlers.setIsCheckIn}
-        />
-        <TextField
-          control={control}
-          name="checkOut"
-          fieldRef={refs.checkoutRef}
-          onFocus={handlers.setIsCheckOut}
-        />
-        <input type="submit" />
-      </form>
-      {datePicker.isCheckIn || datePicker.isCheckOut ? (
-        <FieldsContext.Provider
-          value={{
-            isClose: datePicker.isClose,
-            isCheckIn: datePicker.isCheckIn,
-            isCheckOut: datePicker.isCheckOut,
+    <Box
+      sx={{
+        pt: '120px',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Box sx={{ maxWidth: '700px', display: 'flex', rowGap: '30px', flexDirection: 'column' }}>
+        <Typography
+          sx={{
+            fontSize: 35,
+            fontFamily: 'Montserrat',
           }}
         >
-          <DatePicker disablePreviousDays pickerRef={refs.pickerRef} />
-        </FieldsContext.Provider>
-      ) : null}
-    </div>
+          Contacts info
+        </Typography>
+
+        <Box sx={{ display: 'flex' }}>
+          <Typography sx={{ pr: 2 }}>From</Typography>
+          <Typography sx={{ pr: 2 }}>{`${new Date(start).getDate()} / ${new Date(
+            start,
+          ).getMonth()} / ${new Date(start).getFullYear()}`}</Typography>
+          <Typography sx={{ pl: 2 }}>To</Typography>
+          <Typography sx={{ pl: 2 }}>{`${new Date(end).getDate()} / ${new Date(
+            end,
+          ).getMonth()} / ${new Date(end).getFullYear()}`}</Typography>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            columnGap: '30px',
+          }}
+        >
+          <MuiTextField control={control} name="name" />
+          <MuiTextField control={control} name="surname" />
+          <MuiTextField control={control} name="email" />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            columnGap: '30px',
+          }}
+        >
+          <MuiTextField control={control} name="phone" />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Button
+            onClick={handleBooking}
+            variant="contained"
+            component="label"
+            size="large"
+            sx={{
+              m: '5px',
+
+              fontFamily: 'Montserrat',
+              backgroundColor: '#2D2D2D',
+              '&:hover': {
+                backgroundColor: '#2D2D2D',
+              },
+            }}
+          >
+            Booking
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 };

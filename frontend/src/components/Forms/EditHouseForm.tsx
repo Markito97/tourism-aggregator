@@ -67,15 +67,7 @@ export const EditForm = (props: EditFormProps): JSX.Element => {
         />
       )}
 
-      <IconButton
-        // size="small"
-        // sx={{
-        //   p: '4px',
-        //   borderRadius: '4px',
-        //   bgcolor: '#2D2D2D',
-        // }}
-        onClick={handleEdit}
-      >
+      <IconButton onClick={handleEdit}>
         <EditOutlinedIcon />
       </IconButton>
     </Box>

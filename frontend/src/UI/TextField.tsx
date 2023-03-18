@@ -7,10 +7,13 @@ export const TextField = ({ ...props }: UseControllerProps<SearchPanelForm> | an
 
   return (
     <div ref={props.fieldRef} className={css.textField}>
-      <label className={css.textField__lable} htmlFor={field.name}>
-        {props?.name}
-      </label>
-      <input className={css.field} {...field} placeholder={props.name} onFocus={props.onFocus} />
+      <input
+        className={css.field}
+        {...field}
+        onFocus={props.onFocus}
+        placeholder={props.name}
+        autoComplete="off"
+      />
       <p className={css.error}>
         {fieldState.error && (fieldState.error.message || 'This is required')}
       </p>

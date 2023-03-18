@@ -9,6 +9,7 @@ import styles from './Navbar.module.css';
 const navigationLinks = [
   { text: 'Home', path: '/' },
   { text: 'Houses', path: 'houses' },
+  { text: 'Activities', path: 'activities' },
 ];
 
 export const Navbar = (): JSX.Element => {

@@ -76,8 +76,7 @@ export class HousesService {
   };
 
   bookingHouse = async (id: string, house: any) => {
-    console.log(house);
-
+    console.log(id);
     try {
       const response = await fetch(`http://localhost:3001/houses/${id}`, {
         method: 'PUT',

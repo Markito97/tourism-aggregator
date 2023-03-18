@@ -18,23 +18,15 @@ export interface IField {
   isCheckOut: boolean;
 }
 
-export type PickedDateUnitsDispatch = React.Dispatch<
-  React.SetStateAction<PickedDateUnits>
->;
+export type PickedDateUnitsDispatch = React.Dispatch<React.SetStateAction<PickedDateUnits>>;
 
 export const FieldsContext = createContext<IField | null>(null);
-export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(
-  null,
-);
-export const YearMonthContext = createContext<number[]>([0, 0]);
-export const PickedDateUnitsDispatchContext =
-  createContext<PickedDateUnitsDispatch | null>(null);
+export const PickedDateUnitsContext = createContext<PickedDateUnits | null>(null);
 
-export const DatePickerProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const YearMonthContext = createContext<number[]>([0, 0]);
+export const PickedDateUnitsDispatchContext = createContext<PickedDateUnitsDispatch | null>(null);
+
+export const DatePickerProvider = ({ children }: { children: React.ReactNode }) => {
   const [pickedDateUnits, setPickedDateUnits] = useState<PickedDateUnits>({
     firstPickedDateUnit: null,
     secondPickedDateUnit: null,

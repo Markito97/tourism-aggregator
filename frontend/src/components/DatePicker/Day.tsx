@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable import/no-cycle */
 import { memo, useContext } from 'react';
 import useDayCell from '../../hooks/useDay';
 import { YearMonthContext } from '../../context/DateContext';
@@ -13,19 +11,14 @@ interface DayProps {
 
 const Day = ({ day }: DayProps): JSX.Element => {
   const [year, month] = useContext(YearMonthContext);
-  const {
-    isSelected,
-    isFirstPickedDate,
-    isSecondPickedDate,
-    isBetweenPickedDates,
-    handleDay,
-  } = useDayCell({
-    year,
-    month,
-    day,
-  });
+  const { isSelected, isFirstPickedDate, isSecondPickedDate, isBetweenPickedDates, handleDay } =
+    useDayCell({
+      year,
+      month,
+      day,
+    });
   const isPreviousDaysDisabled = useContext(DisablePreviousDaysContext);
-  const isPreviousDay = checkIsPreviousDay({ year, month, day });
+  const isPreviousDay = checkIsPreviousDay(year, month, day);
 
   return (
     <div>
