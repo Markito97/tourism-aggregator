@@ -2,15 +2,10 @@ import { HousesField } from '../../components/Houses/HousesField';
 import { observer } from 'mobx-react-lite';
 import { ServiceContext } from '../../context/ServiceContext';
 import { useContext, useEffect } from 'react';
+import { mockHouses } from '../../mockdata/mockHouses';
 
 const Houses = observer((): JSX.Element => {
-  const { houses } = useContext(ServiceContext);
-
-  useEffect(() => {
-    houses.getHouses();
-  }, []);
-
-  return <HousesField houses={houses.allHouses} />;
+  return <HousesField houses={mockHouses} />;
 });
 
 export default Houses;

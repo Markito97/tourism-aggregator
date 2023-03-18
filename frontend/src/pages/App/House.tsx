@@ -5,28 +5,35 @@ import styles from './House.module.css';
 import { SearchPanel } from '../../components/Forms/SearchBookingForm';
 import { Typography } from '@mui/material';
 import { Rating } from '../../components/Rating/Rating';
+import { mockHouses } from '../../mockdata/mockHouses';
 
 export const House = () => {
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
-  const [house, setHouse] = useState();
+  const [house, setHouse] = useState<any>();
 
   useEffect(() => {
-    const fetchHouse = async () => {
-      const data = await houses.getHouse(id);
-      if (!data) return;
-      setHouse(data);
-    };
-    fetchHouse();
+    setHouse(mockHouses.find((house) => house._id === id));
   }, []);
+  // useEffect(() => {
+  //   const fetchHouse = async () => {
+  //     const data = await houses.getHouse(id);
+  //     if (!data) return;
+  //     setHouse(data);
+  //   };
+  //   fetchHouse();
+  // }, []);
 
-  if (!house) return <p>aboba</p>;
+  console.log(house);
+
+  // if (!house) return <p>aboba</p>;
+  if (!house) return null;
   return (
     <div className={styles.houseUnit}>
       <h1 className={styles.houseUnitTitle}>{house.houseName}</h1>
       <div className={styles.houseUnitHeader}>
         <div className={styles.imageContainer}>
-          <img src={`http://localhost:3001/${house?.image[0]}`} alt="" />
+          {/* <img src={`http://localhost:3001/${house?.image[0]}`} alt="" /> */}
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>

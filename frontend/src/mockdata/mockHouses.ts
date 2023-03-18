@@ -1,4 +1,4 @@
-const mockHouses = [
+export const mockHouses = [
   {
     _id: '6415a382639074f7ae54d796',
     houseName: 'Bondhusvatnet',

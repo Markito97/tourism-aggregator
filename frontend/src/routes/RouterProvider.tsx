@@ -18,7 +18,7 @@ const HousesLayout = () => {
   return <Outlet />;
 };
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Layout />,

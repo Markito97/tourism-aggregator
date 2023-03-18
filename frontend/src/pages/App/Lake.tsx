@@ -11,6 +11,7 @@ import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './styles.css';
+import { mockHouses } from '../../mockdata/mockHouses';
 
 export const HOUSES = {
   title: 'Houses for Everyoune',
@@ -20,11 +21,6 @@ export const HOUSES = {
 
 export const Lake = observer((): JSX.Element => {
   const { lake } = useParams();
-  const { houses } = useContext(ServiceContext);
-
-  useEffect(() => {
-    houses.getHouses();
-  }, [lake]);
 
   return (
     <>
@@ -69,7 +65,7 @@ export const Lake = observer((): JSX.Element => {
         }
       })}
       <Titles titles={HOUSES} />
-      <HousesField houses={houses.allHouses.filter((house) => house.lake.toLowerCase() === lake)} />
+      <HousesField houses={mockHouses.filter((house) => house.lake.toLowerCase() === lake)} />
     </>
   );
 });

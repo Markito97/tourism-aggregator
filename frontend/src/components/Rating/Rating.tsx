@@ -3,6 +3,8 @@ import { RatingField } from './RatingField';
 import { getPersentage } from './getPercetange';
 
 export function Rating(props: any) {
+  console.log(props);
+
   let totalRating = 0;
   const rating = props.house.rating;
 
