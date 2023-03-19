@@ -6,7 +6,7 @@
     "start:dev": "webpack server --open",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build", 
+    "deploy": "gh-pages -d build",
     "serve": "serve dist -p 3004"
   },
   "license": "MIT",
