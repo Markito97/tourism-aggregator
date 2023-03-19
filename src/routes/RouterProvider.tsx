@@ -26,7 +26,7 @@ const HousesLayout = () => {
 
 const router = createHashRouter([
   {
-    path: '/tourism-aggregator',
+    path: '/',
     element: <Layout />,
     children: [
       {
