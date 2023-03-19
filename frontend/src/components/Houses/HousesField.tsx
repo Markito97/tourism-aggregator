@@ -52,11 +52,7 @@ export const HousesField = observer((props: any): JSX.Element | null => {
                   justifyContent: 'space-between',
                 }}
               >
-                <CardMedia
-                  sx={{ height: 160 }}
-                  title="green iguana"
-                  image={`http://localhost:3001/${house.image[0]}`}
-                />
+                <CardMedia sx={{ height: 160 }} title="green iguana" image={house.image[0]} />
                 <CardContent>
                   <Typography
                     gutterBottom
@@ -78,7 +74,10 @@ export const HousesField = observer((props: any): JSX.Element | null => {
                     justifyContent: 'end',
                   }}
                 >
-                  <Link to={`/house/${house._id}`}>
+                  <Link
+                    to={`/house/${house._id}`}
+                    style={{ textDecoration: 'none', color: 'white' }}
+                  >
                     <Button
                       variant="contained"
                       component="label"

@@ -5,38 +5,34 @@ import styles from './House.module.css';
 import { SearchPanel } from '../../components/Forms/SearchBookingForm';
 import { Typography } from '@mui/material';
 import { Rating } from '../../components/Rating/Rating';
+import { observer } from 'mobx-react-lite';
 
-export const House = () => {
+export const House = observer(() => {
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
   const [house, setHouse] = useState();
 
   useEffect(() => {
-    const fetchHouse = async () => {
-      const data = await houses.getHouse(id);
-      if (!data) return;
-      setHouse(data);
-    };
-    fetchHouse();
+    houses.getHouse(id);
   }, []);
 
-  if (!house) return <p>aboba</p>;
+  if (!houses.currentHouse) return null;
   return (
     <div className={styles.houseUnit}>
-      <h1 className={styles.houseUnitTitle}>{house.houseName}</h1>
+      <h1 className={styles.houseUnitTitle}>{houses.currentHouse.houseName}</h1>
       <div className={styles.houseUnitHeader}>
         <div className={styles.imageContainer}>
-          <img src={`http://localhost:3001/${house?.image[0]}`} alt="" />
+          <img src={houses.currentHouse?.image[0]} alt="" />
         </div>
         <div className={styles.untiInfo}>
           <h6 className={styles.unitInfoTitle}>Price 4500</h6>
-          <Rating house={house} />
+          <Rating house={houses.currentHouse} />
         </div>
       </div>
       <Typography sx={{ fontFamily: 'Montserrat', fontSize: 35, pt: 3 }}>
-        Check available dates{' '}
+        Check available dates
       </Typography>
-      <SearchPanel house={house} />
+      <SearchPanel house={houses.currentHouse} />
       <div className={styles.unitDescription}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernaturrerum, quisquam neque
         dignissimos omnis, adipisci alias accusamusveritatis unde quas quia voluptatibus ducimus in
@@ -61,4 +57,4 @@ export const House = () => {
       </div>
     </div>
   );
-};
+});

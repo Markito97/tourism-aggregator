@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { CreateHouseDto, IHouse } from '../dto/house.dto';
+import { mockHouses } from '../mockdata/mockHouses';
 
 export class HousesService {
   houses: IHouse[] = [];
@@ -37,6 +38,7 @@ export class HousesService {
       this.houses = data;
       return data;
     } catch (error: any) {
+      this.houses = mockHouses;
       throw new Error(error);
     }
   };
@@ -49,6 +51,7 @@ export class HousesService {
       this.house = { ...deserialize };
       return { ...deserialize };
     } catch (error: any) {
+      this.house = mockHouses.find((house) => house._id === id);
       throw new Error(error);
     }
   };

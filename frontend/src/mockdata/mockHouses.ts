@@ -1,4 +1,16 @@
-const mockHouses = [
+import House1 from '@assets/House1.jpg';
+import House2 from '@assets/House2.jpg';
+import House3 from '@assets/House3.jpg';
+import House4 from '@assets/House4.jpg';
+import House5 from '@assets/House5.jpg';
+import House6 from '@assets/House6.jpg';
+import House7 from '@assets/House7.jpg';
+import House8 from '@assets/House8.jpg';
+import House9 from '@assets/House9.jpg';
+import House10 from '@assets/House10.jpg';
+import House11 from '@assets/House11.jpg';
+
+export const mockHouses = [
   {
     _id: '6415a382639074f7ae54d796',
     houseName: 'Bondhusvatnet',
@@ -8,7 +20,7 @@ const mockHouses = [
     persons: '',
     geoData: '',
     booking: [],
-    image: ['images/9d147f22-2da4-4d9d-b746-dc5a3b033e70.jpg'],
+    image: [House1],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -21,7 +33,7 @@ const mockHouses = [
     persons: '',
     geoData: '',
     booking: [],
-    image: ['images/f4f8aafb-1c3e-4c4d-b53b-cc09d0688c06.jpg'],
+    image: [House2],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -34,7 +46,7 @@ const mockHouses = [
     persons: '',
     geoData: '',
     booking: [],
-    image: ['images/1308c680-c351-4fd7-85ac-09b1d2df230b.jpg'],
+    image: [House3],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -47,7 +59,7 @@ const mockHouses = [
     persons: 'Mjosa',
     geoData: 'Mjosa',
     booking: [],
-    image: ['images/9a5eb36e-3b7b-470c-9d54-86363211f28f.jpg'],
+    image: [House4],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -60,7 +72,7 @@ const mockHouses = [
     persons: 'Mjosa',
     geoData: 'Mjosa',
     booking: [],
-    image: ['images/2f9f88c3-a078-43d9-a010-27658cb87ae9.jpg'],
+    image: [House5],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -73,7 +85,7 @@ const mockHouses = [
     persons: 'Mjosa',
     geoData: 'Mjosa',
     booking: [],
-    image: ['images/c6670565-afec-481d-b4e9-4faf54ed0a19.jpg'],
+    image: [House6],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -86,7 +98,7 @@ const mockHouses = [
     persons: 'Hornindalsvatnet',
     geoData: 'Hornindalsvatnet',
     booking: [],
-    image: ['images/bf539051-5a85-41c3-8779-33496507f0f9.jpg'],
+    image: [House7],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -99,7 +111,7 @@ const mockHouses = [
     persons: 'Hornindalsvatnet',
     geoData: 'Hornindalsvatnet',
     booking: [],
-    image: ['images/96864e53-6555-48ce-80a9-222fe994eba9.jpg'],
+    image: [House8],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -112,7 +124,7 @@ const mockHouses = [
     persons: 'Hornindalsvatnet',
     geoData: 'Hornindalsvatnet',
     booking: [],
-    image: ['images/2c6e2d1c-4d07-49b4-8139-caf272ce129e.jpg'],
+    image: [House9],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -125,7 +137,7 @@ const mockHouses = [
     persons: 'Hornindalsvatnet',
     geoData: 'Hornindalsvatnet',
     booking: [],
-    image: ['images/967ea7ba-c0c9-4e62-977d-0e609dd4b232.jpg'],
+    image: [House10],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
@@ -138,7 +150,7 @@ const mockHouses = [
     persons: 'Hornindalsvatnet',
     geoData: 'Hornindalsvatnet',
     booking: [],
-    image: ['images/86f15f3e-7b90-4efe-8b6a-204f243045ff.jpg'],
+    image: [House11],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,
   },
