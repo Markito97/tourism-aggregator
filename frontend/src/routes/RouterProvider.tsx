@@ -1,4 +1,10 @@
-import { Outlet, RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
+import {
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+  createHashRouter,
+  createMemoryRouter,
+} from 'react-router-dom';
 import { lazy } from 'react';
 import { House } from '../pages/App/House';
 import { Layout } from '../components/Layout/App/Layout';

@@ -5,10 +5,11 @@ import { ServiceContext } from './context/ServiceContext';
 import { HousesService } from './services/houses.service';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './theme';
+import Provider from './routes/RouterProvider';
 
-const OtherComponent = lazy(() => {
-  return import('./routes/RouterProvider');
-});
+// const OtherComponent = lazy(() => {
+//   return import('./routes/RouterProvider');
+// });
 
 const App = () => {
   const serviceWrapper = useMemo(() => {
@@ -19,7 +20,8 @@ const App = () => {
       <ServiceContext.Provider value={serviceWrapper}>
         <DatePickerProvider>
           <Suspense>
-            <OtherComponent />
+            <Provider />
+            {/* <OtherComponent /> */}
           </Suspense>
         </DatePickerProvider>
       </ServiceContext.Provider>
