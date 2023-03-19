@@ -24,7 +24,7 @@ module.exports = function (env: any): webpack.Configuration {
       historyApiFallback: true,
     },
     output: {
-      path: path.resolve(__dirname, 'static'),
+      path: path.resolve(__dirname, 'build'),
       filename: 'app.bundle.js',
     },
     resolve: {
