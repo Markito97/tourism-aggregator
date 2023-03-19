@@ -20,14 +20,12 @@ module.exports = function (env: any): webpack.Configuration {
     devtool,
     mode,
     devServer: {
-      static: {
-        directory: path.join(__dirname, 'dist'),
-      },
       port: 3003,
       historyApiFallback: true,
     },
     output: {
-      publicPath: 'auto',
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'app.bundle.js',
     },
     resolve: {
       alias: {
