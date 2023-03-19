@@ -1,0 +1,14 @@
+.ratingContainer {
+  margin-top: 50px;
+  width: auto;
+  border: 1px solid black;
+  width: 500px;
+  padding: 35px;
+  border-radius: 10px;
+}
+.ratingTitle,
+.info {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: Montserrat;
+}
