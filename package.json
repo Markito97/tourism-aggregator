@@ -1,5 +1,5 @@
 {
-  "homepage": "https://myusername.github.io/tourism-aggregator",
+  "homepage": "https://markito97.github.io/tourism-aggregator",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-cli serve --env development",
