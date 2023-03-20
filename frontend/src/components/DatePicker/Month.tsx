@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
-import {
-  getMonthData,
-  getYearMonth,
-  WEEK_DAYS,
-} from '../../utils/dateHelpers/index';
+import { getMonthData, getYearMonth, WEEK_DAYS } from '../../utils/dateHelpers/index';
 import { Days } from './Days';
 import styles from './Month.module.css';
 import { YearMonthContext } from '../../context/DateContext';

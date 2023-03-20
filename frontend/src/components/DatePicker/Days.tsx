@@ -8,7 +8,7 @@ interface DaysProps {
 
 export const Days = ({ days }: DaysProps): JSX.Element => {
   return (
-    <div>
+    <div className={styles.container}>
       {days.map((daysList, index) => {
         return (
           <div key={`${index + 1}`} className={styles.dateRows}>

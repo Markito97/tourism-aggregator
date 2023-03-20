@@ -45,11 +45,12 @@ export class HousesService {
 
   getHouse = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/houses/${id}`);
-      const data = await response.json();
-      const deserialize = new CreateHouseDto(data);
-      this.house = { ...deserialize };
-      return { ...deserialize };
+      // const response = await fetch(`http://localhost:3001/houses/${id}`);
+      // const data = await response.json();
+      // const deserialize = new CreateHouseDto(data);
+      // this.house = { ...deserialize };
+      // return { ...deserialize };
+      this.house = mockHouses.find((house) => house._id === id);
     } catch (error: any) {
       this.house = mockHouses.find((house) => house._id === id);
       throw new Error(error);

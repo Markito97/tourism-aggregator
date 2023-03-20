@@ -2,13 +2,33 @@ import { FieldsContext } from '../../context/DateContext';
 import { DatePicker } from '../DatePicker/DatePicker';
 import { TextField } from '../../UI/TextField';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useDatePicker } from '../../hooks/useDatePicker';
 import * as css from './SearchBookingForm.sass';
-import { Box, Button, Grow, Popper, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useDatePick } from '../../hooks/useDatePick';
+import { Box, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
 import { ServiceContext } from '../../context/ServiceContext';
+import { checkIsBooking } from '../../utils/bookingHelpers/checkIsBooking';
+import { FormControl } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import CloseIcon from '@mui/icons-material/Close';
+
+const FormControlStyles = styled(FormControl)(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'row',
+}));
+
+const TextFiledsStyles = styled(Box)(({ theme }) => ({
+  // width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  // columnGap: '30px',
+  [theme.breakpoints.down('averageMobile')]: {
+    // flexDirection: 'column',
+    columnGap: '15px',
+  },
+}));
 
 export interface SearchPanelForm {
   lake: string;
@@ -16,49 +36,38 @@ export interface SearchPanelForm {
   checkOut: string;
 }
 
-function checkIsBooking(
-  start: number,
-  end: number,
-  range: { CHECK_IN: number; CHECK_OUT: number }[],
-): boolean {
-  return range.every(
-    (date) =>
-      (start < date.CHECK_IN && end < date.CHECK_IN) ||
-      (start > date.CHECK_OUT && end > date.CHECK_OUT),
-  );
-}
-
-function formatDate() {}
-
 export const SearchPanel = (props: any): JSX.Element => {
-  const [isBooking, setIsBooking] = useState(false);
-  const [isWarn, setIsWarn] = useState(false);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('averageMobile'));
+  const [isModal, setIsModal] = useState(false);
   const { refs, datePicker, handlers } = useDatePicker();
-  const [pickedDateUnits, setPickedDateUnits] = useDatePick();
   const { handleSubmit, control, setValue } = useForm<SearchPanelForm>({
     defaultValues: {
-      lake: '',
       checkIn: '',
       checkOut: '',
     },
     mode: 'onChange',
   });
   const { houses } = useContext(ServiceContext);
-  const fieldsRef = useRef(null);
+
+  const handlePicker = (): void => {
+    return matches ? setIsModal(true) : handlers.setIsCheckIn(true);
+  };
+
+  useEffect(() => {
+    if (isModal) {
+      handlers.setIsCheckIn(true);
+    }
+  }, [isModal]);
 
   useEffect(() => {
     if (datePicker.checkin) {
-      console.log(datePicker.checkin);
-
       setValue('checkIn', datePicker.checkin);
     }
-  }, [datePicker.checkin]);
-
-  useEffect(() => {
     if (datePicker.checkout) {
       setValue('checkOut', datePicker.checkout);
     }
-  }, [datePicker.checkout]);
+  }, [datePicker.checkin, datePicker.checkout]);
 
   const onSubmit = (data: any) => {
     const [DAY_START, MONTH_START, YEAR_START] = data.checkIn.split('/');
@@ -89,86 +98,138 @@ export const SearchPanel = (props: any): JSX.Element => {
     }
   }, [datePicker.checkout]);
 
-  useEffect(() => {
-    setIsBooking(false);
-  }, []);
+  const handleCloseModal = () => {
+    setIsModal(false);
+  };
 
   return (
     <div className={css.container}>
-      <form className={css.form}>
-        <Box
-          ref={fieldsRef}
-          sx={{ width: '100%', display: 'flex', alignItems: 'center', columnGap: '30px' }}
-        >
-          <TextField
-            control={control}
-            name="checkIn"
-            rules={{ required: true }}
-            fieldRef={refs.checkinRef}
-            onFocus={handlers.setIsCheckIn}
-          />
-          -
-          <TextField
-            control={control}
-            name="checkOut"
-            rules={{ required: true }}
-            fieldRef={refs.checkoutRef}
-            onFocus={handlers.setIsCheckOut}
-          />
-        </Box>
-        <Button
-          disabled={!isBooking}
-          variant="contained"
-          component="label"
-          size="large"
-          sx={{
-            m: '5px',
-            height: '100%',
-            fontFamily: 'Montserrat',
-            backgroundColor: '#2D2D2D',
-            '&:hover': {
-              backgroundColor: '#2D2D2D',
-            },
-          }}
-        >
-          <Link
-            onClick={() => {
-              setPickedDateUnits({ firstPickedDateUnit: null, secondPickedDateUnit: null });
-            }}
-            to={`/booking/${props?.house?.id}`}
-            style={{ color: 'white' }}
-          >
-            Booking
-          </Link>
-        </Button>
-      </form>
-
-      {isWarn && (
-        <Typography
-          sx={{
-            pt: '36px',
-            display: 'flex',
-            justifyContent: 'center',
-            fontSize: 30,
-            fontFamily: 'Montserrat',
-          }}
-        >
-          It is not possible to book for this date, please try another date
-        </Typography>
+      {!isModal && (
+        <FormControlStyles>
+          <TextFiledsStyles>
+            <TextField
+              control={control}
+              name="checkIn"
+              rules={{ required: true }}
+              fieldRef={refs.checkinRef}
+              onFocus={handlePicker}
+            />
+            <TextField
+              control={control}
+              name="checkOut"
+              rules={{ required: true }}
+              fieldRef={refs.checkoutRef}
+              onFocus={handlers.setIsCheckOut}
+            />
+          </TextFiledsStyles>
+          {datePicker.isCheckIn || datePicker.isCheckOut ? (
+            <DatePicker
+              pickerRef={refs.pickerRef}
+              isClose={datePicker.isClose}
+              isCheckIn={datePicker.isCheckIn}
+              isCheckOut={datePicker.isCheckOut}
+              disablePreviousDays
+            />
+          ) : null}
+        </FormControlStyles>
       )}
 
-      {datePicker.isCheckIn || datePicker.isCheckOut ? (
-        <FieldsContext.Provider
-          value={{
-            isClose: datePicker.isClose,
-            isCheckIn: datePicker.isCheckIn,
-            isCheckOut: datePicker.isCheckOut,
+      <Modal open={isModal}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            bgcolor: 'white',
+            overflowY: 'scroll',
+            height: '100%',
+            padding: '16px',
+            rowGap: '30px',
           }}
         >
-          <DatePicker disablePreviousDays pickerRef={refs.pickerRef} />
-        </FieldsContext.Provider>
-      ) : null}
+          <Box
+            sx={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: 'Montserrat',
+                fontSize: '18px',
+                textAlign: 'center',
+                textTransform: 'uppercase',
+              }}
+            >
+              Booking date
+            </Typography>
+            <CloseIcon
+              sx={{
+                position: 'absolute',
+                right: '0',
+                width: '25px',
+                height: '25px',
+              }}
+              onClick={handleCloseModal}
+            />
+          </Box>
+          <FormControlStyles>
+            <TextFiledsStyles>
+              <TextField
+                control={control}
+                name="checkIn"
+                rules={{ required: true }}
+                fieldRef={refs.checkinRef}
+                onFocus={handlers.setIsCheckIn}
+              />
+              <TextField
+                control={control}
+                name="checkOut"
+                rules={{ required: true }}
+                fieldRef={refs.checkoutRef}
+                onFocus={handlers.setIsCheckOut}
+              />
+            </TextFiledsStyles>
+          </FormControlStyles>
+          <DatePicker
+            pickerRef={refs.pickerRef}
+            isClose={datePicker.isClose}
+            isCheckIn={datePicker.isCheckIn}
+            isCheckOut={datePicker.isCheckOut}
+            disablePreviousDays
+          />
+        </Box>
+      </Modal>
     </div>
   );
 };
 export { FieldsContext };
+
+{
+  /* <Button
+disabled={!isBooking}
+variant="contained"
+component="label"
+size="large"
+sx={{
+  m: '5px',
+  height: '100%',
+  fontFamily: 'Montserrat',
+  backgroundColor: '#2D2D2D',
+  '&:hover': {
+    backgroundColor: '#2D2D2D',
+  },
+}}
+>
+<Link
+  onClick={() => {
+    setPickedDateUnits({ firstPickedDateUnit: null, secondPickedDateUnit: null });
+  }}
+  to={`/booking/${props?.house?.id}`}
+  style={{ color: 'white' }}
+>
+  Booking
+</Link>
+</Button> */
+}

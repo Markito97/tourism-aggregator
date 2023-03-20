@@ -40,9 +40,17 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
   const secondPickedDate = dateUnitToDateObj(secondPickedDateUnit);
   const currentCellDate = dateUnitToDateObj({ year, month, day });
 
+  const first = new Date(2023, 2, 22);
+  const second = new Date(2023, 2, 26);
+  const isBooking = first <= currentCellDate && currentCellDate <= second;
+
+  const dateCondition = firstPickedDate < first && secondPickedDate < first;
+
+  // (start < date.CHECK_IN && end < date.CHECK_IN) ||
+  // (start > date.CHECK_OUT && end > date.CHECK_OUT),
+
   const isSelected =
-    isEqualDate(firstPickedDate, currentCellDate) ||
-    isEqualDate(secondPickedDate, currentCellDate);
+    isEqualDate(firstPickedDate, currentCellDate) || isEqualDate(secondPickedDate, currentCellDate);
 
   const isBetweenPickedDates =
     firstPickedDate <= currentCellDate &&
@@ -136,6 +144,7 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
   };
 
   return {
+    isBooking,
     isSelected,
     isBetweenPickedDates,
     isFirstPickedDate,

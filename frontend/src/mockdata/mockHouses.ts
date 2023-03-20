@@ -19,7 +19,16 @@ export const mockHouses = [
     price: 'Bondhusvatnet',
     persons: '',
     geoData: '',
-    booking: [],
+    booking: [
+      {
+        CHECK_IN: 1682197200000,
+        CHECK_OUT: 1682542800000,
+      },
+      {
+        CHECK_IN: 1684098000000,
+        CHECK_OUT: 1684616400000,
+      },
+    ],
     image: [House1],
     rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
     __v: 0,

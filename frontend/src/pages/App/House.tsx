@@ -3,14 +3,18 @@ import { useParams } from 'react-router-dom';
 import { ServiceContext } from '../../context/ServiceContext';
 import styles from './House.module.css';
 import { SearchPanel } from '../../components/Forms/SearchBookingForm';
-import { Typography } from '@mui/material';
+import { Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Rating } from '../../components/Rating/Rating';
 import { observer } from 'mobx-react-lite';
 
 export const House = observer(() => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
   const [house, setHouse] = useState();
+
+  console.log(matches);
 
   useEffect(() => {
     houses.getHouse(id);

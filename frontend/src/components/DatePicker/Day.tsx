@@ -11,12 +11,18 @@ interface DayProps {
 
 const Day = ({ day }: DayProps): JSX.Element => {
   const [year, month] = useContext(YearMonthContext);
-  const { isSelected, isFirstPickedDate, isSecondPickedDate, isBetweenPickedDates, handleDay } =
-    useDayCell({
-      year,
-      month,
-      day,
-    });
+  const {
+    isBooking,
+    isSelected,
+    isFirstPickedDate,
+    isSecondPickedDate,
+    isBetweenPickedDates,
+    handleDay,
+  } = useDayCell({
+    year,
+    month,
+    day,
+  });
   const isPreviousDaysDisabled = useContext(DisablePreviousDaysContext);
   const isPreviousDay = checkIsPreviousDay(year, month, day);
 
@@ -28,6 +34,8 @@ const Day = ({ day }: DayProps): JSX.Element => {
         className={
           isPreviousDaysDisabled && isPreviousDay
             ? `${styles.disabled}`
+            : isBooking
+            ? `${styles.isBooking}`
             : isSecondPickedDate
             ? `${styles.selected}`
             : isFirstPickedDate
