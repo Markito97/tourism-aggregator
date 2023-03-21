@@ -33,6 +33,17 @@ const TextFiledsStyles = styled(Box)(({ theme }) => ({
   },
 }));
 
+const ButtonStyles = styled(Button)(({ theme }) => ({
+  fontFamily: 'Montserrat',
+  backgroundColor: '#2D2D2D',
+  '&:hover': {
+    backgroundColor: '#2D2D2D',
+  },
+  [theme.breakpoints.down('averageMobile')]: {
+    width: '100%',
+  },
+}));
+
 export interface SearchPanelForm {
   lake: string;
   checkIn: string;
@@ -126,20 +137,9 @@ export const SearchPanel = (props: any): JSX.Element => {
                 onFocus={handlers.setIsCheckOut}
               />
             </TextFiledsStyles>
-            <Button
-              variant="contained"
-              component="label"
-              size="large"
-              sx={{
-                fontFamily: 'Montserrat',
-                backgroundColor: '#2D2D2D',
-                '&:hover': {
-                  backgroundColor: '#2D2D2D',
-                },
-              }}
-            >
+            <ButtonStyles variant="contained" size="large">
               Booking
-            </Button>
+            </ButtonStyles>
           </SearchControlStyles>
 
           {datePicker.isCheckIn || datePicker.isCheckOut ? (
@@ -194,24 +194,22 @@ export const SearchPanel = (props: any): JSX.Element => {
               onClick={handleCloseModal}
             />
           </Box>
-          <FormControlStyles>
-            <TextFiledsStyles>
-              <TextField
-                control={control}
-                name="checkIn"
-                rules={{ required: true }}
-                fieldRef={refs.checkinRef}
-                onFocus={handlers.setIsCheckIn}
-              />
-              <TextField
-                control={control}
-                name="checkOut"
-                rules={{ required: true }}
-                fieldRef={refs.checkoutRef}
-                onFocus={handlers.setIsCheckOut}
-              />
-            </TextFiledsStyles>
-          </FormControlStyles>
+          <TextFiledsStyles>
+            <TextField
+              control={control}
+              name="checkIn"
+              rules={{ required: true }}
+              fieldRef={refs.checkinRef}
+              onFocus={handlers.setIsCheckIn}
+            />
+            <TextField
+              control={control}
+              name="checkOut"
+              rules={{ required: true }}
+              fieldRef={refs.checkoutRef}
+              onFocus={handlers.setIsCheckOut}
+            />
+          </TextFiledsStyles>
           <DatePicker
             pickerRef={refs.pickerRef}
             isClose={datePicker.isClose}
