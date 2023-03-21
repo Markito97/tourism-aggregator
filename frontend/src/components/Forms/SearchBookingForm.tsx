@@ -5,27 +5,30 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState, useContext } from 'react';
 import { useDatePicker } from '../../hooks/useDatePicker';
 import * as css from './SearchBookingForm.sass';
-import { Box, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
 import { ServiceContext } from '../../context/ServiceContext';
 import { checkIsBooking } from '../../utils/bookingHelpers/checkIsBooking';
 import { FormControl } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 
-const FormControlStyles = styled(FormControl)(({ theme }) => ({
-  width: '100%',
+const SearchControlStyles = styled(FormControl)(({ theme }) => ({
   display: 'flex',
+  justifyContent: 'space-between',
   alignItems: 'center',
   flexDirection: 'row',
+  [theme.breakpoints.down('averageMobile')]: {
+    flexDirection: 'column',
+    rowGap: '15px',
+  },
 }));
 
 const TextFiledsStyles = styled(Box)(({ theme }) => ({
-  // width: '100%',
   display: 'flex',
   alignItems: 'center',
-  // columnGap: '30px',
+  justifyContent: 'space-between',
+  columnGap: '30px',
   [theme.breakpoints.down('averageMobile')]: {
-    // flexDirection: 'column',
     columnGap: '15px',
   },
 }));
@@ -105,23 +108,40 @@ export const SearchPanel = (props: any): JSX.Element => {
   return (
     <div className={css.container}>
       {!isModal && (
-        <FormControlStyles>
-          <TextFiledsStyles>
-            <TextField
-              control={control}
-              name="checkIn"
-              rules={{ required: true }}
-              fieldRef={refs.checkinRef}
-              onFocus={handlePicker}
-            />
-            <TextField
-              control={control}
-              name="checkOut"
-              rules={{ required: true }}
-              fieldRef={refs.checkoutRef}
-              onFocus={handlers.setIsCheckOut}
-            />
-          </TextFiledsStyles>
+        <>
+          <SearchControlStyles>
+            <TextFiledsStyles>
+              <TextField
+                control={control}
+                name="checkIn"
+                rules={{ required: true }}
+                fieldRef={refs.checkinRef}
+                onFocus={handlePicker}
+              />
+              <TextField
+                control={control}
+                name="checkOut"
+                rules={{ required: true }}
+                fieldRef={refs.checkoutRef}
+                onFocus={handlers.setIsCheckOut}
+              />
+            </TextFiledsStyles>
+            <Button
+              variant="contained"
+              component="label"
+              size="large"
+              sx={{
+                fontFamily: 'Montserrat',
+                backgroundColor: '#2D2D2D',
+                '&:hover': {
+                  backgroundColor: '#2D2D2D',
+                },
+              }}
+            >
+              Booking
+            </Button>
+          </SearchControlStyles>
+
           {datePicker.isCheckIn || datePicker.isCheckOut ? (
             <DatePicker
               pickerRef={refs.pickerRef}
@@ -131,7 +151,7 @@ export const SearchPanel = (props: any): JSX.Element => {
               disablePreviousDays
             />
           ) : null}
-        </FormControlStyles>
+        </>
       )}
 
       <Modal open={isModal}>

@@ -4,6 +4,7 @@ import HeaderBackImg from '@assets/Rectangle.jpg';
 import { HeaderTitle } from './HeaderTitle';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Footer } from './Footer';
 
 const Header = styled(Box)({
   height: '100vh',
@@ -64,6 +65,10 @@ export const HomeLayout = () => {
           </Container>
         )}
       </Main>
+
+      <footer>
+        <Footer />
+      </footer>
     </Box>
   );
 };

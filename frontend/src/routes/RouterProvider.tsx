@@ -9,6 +9,7 @@ import { AdminForm } from '../components/Forms/CreateHouseFrom';
 import { EditHousePage } from '../pages/Admin/EditHousePage';
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
 import { Lake } from '../pages/App/Lake';
+import { HomeLayout } from '../components/Layout/App/HomeLayout';
 
 const Home = lazy(() => import('../pages/App/Home'));
 const InfoPage = lazy(() => import('../pages/Admin/InfoPage'));
@@ -21,7 +22,7 @@ const HousesLayout = () => {
 const router = createHashRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <HomeLayout />,
     children: [
       {
         index: true,

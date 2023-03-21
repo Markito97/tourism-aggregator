@@ -30,7 +30,13 @@ export const mockHouses = [
       },
     ],
     image: [House1],
-    rating: { oneStar: [], twoStar: [], threeStar: [], fourStar: [], fiveStar: [] },
+    rating: {
+      oneStar: ['star'],
+      twoStar: [],
+      threeStar: ['star', 'star'],
+      fourStar: [],
+      fiveStar: [],
+    },
     __v: 0,
   },
   {

@@ -4,11 +4,11 @@
 }
 
 .houseUnitHeader {
-  padding-top: 30px;
+  /* padding-top: 30px; */
   display: flex;
-  justify-content: space-between;
-  column-gap: 38px;
-  font-family: 'Montserrart';
+  /* justify-content: space-between; */
+  /* column-gap: 38px; */
+  /* font-family: 'Montserrart'; */
 }
 
 .houseUnitTitle {

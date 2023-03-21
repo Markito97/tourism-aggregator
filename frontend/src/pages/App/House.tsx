@@ -3,18 +3,69 @@ import { useParams } from 'react-router-dom';
 import { ServiceContext } from '../../context/ServiceContext';
 import styles from './House.module.css';
 import { SearchPanel } from '../../components/Forms/SearchBookingForm';
-import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Typography, styled, useMediaQuery, useTheme, Box, Button } from '@mui/material';
 import { Rating } from '../../components/Rating/Rating';
 import { observer } from 'mobx-react-lite';
+
+const HouseStyles = styled(Box)(({ theme }) => ({
+  paddingTop: '60px',
+  fontFamily: 'Montserrart',
+  [theme.breakpoints.down('averageMobile')]: {
+    paddingTop: '30px',
+  },
+}));
+
+const HouseTitle = styled(Typography)(({ theme }) => ({
+  fontFamily: 'Montserrart',
+  textTransform: 'uppercase',
+  fontSize: '55px',
+  [theme.breakpoints.down('averageMobile')]: {
+    fontSize: '30px',
+  },
+}));
+
+const HouseHeaderStyles = styled(Box)(({ theme }) => ({
+  paddingTop: '30px',
+  display: 'flex',
+  columnGap: '38px',
+  [theme.breakpoints.down('laptop')]: {
+    flexDirection: 'column',
+  },
+  [theme.breakpoints.down('averageMobile')]: {
+    flexDirection: 'column',
+  },
+}));
+
+const HouseInfo = styled(Box)(({ theme }) => ({
+  paddingTop: '30px',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  flexDirection: 'column',
+  rowGap: '30px',
+}));
+
+const HouseImage = styled('img')(({ theme }) => ({
+  maxWidth: '800px',
+  height: '100%',
+  [theme.breakpoints.down('desktop')]: {
+    maxWidth: '700px',
+  },
+  [theme.breakpoints.down('laptop')]: {
+    maxWidth: '100%',
+  },
+}));
+
+const HouseInfoTitle = styled(Typography)(({ theme }) => ({
+  fontFamily: 'Montserrat',
+  fontSize: '25px',
+}));
 
 export const House = observer(() => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
-  const [house, setHouse] = useState();
-
-  console.log(matches);
 
   useEffect(() => {
     houses.getHouse(id);
@@ -22,21 +73,30 @@ export const House = observer(() => {
 
   if (!houses.currentHouse) return null;
   return (
-    <div className={styles.houseUnit}>
-      <h1 className={styles.houseUnitTitle}>{houses.currentHouse.houseName}</h1>
-      <div className={styles.houseUnitHeader}>
-        <div className={styles.imageContainer}>
-          <img src={houses.currentHouse?.image[0]} alt="" />
-        </div>
-        <div className={styles.untiInfo}>
-          <h6 className={styles.unitInfoTitle}>Price 4500</h6>
+    <HouseStyles>
+      <HouseTitle variant="h1">{houses.currentHouse.houseName}</HouseTitle>
+      <HouseHeaderStyles>
+        <HouseImage src={houses.currentHouse?.image[0]} />
+        <HouseInfo>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <HouseInfoTitle>Price 4500</HouseInfoTitle>
+            <HouseInfoTitle>Persons</HouseInfoTitle>
+          </Box>
+
           <Rating house={houses.currentHouse} />
-        </div>
-      </div>
-      <Typography sx={{ fontFamily: 'Montserrat', fontSize: 35, pt: 3 }}>
+        </HouseInfo>
+      </HouseHeaderStyles>
+      <Typography sx={{ fontFamily: 'Montserrat', fontSize: '25px', pt: '30px' }}>
         Check available dates
       </Typography>
       <SearchPanel house={houses.currentHouse} />
+
       <div className={styles.unitDescription}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernaturrerum, quisquam neque
         dignissimos omnis, adipisci alias accusamusveritatis unde quas quia voluptatibus ducimus in
@@ -59,6 +119,6 @@ export const House = observer(() => {
           <li className={styles.listUnit}>8-800-555-35-35</li>
         </ul>
       </div>
-    </div>
+    </HouseStyles>
   );
 });
