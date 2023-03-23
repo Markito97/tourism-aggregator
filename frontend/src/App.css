@@ -38,7 +38,7 @@ li {
   text-decoration: none;
 }
 
-.app__container {
+/* .app__container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,4 +46,4 @@ li {
   background-color: #72757a;
   height: 100vh;
   margin-inline: auto;
-}
+} */

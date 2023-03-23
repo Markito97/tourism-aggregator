@@ -2,7 +2,6 @@ import { HousesField } from '../../components/Houses/HousesField';
 import { observer } from 'mobx-react-lite';
 import { ServiceContext } from '../../context/ServiceContext';
 import { useContext, useEffect } from 'react';
-import { toJS } from 'mobx';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from '@mui/material';
 
@@ -12,7 +11,7 @@ const Houses = observer((): JSX.Element => {
   useEffect(() => {
     houses.getHouses();
   }, []);
-  // console.log(toJS());
+
   if (!houses.allHouses.length)
     return (
       <Box

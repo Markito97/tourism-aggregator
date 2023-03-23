@@ -6,6 +6,18 @@ import { SearchPanel } from '../../components/Forms/SearchBookingForm';
 import { Typography, styled, useMediaQuery, useTheme, Box, Button } from '@mui/material';
 import { Rating } from '../../components/Rating/Rating';
 import { observer } from 'mobx-react-lite';
+import Modal from '@mui/material/Modal';
+import CloseIcon from '@mui/icons-material/Close';
+
+const ModalContent = styled(Box)(({}) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  bgcolor: 'white',
+  overflowY: 'scroll',
+  height: '100%',
+  padding: '16px',
+  rowGap: '30px',
+}));
 
 const HouseStyles = styled(Box)(({ theme }) => ({
   paddingTop: '60px',
@@ -63,7 +75,7 @@ const HouseInfoTitle = styled(Typography)(({ theme }) => ({
 
 export const House = observer(() => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+  const matches = useMediaQuery(theme.breakpoints.down('averageMobile'));
   const { id } = useParams();
   const { houses } = useContext(ServiceContext);
 
@@ -88,7 +100,6 @@ export const House = observer(() => {
             <HouseInfoTitle>Price 4500</HouseInfoTitle>
             <HouseInfoTitle>Persons</HouseInfoTitle>
           </Box>
-
           <Rating house={houses.currentHouse} />
         </HouseInfo>
       </HouseHeaderStyles>
@@ -96,7 +107,6 @@ export const House = observer(() => {
         Check available dates
       </Typography>
       <SearchPanel house={houses.currentHouse} />
-
       <div className={styles.unitDescription}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernaturrerum, quisquam neque
         dignissimos omnis, adipisci alias accusamusveritatis unde quas quia voluptatibus ducimus in

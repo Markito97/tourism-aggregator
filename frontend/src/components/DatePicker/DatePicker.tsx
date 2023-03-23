@@ -38,9 +38,9 @@ const DatePickerStyles = styled(Box)(({ theme }) => ({
 }));
 
 interface DatePickerProps {
-  pickerRef: Ref<HTMLDivElement | null>;
+  pickerRef?: Ref<HTMLDivElement | null>;
   disablePreviousDays: boolean;
-  isClose: boolean;
+  isClose?: boolean;
   isCheckIn: boolean;
   isCheckOut: boolean;
 }
@@ -138,11 +138,7 @@ export const DatePicker = ({
 
   const scrollHandler = (e: any): void => {
     if (e.target.scrollHeight - (e.target.scrollTop + window.innerHeight) < 100) {
-      console.log('scroll');
     }
-    // console.log(e.target.scrollHeight);
-    // console.log(e.target.scrollTop);
-    // console.log(window.innerHeight);
   };
 
   useEffect(() => {

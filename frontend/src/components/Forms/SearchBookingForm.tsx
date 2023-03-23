@@ -12,6 +12,23 @@ import { FormControl } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 
+const ModalContent = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  backgroundColor: 'white',
+  overflowY: 'scroll',
+  height: '100%',
+  padding: '16px',
+  rowGap: '30px',
+}));
+
+const ModalHeader = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
 const SearchControlStyles = styled(FormControl)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
@@ -64,53 +81,41 @@ export const SearchPanel = (props: any): JSX.Element => {
   });
   const { houses } = useContext(ServiceContext);
 
-  const handlePicker = (): void => {
+  const handlePickerIn = (): void => {
     return matches ? setIsModal(true) : handlers.setIsCheckIn(true);
   };
 
-  useEffect(() => {
-    if (isModal) {
-      handlers.setIsCheckIn(true);
-    }
-  }, [isModal]);
-
-  useEffect(() => {
-    if (datePicker.checkin) {
-      setValue('checkIn', datePicker.checkin);
-    }
-    if (datePicker.checkout) {
-      setValue('checkOut', datePicker.checkout);
-    }
-  }, [datePicker.checkin, datePicker.checkout]);
-
-  const onSubmit = (data: any) => {
-    const [DAY_START, MONTH_START, YEAR_START] = data.checkIn.split('/');
-    const [DAY_END, MONTH_END, YEAR_END] = data.checkOut.split('/');
-    const CHECK_IN = new Date(
-      Number(YEAR_START),
-      Number(MONTH_START - 1),
-      Number(DAY_START),
-    ).getTime();
-    const CHECK_OUT = new Date(Number(YEAR_END), Number(MONTH_END - 1), Number(DAY_END)).getTime();
-    if (!props.house.booking.length) {
-      setIsBooking(true);
-      localStorage.setItem('range', JSON.stringify({ CHECK_IN, CHECK_OUT }));
-    }
-    if (checkIsBooking(CHECK_IN, CHECK_OUT, houses.currentHouse.booking)) {
-      localStorage.setItem('range', JSON.stringify({ CHECK_IN, CHECK_OUT }));
-      setIsWarn(false);
-      setIsBooking(true);
-    } else {
-      setIsBooking(false);
-      setIsWarn(true);
-    }
+  const handlePickerOut = (): void => {
+    return matches ? setIsModal(true) : handlers.setIsCheckOut(true);
   };
 
   useEffect(() => {
-    if (datePicker.checkout) {
-      handleSubmit(onSubmit)();
-    }
-  }, [datePicker.checkout]);
+    if (datePicker.checkin) setValue('checkIn', datePicker.checkin);
+    if (datePicker.checkout) setValue('checkOut', datePicker.checkout);
+  }, [datePicker.checkin, datePicker.checkout]);
+
+  const onSubmit = (data: any) => {
+    // const [DAY_START, MONTH_START, YEAR_START] = data.checkIn.split('/');
+    // const [DAY_END, MONTH_END, YEAR_END] = data.checkOut.split('/');
+    // const CHECK_IN = new Date(
+    //   Number(YEAR_START),
+    //   Number(MONTH_START - 1),
+    //   Number(DAY_START),
+    // ).getTime();
+    // const CHECK_OUT = new Date(Number(YEAR_END), Number(MONTH_END - 1), Number(DAY_END)).getTime();
+    // if (!props.house.booking.length) {
+    //   setIsBooking(true);
+    //   localStorage.setItem('range', JSON.stringify({ CHECK_IN, CHECK_OUT }));
+    // }
+    // if (checkIsBooking(CHECK_IN, CHECK_OUT, houses.currentHouse.booking)) {
+    //   localStorage.setItem('range', JSON.stringify({ CHECK_IN, CHECK_OUT }));
+    //   setIsWarn(false);
+    //   setIsBooking(true);
+    // } else {
+    //   setIsBooking(false);
+    //   setIsWarn(true);
+    // }
+  };
 
   const handleCloseModal = () => {
     setIsModal(false);
@@ -127,14 +132,14 @@ export const SearchPanel = (props: any): JSX.Element => {
                 name="checkIn"
                 rules={{ required: true }}
                 fieldRef={refs.checkinRef}
-                onFocus={handlePicker}
+                onFocus={handlePickerIn}
               />
               <TextField
                 control={control}
                 name="checkOut"
                 rules={{ required: true }}
                 fieldRef={refs.checkoutRef}
-                onFocus={handlers.setIsCheckOut}
+                onFocus={handlePickerOut}
               />
             </TextFiledsStyles>
             <ButtonStyles variant="contained" size="large">
@@ -155,25 +160,8 @@ export const SearchPanel = (props: any): JSX.Element => {
       )}
 
       <Modal open={isModal}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            bgcolor: 'white',
-            overflowY: 'scroll',
-            height: '100%',
-            padding: '16px',
-            rowGap: '30px',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+        <ModalContent>
+          <ModalHeader>
             <Typography
               sx={{
                 fontFamily: 'Montserrat',
@@ -193,61 +181,20 @@ export const SearchPanel = (props: any): JSX.Element => {
               }}
               onClick={handleCloseModal}
             />
-          </Box>
+          </ModalHeader>
           <TextFiledsStyles>
-            <TextField
-              control={control}
-              name="checkIn"
-              rules={{ required: true }}
-              fieldRef={refs.checkinRef}
-              onFocus={handlers.setIsCheckIn}
-            />
-            <TextField
-              control={control}
-              name="checkOut"
-              rules={{ required: true }}
-              fieldRef={refs.checkoutRef}
-              onFocus={handlers.setIsCheckOut}
-            />
+            <TextField control={control} name="checkIn" />
+            <TextField control={control} name="checkOut" />
           </TextFiledsStyles>
           <DatePicker
-            pickerRef={refs.pickerRef}
             isClose={datePicker.isClose}
-            isCheckIn={datePicker.isCheckIn}
-            isCheckOut={datePicker.isCheckOut}
+            isCheckIn={isModal}
+            isCheckOut={isModal}
             disablePreviousDays
           />
-        </Box>
+        </ModalContent>
       </Modal>
     </div>
   );
 };
 export { FieldsContext };
-
-{
-  /* <Button
-disabled={!isBooking}
-variant="contained"
-component="label"
-size="large"
-sx={{
-  m: '5px',
-  height: '100%',
-  fontFamily: 'Montserrat',
-  backgroundColor: '#2D2D2D',
-  '&:hover': {
-    backgroundColor: '#2D2D2D',
-  },
-}}
->
-<Link
-  onClick={() => {
-    setPickedDateUnits({ firstPickedDateUnit: null, secondPickedDateUnit: null });
-  }}
-  to={`/booking/${props?.house?.id}`}
-  style={{ color: 'white' }}
->
-  Booking
-</Link>
-</Button> */
-}

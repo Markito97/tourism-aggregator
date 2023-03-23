@@ -1,7 +1,4 @@
-export const splitArray = (
-  array: Array<number | false>,
-  part: number,
-): (number | false)[][] => {
+export const splitArray = (array: Array<number | false>, part: number): (number | false)[][] => {
   const tmp = [];
 
   for (let i = 0; i < array.length; i += part) {
