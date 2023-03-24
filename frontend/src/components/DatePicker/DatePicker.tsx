@@ -15,6 +15,8 @@ import { DatePickerControls } from './DatePickerControls';
 import { DatePickerHeader } from './DatePickerHeader';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { getDDMMYYYY } from '../../utils/dateHelpers/getDDMMYYYY';
+import { ChevronLeft } from '../../assets/icons/ChevronLeft';
+import { ChevronRight } from '../../assets/icons/ChevronRight';
 
 export interface DatePickerProps {
   disablePreviousDays?: boolean;
@@ -114,20 +116,26 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
   };
 
   const onClickNextButton = (): void => {
-    setMonthsDate(([{ year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
-      const [nextRightDisplayYear, nextRightDisplayMonth] = getNextYearAndMonth(
-        prevRightDisplayYear,
-        prevRightDisplayMonth,
-      );
-      if (isModal) {
+    if (isModal) {
+      setMonthsDate(([{ year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
+        const [nextRightDisplayYear, nextRightDisplayMonth] = getNextYearAndMonth(
+          prevRightDisplayYear,
+          prevRightDisplayMonth,
+        );
         return [{ year: nextRightDisplayYear, month: nextRightDisplayMonth }];
-      } else {
+      });
+    } else {
+      setMonthsDate(([, { year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
+        const [nextRightDisplayYear, nextRightDisplayMonth] = getNextYearAndMonth(
+          prevRightDisplayYear,
+          prevRightDisplayMonth,
+        );
         return [
           { year: prevRightDisplayYear, month: prevRightDisplayMonth },
           { year: nextRightDisplayYear, month: nextRightDisplayMonth },
         ];
-      }
-    });
+      });
+    }
   };
 
   const onClickPrevButton = () => {
@@ -173,22 +181,56 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
       }}
     >
       <div className={styles.container}>
-        <div className={styles.textFields}>
-          <TextField
-            control={props.control}
-            name="checkIn"
-            fieldRef={refs.checkinRef}
-            onFocus={handleOpenCheckIn}
-            placeholder="DD / MM / YYYY"
-          />
-          <TextField
-            control={props.control}
-            name="checkOut"
-            fieldRef={refs.checkoutRef}
-            onFocus={handleOpenCheckOut}
-            placeholder="DD / MM / YYYY"
-          />
-        </div>
+        {matches && (
+          <div style={{ display: 'flex', columnGap: '30px', justifyContent: 'space-between' }}>
+            <div
+              style={{
+                border: '1px solid black',
+                padding: '16px 32px',
+              }}
+              onClick={handleOpenCheckIn}
+            >
+              {!pickedDateUnits.firstPickedDateUnit
+                ? 'CheckIn'
+                : getDDMMYYYY(
+                    pickedDateUnits?.firstPickedDateUnit?.day,
+                    pickedDateUnits?.firstPickedDateUnit?.month,
+                    pickedDateUnits?.firstPickedDateUnit?.year,
+                  )}
+            </div>
+            <div
+              style={{ border: '1px solid black', padding: '16px 32px' }}
+              onClick={handleOpenCheckOut}
+            >
+              {!pickedDateUnits.secondPickedDateUnit
+                ? 'CheckOut'
+                : getDDMMYYYY(
+                    pickedDateUnits?.secondPickedDateUnit?.day,
+                    pickedDateUnits?.secondPickedDateUnit?.month,
+                    pickedDateUnits?.secondPickedDateUnit?.year,
+                  )}
+            </div>
+          </div>
+        )}
+        {!matches && (
+          <div className={styles.textFields}>
+            <TextField
+              control={props.control}
+              name="checkIn"
+              fieldRef={refs.checkinRef}
+              onFocus={handleOpenCheckIn}
+              placeholder="DD / MM / YYYY"
+            />
+            <TextField
+              control={props.control}
+              name="checkOut"
+              fieldRef={refs.checkoutRef}
+              onFocus={handleOpenCheckOut}
+              placeholder="DD / MM / YYYY"
+            />
+          </div>
+        )}
+
         <div ref={modalRef} className={isModal ? styles.modal : ''}>
           {datePicker.isCheckIn || datePicker.isCheckOut ? (
             <div
@@ -203,6 +245,27 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
                   onNext={onClickNextButton}
                 />
               )}
+              {!matches && (
+                <>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                    }}
+                  >
+                    <ChevronLeft onClick={onClickPrevButton} />
+                  </div>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      right: 0,
+                    }}
+                  >
+                    <ChevronRight onClick={onClickNextButton} />
+                  </div>
+                </>
+              )}
+
               <DatePickerField dates={monthsDate} />
               <DatePickerControls isModal={isModal} onClose={handleClose} />
             </div>
