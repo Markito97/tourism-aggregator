@@ -144,11 +144,20 @@ const useDayCell: UseDayCell = ({ year, month, day }) => {
       }
 
       if (fieldContext?.isClose) {
-        setPickedDateUnits({
-          ...pickedDateUnits,
-          secondPickedDateUnit: curPickedDateUnit,
-        });
-        return;
+        if (currentCellDate < firstPickedDate) {
+          setPickedDateUnits((prev) => {
+            return {
+              firstPickedDateUnit: curPickedDateUnit,
+              secondPickedDateUnit: null,
+            };
+          });
+        } else {
+          setPickedDateUnits({
+            ...pickedDateUnits,
+            secondPickedDateUnit: curPickedDateUnit,
+          });
+          return;
+        }
       }
 
       // if (firstPickedDateUnit === null) {
