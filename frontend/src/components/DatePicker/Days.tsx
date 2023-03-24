@@ -1,6 +1,5 @@
-/* eslint-disable import/no-cycle */
-import Day from './Day';
-import styles from './Days.module.css';
+import Day from "./Day";
+import styles from "./Days.module.css";
 
 interface DaysProps {
   days: Array<Array<number | false>>;

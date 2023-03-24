@@ -1,0 +1,8 @@
+.custom__button {
+  padding: 8px 8px;
+  background-color: #2d2d2d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+}

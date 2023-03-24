@@ -1,4 +1,4 @@
-import { startOfDay } from 'date-fns';
+import { startOfDay } from "date-fns";
 
 export function checkIsPreviousDay(year: number, month: number, day: number | false) {
   if (!day) return true;

@@ -1,60 +1,31 @@
-import { Ref, createContext, useEffect, useState } from 'react';
+import { FunctionComponent, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { FieldsContext } from '../../context/DateContext';
 import {
   getNextYearAndMonth,
   getPrevYearAndMonth,
   getThisYearAndThisMonth,
 } from '../../utils/dateHelpers/index';
-import { Month } from './Month';
-import { ChevronLeft } from '../../assets/icons/ChevronLeft';
-import { ChevronRight } from '../../assets/icons/ChevronRight';
-import { Box, styled, useMediaQuery, useTheme } from '@mui/material';
-import { setCoords } from '../../utils/coords/setCoords';
-import { FieldsContext } from '../../context/DateContext';
-import { ScrollbarEvents } from 'swiper/types';
+import styles from './DatePicker.module.css';
+import withContextHoc from '../../hoc/withContext';
+import { useDatePicker } from '../../hooks/useDatePicker';
+import { TextField } from '../../UI/TextField';
+import { useDatePick } from '../../hooks/useDatePick';
+import { DatePickerField } from './DatePickerField';
+import { DatePickerControls } from './DatePickerControls';
+import { DatePickerHeader } from './DatePickerHeader';
+import { useMediaQuery, useTheme } from '@mui/material';
+import { getDDMMYYYY } from '../../utils/dateHelpers/getDDMMYYYY';
 
-export const DisablePreviousDaysContext = createContext<boolean>(false);
-
-const DatePickerStyles = styled(Box)(({ theme }) => ({
-  fontSize: 'Montserrat',
-  p: '15px',
-  display: 'flex',
-  columnGap: '30px',
-  position: 'absolute',
-  bgcolor: 'white',
-  top: `120px`,
-  left: '0',
-  border: '1px solid black',
-  borderRadius: '4px',
-  background: 'white',
-  [theme.breakpoints.down('averageMobile')]: {
-    top: '0',
-    width: '100%',
-    flexDirection: 'column',
-    position: 'sticky',
-    border: 'none',
-    fontSize: '14px',
-    rowGap: '30px',
-  },
-}));
-
-interface DatePickerProps {
-  pickerRef?: Ref<HTMLDivElement | null>;
-  disablePreviousDays: boolean;
-  isClose?: boolean;
-  isCheckIn: boolean;
-  isCheckOut: boolean;
+export interface DatePickerProps {
+  disablePreviousDays?: boolean;
 }
 
-export const DatePicker = ({
-  pickerRef,
-  isClose,
-  isCheckIn,
-  isCheckOut,
-  disablePreviousDays = false,
-}: DatePickerProps) => {
+const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
+  const modalRef = useRef(null);
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('averageMobile'));
-
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+  const [pickedDateUnits, setPickedDateUnits] = useDatePick();
+  const [isModal, setIsModal] = useState(false);
   const [thisYear, thisMonth] = getThisYearAndThisMonth();
   const [monthsDate, setMonthsDate] = useState([
     {
@@ -67,59 +38,95 @@ export const DatePicker = ({
     },
   ]);
 
-  const [mobileMonthsDate, setMobileMonthsDate] = useState([
-    {
-      year: thisYear,
-      month: thisMonth + 1,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 2,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 3,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 4,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 5,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 6,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 7,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 8,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 9,
-    },
-    {
-      year: thisYear,
-      month: thisMonth + 10,
-    },
-  ]);
+  const { refs, datePicker, handlers } = useDatePicker(isModal);
 
-  const onClickNextButton = () => {
-    setMonthsDate(([, { year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
+  useLayoutEffect(() => {
+    if (isModal) {
+      setMonthsDate([
+        {
+          year: thisYear,
+          month: thisMonth + 1,
+        },
+      ]);
+    } else {
+      setMonthsDate([
+        {
+          year: thisYear,
+          month: thisMonth + 1,
+        },
+        {
+          year: thisYear,
+          month: thisMonth + 2,
+        },
+      ]);
+    }
+  }, [isModal]);
+
+  useEffect(() => {
+    if (pickedDateUnits.firstPickedDateUnit) {
+      if (props.handleValue) {
+        props.handleValue(
+          'checkIn',
+          getDDMMYYYY(
+            pickedDateUnits.firstPickedDateUnit.day,
+            pickedDateUnits.firstPickedDateUnit.month,
+            pickedDateUnits.firstPickedDateUnit.year,
+          ),
+        );
+      }
+    }
+    if (pickedDateUnits.secondPickedDateUnit) {
+      if (props.handleValue) {
+        props.handleValue(
+          'checkOut',
+          getDDMMYYYY(
+            pickedDateUnits.secondPickedDateUnit.day,
+            pickedDateUnits.secondPickedDateUnit.month,
+            pickedDateUnits.secondPickedDateUnit.year,
+          ),
+        );
+      }
+    }
+  });
+
+  const handleOpenCheckIn = (): void => {
+    if (matches) {
+      setIsModal(true);
+      handlers.setIsCheckIn(true);
+    } else {
+      handlers.setIsCheckIn(true);
+    }
+  };
+
+  const handleOpenCheckOut = (): void => {
+    if (matches) {
+      setIsModal(true);
+      handlers.setIsCheckOut(true);
+    } else {
+      handlers.setIsCheckOut(true);
+    }
+  };
+
+  const handleClose = (): void => {
+    setIsModal(false);
+    handlers.setIsCheckIn(false);
+    handlers.setIsCheckOut(false);
+  };
+
+  const onClickNextButton = (): void => {
+    setMonthsDate(([{ year: prevRightDisplayYear, month: prevRightDisplayMonth }]) => {
       const [nextRightDisplayYear, nextRightDisplayMonth] = getNextYearAndMonth(
         prevRightDisplayYear,
         prevRightDisplayMonth,
       );
-      return [
-        { year: prevRightDisplayYear, month: prevRightDisplayMonth },
-        { year: nextRightDisplayYear, month: nextRightDisplayMonth },
-      ];
+      if (isModal) {
+        return [{ year: nextRightDisplayYear, month: nextRightDisplayMonth }];
+      } else {
+        return [
+          { year: prevRightDisplayYear, month: prevRightDisplayMonth },
+          { year: nextRightDisplayYear, month: nextRightDisplayMonth },
+        ];
+      }
     });
   };
 
@@ -129,62 +136,81 @@ export const DatePicker = ({
         prevLeftDisplayYear,
         prevLeftDisplayMonth,
       );
-      return [
-        { year: nextLeftDisplayYear, month: nextLeftDisplayMonth },
-        { year: prevLeftDisplayYear, month: prevLeftDisplayMonth },
-      ];
+      if (isModal) {
+        return [{ year: nextLeftDisplayYear, month: nextLeftDisplayMonth }];
+      } else {
+        return [
+          { year: nextLeftDisplayYear, month: nextLeftDisplayMonth },
+          { year: prevLeftDisplayYear, month: prevLeftDisplayMonth },
+        ];
+      }
     });
   };
 
-  const scrollHandler = (e: any): void => {
-    if (e.target.scrollHeight - (e.target.scrollTop + window.innerHeight) < 100) {
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener('scroll', scrollHandler, true);
-    return () => {
-      document.removeEventListener('scroll', scrollHandler, true);
+    if (!isModal) return;
+    const handleClick = (e: MouseEvent) => {
+      if (
+        modalRef.current?.contains(e.target as Node) &&
+        !refs.pickerRef.current?.contains(e.target as Node)
+      ) {
+        handleClose();
+      }
     };
-  }, []);
-
-  // useEffect(() => {
-  //   setCoords(pickerRef);
-  // }, []);
-
-  // useEffect(() => {
-  //   document.addEventListener('scroll', scrollHandler);
-  //   return () => {
-  //     document.removeEventListener('scroll', scrollHandler);
-  //   };
-  // }, []);
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  });
 
   return (
     <FieldsContext.Provider
       value={{
-        isClose,
-        isCheckIn,
-        isCheckOut,
+        isClose: datePicker.isClose,
+        isCheckIn: datePicker.isCheckIn,
+        isCheckOut: datePicker.isCheckOut,
+        isModal: isModal,
       }}
     >
-      <DisablePreviousDaysContext.Provider value={disablePreviousDays}>
-        <DatePickerStyles ref={pickerRef}>
-          {/* <Box>
-            <ChevronLeft onClick={onClickPrevButton} />
-          </Box> */}
-          {!matches &&
-            monthsDate.map(({ year, month }) => (
-              <Month key={`${year}${month}`} year={year} month={month} />
-            ))}
-          {matches &&
-            mobileMonthsDate.map(({ year, month }) => (
-              <Month key={`${year}${month}`} year={year} month={month} />
-            ))}
-          {/* <div>
-            <ChevronRight onClick={onClickNextButton} />
-          </div> */}
-        </DatePickerStyles>
-      </DisablePreviousDaysContext.Provider>
+      <div className={styles.container}>
+        <div className={styles.textFields}>
+          <TextField
+            control={props.control}
+            name="checkIn"
+            fieldRef={refs.checkinRef}
+            onFocus={handleOpenCheckIn}
+            placeholder="DD / MM / YYYY"
+          />
+          <TextField
+            control={props.control}
+            name="checkOut"
+            fieldRef={refs.checkoutRef}
+            onFocus={handleOpenCheckOut}
+            placeholder="DD / MM / YYYY"
+          />
+        </div>
+        <div ref={modalRef} className={isModal ? styles.modal : ''}>
+          {datePicker.isCheckIn || datePicker.isCheckOut ? (
+            <div
+              ref={refs.pickerRef}
+              className={isModal ? styles.modal__content : styles.picker__content}
+            >
+              {matches && (
+                <DatePickerHeader
+                  checkIn={pickedDateUnits.firstPickedDateUnit}
+                  checkOut={pickedDateUnits.secondPickedDateUnit}
+                  onPrev={onClickPrevButton}
+                  onNext={onClickNextButton}
+                />
+              )}
+              <DatePickerField dates={monthsDate} />
+              <DatePickerControls isModal={isModal} onClose={handleClose} />
+            </div>
+          ) : null}
+        </div>
+      </div>
     </FieldsContext.Provider>
   );
 };
+
+export default withContextHoc(DatePicker);

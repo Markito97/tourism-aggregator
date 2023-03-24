@@ -1,4 +1,4 @@
-import { isEqual } from 'date-fns';
+import { isEqual } from "date-fns";
 
 interface IsEqualDate {
   (date1: Date | null | false, date2: Date | null | false): boolean;

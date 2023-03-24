@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useOutside } from './useOutside';
 import { PickedDateUnitsContext } from '../context/DateContext';
 
-export function useDatePicker() {
+export function useDatePicker(isModal: boolean) {
   const [checkin, setCheckin] = useState<string>('');
   const [checkout, setCheckout] = useState<string>('');
 
@@ -24,6 +24,7 @@ export function useDatePicker() {
   }, [pickedDateUnits.firstPickedDateUnit, pickedDateUnits.secondPickedDateUnit]);
 
   const handleClose = () => {
+    if (isModal) return;
     setIsCheckIn(false);
     setIsClose(true);
     setIsCheckOut(false);
@@ -39,12 +40,8 @@ export function useDatePicker() {
     !pickedDateUnits.secondPickedDateUnit?.month ||
     !pickedDateUnits.secondPickedDateUnit?.year;
 
-  const firstValue = `${pickedDateUnits.firstPickedDateUnit?.day} / ${pickedDateUnits.firstPickedDateUnit?.month} / ${pickedDateUnits.firstPickedDateUnit?.year}`;
-  const secondValue = `${pickedDateUnits.secondPickedDateUnit?.day} / ${pickedDateUnits.secondPickedDateUnit?.month} / ${pickedDateUnits.secondPickedDateUnit?.year}`;
-
   useEffect(() => {
     if (isFirstPicked) return;
-    setCheckin(firstValue);
     if (pickedDateUnits.firstPickedDateUnit && pickedDateUnits.secondPickedDateUnit) {
       if (!isClose) {
         setIsCheckIn(false);
@@ -56,11 +53,14 @@ export function useDatePicker() {
 
   useEffect(() => {
     if (isSecondPicked) return;
-    setCheckout(secondValue);
     if (pickedDateUnits.firstPickedDateUnit && pickedDateUnits.secondPickedDateUnit) {
-      setIsCheckIn(false);
-      setIsCheckOut(false);
-      setIsClose(true);
+      if (isModal) {
+        setIsClose(true);
+      } else {
+        setIsCheckIn(false);
+        setIsCheckOut(false);
+        setIsClose(true);
+      }
     }
   }, [pickedDateUnits.secondPickedDateUnit]);
 

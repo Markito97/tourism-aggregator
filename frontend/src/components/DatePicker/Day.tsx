@@ -1,9 +1,8 @@
 import { memo, useContext } from 'react';
-import useDayCell from '../../hooks/useDay';
-import { YearMonthContext } from '../../context/DateContext';
-import { checkIsPreviousDay } from '../../utils/dateHelpers/checkIsPreviosDay';
-import { DisablePreviousDaysContext } from './DatePicker';
 import styles from './Day.module.css';
+import useDayCell from '../../hooks/useDay';
+import { checkIsPreviousDay } from '../../utils/dateHelpers/checkIsPreviousDay';
+import { DisablePreviousDaysContext, YearMonthContext } from '../../context/DateContext';
 
 interface DayProps {
   day: number | false;
@@ -11,18 +10,12 @@ interface DayProps {
 
 const Day = ({ day }: DayProps): JSX.Element => {
   const [year, month] = useContext(YearMonthContext);
-  const {
-    isBooking,
-    isSelected,
-    isFirstPickedDate,
-    isSecondPickedDate,
-    isBetweenPickedDates,
-    handleDay,
-  } = useDayCell({
-    year,
-    month,
-    day,
-  });
+  const { isSelected, isFirstPickedDate, isSecondPickedDate, isBetweenPickedDates, handleDay } =
+    useDayCell({
+      year,
+      month,
+      day,
+    });
   const isPreviousDaysDisabled = useContext(DisablePreviousDaysContext);
   const isPreviousDay = checkIsPreviousDay(year, month, day);
 
@@ -30,13 +23,12 @@ const Day = ({ day }: DayProps): JSX.Element => {
     <div>
       <div
         onClick={handleDay}
-        // onKeyDown={onKeyUpDayCell}
         className={
           isPreviousDaysDisabled && isPreviousDay
             ? `${styles.disabled}`
-            : isBooking
-            ? `${styles.isBooking}`
-            : isSecondPickedDate
+            : // : isBooking
+            // ? `${styles.isBooking}`
+            isSecondPickedDate
             ? `${styles.selected}`
             : isFirstPickedDate
             ? `${styles.selected}`

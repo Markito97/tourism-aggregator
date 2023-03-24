@@ -5,20 +5,16 @@
   row-gap: 15px;
 }
 
-.content {
-  /* min-width: 300px; */
-}
-
 .header {
   text-align: center;
   font-size: 25px;
   text-transform: capitalize;
   font-weight: bold;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 .weekDays {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   display: grid;
   font-size: 12px;
   grid-template-columns: repeat(7, 1fr);
@@ -28,7 +24,10 @@
   text-align: center;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 600px) {
+  .container {
+    padding-top: 30px;
+  }
   .header {
     font-size: 16px;
     text-transform: uppercase;
