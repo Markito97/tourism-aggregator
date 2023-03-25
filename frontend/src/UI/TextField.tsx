@@ -19,3 +19,9 @@ export const TextField = ({ ...props }: UseControllerProps<SearchPanelForm> | an
     </div>
   );
 };
+
+// interface TextFieldProps {
+//   autoFocus?: boolean;
+//   multiline?: boolean;
+//   onBlur?: (() => void) | undefined;
+// }

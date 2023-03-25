@@ -1,27 +1,16 @@
 import { FC } from 'react';
 import { Button } from '../../UI/Button';
+import styles from './DatePickerControls.module.css';
 
 interface DatePickerControlsProps {
-  isModal: boolean;
   onClose: () => void;
 }
 
-export const DatePickerControls: FC<DatePickerControlsProps> = (props) => {
+export const DatePickerControls: FC<DatePickerControlsProps> = ({ onClose }): JSX.Element => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        columnGap: '15px',
-        paddingTop: '15px',
-      }}
-    >
-      {props.isModal ? (
-        <>
-          <Button onClick={props.onClose}>close</Button>
-          <Button onClick={props.onClose}>ok</Button>
-        </>
-      ) : null}
+    <div className={styles.controls__container}>
+      <Button onClick={onClose}>close</Button>
+      <Button onClick={onClose}>ok</Button>
     </div>
   );
 };

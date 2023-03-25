@@ -1,0 +1,6 @@
+.controls__container {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 15px;
+  padding-top: 15px;
+}

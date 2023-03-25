@@ -1,22 +1,21 @@
-import Day from "./Day";
-import styles from "./Days.module.css";
+import { FC } from 'react';
+import Day from './Day';
+import styles from './Days.module.css';
 
 interface DaysProps {
   days: Array<Array<number | false>>;
 }
 
-export const Days = ({ days }: DaysProps): JSX.Element => {
+export const Days: FC<DaysProps> = ({ days }): JSX.Element => {
   return (
-    <div className={styles.container}>
-      {days.map((daysList, index) => {
-        return (
-          <div key={`${index + 1}`} className={styles.dateRows}>
-            {daysList.map((day, index) => {
-              return <Day key={`${index + 2}`} day={day} />;
-            })}
-          </div>
-        );
-      })}
+    <div className={styles.days__container}>
+      {days.map((daysField, index) => (
+        <div key={`${index + 1}`} className={styles.days__row}>
+          {daysField.map((day, index) => (
+            <Day key={`${index + 2}`} day={day} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

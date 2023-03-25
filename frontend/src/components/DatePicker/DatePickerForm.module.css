@@ -1,0 +1,10 @@
+.form__container {
+  display: flex;
+  column-gap: 30px;
+  justify-content: space-between;
+}
+
+.form__textfield {
+  padding: 16px 16px;
+  border: 1;
+}

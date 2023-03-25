@@ -1,8 +1,16 @@
-.datepicker__header {
+.header__controls__modal {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
-  font-size: 16px;
+  column-gap: 15px;
   text-transform: uppercase;
+  align-items: center;
+}
+
+.header__controls {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  column-gap: 15px;
+  width: 100%;
+  position: absolute;
 }

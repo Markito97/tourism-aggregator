@@ -1,12 +1,13 @@
-.container {
+.datepicker__container {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.textFields {
+.datepicker__content {
   display: flex;
   column-gap: 30px;
+  justify-content: space-between;
 }
 
 .modal {
@@ -25,11 +26,15 @@
 .modal__content {
   padding: 20px;
   background-repeat: 12px;
+  display: flex;
+  row-gap: 15px;
+  flex-direction: column;
   background-color: white;
 }
 
 .picker__content {
   display: flex;
+  flex-direction: column;
   position: absolute;
   background: white;
   top: 120px;

@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import { Box, Button, styled, useMediaQuery, useTheme } from '@mui/material';
 import { ServiceContext } from '../../context/ServiceContext';
 import DatePicker from '../DatePicker/DatePicker';
+import { TextField } from '../../UI/TextField';
 
 export interface SearchPanelForm {
   lake: string;
@@ -65,7 +66,12 @@ export const SearchPanel = (props: any): JSX.Element => {
 
   return (
     <SearchPanelStyles>
-      <DatePicker disablePreviousDays={true} control={control} handleValue={setValue} />
+      <DatePicker
+        disablePreviousDays={true}
+        control={control}
+        handleValue={setValue}
+        field={<TextField name="checkIn" control={control} />}
+      />
       <Button
         variant="contained"
         component="label"

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Days } from './Days';
 import styles from './Month.module.css';
 import { YearMonthContext } from '../../context/DateContext';
@@ -9,7 +9,7 @@ interface MonthProps {
   month: number;
 }
 
-export const Month = ({ year, month }: MonthProps): JSX.Element => {
+export const Month: FC<MonthProps> = ({ year, month }): JSX.Element => {
   const days = useMemo(() => {
     return getMonthData(year, month);
   }, [year, month]);
@@ -19,16 +19,14 @@ export const Month = ({ year, month }: MonthProps): JSX.Element => {
 
   return (
     <YearMonthContext.Provider value={value}>
-      <div className={styles.container}>
-        <div className={styles.header}>{getYearMonth(year, month)}</div>
-        <div className={styles.weekDays}>
-          {WEEK_DAYS.map((weekDay) => {
-            return <div key={`${weekDay}`}>{weekDay}</div>;
-          })}
+      <div className={styles.month__container}>
+        <div className={styles.month__header}>{getYearMonth(year, month)}</div>
+        <div className={styles.month__weekdays}>
+          {WEEK_DAYS.map((weekday) => (
+            <div key={`${weekday}`}>{weekday}</div>
+          ))}
         </div>
-        <div className={styles.datesContent}>
-          <Days days={days} />
-        </div>
+        <Days days={days} />
       </div>
     </YearMonthContext.Provider>
   );

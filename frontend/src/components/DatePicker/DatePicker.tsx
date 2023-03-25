@@ -8,15 +8,13 @@ import {
 import styles from './DatePicker.module.css';
 import withContextHoc from '../../hoc/withContext';
 import { useDatePicker } from '../../hooks/useDatePicker';
-import { TextField } from '../../UI/TextField';
 import { useDatePick } from '../../hooks/useDatePick';
 import { DatePickerField } from './DatePickerField';
-import { DatePickerControls } from './DatePickerControls';
 import { DatePickerHeader } from './DatePickerHeader';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { getDDMMYYYY } from '../../utils/dateHelpers/getDDMMYYYY';
-import { ChevronLeft } from '../../assets/icons/ChevronLeft';
-import { ChevronRight } from '../../assets/icons/ChevronRight';
+import { DatePickerControls } from './DatePickerControls';
+import { DatePickerForm } from './DatePickerForm';
 
 export interface DatePickerProps {
   disablePreviousDays?: boolean;
@@ -26,7 +24,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
   const modalRef = useRef(null);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
-  const [pickedDateUnits, setPickedDateUnits] = useDatePick();
+  const [pickedDateUnits] = useDatePick();
   const [isModal, setIsModal] = useState(false);
   const [thisYear, thisMonth] = getThisYearAndThisMonth();
   const [monthsDate, setMonthsDate] = useState([
@@ -41,6 +39,8 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
   ]);
 
   const { refs, datePicker, handlers } = useDatePicker(isModal);
+
+  const isShow = datePicker.isCheckIn || datePicker.isCheckOut;
 
   useLayoutEffect(() => {
     if (isModal) {
@@ -180,9 +180,9 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
         isModal: isModal,
       }}
     >
-      <div className={styles.container}>
-        {matches && (
-          <div style={{ display: 'flex', columnGap: '30px', justifyContent: 'space-between' }}>
+      <div className={styles.datepicker__container}>
+        {/* {matches && (
+          <div className={styles.datepicker__content}>
             <div
               style={{
                 border: '1px solid black',
@@ -213,63 +213,35 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
           </div>
         )}
         {!matches && (
-          <div className={styles.textFields}>
-            <TextField
-              control={props.control}
-              name="checkIn"
-              fieldRef={refs.checkinRef}
-              onFocus={handleOpenCheckIn}
-              placeholder="DD / MM / YYYY"
-            />
-            <TextField
-              control={props.control}
-              name="checkOut"
-              fieldRef={refs.checkoutRef}
-              onFocus={handleOpenCheckOut}
-              placeholder="DD / MM / YYYY"
-            />
-          </div>
-        )}
-
+       
+        )} */}
+        <DatePickerForm
+          isMatches={matches}
+          onCheckIn={handleOpenCheckIn}
+          onCheckOut={handleOpenCheckOut}
+          checkInRef={refs.checkinRef}
+          checkOutRef={refs.checkoutRef}
+        />
         <div ref={modalRef} className={isModal ? styles.modal : ''}>
-          {datePicker.isCheckIn || datePicker.isCheckOut ? (
+          {isShow && (
             <div
               ref={refs.pickerRef}
               className={isModal ? styles.modal__content : styles.picker__content}
             >
-              {matches && (
+              <div style={{ position: 'relative' }}>
                 <DatePickerHeader
+                  isModal={isModal}
                   checkIn={pickedDateUnits.firstPickedDateUnit}
                   checkOut={pickedDateUnits.secondPickedDateUnit}
                   onPrev={onClickPrevButton}
                   onNext={onClickNextButton}
+                  className={isModal ? 'header__controls__modal' : 'header__controls'}
                 />
-              )}
-              {!matches && (
-                <>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                    }}
-                  >
-                    <ChevronLeft onClick={onClickPrevButton} />
-                  </div>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      right: 0,
-                    }}
-                  >
-                    <ChevronRight onClick={onClickNextButton} />
-                  </div>
-                </>
-              )}
-
+              </div>
               <DatePickerField dates={monthsDate} />
-              <DatePickerControls isModal={isModal} onClose={handleClose} />
+              {matches && <DatePickerControls onClose={handleClose} />}
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </FieldsContext.Provider>

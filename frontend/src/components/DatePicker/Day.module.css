@@ -26,11 +26,3 @@
   outline: 1px solid blue;
   border-radius: 3px;
 }
-
-.isBooking {
-  pointer-events: none;
-  border-radius: 3px;
-  padding: 6px;
-  color: white;
-  background-color: #ff1744;
-}
