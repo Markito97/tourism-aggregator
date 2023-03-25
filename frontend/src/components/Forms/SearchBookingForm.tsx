@@ -64,15 +64,19 @@ export const SearchPanel = (props: any): JSX.Element => {
   //   setIsModal(false);
   // };
 
+  const onSubmit = (data: any) => {
+    console.log(data);
+    const [DAY_START, MONTH_START, YEAR_START] = data.checkIn.split('.');
+
+    const checkIn = new Date(data.checkIn);
+    console.log(checkIn);
+  };
+
   return (
     <SearchPanelStyles>
-      <DatePicker
-        disablePreviousDays={true}
-        control={control}
-        handleValue={setValue}
-        field={<TextField name="checkIn" control={control} />}
-      />
+      <DatePicker disablePreviousDays={true} handleValue={setValue} />
       <Button
+        onClick={handleSubmit(onSubmit)}
         variant="contained"
         component="label"
         size="large"

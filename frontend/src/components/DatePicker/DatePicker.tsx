@@ -18,10 +18,11 @@ import { DatePickerForm } from './DatePickerForm';
 
 export interface DatePickerProps {
   disablePreviousDays?: boolean;
+  handleValue: any;
 }
 
 const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const [pickedDateUnits] = useDatePick();
@@ -181,44 +182,20 @@ const DatePicker: FunctionComponent<DatePickerProps> = (props) => {
       }}
     >
       <div className={styles.datepicker__container}>
-        {/* {matches && (
-          <div className={styles.datepicker__content}>
-            <div
-              style={{
-                border: '1px solid black',
-                padding: '16px 32px',
-              }}
-              onClick={handleOpenCheckIn}
-            >
-              {!pickedDateUnits.firstPickedDateUnit
-                ? 'CheckIn'
-                : getDDMMYYYY(
-                    pickedDateUnits?.firstPickedDateUnit?.day,
-                    pickedDateUnits?.firstPickedDateUnit?.month,
-                    pickedDateUnits?.firstPickedDateUnit?.year,
-                  )}
-            </div>
-            <div
-              style={{ border: '1px solid black', padding: '16px 32px' }}
-              onClick={handleOpenCheckOut}
-            >
-              {!pickedDateUnits.secondPickedDateUnit
-                ? 'CheckOut'
-                : getDDMMYYYY(
-                    pickedDateUnits?.secondPickedDateUnit?.day,
-                    pickedDateUnits?.secondPickedDateUnit?.month,
-                    pickedDateUnits?.secondPickedDateUnit?.year,
-                  )}
-            </div>
-          </div>
-        )}
-        {!matches && (
-       
-        )} */}
         <DatePickerForm
           isMatches={matches}
           onCheckIn={handleOpenCheckIn}
           onCheckOut={handleOpenCheckOut}
+          checkInValue={getDDMMYYYY(
+            pickedDateUnits?.firstPickedDateUnit?.day,
+            pickedDateUnits?.firstPickedDateUnit?.month,
+            pickedDateUnits?.firstPickedDateUnit?.year,
+          )}
+          checkOutValue={getDDMMYYYY(
+            pickedDateUnits?.secondPickedDateUnit?.day,
+            pickedDateUnits?.secondPickedDateUnit?.month,
+            pickedDateUnits?.secondPickedDateUnit?.year,
+          )}
           checkInRef={refs.checkinRef}
           checkOutRef={refs.checkoutRef}
         />

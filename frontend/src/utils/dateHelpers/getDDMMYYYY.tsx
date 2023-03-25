@@ -1,4 +1,8 @@
-export function getDDMMYYYY(DD: number, MM: number, YYYY: number) {
+export function getDDMMYYYY(
+  DD: number | undefined,
+  MM: number | undefined,
+  YYYY: number | undefined,
+): string {
   if (!DD || !MM || !YYYY) return;
   const language = typeof window !== 'undefined' ? navigator.language : 'en-US';
   return new Intl.DateTimeFormat(language, {
@@ -7,12 +11,3 @@ export function getDDMMYYYY(DD: number, MM: number, YYYY: number) {
     year: 'numeric',
   }).format(new Date(YYYY, MM - 1, DD));
 }
-
-// export const getYearMonth = (year: number | undefined, month: number | undefined) => {
-//     if (!year || !month) return;
-//     const language = typeof window !== "undefined" ? navigator.language : "en-US";
-//     return new Intl.DateTimeFormat(language, {
-//       year: "numeric",
-//       month: "long",
-//     }).format(new Date(year, month - 1));
-//   };
